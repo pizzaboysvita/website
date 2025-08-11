@@ -1,107 +1,179 @@
-import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, OnInit, OnDestroy } from "@angular/core";
+import {
+  trigger,
+  transition,
+  style,
+  animate,
+  query,
+  stagger,
+} from "@angular/animations";
 import { HeaderComponent } from "../home/header/header.component";
 import { CategoryComponent } from "../home/category/category.component";
 import { CommonModule } from "@angular/common";
 import { HomeService } from "../../services/home.service";
 import { FooterComponent } from "../home/footer/footer.component";
+import { RouterLink } from "@angular/router";
+import { Subscription } from "rxjs";
+
+interface Dish {
+  dish_id: number;
+  dish_name: string;
+  dish_image?: string;
+  dish_price?: number;
+  description?: string;
+  dish_category_id?: number;
+  quantity?: number;
+  imageLoaded?: boolean;
+  isFavorite?: boolean;
+  [key: string]: any;
+}
 
 @Component({
   selector: "app-menu",
-  imports: [HeaderComponent, CommonModule, FooterComponent, CategoryComponent],
+  standalone: true,
+  imports: [
+    HeaderComponent,
+    CommonModule,
+    FooterComponent,
+    CategoryComponent,
+    RouterLink,
+  ],
   templateUrl: "./menu.component.html",
-  styleUrl: "./menu.component.scss",
+  styleUrls: ["./menu.component.scss"],
+  animations: [
+    trigger("listAnimation", [
+      transition("* => *", [
+        query(
+          ":enter",
+          [
+            style({ opacity: 0, transform: "translateY(10px)" }),
+            stagger(
+              80,
+              animate(
+                "300ms ease-out",
+                style({ opacity: 1, transform: "translateY(0)" })
+              )
+            ),
+          ],
+          { optional: true }
+        ),
+        query(
+          ":leave",
+          [
+            animate(
+              "200ms ease-in",
+              style({ opacity: 0, transform: "translateY(-10px)" })
+            ),
+          ],
+          { optional: true }
+        ),
+      ]),
+    ]),
+  ],
 })
-export class MenuComponent implements OnInit {
-  public breadcrumb = {
+export class MenuComponent implements OnInit, OnDestroy {
+  breadcrumb = {
     title: "Menu Grid",
     page: "Home",
     sub_page: "Menu Grid",
   };
 
-  public allProducts: any[] = [];
-  public filteredProducts: any[] = [];
-  public categories: any[] = [];
-  public cartItems: any[] = [];
-  selectedCategoryName: string = "All Dishes";
+  allProducts: Dish[] = [];
+  filteredProducts: Dish[] = [];
+  categories: any[] = [];
+  selectedCategoryName = "All Dishes";
+
+  private subscriptions: Subscription[] = [];
+  private readonly FAVORITES_KEY = "my_app_favorites_v1";
 
   constructor(
     private apiService: HomeService,
     private cdr: ChangeDetectorRef
   ) {}
+
   ngOnInit() {
-    this.apiService.getCategories().subscribe((response) => {
-      console.log(response, "categories response");
+    // categories
+    const cat = this.apiService.getCategories().subscribe((response: any) => {
+      this.categories = response?.categories || [];
     });
-    this.apiService.getCategories().subscribe((response) => {
-      this.categories = response.categories; // Assuming API response has a 'categories' array
-    });
-    this.apiService.getDishes().subscribe((response) => {
-      this.allProducts = response.data.map((dish: any) => ({
-        ...dish,
-        quantity: 1,
-        imageLoaded: false,
-      }));
+    this.subscriptions.push(cat);
+
+    // dishes
+    const dishs = this.apiService.getDishes().subscribe((response: any) => {
+      const remoteDishes: any[] = response?.data || [];
+      const favorites = this.loadFavorites();
+      this.allProducts = remoteDishes.map((dish: any) => {
+        const normalized: Dish = {
+          ...dish,
+          quantity: 1,
+          imageLoaded: false,
+          isFavorite: !!favorites[dish.dish_id],
+        };
+        return normalized;
+      });
+
       this.filteredProducts = [...this.allProducts];
-      console.log(this.filteredProducts, "products response");
+      this.cdr.detectChanges();
     });
+    this.subscriptions.push(dishs);
 
     document.body.classList.add("bg-color");
   }
-  trackByProductId(index: number, product: any): number {
-    return product.id || product.dish_id || index;
-  }
-  onCategorySelected(categoryId: any) {
-    console.log("Selected Category ID:", categoryId);
-    this.filteredProducts = this.allProducts.filter(
-      (dish) => dish.dish_category_id === categoryId.id
-    );
 
-    const selectedCategory = this.categories.find(
-      (category) => category.id === categoryId.id
-    );
+  trackByProductId = (index: number, product: Dish): number =>
+    product?.dish_id || (product as any)?.id || index;
 
-    if (selectedCategory) {
-      this.selectedCategoryName = selectedCategory.name;
-    } else {
+  onCategorySelected(category: any | null) {
+    if (!category) {
+      this.filteredProducts = [...this.allProducts];
       this.selectedCategoryName = "All Dishes";
+    } else {
+      this.filteredProducts = this.allProducts.filter(
+        (dish) => dish.dish_category_id === category.id
+      );
+      this.selectedCategoryName = category.name;
     }
-    console.log(
-      this.filteredProducts,
-      "filtered products",
-      selectedCategory,
-      "selected category",
-      this.selectedCategoryName,
-      "selected category name"
-    );
     this.cdr.detectChanges();
   }
 
-  incrementQuantity(product: any): void {
-    product.quantity++;
+  toggleFavorite(product: Dish, event?: MouseEvent) {
+    if (event) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
+    product.isFavorite = !product.isFavorite;
+    this.persistFavorites();
   }
 
-  decrementQuantity(product: any): void {
-    if (product.quantity > 1) {
-      product.quantity--;
+  private persistFavorites() {
+    try {
+      const map: Record<number, boolean> = {};
+      for (const p of this.allProducts) {
+        if (p.isFavorite) {
+          map[p.dish_id] = true;
+        }
+      }
+      localStorage.setItem(this.FAVORITES_KEY, JSON.stringify(map));
+      // Optionally sync with server if you have an API
+      // this.syncFavoritesToServer(map);
+    } catch (err) {
+      console.error("Failed to save favorites", err);
     }
   }
 
-  addToCart(product: any): void {
-    const existingItem = this.cartItems.find(
-      (item) => item.dish_id === product.dish_id
-    );
-    if (existingItem) {
-      existingItem.quantity += product.quantity;
-    } else {
-      this.cartItems.push({ ...product });
+  private loadFavorites(): Record<number, boolean> {
+    try {
+      const raw = localStorage.getItem(this.FAVORITES_KEY);
+      if (!raw) return {};
+      return JSON.parse(raw);
+    } catch (err) {
+      console.warn("Failed to load favorites", err);
+      return {};
     }
   }
-  removeFromCart(itemToRemove: any): void {
-    this.cartItems = this.cartItems.filter(
-      (item) => item.dish_id !== itemToRemove.dish_id
-    );
-  }
+
   ngOnDestroy() {
     document.body.classList.remove("bg-color");
+    this.subscriptions.forEach((s) => s.unsubscribe());
   }
 }
