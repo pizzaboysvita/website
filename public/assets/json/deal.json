@@ -1,0 +1,57 @@
+{
+    "todaysDeal": [
+        {
+            "id": 1,
+            "image_url": "assets/images/banner/banner1.jpg"
+        },
+        {
+            "id": 2,
+            "image_url": "assets/images/banner/banner2.jpg"
+        },
+        {
+            "id": 3,
+            "image_url": "assets/images/banner/banner3.jpg"
+        },
+        {
+            "id": 4,
+            "image_url": "assets/images/banner/banner4.jpg"
+        },
+        {
+            "id": 5,
+            "image_url": "assets/images/banner/banner5.jpg"
+        }
+    ],
+
+    "homeFiveTodaysDeal": [
+        {
+            "id": 1,
+            "image_url": "assets/images/icons/brand1.png",
+            "offer":"Up to 50% Off!",
+            "coupon_code":"ZOMO10"
+        },
+        {
+            "id": 1,
+            "image_url": "assets/images/icons/brand2.png",
+            "offer":"Flat 20%",
+            "coupon_code":"MAC20"
+        },
+        {
+            "id": 1,
+            "image_url": "assets/images/icons/brand3.png",
+            "offer":"Buy 1 Get 1",
+            "coupon_code":"BOGO"
+        },
+        {
+            "id": 1,
+            "image_url": "assets/images/icons/brand4.png",
+            "offer":"Up to 30% Off!",
+            "coupon_code":"ZOMO10"
+        },
+        {
+            "id": 1,
+            "image_url": "assets/images/icons/brand6.png",
+            "offer":"Up to 50% Off!",
+            "coupon_code":"ZOMO10"
+        }
+    ]
+}

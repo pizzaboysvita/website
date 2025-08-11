@@ -1,0 +1,26 @@
+section,
+[dir="ltr"] .section-t-space {
+  padding-top: calc(3px + 1 * (100vw - 320px) / 1600);
+}
+
+.app-section {
+  background-image: url("/assets/img/bg1.png");
+  background-position: left;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  margin-top: 15px;
+}
+.app-section .app-content {
+  background-color: black;
+  padding: calc(40px + 50 * (100vw - 320px) / 1600);;
+  opacity: 0.5;
+}
+
+.app-section .app-content h2 {
+  color: white;
+}
+
+.app-section .app-content h5 {
+  color: white;
+}

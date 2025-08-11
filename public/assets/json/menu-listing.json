@@ -1,0 +1,277 @@
+{
+    "menuListing": [
+        {
+            "id": "item-1",
+            "title": "Best Seller",
+            "children": [
+                {
+                    "id": "item-1-1",
+                    "image_url": "assets/images/menu/13.jpg",
+                    "title": "Ultimate Loaded Nacho Fiesta",
+                    "description": "Nacho typically consists of layers of crispy tortilla chips topped with a variety of delicious ingredients.",
+                    "price": "40",
+                    "rating": 5,
+                    "mealType": "veg"
+                }
+            ]
+        },
+        {
+            "id": "item-2",
+            "title": "Special Combos",
+            "children": [
+                {
+                    "id": "item-2-1",
+                    "image_url": "assets/images/menu/1.jpg",
+                    "title": "Burger & French fried combo",
+                    "description": "Your burger dish looks perfect combination of flavors and textures.",
+                    "price": "30",
+                    "rating": 5,
+                    "offer_price": " 60",
+                    "mealType": "veg",
+                    "customized": true
+                }
+            ]
+        },
+        {
+            "id": "item-3",
+            "title": "Sandwich",
+            "children": [
+                {
+                    "id": "item-3-1",
+                    "image_url": "assets/images/menu/2.jpg",
+                    "title": "Smoked Salmon Bagel",
+                    "description": "This sandwich is a delightful combination of fresh crisp lettuce, juicy tomato,nestled two slices of toasted whole wheat bread. ",
+                    "price": "20",
+                    "rating": 5,
+                    "customized": true,
+                    "mealType": "non-veg"
+                },
+                {
+                    "id": "item-3-2",
+                    "image_url": "assets/images/menu/3.jpg",
+                    "title": "Avocado toasts with radish and seeds",
+                    "description": "This sandwich is a delightful combination of fresh creamy avocado slices of toasted bread.",
+                    "price": "26",
+                    "rating": 5,
+                    "mealType": "non-veg"
+                },
+                {
+                    "id": "item-3-3",
+                    "image_url": "assets/images/menu/4.jpg",
+                    "title": "Cranberry Club Sandwich",
+                    "description": "The club sandwich is a classic favorite, known for its layers of deliciousness all sandwiched between three slices of toasted bread. ",
+                    "price": "50",
+                    "rating": 5,
+                    "mealType": "veg"
+                }
+            ]
+        },
+        {
+            "id": "item-4",
+            "title": "Tacos",
+            "children": [
+                {
+                    "id": "item-4-1",
+                    "image_url": "assets/images/menu/5.jpg",
+                    "title": "Delicious taco shells with ground beef and fresh vegetables.",
+                    "description": "Tacos are a delicious and versatile dish consist of a warm, soft corn or flour tortilla filled with a variety of savory ingredients",
+                    "price": "30",
+                    "rating": 5,
+                    "mealType": "veg"
+                },
+                {
+                    "id": "item-4-2",
+                    "image_url": "assets/images/menu/6.jpg",
+                    "title": "Spicy Shrimp Street Tacos",
+                    "description": "Tacos are a delicious and versatile dish consist of a warm, soft corn or flour tortilla filled with a variety of savory ingredients",
+                    "price": "34",
+                    "rating": 5,
+                    "mealType": "non-veg"
+                },
+                {
+                    "id": "item-4-3",
+                    "image_url": "assets/images/menu/7.jpg",
+                    "title": "BBQ Pulled Pork Fiesta Tacos",
+                    "description": "Tacos are a delicious and versatile dish consist of a Rosated tortilla filled with a variety of savory ingredients",
+                    "price": "38",
+                    "rating": 5,
+                    "mealType": "veg"
+                }
+            ]
+        },
+        {
+            "id": "item-5",
+            "title": "Pasta",
+            "children": [
+                {
+                    "id": "item-5-1",
+                    "image_url": "assets/images/menu/8.jpg",
+                    "title": "Pasta salad with balsamic vinegar",
+                    "description": "Green vegetable pasta a pasta dish that incorporates various green vegetables and sauce or as part of the toppings.",
+                    "price": "40",
+                    "rating": 5,
+                    "mealType": "veg"
+                },
+                {
+                    "id": "item-5-2",
+                    "image_url": "assets/images/menu/9.jpg",
+                    "title": "Striped handmade ravioli,",
+                    "description": "Ravioli is a traditional Italian pasta dish loved for its delicate, pillow-like pockets filled with flavorful ingredients.",
+                    "price": "34",
+                    "rating": 5,
+                    "mealType": "veg"
+                },
+                {
+                    "id": "item-5-3",
+                    "image_url": "assets/images/menu/11.jpg",
+                    "title": "Pasta carbonara on a plate",
+                    "description": "Carbonara pasta is a classic Italian dish known for its rich and creamy sauce made with eggs, cheese, pancetta or bacon, and black pepper.",
+                    "price": "35",
+                    "rating": 5,
+                    "mealType": "veg"
+                },
+                {
+                    "id": "item-5-4",
+                    "image_url": "assets/images/menu/12.jpg",
+                    "title": "Penne pasta with tomato sauce",
+                    "description": "Penne pasta is a versatile and popular type of pasta that is shaped like tubes with diagonally-cut ends.",
+                    "price": "45",
+                    "rating": 5,
+                    "mealType": "veg"
+                }
+            ]
+        },
+        {
+            "id": "item-6",
+            "title": "Noddles",
+            "children": [
+                {
+                    "id": "item-6-1",
+                    "image_url": "assets/images/menu/10.jpg",
+                    "title": "Noodles with egg and chicken",
+                    "description": "This dish is a delicious combination of tender chicken, fluffy eggs, and flavorful noodles, all coated in a savory sauce.",
+                    "price": "50",
+                    "rating": 5,
+                    "mealType": "non-veg"
+                },
+                {
+                    "id": "item-6-2",
+                    "image_url": "assets/images/menu/13.jpg",
+                    "title": "Creamy garlic mushroom spinach tube pasta,",
+                    "description": "Decadent and flavorful dish that combines tender pasta tubes with a rich and creamy sauce, sautéed mushrooms, garlic, and fresh spinach.",
+                    "price": "32",
+                    "rating": 5,
+                    "mealType": "veg"
+                }
+            ]
+        },
+        {
+            "id": "item-7",
+            "title": "Wrap",
+            "children": [
+                {
+                    "id": "item-7-1",
+                    "image_url": "assets/images/menu/14.jpg",
+                    "title": "Kebab sandwich wrap",
+                    "description": "Delicious and satisfying dish that combines flavorful kebab meat, fresh vegetables, and creamy sauces all wrapped in a warm tortilla or flatbread",
+                    "price": "46",
+                    "rating": 5,
+                    "mealType": "non-veg"
+                },
+                {
+                    "id": "item-7-2",
+                    "image_url": "assets/images/menu/15.jpg",
+                    "title": "Vietnamese spring rolls",
+                    "description": "Fresh spring rolls or summer rolls, are a popular and refreshing dish made with rice paper wrappers filled with a variety of fresh ingredients.",
+                    "price": "43",
+                    "rating": 5,
+                    "mealType": "veg"
+                }
+            ]
+        },
+        {
+            "id": "item-8",
+            "title": "Desserts",
+            "children": [
+                {
+                    "id": "item-8-1",
+                    "image_url": "assets/images/menu/16.jpg",
+                    "title": "Croissant with fresh strawberry and whipped cream.",
+                    "description": "Delightful and indulgent treat that combines the buttery richness of a croissant with the sweetness of fresh strawberries and the lightness of whipped cream.",
+                    "price": "20",
+                    "rating": 5,
+                    "mealType": "veg"
+                },
+                {
+                    "id": "item-8-2",
+                    "image_url": "assets/images/menu/17.jpg",
+                    "title": "Cookies and coffee",
+                    "description": "Cookies are sweet baked treats that come in various shapes, sizes, and flavors.",
+                    "price": "18",
+                    "rating": 5,
+                    "mealType": "non-veg"
+                },
+                {
+                    "id": "item-8-3",
+                    "image_url": "assets/images/menu/18.jpg",
+                    "title": "delicious dessert with tea, nuts, teapot, fruit jam",
+                    "description": "decadent triple chocolate mousse cake, a true indulgence for any chocolate lover.",
+                    "price": "16",
+                    "rating": 5,
+                    "mealType": "veg"
+                },
+                {
+                    "id": "item-8-4",
+                    "image_url": "assets/images/menu/19.jpg",
+                    "title": "Strawberries with sour cream",
+                    "description": "This Mexican Shredded Beef has incredible depth of flavour!",
+                    "price": "8",
+                    "rating": 5,
+                    "mealType": "veg"
+                }
+            ]
+        },
+        {
+            "id": "item-9",
+            "title": "Drinks",
+            "children": [
+                {
+                    "id": "item-9-1",
+                    "image_url": "assets/images/menu/20.jpg",
+                    "title": "Glass of coffee and milk",
+                    "description": "classic and comforting beverage that combines the rich flavor of coffee with the creamy goodness of milk.",
+                    "price": "20",
+                    "rating": 5,
+                    "mealType": "veg"
+                },
+                {
+                    "id": "item-9-2",
+                    "image_url": "assets/images/menu/21.jpg",
+                    "title": "Healthy detox drinks",
+                    "description": "This infused with various fruits, vegetables, and herbs to add flavor and provide additional health benefits.",
+                    "price": "10",
+                    "rating": 5,
+                    "mealType": "veg"
+                },
+                {
+                    "id": "item-9-3",
+                    "image_url": "assets/images/menu/22.jpg",
+                    "title": "Lemon juice cocktail with a slice of lemon",
+                    "description": "A lemon juice cocktail is a refreshing and tangy beverage made with freshly squeezed lemon juice.",
+                    "price": "10",
+                    "rating": 5,
+                    "mealType": "veg"
+                },
+                {
+                    "id": "item-9-4",
+                    "image_url": "assets/images/menu/23.jpg",
+                    "title": "Orange and lime fresh drinks",
+                    "description": "A orange juice cocktail is a refreshing and tangy beverage made with freshly squeezed lemon juice.",
+                    "price": "12",
+                    "rating": 5,
+                    "mealType": "veg"
+                }
+            ]
+        }
+    ]
+}

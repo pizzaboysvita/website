@@ -1,0 +1,96 @@
+{
+    "order": [
+        {
+            "image_url": "assets/images/icons/brand2.png",
+            "brand": "Mcdonald's",
+            "transaction_id": "#ACB12345458",
+            "amount": "40.00",
+            "address": "93, Songbird Cir, Blackville, SC, USA-29817",
+            "restaurant_address": "Mcdonald's",
+            "delivery_address": "Blackville",
+            "date": "10 Aug 2024",
+            "time": "05:00 PM",
+            "product": [
+                {
+                    "title": "Mexican Pizza",
+                    "qty": 10,
+                    "price": 20
+                },
+                {
+                    "title": "Chicken karahi",
+                    "qty": 1,
+                    "price": 20
+                }
+            ]
+        },
+        {
+            "image_url": "assets/images/icons/brand3.png",
+            "brand": "Starbucks",
+            "transaction_id": "#ACB12345459",
+            "amount": "100.00",
+            "address": "93, Songbird Cir, Blackville, SC, USA-29817",
+            "restaurant_address": "Starbucks",
+            "delivery_address": "Blackville",
+            "date": "10 Aug 2024",
+            "time": "05:00 PM",
+            "product": [
+                {
+                    "title": "Poultry Palace",
+                    "qty": 2,
+                    "price": 50
+                },
+                {
+                    "title": "Ribeye Junction",
+                    "qty": 3,
+                    "price": 40 
+                }
+            ]
+        },
+        {
+            "image_url": "assets/images/icons/brand4.png",
+            "brand": "Pizza Hut",
+            "transaction_id": "#ACB123456678",
+            "amount": "60.00",
+            "address": "93, Songbird Cir, Blackville, SC, USA-29817",
+            "restaurant_address": "Pizza Hut",
+            "delivery_address": "Blackville",
+            "date": "10 Aug 2024",
+            "time": "05:00 PM",
+            "product": [
+                {
+                    "title": "Taco",
+                    "qty": 2,
+                    "price": 10
+                },
+                {
+                    "title": "Muffin",
+                    "qty": 2,
+                    "price": 35
+                }
+            ]
+        },
+        {
+            "image_url": "assets/images/icons/brand6.png",  
+            "brand": "Burger King",
+            "transaction_id": "#ACB123458745",
+            "amount": "50.00",
+            "address": "26, Dhanmora Cir, Blackville, SC, USA-29817",
+            "restaurant_address": "Burger King",
+            "delivery_address": "Blackville",
+            "date": "10 Aug 2024",
+            "time": "05:00 PM",
+            "product": [
+                {
+                    "title": "Boritto",
+                    "qty": 2,
+                    "price": 50
+                },
+                {
+                    "title": "Fries",
+                    "qty": 1,
+                    "price": 25
+                }
+            ]
+        }
+    ]
+}

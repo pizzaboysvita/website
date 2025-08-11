@@ -1,0 +1,23 @@
+<div class="row bg-dark text-light">
+  <div class="col-sm-11 m-auto">
+    <div class="p-4">
+      <div class="category-carousel">
+        <owl-carousel-o [options]="customOptions" #owlCar>
+          <ng-template carouselSlide *ngFor="let cat of categories">
+            <div class="category-item" (click)="selectCategory(cat)">
+              <div *ngIf="!cat.imageLoaded" class="spinner-container">
+                <div class="spinner"></div>
+              </div>
+              <img [src]="cat.category_image" (load)="cat.imageLoaded = true" [alt]="cat.name"
+                [ngClass]="{'d-none': !cat.imageLoaded}" />
+              <span>{{ cat.name }}</span>
+            </div>
+          </ng-template>
+        </owl-carousel-o>
+
+        <button class="nav-btn prev" (click)="owlCar.prev()">&#10094;</button>
+        <button class="nav-btn next" (click)="owlCar.next()">&#10095;</button>
+      </div>
+    </div>
+  </div>
+</div>

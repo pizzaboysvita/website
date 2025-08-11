@@ -1,0 +1,121 @@
+{
+    "logo": {
+        "heder_logo": "assets/images/svg/logo.svg",
+        "footer_logo": "assets/images/svg/logo.svg",
+        "favicon_logo": "assets/images/logo/favicon.png"
+    },
+    "general":{
+        "side_title":"Zomo",
+        "mode":"light",
+        "language_direction":"ltr",
+        "top_to_tap": true
+    },
+    "footer": {
+        "footer_news_latter": {
+            "title":"Don't pass up our fantastic discounts. email offers from all of our best eateries",
+            "status":true
+        },
+        "description": "Welcome to our online order website! Here, you can browse our wide selection of products and place orders from the comfort of your own home.",
+        "social_media": {
+            "facebook": "https://www.facebook.com/login/",
+            "twitter": "https://twitter.com/i/flow/login",
+            "linkedin": "https://www.linkedin.com/login/",
+            "instagram": "https://www.instagram.com/accounts/login/",
+            "youtube": "https://www.youtube.com/"
+        },
+        "company": {
+            "title": "Company",
+            "page": [
+                {
+                    "title": "About us",
+                    "link": "about"
+                },
+                {
+                    "title": "Contact us",
+                    "link": "contact"
+                },
+                {
+                    "title": "Offer",
+                    "link": "order/offer"
+                },
+                {
+                    "title": "FAQs",
+                    "link": "pages/faqs"
+                }
+            ]
+        },
+        "account": {
+            "title": "Account",
+            "page": [
+                {
+                    "title": "My orders",
+                    "link": "account/my-order"
+                },
+                {
+                    "title": "Wishlist",
+                    "link": "pages/wishlist"
+                },
+                {
+                    "title": "Shopping Cart",
+                    "link": "order/checkout"
+                },
+                {
+                    "title": "Saved Address",
+                    "link": "account/saved-address"
+                }
+            ]
+        },  
+        "useful_links": {
+            "title": "Useful links",
+            "page": [
+                {
+                    "title": "Blogs",
+                    "link": "blog/grid-left-sidebar"
+                },
+                {
+                    "title": "Login",
+                    "link": "pages/sign-in"
+                },
+                {
+                    "title": "Register",
+                    "link": "pages/sign-up"
+                },
+                {
+                    "title": "Profile",
+                    "link": "account/change-profile"
+                },
+                {
+                    "title": "Settings",
+                    "link": "account/settings"
+                }
+            ]
+        },
+        "top_brands": {
+            "title": "Top Brands",
+            "page": [
+                {
+                    "title": "PizzaBoy",
+                    "link": "order/menu-listing/poultry-palace"
+                },
+                {
+                    "title": "Saladish",
+                    "link": "order/menu-listing/poultry-palace"
+                },
+                {
+                    "title": "IcePops",
+                    "link": "order/menu-listing/poultry-palace"
+                },
+                {
+                    "title": "Maxican Hoy",
+                    "link": "order/menu-listing/poultry-palace"
+                },
+                {
+                    "title": "La Foodie",
+                    "link": "order/menu-listing/poultry-palace"
+                }
+            ]
+        },
+        "copy_right_text" : "@ Copyright 2024 ZOMO. All rights Reserved.",
+        "payment_gateway": "assets/images/icons/footer-card.png"
+    }
+}

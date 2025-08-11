@@ -1,0 +1,59 @@
+<app-header class="head"></app-header>
+<header class="menu-grid-header p-4">
+  <div class="header-content">
+    <h1>{{ breadcrumb.title }}</h1>
+    <nav>
+      <a href="#">{{ breadcrumb.page }}</a> /
+      <a href="#">{{ breadcrumb.sub_page }}</a>
+    </nav>
+  </div>
+</header>
+<div class="">
+  <app-category (categorySelected)="onCategorySelected($event)"></app-category>
+</div>
+<div class="row bg-dark">
+  <div class="col-sm-11 m-auto">
+    <section class="menu-section bg-dark">
+      <div class="category-section">
+        <h2 class="category-title text-light">{{ selectedCategoryName }}</h2>
+
+        <div class="product-list">
+          @for (item of filteredProducts; track item.id) {
+          <div class="product-card">
+            <!-- <div class="product-image">
+                <img [src]="item.dish_image" [alt]="item.dish_name" />
+            </div> -->
+            <div class="product-image">
+              <img
+                [src]="item.dish_image"
+                [alt]="item.dish_name"
+                (load)="img.style.display = 'block'"
+                #img
+                style="display: none"
+              />
+              <div
+                *ngIf="img.style.display === 'none'"
+                class="spinner-container"
+              >
+                <div class="spinner"></div>
+              </div>
+            </div>
+            <div class="product-info justify-content-center">
+              <h3 class="product-name text-light">{{ item.dish_name }}</h3>
+              <p class="product-desc text-light">{{ item.description }}</p>
+              <div class="product-footer">
+                <span class="product-price">₹{{ item.dish_price }}</span>
+                <button class="favorite-btn">
+                  <i class="fa fa-heart"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          }
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<app-footer></app-footer>

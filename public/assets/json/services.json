@@ -1,0 +1,38 @@
+{
+    "service": [
+        {
+            "title": "Wide Map",
+            "svg": "assets/images/svg/routing.svg"
+        },
+        {
+            "title": "Easiest Order",
+            "svg": "assets/images/svg/3d-rotate.svg"
+        },
+        {
+            "title": "Most Delivery",
+            "svg": "assets/images/svg/truck.svg"
+        }
+    ],
+    "homeFour": [
+        {
+            "svg": "assets/images/svg/routing.svg",
+            "title":"Wide Map",
+            "description": "Wide Range of Map, Order from anywhere anytime"
+        },
+        {
+            "svg": "assets/images/svg/3d-rotate.svg",
+            "title":"Easiest Order",
+            "description": "Easy and hussle free order online process"
+        },
+        {
+            "svg": "assets/images/svg/truck.svg",
+            "title":"Most Delivery",
+            "description": "we ensure your food is delivered swiftly"
+        },
+        {
+            "svg": "assets/images/svg/credit-card.svg",
+            "title":"Various Payment",
+            "description": "Various payment options to make order seamless"
+        }
+    ]
+}

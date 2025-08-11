@@ -1,0 +1,528 @@
+{
+    "categories": [
+        {
+            "name": "Fruits & Vegetables",
+            "value": "15"
+        },
+        {
+            "name": "Bakery, Cake & Dairy",
+            "value": "12"
+        },
+        {
+            "name": "Beverages",
+            "value": "20"
+        },
+        {
+            "name": "Snacks & Branded Foods",
+            "value": "05"
+        },
+        {
+            "name": "Beauty & Household",
+            "value": "30"
+        },
+        {
+            "name": "Kitchen, Garden & Pets",
+            "value": "50"
+        },
+        {
+            "name": "Eggs, Meat & Fish",
+            "value": "19"
+        },
+        {
+            "name": "Gourment & World Food",
+            "value": "30"
+        },
+        {
+            "name": "Baby Care",
+            "value": "20"
+        },
+        {
+            "name": "Fish & Seafood",
+            "value": "10"
+        },
+        {
+            "name": "Marinades",
+            "value": "05"
+        },
+        {
+            "name": "Mutton & Lamb",
+            "value": "09"
+        },
+        {
+            "name": "Port & other Meats",
+            "value": "06"
+        },
+        {
+            "name": "Pourltry",
+            "value": "01"
+        },
+        {
+            "name": "Sausages, bacon & Salami",
+            "value": "03"
+        }
+    ],
+    "recentPost": [
+        {
+            "imageUrl": "assets/images/blog/2.png",
+            "user_name": "John wike",
+            "date": "20 Sep, 2024"
+        },
+        {
+            "imageUrl": "assets/images/blog/3.png",
+            "user_name": "Megan Jones",
+            "date": "22 Nov, 2024"
+        },
+        {
+            "imageUrl": "assets/images/blog/4.png",
+            "user_name": "Mary Brown",
+            "date": "1 Dec, 2024"
+        },
+        {
+            "imageUrl": "assets/images/blog/5.png",
+            "user_name": "Celia Abbott",
+            "date": "1 Mar, 2024"
+        }
+    ],
+    "tags": [
+        {
+            "title": "Vegetable"
+        },
+        {
+            "title": "Pharmacy"
+        },
+        {
+            "title": "Grocery"
+        },
+        {
+            "title": "Milk"
+        },
+        {
+            "title": "Fruit"
+        },
+        {
+            "title": "Organic"
+        },
+        {
+            "title": "Health"
+        },
+        {
+            "title": "Covid care"
+        }
+    ],
+    "blogDetails": [
+        {
+            "id": 1,
+            "image_url": "assets/images/blog/1.png",
+            "title": "By Furion in Food",
+            "slug_url": "by-furion",
+            "sub_title": "Paradise Taste of Meals",
+            "date": "on May 30, 2024 By Frurion",
+            "description": "a world of gourmet ingredients and specialty products that will inspire your culinary creativity. From aged balsamic vinegar to truffle-infused oils and imported cheeses, these indulgent treats add a touch of luxury to any meal.",
+            "content": [
+                {
+                    "text": "Nachos are a popular Mexican-inspired dish consisting of tortilla chips topped with melted cheese and a variety of other ingredients. They are often served as a snack or appetizer and can be customized with different toppings to suit individual preferences."
+                },
+                {
+                    "text": "The origin of nachos is attributed to Ignacio Nacho Anaya, a Mexican chef, who is said to have created the dish in the 1940s. The story goes that Anaya improvised the dish using what he had available in the kitchen to serve a group of hungry guests. He topped the tortilla chips with shredded cheese and sliced jalapeños, then heated them until the cheese melted, creating the iconic dish we know today as nachos."
+                },
+                {
+                    "text": "Since then, nachos have become a popular dish worldwide, with many variations and toppings. Some common toppings include beans, ground beef, chicken, tomatoes, onions, sour cream, guacamole, and salsa. Nachos can be served as a simple snack or as a hearty meal, depending on the toppings and portion size."
+                },
+                {
+                    "text": "Whether you prefer classic nachos with just cheese and jalapeños or loaded nachos with a variety of toppings, nachos are a versatile and delicious dish that can be enjoyed in many different ways."
+                }
+            ],
+            "comment": [
+                {
+                    "image_url": "assets/images/icons/p2.png",
+                    "name": "Megan Jones",
+                    "date": "Aug 20, 2022",
+                    "comment": "I never knew the history behind nachos! It's fascinating to learn how they were invented. Definitely going to try making them at home.",
+                    "replay": false
+                },
+                {
+                    "image_url": "assets/images/icons/p3.png",
+                    "name": "Mary Brown",
+                    "date": "Aug 20, 2022",
+                    "comment": "Thank you for your comment! I'm glad you found the history of nachos interesting. Let me know how your homemade nachos turn out!",
+                    "replay": true
+                },
+                {
+                    "image_url": "assets/images/icons/p4.png",
+                    "name": "Celia Abbott",
+                    "date": "Aug 20, 2022",
+                    "comment": "Nachos are my guilty pleasure! I could eat them every day. This article has inspired me to get creative with my toppings next time. Nachos are the ultimate comfort food for me. Nothing beats a big plate of cheesy, crispy chips loaded with all my favorite toppings.",
+                    "replay": false
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "image_url": "assets/images/blog/2.png",
+            "title": "By John in Food",
+            "slug_url": "by-john",
+            "sub_title": "Heaven Flavour of Dishes",
+            "date": "on May 20, 2024 By John",
+            "description": "a world where crispy tortilla chips meet a symphony of flavors, creating a nachos experience like no other. Our signature nachos dish is a testament to culinary excellence, promising a fiesta of taste sensations that will leave you craving more with every bite.",
+            "content": [
+                {
+                    "text": "Nachos are a popular Mexican-inspired dish consisting of tortilla chips topped with melted cheese and a variety of other ingredients. They are often served as a snack or appetizer and can be customized with different toppings to suit individual preferences."
+                },
+                {
+                    "text": "The origin of nachos is attributed to Ignacio Nacho Anaya, a Mexican chef, who is said to have created the dish in the 1940s. The story goes that Anaya improvised the dish using what he had available in the kitchen to serve a group of hungry guests. He topped the tortilla chips with shredded cheese and sliced jalapeños, then heated them until the cheese melted, creating the iconic dish we know today as nachos."
+                },
+                {
+                    "text": "Since then, nachos have become a popular dish worldwide, with many variations and toppings. Some common toppings include beans, ground beef, chicken, tomatoes, onions, sour cream, guacamole, and salsa. Nachos can be served as a simple snack or as a hearty meal, depending on the toppings and portion size."
+                },
+                {
+                    "text": "Whether you prefer classic nachos with just cheese and jalapeños or loaded nachos with a variety of toppings, nachos are a versatile and delicious dish that can be enjoyed in many different ways."
+                }
+            ],
+            "comment": [
+                {
+                    "image_url": "assets/images/icons/p2.png",
+                    "name": "Megan Jones",
+                    "date": "Aug 20, 2022",
+                    "comment": "I never knew the history behind nachos! It's fascinating to learn how they were invented. Definitely going to try making them at home.",
+                    "replay": false
+                },
+                {
+                    "image_url": "assets/images/icons/p3.png",
+                    "name": "Mary Brown",
+                    "date": "Aug 20, 2022",
+                    "comment": "Thank you for your comment! I'm glad you found the history of nachos interesting. Let me know how your homemade nachos turn out!",
+                    "replay": true
+                },
+                {
+                    "image_url": "assets/images/icons/p4.png",
+                    "name": "Celia Abbott",
+                    "date": "Aug 20, 2022",
+                    "comment": "Nachos are my guilty pleasure! I could eat them every day. This article has inspired me to get creative with my toppings next time. Nachos are the ultimate comfort food for me. Nothing beats a big plate of cheesy, crispy chips loaded with all my favorite toppings.",
+                    "replay": false
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "image_url": "assets/images/blog/3.png",
+            "title": "By Mike in Food",
+            "slug_url": "by-mike",
+            "sub_title": "Happiness Taste of Panner",
+            "date": "on April 25, 2024 By Mike",
+            "description": "At the heart of our paneer dish lies a dedication to craftsmanship and care.Our chefs pour their passion and expertise into every step of the cookingprocess, from selecting the finest ingredients to mastering the art ofseasoning and simmering. Each piece of paneer is meticulously marinated andcooked to perfection, ensuring a tender texture and a depth of flavor thatwill leave you craving more.",
+            "content": [
+                {
+                    "text": "Nachos are a popular Mexican-inspired dish consisting of tortilla chips topped with melted cheese and a variety of other ingredients. They are often served as a snack or appetizer and can be customized with different toppings to suit individual preferences."
+                },
+                {
+                    "text": "The origin of nachos is attributed to Ignacio Nacho Anaya, a Mexican chef, who is said to have created the dish in the 1940s. The story goes that Anaya improvised the dish using what he had available in the kitchen to serve a group of hungry guests. He topped the tortilla chips with shredded cheese and sliced jalapeños, then heated them until the cheese melted, creating the iconic dish we know today as nachos."
+                },
+                {
+                    "text": "Since then, nachos have become a popular dish worldwide, with many variations and toppings. Some common toppings include beans, ground beef, chicken, tomatoes, onions, sour cream, guacamole, and salsa. Nachos can be served as a simple snack or as a hearty meal, depending on the toppings and portion size."
+                },
+                {
+                    "text": "Whether you prefer classic nachos with just cheese and jalapeños or loaded nachos with a variety of toppings, nachos are a versatile and delicious dish that can be enjoyed in many different ways."
+                }
+            ],
+            "comment": [
+                {
+                    "image_url": "assets/images/icons/p2.png",
+                    "name": "Megan Jones",
+                    "date": "Aug 20, 2022",
+                    "comment": "I never knew the history behind nachos! It's fascinating to learn how they were invented. Definitely going to try making them at home.",
+                    "replay": false
+                },
+                {
+                    "image_url": "assets/images/icons/p3.png",
+                    "name": "Mary Brown",
+                    "date": "Aug 20, 2022",
+                    "comment": "Thank you for your comment! I'm glad you found the history of nachos interesting. Let me know how your homemade nachos turn out!",
+                    "replay": true
+                },
+                {
+                    "image_url": "assets/images/icons/p4.png",
+                    "name": "Celia Abbott",
+                    "date": "Aug 20, 2022",
+                    "comment": "Nachos are my guilty pleasure! I could eat them every day. This article has inspired me to get creative with my toppings next time. Nachos are the ultimate comfort food for me. Nothing beats a big plate of cheesy, crispy chips loaded with all my favorite toppings.",
+                    "replay": false
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "image_url": "assets/images/blog/4.png",
+            "title": "By Johnny in Food",
+            "slug_url": "by-johnny",
+            "sub_title": "The Evolution of Food",
+            "date": "on April 10, 2024 By Johnny",
+            "description": "the joy of falafel with us and discover why it has become a cherished staple of Mediterranean cuisine. With its irresistible flavors, satisfying textures, and endless versatility, our falafel dish is sure to leave you smiling and satisfied, craving just one more bite.",
+            "content": [
+                {
+                    "text": "Nachos are a popular Mexican-inspired dish consisting of tortilla chips topped with melted cheese and a variety of other ingredients. They are often served as a snack or appetizer and can be customized with different toppings to suit individual preferences."
+                },
+                {
+                    "text": "The origin of nachos is attributed to Ignacio Nacho Anaya, a Mexican chef, who is said to have created the dish in the 1940s. The story goes that Anaya improvised the dish using what he had available in the kitchen to serve a group of hungry guests. He topped the tortilla chips with shredded cheese and sliced jalapeños, then heated them until the cheese melted, creating the iconic dish we know today as nachos."
+                },
+                {
+                    "text": "Since then, nachos have become a popular dish worldwide, with many variations and toppings. Some common toppings include beans, ground beef, chicken, tomatoes, onions, sour cream, guacamole, and salsa. Nachos can be served as a simple snack or as a hearty meal, depending on the toppings and portion size."
+                },
+                {
+                    "text": "Whether you prefer classic nachos with just cheese and jalapeños or loaded nachos with a variety of toppings, nachos are a versatile and delicious dish that can be enjoyed in many different ways."
+                }
+            ],
+            "comment": [
+                {
+                    "image_url": "assets/images/icons/p2.png",
+                    "name": "Megan Jones",
+                    "date": "Aug 20, 2022",
+                    "comment": "I never knew the history behind nachos! It's fascinating to learn how they were invented. Definitely going to try making them at home.",
+                    "replay": false
+                },
+                {
+                    "image_url": "assets/images/icons/p3.png",
+                    "name": "Mary Brown",
+                    "date": "Aug 20, 2022",
+                    "comment": "Thank you for your comment! I'm glad you found the history of nachos interesting. Let me know how your homemade nachos turn out!",
+                    "replay": true
+                },
+                {
+                    "image_url": "assets/images/icons/p4.png",
+                    "name": "Celia Abbott",
+                    "date": "Aug 20, 2022",
+                    "comment": "Nachos are my guilty pleasure! I could eat them every day. This article has inspired me to get creative with my toppings next time. Nachos are the ultimate comfort food for me. Nothing beats a big plate of cheesy, crispy chips loaded with all my favorite toppings.",
+                    "replay": false
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "image_url": "assets/images/blog/5.png",
+            "title": "By Mary in Food",
+            "slug_url": "by-mary",
+            "sub_title": "Taste of Peace in Foods",
+            "date": "on March 22, 2024 By Mary",
+            "description": "The magic of samosas with us and discover why they have become a beloved staple of Indian cuisine. Whether you're a lifelong fan or trying them for the first time, our samosa dish promises to delight your senses and leave you longing for just one more bite.",
+            "content": [
+                {
+                    "text": "Nachos are a popular Mexican-inspired dish consisting of tortilla chips topped with melted cheese and a variety of other ingredients. They are often served as a snack or appetizer and can be customized with different toppings to suit individual preferences."
+                },
+                {
+                    "text": "The origin of nachos is attributed to Ignacio Nacho Anaya, a Mexican chef, who is said to have created the dish in the 1940s. The story goes that Anaya improvised the dish using what he had available in the kitchen to serve a group of hungry guests. He topped the tortilla chips with shredded cheese and sliced jalapeños, then heated them until the cheese melted, creating the iconic dish we know today as nachos."
+                },
+                {
+                    "text": "Since then, nachos have become a popular dish worldwide, with many variations and toppings. Some common toppings include beans, ground beef, chicken, tomatoes, onions, sour cream, guacamole, and salsa. Nachos can be served as a simple snack or as a hearty meal, depending on the toppings and portion size."
+                },
+                {
+                    "text": "Whether you prefer classic nachos with just cheese and jalapeños or loaded nachos with a variety of toppings, nachos are a versatile and delicious dish that can be enjoyed in many different ways."
+                }
+            ],
+            "comment": [
+                {
+                    "image_url": "assets/images/icons/p2.png",
+                    "name": "Megan Jones",
+                    "date": "Aug 20, 2022",
+                    "comment": "I never knew the history behind nachos! It's fascinating to learn how they were invented. Definitely going to try making them at home.",
+                    "replay": false
+                },
+                {
+                    "image_url": "assets/images/icons/p3.png",
+                    "name": "Mary Brown",
+                    "date": "Aug 20, 2022",
+                    "comment": "Thank you for your comment! I'm glad you found the history of nachos interesting. Let me know how your homemade nachos turn out!",
+                    "replay": true
+                },
+                {
+                    "image_url": "assets/images/icons/p4.png",
+                    "name": "Celia Abbott",
+                    "date": "Aug 20, 2022",
+                    "comment": "Nachos are my guilty pleasure! I could eat them every day. This article has inspired me to get creative with my toppings next time. Nachos are the ultimate comfort food for me. Nothing beats a big plate of cheesy, crispy chips loaded with all my favorite toppings.",
+                    "replay": false
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "image_url": "assets/images/blog/6.png",
+            "title": "By Celia in Food",
+            "slug_url": "by-celia",
+            "sub_title": "Perfect Taste of Cuisine",
+            "date": "on March 15, 2024 By Celia",
+            "description": "Indulge your senses as you savor the rich, robust flavors of our pasta dish. Each bite is a revelation, with layers of savory tomato sauce, fragrant herbs, and creamy cheese coming together in perfect harmony to create a taste sensation that is nothing short of extraordinary.",
+            "content": [
+                {
+                    "text": "Nachos are a popular Mexican-inspired dish consisting of tortilla chips topped with melted cheese and a variety of other ingredients. They are often served as a snack or appetizer and can be customized with different toppings to suit individual preferences."
+                },
+                {
+                    "text": "The origin of nachos is attributed to Ignacio Nacho Anaya, a Mexican chef, who is said to have created the dish in the 1940s. The story goes that Anaya improvised the dish using what he had available in the kitchen to serve a group of hungry guests. He topped the tortilla chips with shredded cheese and sliced jalapeños, then heated them until the cheese melted, creating the iconic dish we know today as nachos."
+                },
+                {
+                    "text": "Since then, nachos have become a popular dish worldwide, with many variations and toppings. Some common toppings include beans, ground beef, chicken, tomatoes, onions, sour cream, guacamole, and salsa. Nachos can be served as a simple snack or as a hearty meal, depending on the toppings and portion size."
+                },
+                {
+                    "text": "Whether you prefer classic nachos with just cheese and jalapeños or loaded nachos with a variety of toppings, nachos are a versatile and delicious dish that can be enjoyed in many different ways."
+                }
+            ],
+            "comment": [
+                {
+                    "image_url": "assets/images/icons/p2.png",
+                    "name": "Megan Jones",
+                    "date": "Aug 20, 2022",
+                    "comment": "I never knew the history behind nachos! It's fascinating to learn how they were invented. Definitely going to try making them at home.",
+                    "replay": false
+                },
+                {
+                    "image_url": "assets/images/icons/p3.png",
+                    "name": "Mary Brown",
+                    "date": "Aug 20, 2022",
+                    "comment": "Thank you for your comment! I'm glad you found the history of nachos interesting. Let me know how your homemade nachos turn out!",
+                    "replay": true
+                },
+                {
+                    "image_url": "assets/images/icons/p4.png",
+                    "name": "Celia Abbott",
+                    "date": "Aug 20, 2022",
+                    "comment": "Nachos are my guilty pleasure! I could eat them every day. This article has inspired me to get creative with my toppings next time. Nachos are the ultimate comfort food for me. Nothing beats a big plate of cheesy, crispy chips loaded with all my favorite toppings.",
+                    "replay": false
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "image_url": "assets/images/blog/7.png",
+            "title": "By Blink in Food",
+            "slug_url": "by-slink",
+            "sub_title": "Tastes of the World",
+            "date": "on March 16, 2024 By Blink",
+            "description": "The hallmark of a great taco lies in its texture, and ours are no exception. With their crispy, golden shells and tender, flavorful fillings, our tacos offer the perfect balance of crunch and melt-in-your-mouth goodness that will leave you craving more with every bite.",
+            "content": [
+                {
+                    "text": "Nachos are a popular Mexican-inspired dish consisting of tortilla chips topped with melted cheese and a variety of other ingredients. They are often served as a snack or appetizer and can be customized with different toppings to suit individual preferences."
+                },
+                {
+                    "text": "The origin of nachos is attributed to Ignacio Nacho Anaya, a Mexican chef, who is said to have created the dish in the 1940s. The story goes that Anaya improvised the dish using what he had available in the kitchen to serve a group of hungry guests. He topped the tortilla chips with shredded cheese and sliced jalapeños, then heated them until the cheese melted, creating the iconic dish we know today as nachos."
+                },
+                {
+                    "text": "Since then, nachos have become a popular dish worldwide, with many variations and toppings. Some common toppings include beans, ground beef, chicken, tomatoes, onions, sour cream, guacamole, and salsa. Nachos can be served as a simple snack or as a hearty meal, depending on the toppings and portion size."
+                },
+                {
+                    "text": "Whether you prefer classic nachos with just cheese and jalapeños or loaded nachos with a variety of toppings, nachos are a versatile and delicious dish that can be enjoyed in many different ways."
+                }
+            ],
+            "comment": [
+                {
+                    "image_url": "assets/images/icons/p2.png",
+                    "name": "Megan Jones",
+                    "date": "Aug 20, 2022",
+                    "comment": "I never knew the history behind nachos! It's fascinating to learn how they were invented. Definitely going to try making them at home.",
+                    "replay": false
+                },
+                {
+                    "image_url": "assets/images/icons/p3.png",
+                    "name": "Mary Brown",
+                    "date": "Aug 20, 2022",
+                    "comment": "Thank you for your comment! I'm glad you found the history of nachos interesting. Let me know how your homemade nachos turn out!",
+                    "replay": true
+                },
+                {
+                    "image_url": "assets/images/icons/p4.png",
+                    "name": "Celia Abbott",
+                    "date": "Aug 20, 2022",
+                    "comment": "Nachos are my guilty pleasure! I could eat them every day. This article has inspired me to get creative with my toppings next time. Nachos are the ultimate comfort food for me. Nothing beats a big plate of cheesy, crispy chips loaded with all my favorite toppings.",
+                    "replay": false
+                }
+            ]
+        },
+        {
+            "id": 8,
+            "image_url": "assets/images/blog/8.png",
+            "title": "By Shean in Food",
+            "slug_url": "by-shean",
+            "sub_title": "The Best Italian Food.",
+            "date": "on March 12, 2024 By Shean",
+            "description": "Whether you prefer your noodles spicy or mild, vegetarian or with succulent meats, our dish offers endless possibilities for customization. With a variety of toppings and sauces to choose from, you can tailor your noodles to suit your taste preferences, creating a meal that is uniquely yours.",
+            "content": [
+                {
+                    "text": "Nachos are a popular Mexican-inspired dish consisting of tortilla chips topped with melted cheese and a variety of other ingredients. They are often served as a snack or appetizer and can be customized with different toppings to suit individual preferences."
+                },
+                {
+                    "text": "The origin of nachos is attributed to Ignacio Nacho Anaya, a Mexican chef, who is said to have created the dish in the 1940s. The story goes that Anaya improvised the dish using what he had available in the kitchen to serve a group of hungry guests. He topped the tortilla chips with shredded cheese and sliced jalapeños, then heated them until the cheese melted, creating the iconic dish we know today as nachos."
+                },
+                {
+                    "text": "Since then, nachos have become a popular dish worldwide, with many variations and toppings. Some common toppings include beans, ground beef, chicken, tomatoes, onions, sour cream, guacamole, and salsa. Nachos can be served as a simple snack or as a hearty meal, depending on the toppings and portion size."
+                },
+                {
+                    "text": "Whether you prefer classic nachos with just cheese and jalapeños or loaded nachos with a variety of toppings, nachos are a versatile and delicious dish that can be enjoyed in many different ways."
+                }
+            ],
+            "comment": [
+                {
+                    "image_url": "assets/images/icons/p2.png",
+                    "name": "Megan Jones",
+                    "date": "Aug 20, 2022",
+                    "comment": "I never knew the history behind nachos! It's fascinating to learn how they were invented. Definitely going to try making them at home.",
+                    "replay": false
+                },
+                {
+                    "image_url": "assets/images/icons/p3.png",
+                    "name": "Mary Brown",
+                    "date": "Aug 20, 2022",
+                    "comment": "Thank you for your comment! I'm glad you found the history of nachos interesting. Let me know how your homemade nachos turn out!",
+                    "replay": true
+                },
+                {
+                    "image_url": "assets/images/icons/p4.png",
+                    "name": "Celia Abbott",
+                    "date": "Aug 20, 2022",
+                    "comment": "Nachos are my guilty pleasure! I could eat them every day. This article has inspired me to get creative with my toppings next time. Nachos are the ultimate comfort food for me. Nothing beats a big plate of cheesy, crispy chips loaded with all my favorite toppings.",
+                    "replay": false
+                }
+            ]
+        },
+        {
+            "id": 9,
+            "image_url": "assets/images/blog/9.png",
+            "title": "By Elisa in Food",
+            "slug_url": "by-slisa",
+            "sub_title": "Asian Most Famous Rice",
+            "date": "on March 5, 2024 By Elisa",
+            "description": "Whether you prefer your noodles spicy or mild, vegetarian or with succulent meats, our dish offers endless possibilities for customization. With a variety of toppings and sauces to choose from, you can tailor your noodles to suit your taste preferences, creating a meal that is uniquely yours.",
+            "content": [
+                {
+                    "text": "Nachos are a popular Mexican-inspired dish consisting of tortilla chips topped with melted cheese and a variety of other ingredients. They are often served as a snack or appetizer and can be customized with different toppings to suit individual preferences."
+                },
+                {
+                    "text": "The origin of nachos is attributed to Ignacio Nacho Anaya, a Mexican chef, who is said to have created the dish in the 1940s. The story goes that Anaya improvised the dish using what he had available in the kitchen to serve a group of hungry guests. He topped the tortilla chips with shredded cheese and sliced jalapeños, then heated them until the cheese melted, creating the iconic dish we know today as nachos."
+                },
+                {
+                    "text": "Since then, nachos have become a popular dish worldwide, with many variations and toppings. Some common toppings include beans, ground beef, chicken, tomatoes, onions, sour cream, guacamole, and salsa. Nachos can be served as a simple snack or as a hearty meal, depending on the toppings and portion size."
+                },
+                {
+                    "text": "Whether you prefer classic nachos with just cheese and jalapeños or loaded nachos with a variety of toppings, nachos are a versatile and delicious dish that can be enjoyed in many different ways."
+                }
+            ],
+            "comment": [
+                {
+                    "image_url": "assets/images/icons/p2.png",
+                    "name": "Megan Jones",
+                    "date": "Aug 20, 2022",
+                    "comment": "I never knew the history behind nachos! It's fascinating to learn how they were invented. Definitely going to try making them at home.",
+                    "replay": false
+                },
+                {
+                    "image_url": "assets/images/icons/p3.png",
+                    "name": "Mary Brown",
+                    "date": "Aug 20, 2022",
+                    "comment": "Thank you for your comment! I'm glad you found the history of nachos interesting. Let me know how your homemade nachos turn out!",
+                    "replay": true
+                },
+                {
+                    "image_url": "assets/images/icons/p4.png",
+                    "name": "Celia Abbott",
+                    "date": "Aug 20, 2022",
+                    "comment": "Nachos are my guilty pleasure! I could eat them every day. This article has inspired me to get creative with my toppings next time. Nachos are the ultimate comfort food for me. Nothing beats a big plate of cheesy, crispy chips loaded with all my favorite toppings.",
+                    "replay": false
+                }
+            ]
+        }
+    ]
+}
