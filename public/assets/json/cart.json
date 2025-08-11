@@ -1,0 +1,32 @@
+{
+    "data": [
+        {
+            "id": 1,
+            "title": "Ultimate Loaded Nacho Fiesta",
+            "sub_title": "Hot Nacho Chips",
+            "place": "Serve 1",
+            "count": 1,
+            "price": 20,
+            "qty": 1
+        },
+        {
+            "id": 2,
+            "title": "Smoked Salmon Bagel ",
+            "sub_title": "Smoked Biscuit",
+            "place": "Serve 2",
+            "count": 1,
+            "price": 40,
+            "qty": 1
+        },
+        {
+            "id": 3,
+            "title": "Cranberry Club Sandwich",
+            "sub_title": "Vegetables",
+            "place": "Serve 3",
+            "count": 1,
+            "price": 50,
+            "qty": 1
+        }
+    ],
+    "discount": 10
+}

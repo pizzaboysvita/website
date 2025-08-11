@@ -1,0 +1,104 @@
+{
+    "faq": [
+        {
+            "title": "I want to track my order",
+            "data": [
+                {
+                    "item": "To track your order, you will need to have the tracking number or order ID provided by the seller or shipping carrier. Once you have this information, you can usually track your order online by visiting the carrier's website and entering the tracking number or order ID in the designated tracking field."
+                }
+            ]
+        },
+        {
+            "title": "I want to manage my order",
+            "data": [
+                {
+                    "item": "Check your order confirmation email or account: This should contain information about your order, including the expected delivery date, tracking number (if applicable), and contact information for the seller."
+                },
+                {
+                    "item": "Contact the seller: If you have any questions about your order or need to make changes, the best way to do so is to contact the seller directly. You can typically find their contact information on their website or in your order confirmation email."
+                },
+                {
+                    "item": "Check the order status: Many online retailers provide a way for you to check the status of your order online. This can give you information about when your order was shipped, when it's expected to arrive, and any tracking information."
+                },
+                {
+                    "item": "Make changes to your order: Depending on the seller's policies, you may be able to make changes to your order, such as adding or removing items, changing the shipping address, or canceling the order altogether. Contact the seller to see if this is possible."
+                }
+            ]
+        },
+        {
+            "title": "I did not receive Instant Cashback",
+            "data": [
+                {
+                    "title": "I'm sorry to hear that you did not receive an instant cashback. To help you with this issue, I need more information.",
+                    "data": [
+                        {
+                            "item": "What type of purchase did you make?"
+                        },
+                        {
+                            "item": "From which website or store did you make the purchase?"
+                        },
+                        {
+                            "item": "Did you receive any confirmation or receipt for your purchase?"
+                        },
+                        {
+                            "item": "Did you check the terms and conditions of the cashback offer before making the purchase?"
+                        },
+                        {
+                            "item": "What type of purchase did you make?Have you contacted the website or store's customer support regarding the issue?"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "I am unable to pay using wallet",
+            "data": [
+                {
+                    "title": "I'm sorry to hear that you did not receive an instant cashback. To help you with this issue, I need more information.",
+                    "data": [
+                        {
+                            "item": "What type of purchase did you make?"
+                        },
+                        {
+                            "item": "From which website or store did you make the purchase?"
+                        },
+                        {
+                            "item": "Did you receive any confirmation or receipt for your purchase?"
+                        },
+                        {
+                            "item": "Did you check the terms and conditions of the cashback offer before making the purchase?"
+                        },
+                        {
+                            "item": "What type of purchase did you make?Have you contacted the website or store's customer support regarding the issue?"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "I want help with returns & refunds",
+            "data": [
+                {
+                    "title": "I'm sorry to hear that you did not receive an instant cashback. To help you with this issue, I need more information.",
+                    "data": [
+                        {
+                            "item": "What type of purchase did you make?"
+                        },
+                        {
+                            "item": "From which website or store did you make the purchase?"
+                        },
+                        {
+                            "item": "Did you receive any confirmation or receipt for your purchase?"
+                        },
+                        {
+                            "item": "Did you check the terms and conditions of the cashback offer before making the purchase?"
+                        },
+                        {
+                            "item": "What type of purchase did you make?Have you contacted the website or store's customer support regarding the issue?"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

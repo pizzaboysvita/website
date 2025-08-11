@@ -1,0 +1,36 @@
+{
+    "photos":[
+        {
+            "image_url":"assets/images/service/6.jpg",
+            "alt":6
+        },
+        {
+            "image_url":"assets/images/service/7.jpg",
+            "alt":7
+        },
+        {
+            "image_url":"assets/images/service/8.jpg",
+            "alt":8
+        },
+        {
+            "image_url":"assets/images/service/9.jpg",
+            "alt":9
+        },
+        {
+            "image_url":"assets/images/service/10.jpg",
+            "alt":10
+        },
+        {
+            "image_url":"assets/images/service/11.jpg",
+            "alt":11
+        },
+        {
+            "image_url":"assets/images/service/12.jpg",
+            "alt":12
+        },
+        {
+            "image_url":"assets/images/service/13.jpg",
+            "alt":13
+        }
+    ]
+}

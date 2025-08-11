@@ -1,0 +1,17 @@
+<div class="hero">
+    <!-- Curtains -->
+    <div class="hero__courtains" [ngClass]="{ 'open': isCurtainsOpen }">
+        <div class="hero__courtains__left">
+            <h1>Welcome to </h1>
+        </div>
+        <div class="hero__courtains__right">
+            <h1>PIZZA BOYZ</h1>
+        </div>
+    </div>
+
+    <!-- Video -->
+    <video #introVideo class="hero-video" [hidden]="!isCurtainsOpen" autoplay muted loop playsinline>
+        <source src="assets/img/Pizza-Nova-Hero.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</div>

@@ -1,0 +1,99 @@
+{
+    "categories": [
+        {
+            "id": 1,
+            "title": "Pizza",
+            "image_Url": "assets/images/product/p-1.png"
+        },
+        {
+            "id": 2,
+            "title": "Chicken",
+            "image_Url": "assets/images/product/p-2.png"
+        },
+        {
+            "id": 3,
+            "title": "Burger",
+            "image_Url": "assets/images/product/p-3.png"
+        },
+        {
+            "id": 4,
+            "title": "Fries",
+            "image_Url": "assets/images/product/p-5.png"
+        },
+        {
+            "id": 5,
+            "title": "Boritto",
+            "image_Url": "assets/images/product/p-6.png"
+        },
+        {
+            "id": 6,
+            "title": "Taco",
+            "image_Url": "assets/images/product/p-7.png"
+        },
+        {
+            "id": 7,
+            "title": "Muffin",
+            "image_Url": "assets/images/product/p-8.png"
+        },
+        {
+            "id": 8,
+            "title": "Meat",
+            "image_Url": "assets/images/product/p-9.png"
+        },
+        {
+            "id": 9,
+            "title": "Panner",
+            "image_Url": "assets/images/product/p-10.png"
+        },
+        {
+            "id": 10,
+            "title": "Hotdog",
+            "image_Url": "assets/images/product/p-11.png"
+        },
+        {
+            "id": 11,
+            "title": "Donuts",
+            "image_Url": "assets/images/product/p-12.png"
+        },
+        {
+            "id": 12,
+            "title": "Coffee",
+            "image_Url": "assets/images/product/p-13.png"
+        },
+        {
+            "id": 13,
+            "title": "Sandwich",
+            "image_Url": "assets/images/product/p-14.png"
+        },
+        {
+            "id": 14,
+            "title": "Noddle",
+            "image_Url": "assets/images/product/p-15.png"
+        },
+        {
+            "id": 15,
+            "title": "Pasta",
+            "image_Url": "assets/images/product/p-16.png"
+        },
+        {
+            "id": 16,
+            "title": "Meggi",
+            "image_Url": "assets/images/product/p-17.png"
+        },
+        {
+            "id": 17,
+            "title": "Momos",
+            "image_Url": "assets/images/product/p-18.png"
+        },
+        {
+            "id": 18,
+            "title": "Salad",
+            "image_Url": "assets/images/product/p-19.png"
+        },
+        {
+            "id": 19,
+            "title": "Biryani",
+            "image_Url": "assets/images/product/p-20.png"
+        }
+    ]
+}

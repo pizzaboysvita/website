@@ -1,0 +1,114 @@
+{
+    "AvailableCoupons": [
+        {
+            "id": 1,
+            "image_url": "assets/images/icons/google-pay.png",
+            "title": "Google Pay",
+            "sub_title": "Use Gpay",
+            "type": "new",
+            "description": "Get cashback between $5 to $10 using Gpay",
+            "condition": "Valid on order with items wroth $10 or more.",
+            "coupon_code": "#GOOGLE10"
+        },
+        {
+            "id": 2,
+            "image_url": "assets/images/icons/amex.png",
+            "title": "Amex",
+            "sub_title": "Use Amex",
+            "type": "used",
+            "description": "Get cashback between $10 to $20 using Amex",
+            "condition": "Valid on order with items wroth $10 or more.",
+            "coupon_code": "#AMEX20"
+        },
+        {
+            "id": 3,
+            "image_url": "assets/images/icons/amazon.png",
+            "title": "Amazon",
+            "sub_title": "Use Amazon",
+            "type": "new",
+            "description": "Get cashback between $20 to $50 using Amazon",
+            "condition": "Valid on order with items wroth $10 or more.",
+            "coupon_code": "#AMAZON30"
+        },
+        {
+            "id": 4,
+            "image_url": "assets/images/icons/apple_pay.png",
+            "title": "Apple Pay",
+            "sub_title": "Use Apple Pay",
+            "type": "used",
+            "description": "Get cashback between $30 to $60 using Apple Pay",
+            "condition": "Valid on order with items wroth $10 or more.",
+            "coupon_code": "#APPLEPAY40"
+        },
+        {
+            "id": 5,
+            "image_url": "assets/images/icons/paypal.png",
+            "title": "Paypal",
+            "sub_title": "Use Paypal",
+            "type": "new",
+            "description": "Get cashback between $50 to $55 using Paypal",
+            "condition": "Valid on order with items wroth $10 or more.",
+            "coupon_code": "#PAYPAL50"
+        },
+        {
+            "id": 6,
+            "image_url": "assets/images/icons/visa.png",
+            "title": "Visa",
+            "sub_title": "Use Visa",
+            "type": "expired",
+            "description": "Get cashback between $30 to $40 using Visa",
+            "condition": "Valid on order with items wroth $10 or more.",
+            "coupon_code": "#VISA60"
+        },
+        {
+            "id": 7,
+            "image_url": "assets/images/icons/sepa.png",
+            "title": "Google Sepa",
+            "sub_title": "Use Sepa",
+            "type": "expired",
+            "description": "Get cashback between $12 to $20 using Sepa",
+            "condition": "Valid on order with items wroth $10 or more.",
+            "coupon_code": "#SEPA70"
+        },
+        {
+            "id": 8,
+            "image_url": "assets/images/icons/mastercard.png",
+            "title": "Mastercard",
+            "sub_title": "Use Mastercard",
+            "type": "expired",
+            "description": "Get cashback between $25 to $50 using Mastercard",
+            "condition": "Valid on order with items wroth $10 or more.",
+            "coupon_code": "#MASTERCARD80"
+        }
+    ],
+    "BankOffers": [
+        {
+            "id": 1,
+            "image_url": "assets/images/icons/svg/hdfc.svg",
+            "title": "HDFC",
+            "sub_title": "Pay hdfc bank card",
+            "description": "Receive 10% cashback when using American Express cards to make purchases."
+        },
+        {
+            "id": 2,
+            "image_url": "assets/images/icons/svg/b2b.svg",
+            "title": "B2B Bank",
+            "sub_title": "Pay b2b bank card",
+            "description": "Receive 10% cashback when using American Express cards to make purchases."
+        },
+        {
+            "id": 3,
+            "image_url": "assets/images/icons/svg/cibc.svg",
+            "title": "CIBC",
+            "sub_title": "Pay cibc card",
+            "description": "Receive 10% cashback when using American Express cards to make purchases."
+        },
+        {
+            "id": 4,
+            "image_url": "assets/images/icons/svg/american.svg",
+            "title": "American Express",
+            "sub_title": "Pay american ex. card",
+            "description": "Receive 10% cashback when using American Express cards to make purchases."
+        }
+    ]
+}

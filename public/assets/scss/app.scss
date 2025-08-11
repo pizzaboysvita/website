@@ -1,0 +1,22 @@
+//light box 
+// @import '@angular/cdk/overlay-prebuilt.css';
+
+// bootstrap
+@import "vendor/bootstrap.scss";
+
+[dir="rtl"] {
+    @import "./vendor/bootstrap.rtl.scss";
+    @import "./style.scss";
+}
+
+[dir="ltr"] {
+    @import "./vendor/bootstrap.scss";
+    @import "./style.scss";
+}
+
+//owl carousel o
+@import 'ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
+@import 'ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
+
+// style
+@import "./style.scss";

@@ -1,0 +1,56 @@
+{
+    "testimonial": [
+        {
+            "description": "I was so impressed with my breakfast this morning! I tried the Fried Green Tomato Benedict and my boyfriend got the Crab Cakes Benedict",
+            "image_url": "assets/images/icons/p1.png",
+            "name": "Gunjan Puri"
+        },
+        {
+            "description": "We both finished our whole plates and were so impressed with the quality of the food and the short amount of time it took to receive it. Our waitress was sweet and helpful.",
+            "image_url": "assets/images/icons/p2.png",
+            "name": "Emily James"
+        },
+        {
+            "description": "This is always our breakfast stop before heading home from vacation. Always delicious. Always great service. Always worth the stop.",
+            "image_url": "assets/images/icons/p3.png",
+            "name": "Alexa Diaz"
+        },
+        {
+            "description": "The absolute best red sauce. Weather on Pizza or Pasta, it’s honestly delicious. Portions are huge and the staff is extremely friendly and courteous.",
+            "image_url": "assets/images/icons/p4.png",
+            "name": "Nicole Cooper"
+        },
+        {
+            "description": "Breakfast was delicious. Like a good homestyle country savory breakfast Enjoyed the whole experience and definitely recommend this place for a place to eat on the cape.",
+            "image_url": "assets/images/icons/p5.png",
+            "name": "Makenna Clark"
+        }
+    ],
+    "testimonialRtl": [
+        {
+            "description": "I was so impressed with my breakfast this morning! I tried the Fried Green Tomato Benedict and my boyfriend got the Crab Cakes Benedict",
+            "image_url": "assets/images/icons/p1.png",
+            "name": "Gunjan Puri"
+        },
+        {
+            "description": "We both finished our whole plates and were so impressed with the quality of the food and the short amount of time it took to receive it. Our waitress was sweet and helpful.",
+            "image_url": "assets/images/icons/p2.png",
+            "name": "Maggie Martin"
+        },
+        {
+            "description": "This is always our breakfast stop before heading home from vacation. Always delicious. Always great service. Always worth the stop.",
+            "image_url": "assets/images/icons/p3.png",
+            "name": "Amina James"
+        },
+        {
+            "description": "The absolute best red sauce. Weather on Pizza or Pasta, it’s honestly delicious. Portions are huge and the staff is extremely friendly and courteous.",
+            "image_url": "assets/images/icons/p4.png",
+            "name": "Hailey Jackson"
+        },
+        {
+            "description": "Breakfast was delicious. Like a good homestyle country savory breakfast Enjoyed the whole experience and definitely recommend this place for a place to eat on the cape.",
+            "image_url": "assets/images/icons/p5.png",
+            "name": "Logan Ross"
+        }
+    ]
+}

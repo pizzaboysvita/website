@@ -1,0 +1,74 @@
+{
+    "data" :{
+        "image_url":"assets/images/service/5.jpg",
+        "description":[
+            {
+                "item":"Welcome to our online order website! Here, you can browse our wide selection of products and place orders from the comfort of your own home. Whether you're looking for groceries, electronics, or gifts, we have you covered. With easy navigation, secure payment options, and fast delivery."
+            },
+            {
+                "item":"we strive to make your online shopping experience as seamless as possible. Explore our website today and discover the convenience of ordering online!"
+            },
+            {
+                "item":"So why wait? Start shopping on our online order website today and experience the ultimate convenience of online shopping!"
+            }
+        ],
+        "images":[
+            {
+               "image_url": "assets/images/service/1.jpg"  
+            },
+            {
+                "image_url": "assets/images/service/2.jpg"
+            },
+            {
+                "image_url": "assets/images/service/3.jpg"
+            },
+            {
+                "image_url": "assets/images/service/4.jpg"
+            }
+        ]
+    },
+    "services": [
+        {
+            "Image_url": "assets/images/svg/routing.svg",
+            "Service_Name": "Easiest Way To Order",
+            "Service_Details": "we have designed our refund policies to be easy and hassle-free."
+        },
+        {
+            "Image_url": "assets/images/svg/3d-rotate.svg",
+            "Service_Name": "Easy Refund Policies",
+            "Service_Details": "With our commitment to speedy delivery and no additional cost to you."
+        },
+        {
+            "Image_url": "assets/images/svg/truck.svg",
+            "Service_Name": "Free Fast Deliveries",
+            "Service_Details": "Enjoy priority access, special discounts, and more. Elevate your experience today!"
+        },
+        {
+            "Image_url": "assets/images/svg/medal.svg",
+            "Service_Name": "Premium Options",
+            "Service_Details": "You only need to follow a few steps & the tasty food is next to your home."
+        }
+    ],
+    "our_team": [
+        {
+            "Image_Url": "assets/images/service/person1.png",
+            "Member_Name": "Harriet Watson",
+            "post": "Co - Founder"
+        },
+        {
+            "Image_Url": "assets/images/service/person2.png",
+            "Member_Name": "Jenifer Peters",
+            "post": "Founder"
+        },
+        {
+            "Image_Url": "assets/images/service/person3.png",
+            "Member_Name": "Rock Smith",
+            "post": "Manager"
+        },
+        {
+            "Image_Url": "assets/images/service/person4.png",
+            "Member_Name": "Johnson Clarke",
+            "post": "Marketing Manager"
+        }
+    ]
+}

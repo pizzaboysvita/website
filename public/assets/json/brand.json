@@ -1,0 +1,81 @@
+{
+    "brand": [
+        {
+            "id": 1,
+            "name":"La Pino’z",
+            "url" : "/order/menu-listing/poultry-palace", 
+            "image_url" :"assets/images/icons/brand1.png",
+            "alt":"brand1"
+        },
+        {
+            "id": 2,
+            "name":"Mc'd",
+            "url" : "/order/menu-listing/poultry-palace",
+            "image_url" :"assets/images/icons/brand2.png",
+            "alt":"brand2"
+        },
+        {
+            "id": 3,
+            "name":"Starbucks",
+            "url" : "/order/menu-listing/poultry-palace",
+            "image_url" :"assets/images/icons/brand3.png",
+            "alt":"brand3"
+        },
+        {
+            "id": 4,
+            "name":"Pizza Hut",
+            "url" : "/order/menu-listing/poultry-palace",
+            "image_url" :"assets/images/icons/brand4.png",
+            "alt":"brand4"
+        },
+        {
+            "id": 5,
+            "name":"Wendy's",
+            "url" : "/order/menu-listing/poultry-palace",
+            "image_url" :"assets/images/icons/brand5.png",
+            "alt":"brand5"
+        },
+        {
+            "id": 6,
+            "name":"Burger King",
+            "url" : "/order/menu-listing/poultry-palace",
+            "image_url" :"assets/images/icons/brand6.png",
+            "alt":"brand6"
+        },
+        {
+            "id": 7,
+            "name":"Subway",
+            "url" : "/order/menu-listing/poultry-palace",
+            "image_url" :"assets/images/icons/brand7.png",
+            "alt":"brand7"
+        },
+        {
+            "id": 8,
+            "name":"Domino's",
+            "url" : "/order/menu-listing/poultry-palace",
+            "image_url" :"assets/images/icons/brand8.png",
+            "alt":"brand8"
+        },
+        {
+            "id": 9,
+            "name":"Taco Bell",
+            "url" : "/order/menu-listing/poultry-palace",
+            "image_url" :"assets/images/icons/brand9.png",
+            "alt":"brand9"
+        },
+        {
+            "id": 10,
+            "name":"Chipotle",
+            "url" : "/order/menu-listing/poultry-palace",
+            "image_url" :"assets/images/icons/brand10.png",
+            "alt":"brand10"
+        },
+        {
+            "id": 11,
+            "name":"KFC",
+            "url" : "/order/menu-listing/poultry-palace",
+            "image_url" :"assets/images/icons/brand11.png",
+            "alt":"brand11"
+        }
+    ]
+}

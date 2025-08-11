@@ -1,0 +1,65 @@
+{
+    "user": [
+        {
+            "label": "Name",
+            "value": "Mark Jecno",
+            "icon": "ri-user-3-fill"
+        },
+        {
+            "label": "Email",
+            "value": "mark-jecno@gmail.com",
+            "icon": "ri-mail-fill"
+        },
+        {
+            "label": "Phone Number",
+            "value": "+1 (692)52 - 95555",
+            "icon": "ri-phone-fill"
+        },
+        {
+            "label": "Password",
+            "value": "*****",
+            "icon": "ri-lock-2-fill"
+        }
+    ],
+    "address": [
+        {
+            "first_name": "Smith",
+            "last_name": "Jones",
+            "title": "Home",
+            "address": "93, Songbird Cir, Blackville, South Carolina, USA-29817",
+            "city": "South Carolina",
+            "country": "USA",
+            "phone_number": "+33 (907) 555-0101",
+            "class": "ri-home-4-fill icon",
+            "zip": 29817,
+            "edit": true,
+            "deliver": true
+        },
+        {
+            "first_name": "Smith",
+            "last_name": "Jones",
+            "title": "Smith Jones",
+            "address": "13th Street 47 W 13th St, New York, USA-10011",
+            "city": "Hackney",
+            "country": "London",
+            "phone_number": "+33 (907) 555-1235",
+            "class": "ri-account-circle-fill icon",
+            "zip": 33694,
+            "edit": true,
+            "deliver": true
+        },
+        {
+            "first_name": "Smith",
+            "last_name": "Jones",
+            "title": "Office",
+            "address": "703 Elizabeth Barcus Way, USA-95540",
+            "city": "Ottawa",
+            "country": "canada",
+            "phone_number": "+33 (907) 555-3456",
+            "class": "ri-briefcase-4-fill icon",
+            "zip": 33694,
+            "edit": true,
+            "deliver": true
+        }
+    ]
+}

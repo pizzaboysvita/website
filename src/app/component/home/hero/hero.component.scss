@@ -1,0 +1,100 @@
+.hero {
+  width: 100%;
+  min-height: 400px;
+  max-height: 500px;
+  position: relative;
+  background-image: url('/assets/img/home-hero-background-40th.png');
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+
+  .hero-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    opacity: 0; /* Start invisible */
+    transition: opacity 1.5s ease-in-out; /* Smooth fade */
+  }
+
+  .hero-video.show {
+    opacity: 1; /* Fade in */
+  }
+}
+
+.hero__courtains {
+  position: absolute;
+  z-index: 9;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+
+  &__left,
+  &__right {
+    position: absolute;
+    top: 0;
+    width: 50vw;
+    height: 100%;
+    min-height: 400px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: transform 4.5s ease-in-out;
+  }
+
+  &__left {
+    left: 0;
+    background-image: url('/assets/img/courtain-left.jpg');
+    transform: translateX(0);
+  }
+
+  &__right {
+    right: 0;
+    background-image: url('/assets/img/courtain-right.jpg');
+    transform: translateX(0);
+  }
+
+
+
+  h1 {
+    font-size: clamp(2rem, 5vw + 1rem, 4.5rem);
+    font-weight: 800;
+    color: #fff;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    margin: 0 20px;
+    animation: fadeInText 1s ease-in-out;
+  }
+
+  &.open {
+    .hero__courtains__left {
+      transform: translateX(-100%);
+    }
+    .hero__courtains__right {
+      transform: translateX(100%);
+    }
+    h1 {
+      opacity: 0; /* Fade text out */
+      transition: opacity 3.8s ease-in-out;
+    }
+  }
+}
+
+@keyframes fadeInText {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

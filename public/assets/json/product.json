@@ -1,0 +1,1371 @@
+{
+    "product": [
+        {
+            "id": 1,
+            "image_url": "assets/images/product/vp-1.png",
+            "isOffer": true,
+            "name": "Poultry Palace",
+            "slug":"poultry-palace",
+            "description": "Chicken quesadilla, avocado....",
+            "rating": "3.9",
+            "country": "New Jsercy",
+            "distance": "3.2 ",
+            "time": "25 ",
+            "type": "non_veg",
+            "value":1,
+            "price": 210,
+            "brand": "assets/images/icons/brand1.png",
+            "offer": {
+                "title": "upto $2",
+                "offer": "50% OFF"
+            },
+            "coupon": "Upto 50% off | Code ZOMO50",
+            "overView": [
+                {
+                    "id": 1,
+                    "items": [
+                        {
+                            "id": 1,
+                            "title": "Phone Number",
+                            "data": [
+                                {
+                                    "item": "+1 (692)52 - 95555"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 2,
+                            "title": "Cuisines",
+                            "data": [
+                                {
+                                    "item": "Mexican"
+                                },
+                                {
+                                    "item": "Italian"
+                                },
+                                {
+                                    "item": "Chinese"
+                                },
+                                {
+                                    "item": "Panjabi"
+                                },
+                                {
+                                    "item": "Street Food"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 3,
+                            "title": "Average Cost",
+                            "data": [
+                                {
+                                    "item": "$300 for Two people (approx.)"
+                                },
+                                {
+                                    "item": "Cash and Cards accepted"
+                                },
+                                {
+                                     "item" :"Digital payments accepted"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 4,
+                            "title": "Known For",
+                            "data": [
+                                {
+                                    "item": "Calming Atmosphere, Weekend Brunch,Elaborate Menu,Staff,Fresh Food, Good Quality"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "items": [
+                        {
+                            "id": 1,
+                            "title": "Address",
+                            "data": [
+                                {
+                                    "item": "+874 Trans-Canada Hwy, Peterborough, ON K9J 6X8, Canada"
+                                },
+                                {
+                                    "item": "8970 Trans-Canada Hwy, Emo, ON P0W 1E0, Canada"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 1,
+                            "title": "More Info",
+                            "data": [
+                                {
+                                    "item": "Breakfast"
+                                },
+                                {
+                                    "item": "Takeaway"
+                                },
+                                {
+                                    "item": "Home Delivery"
+                                },
+                                {
+                                    "item": "Valet Parking"
+                                },
+                                {
+                                    "item": "Luxury Dining"
+                                },
+                                {
+                                    "item": "Table booking"
+                                },
+                                {
+                                    "item": "Brunch"
+                                },
+                                {
+                                    "item": "Buffet"
+                                },
+                                {
+                                    "item": "Indoor Seating"
+                                },
+                                {
+                                    "item": "Outdoor Seating"
+                                },
+                                {
+                                    "item": "4/5 Star"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "image_url": "assets/images/product/vp-2.png",
+            "isOffer": true,
+            "name": "Ribeye Junction",
+            "slug":"ribeye-junction",
+            "description": "Chicken quesadilla, avocado....",
+            "rating": "3.2",
+            "country": "California",
+            "distance": "1",
+            "time": "10",
+            "type": "veg",
+            "value":1,
+            "price": 250,
+            "tag": "newest",
+            "brand": "assets/images/icons/brand2.png",
+            "offer": {
+                "title": "upto $2",
+                "offer": "50% OFF"
+            },
+            "coupon": " $5 off above $50",
+            "overView": [
+                {
+                    "id": 1,
+                    "sectionClass": "overview-content mt-0",
+                    "items": [
+                        {
+                            "id": 1,
+                            "title": "Phone Number",
+                            "data": [
+                                {
+                                    "item": "+1 (692)52 - 95555"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 2,
+                            "title": "Cuisines",
+                            "data": [
+                                {
+                                    "item": "Mexican"
+                                },
+                                {
+                                    "item": "Italian"
+                                },
+                                {
+                                    "item": "Chinese"
+                                },
+                                {
+                                    "item": "Panjabi"
+                                },
+                                {
+                                    "item": "Street Food"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 3,
+                            "title": "Average Cost",
+                            "data": [
+                                {
+                                    "item": "$300 for Two people (approx.)"
+                                },
+                                {
+                                    "item": "Cash and Cards accepted"
+                                },
+                                {
+                                     "item" :"Digital payments accepted"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 4,
+                            "title": "Known For",
+                            "data": [
+                                {
+                                    "item": "Calming Atmosphere, Weekend Brunch,Elaborate Menu,Staff,Fresh Food, Good Quality"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "items": [
+                        {
+                            "id": 1,
+                            "title": "Address",
+                            "data": [
+                                {
+                                    "item": "+874 Trans-Canada Hwy, Peterborough, ON K9J 6X8, Canada"
+                                },
+                                {
+                                    "item": "8970 Trans-Canada Hwy, Emo, ON P0W 1E0, Canada"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 1,
+                            "title": "More Info",
+                            "data": [
+                                {
+                                    "item": "Breakfast"
+                                },
+                                {
+                                    "item": "Takeaway"
+                                },
+                                {
+                                    "item": "Home Delivery"
+                                },
+                                {
+                                    "item": "Valet Parking"
+                                },
+                                {
+                                    "item": "Luxury Dining"
+                                },
+                                {
+                                    "item": "Table booking"
+                                },
+                                {
+                                    "item": "Brunch"
+                                },
+                                {
+                                    "item": "Buffet"
+                                },
+                                {
+                                    "item": "Indoor Seating"
+                                },
+                                {
+                                    "item": "Outdoor Seating"
+                                },
+                                {
+                                    "item": "4/5 Star"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "image_url": "assets/images/product/vp-3.png",
+            "name": "The Grill Master's Cafe",
+            "slug":"the-grill-master-cafe",
+            "description": "Bread, Eggs, Butter, Fries...",
+            "rating": "4.3",
+            "country": "New York",
+            "distance": "5",
+            "time": "40",
+            "type": "non_veg",
+            "value":1,
+            "price": 240,
+            "brand": "assets/images/icons/brand3.png",
+            "coupon": "$10 off above $80",
+            "overView": [
+                {
+                    "id": 1,
+                    "sectionClass": "overview-content mt-0",
+                    "items": [
+                        {
+                            "id": 1,
+                            "title": "Phone Number",
+                            "data": [
+                                {
+                                    "item": "+1 (692)52 - 95555"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 2,
+                            "title": "Cuisines",
+                            "data": [
+                                {
+                                    "item": "Mexican"
+                                },
+                                {
+                                    "item": "Italian"
+                                },
+                                {
+                                    "item": "Chinese"
+                                },
+                                {
+                                    "item": "Panjabi"
+                                },
+                                {
+                                    "item": "Street Food"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 3,
+                            "title": "Average Cost",
+                            "data": [
+                                {
+                                    "item": "$300 for Two people (approx.)"
+                                },
+                                {
+                                    "item": "Cash and Cards accepted"
+                                },
+                                {
+                                     "item" :"Digital payments accepted"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 4,
+                            "title": "Known For",
+                            "data": [
+                                {
+                                    "item": "Calming Atmosphere, Weekend Brunch,Elaborate Menu,Staff,Fresh Food, Good Quality"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "items": [
+                        {
+                            "id": 1,
+                            "title": "Address",
+                            "data": [
+                                {
+                                    "item": "+874 Trans-Canada Hwy, Peterborough, ON K9J 6X8, Canada"
+                                },
+                                {
+                                    "item": "8970 Trans-Canada Hwy, Emo, ON P0W 1E0, Canada"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 1,
+                            "title": "More Info",
+                            "data": [
+                                {
+                                    "item": "Breakfast"
+                                },
+                                {
+                                    "item": "Takeaway"
+                                },
+                                {
+                                    "item": "Home Delivery"
+                                },
+                                {
+                                    "item": "Valet Parking"
+                                },
+                                {
+                                    "item": "Luxury Dining"
+                                },
+                                {
+                                    "item": "Table booking"
+                                },
+                                {
+                                    "item": "Brunch"
+                                },
+                                {
+                                    "item": "Buffet"
+                                },
+                                {
+                                    "item": "Indoor Seating"
+                                },
+                                {
+                                    "item": "Outdoor Seating"
+                                },
+                                {
+                                    "item": "4/5 Star"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "image_url": "assets/images/product/vp-4.png",
+            "name": "Cozy Cuppa Cafe",
+            "slug":"cozy-cuppa-cafe",
+            "description": "cheesecake, waffles, Cakes,...",
+            "rating": "3.6",
+            "country": "Dallas",
+            "distance": 4,
+            "time": 30,
+            "type": "veg",
+            "value":1,
+            "price": 290,
+            "brand": "assets/images/icons/brand4.png",
+            "coupon": "Flat 15% off|Code ZOMO15",
+            "overView": [
+                {
+                    "id": 1,
+                    "sectionClass": "overview-content mt-0",
+                    "items": [
+                        {
+                            "id": 1,
+                            "title": "Phone Number",
+                            "data": [
+                                {
+                                    "item": "+1 (692)52 - 95555"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 2,
+                            "title": "Cuisines",
+                            "data": [
+                                {
+                                    "item": "Mexican"
+                                },
+                                {
+                                    "item": "Italian"
+                                },
+                                {
+                                    "item": "Chinese"
+                                },
+                                {
+                                    "item": "Panjabi"
+                                },
+                                {
+                                    "item": "Street Food"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 3,
+                            "title": "Average Cost",
+                            "data": [
+                                {
+                                    "item": "$300 for Two people (approx.)"
+                                },
+                                {
+                                    "item": "Cash and Cards accepted"
+                                },
+                                {
+                                     "item" :"Digital payments accepted"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 4,
+                            "title": "Known For",
+                            "data": [
+                                {
+                                    "item": "Calming Atmosphere, Weekend Brunch,Elaborate Menu,Staff,Fresh Food, Good Quality"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "items": [
+                        {
+                            "id": 1,
+                            "title": "Address",
+                            "data": [
+                                {
+                                    "item": "+874 Trans-Canada Hwy, Peterborough, ON K9J 6X8, Canada"
+                                },
+                                {
+                                    "item": "8970 Trans-Canada Hwy, Emo, ON P0W 1E0, Canada"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 1,
+                            "title": "More Info",
+                            "data": [
+                                {
+                                    "item": "Breakfast"
+                                },
+                                {
+                                    "item": "Takeaway"
+                                },
+                                {
+                                    "item": "Home Delivery"
+                                },
+                                {
+                                    "item": "Valet Parking"
+                                },
+                                {
+                                    "item": "Luxury Dining"
+                                },
+                                {
+                                    "item": "Table booking"
+                                },
+                                {
+                                    "item": "Brunch"
+                                },
+                                {
+                                    "item": "Buffet"
+                                },
+                                {
+                                    "item": "Indoor Seating"
+                                },
+                                {
+                                    "item": "Outdoor Seating"
+                                },
+                                {
+                                    "item": "4/5 Star"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "image_url": "assets/images/product/vp-5.png",
+            "name": "Mocha Magic Cafe",
+            "slug":"mocha-magic-cafe",
+            "description": "Chinese, Momos, Dumplings,...",
+            "rating": "3.2",
+            "country": "Seattle",
+            "distance": 1,
+            "time": 8,
+            "type": "non_veg",
+            "value":1,
+            "price": 300,
+            "brand": "assets/images/icons/brand7.png",
+            "coupon": "Buy 1 Get 1 Free",
+            "overView": [
+                {
+                    "id": 1,
+                    "sectionClass": "overview-content mt-0",
+                    "items": [
+                        {
+                            "id": 1,
+                            "title": "Phone Number",
+                            "data": [
+                                {
+                                    "item": "+1 (692)52 - 95555"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 2,
+                            "title": "Cuisines",
+                            "data": [
+                                {
+                                    "item": "Mexican"
+                                },
+                                {
+                                    "item": "Italian"
+                                },
+                                {
+                                    "item": "Chinese"
+                                },
+                                {
+                                    "item": "Panjabi"
+                                },
+                                {
+                                    "item": "Street Food"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 3,
+                            "title": "Average Cost",
+                            "data": [
+                                {
+                                    "item": "$300 for Two people (approx.)"
+                                },
+                                {
+                                    "item": "Cash and Cards accepted"
+                                },
+                                {
+                                     "item" :"Digital payments accepted"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 4,
+                            "title": "Known For",
+                            "data": [
+                                {
+                                    "item": "Calming Atmosphere, Weekend Brunch,Elaborate Menu,Staff,Fresh Food, Good Quality"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "items": [
+                        {
+                            "id": 1,
+                            "title": "Address",
+                            "data": [
+                                {
+                                    "item": "+874 Trans-Canada Hwy, Peterborough, ON K9J 6X8, Canada"
+                                },
+                                {
+                                    "item": "8970 Trans-Canada Hwy, Emo, ON P0W 1E0, Canada"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 1,
+                            "title": "More Info",
+                            "data": [
+                                {
+                                    "item": "Breakfast"
+                                },
+                                {
+                                    "item": "Takeaway"
+                                },
+                                {
+                                    "item": "Home Delivery"
+                                },
+                                {
+                                    "item": "Valet Parking"
+                                },
+                                {
+                                    "item": "Luxury Dining"
+                                },
+                                {
+                                    "item": "Table booking"
+                                },
+                                {
+                                    "item": "Brunch"
+                                },
+                                {
+                                    "item": "Buffet"
+                                },
+                                {
+                                    "item": "Indoor Seating"
+                                },
+                                {
+                                    "item": "Outdoor Seating"
+                                },
+                                {
+                                    "item": "4/5 Star"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "image_url": "assets/images/product/vp-6.png",
+            "isOffer": true,
+            "name": "Latte Lounge",
+            "slug":"latte-lounge",
+            "description": "Chicken fingers, Chicken goujons,....",
+            "rating": "3.9",
+            "country": "Atlanta",
+            "distance": 3,
+            "time": 25,
+            "type": "non_veg",
+            "value":1,
+            "price": 360,
+            "brand": "assets/images/icons/brand6.png",
+            "offer": {
+                "title": "upto $2",
+                "offer": "50% OFF"
+            },
+            "coupon": "$5 off above $50",
+            "overView": [
+                {
+                    "id": 1,
+                    "sectionClass": "overview-content mt-0",
+                    "items": [
+                        {
+                            "id": 1,
+                            "title": "Phone Number",
+                            "data": [
+                                {
+                                    "item": "+1 (692)52 - 95555"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 2,
+                            "title": "Cuisines",
+                            "data": [
+                                {
+                                    "item": "Mexican"
+                                },
+                                {
+                                    "item": "Italian"
+                                },
+                                {
+                                    "item": "Chinese"
+                                },
+                                {
+                                    "item": "Panjabi"
+                                },
+                                {
+                                    "item": "Street Food"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 3,
+                            "title": "Average Cost",
+                            "data": [
+                                {
+                                    "item": "$300 for Two people (approx.)"
+                                },
+                                {
+                                    "item": "Cash and Cards accepted"
+                                },
+                                {
+                                     "item" :"Digital payments accepted"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 4,
+                            "title": "Known For",
+                            "data": [
+                                {
+                                    "item": "Calming Atmosphere, Weekend Brunch,Elaborate Menu,Staff,Fresh Food, Good Quality"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "items": [
+                        {
+                            "id": 1,
+                            "title": "Address",
+                            "data": [
+                                {
+                                    "item": "+874 Trans-Canada Hwy, Peterborough, ON K9J 6X8, Canada"
+                                },
+                                {
+                                    "item": "8970 Trans-Canada Hwy, Emo, ON P0W 1E0, Canada"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 1,
+                            "title": "More Info",
+                            "data": [
+                                {
+                                    "item": "Breakfast"
+                                },
+                                {
+                                    "item": "Takeaway"
+                                },
+                                {
+                                    "item": "Home Delivery"
+                                },
+                                {
+                                    "item": "Valet Parking"
+                                },
+                                {
+                                    "item": "Luxury Dining"
+                                },
+                                {
+                                    "item": "Table booking"
+                                },
+                                {
+                                    "item": "Brunch"
+                                },
+                                {
+                                    "item": "Buffet"
+                                },
+                                {
+                                    "item": "Indoor Seating"
+                                },
+                                {
+                                    "item": "Outdoor Seating"
+                                },
+                                {
+                                    "item": "4/5 Star"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "image_url": "assets/images/product/vp-7.png",
+            "isOffer": true,
+            "name": "The Burger Barn",
+            "slug":"the-burger-barn",
+            "description": "Burger, Garlic Bread, Sandwich....",
+            "rating": "3.8",
+            "country": "Chicago",
+            "distance": "2.4",
+            "time": "20",
+            "type": "veg",
+            "value":1,
+            "price": 300,
+            "tag": "Best seller",
+            "brand": "assets/images/icons/brand7.png",
+            "offer": {
+                "title": "upto $2",
+                "offer": "50% OFF"
+            },
+            "coupon": "Upto 50% | Code ZOMO50",
+            "overView": [
+                {
+                    "id": 1,
+                    "sectionClass": "overview-content mt-0",
+                    "items": [
+                        {
+                            "id": 1,
+                            "title": "Phone Number",
+                            "data": [
+                                {
+                                    "item": "+1 (692)52 - 95555"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 2,
+                            "title": "Cuisines",
+                            "data": [
+                                {
+                                    "item": "Mexican"
+                                },
+                                {
+                                    "item": "Italian"
+                                },
+                                {
+                                    "item": "Chinese"
+                                },
+                                {
+                                    "item": "Panjabi"
+                                },
+                                {
+                                    "item": "Street Food"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 3,
+                            "title": "Average Cost",
+                            "data": [
+                                {
+                                    "item": "$300 for Two people (approx.)"
+                                },
+                                {
+                                    "item": "Cash and Cards accepted"
+                                },
+                                {
+                                     "item" :"Digital payments accepted"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 4,
+                            "title": "Known For",
+                            "data": [
+                                {
+                                    "item": "Calming Atmosphere, Weekend Brunch,Elaborate Menu,Staff,Fresh Food, Good Quality"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "items": [
+                        {
+                            "id": 1,
+                            "title": "Address",
+                            "data": [
+                                {
+                                    "item": "+874 Trans-Canada Hwy, Peterborough, ON K9J 6X8, Canada"
+                                },
+                                {
+                                    "item": "8970 Trans-Canada Hwy, Emo, ON P0W 1E0, Canada"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 1,
+                            "title": "More Info",
+                            "data": [
+                                {
+                                    "item": "Breakfast"
+                                },
+                                {
+                                    "item": "Takeaway"
+                                },
+                                {
+                                    "item": "Home Delivery"
+                                },
+                                {
+                                    "item": "Valet Parking"
+                                },
+                                {
+                                    "item": "Luxury Dining"
+                                },
+                                {
+                                    "item": "Table booking"
+                                },
+                                {
+                                    "item": "Brunch"
+                                },
+                                {
+                                    "item": "Buffet"
+                                },
+                                {
+                                    "item": "Indoor Seating"
+                                },
+                                {
+                                    "item": "Outdoor Seating"
+                                },
+                                {
+                                    "item": "4/5 Star"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 8,
+            "image_url": "assets/images/product/vp-8.png",
+            "isOffer": true,
+            "name": "Wing Master",
+            "slug":"wing-master",
+            "description": "Chicken quesadilla, avocado....",
+            "rating": "3.2",
+            "country": "New York",
+            "distance": "1.8",
+            "time": "12",
+            "type": "veg",
+            "value":1,
+            "price": 120,
+            "tag": "Exclusive",
+            "brand": "assets/images/icons/brand8.png",
+            "offer": {
+                "title": "upto $2",
+                "offer": "50% OFF"
+            },
+            "coupon": "Flat 15% off|Code ZOMO15",
+            "overView": [
+                {
+                    "id": 1,
+                    "sectionClass": "overview-content mt-0",
+                    "items": [
+                        {
+                            "id": 1,
+                            "title": "Phone Number",
+                            "data": [
+                                {
+                                    "item": "+1 (692)52 - 95555"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 2,
+                            "title": "Cuisines",
+                            "data": [
+                                {
+                                    "item": "Mexican"
+                                },
+                                {
+                                    "item": "Italian"
+                                },
+                                {
+                                    "item": "Chinese"
+                                },
+                                {
+                                    "item": "Panjabi"
+                                },
+                                {
+                                    "item": "Street Food"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 3,
+                            "title": "Average Cost",
+                            "data": [
+                                {
+                                    "item": "$300 for Two people (approx.)"
+                                },
+                                {
+                                    "item": "Cash and Cards accepted"
+                                },
+                                {
+                                     "item" :"Digital payments accepted"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 4,
+                            "title": "Known For",
+                            "data": [
+                                {
+                                    "item": "Calming Atmosphere, Weekend Brunch,Elaborate Menu,Staff,Fresh Food, Good Quality"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "items": [
+                        {
+                            "id": 1,
+                            "title": "Address",
+                            "data": [
+                                {
+                                    "item": "+874 Trans-Canada Hwy, Peterborough, ON K9J 6X8, Canada"
+                                },
+                                {
+                                    "item": "8970 Trans-Canada Hwy, Emo, ON P0W 1E0, Canada"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 1,
+                            "title": "More Info",
+                            "data": [
+                                {
+                                    "item": "Breakfast"
+                                },
+                                {
+                                    "item": "Takeaway"
+                                },
+                                {
+                                    "item": "Home Delivery"
+                                },
+                                {
+                                    "item": "Valet Parking"
+                                },
+                                {
+                                    "item": "Luxury Dining"
+                                },
+                                {
+                                    "item": "Table booking"
+                                },
+                                {
+                                    "item": "Brunch"
+                                },
+                                {
+                                    "item": "Buffet"
+                                },
+                                {
+                                    "item": "Indoor Seating"
+                                },
+                                {
+                                    "item": "Outdoor Seating"
+                                },
+                                {
+                                    "item": "4/5 Star"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 9,
+            "image_url": "assets/images/product/vp-15.png",
+            "name": "Lettuce Eat Bistro",
+            "slug":"lettuce-eat-bistro",
+            "description": "cheesecake, waffles, Cakes,...",
+            "rating": "7.9",
+            "country": "Ottawa",
+            "distance": 12,
+            "time": 60,
+            "type": "veg",
+            "value":1,
+            "price": 290,
+            "brand": "assets/images/icons/brand4.png",
+            "coupon": "Upto 50% off",
+            "overView": [
+                {
+                    "id": 1,
+                    "sectionClass": "overview-content mt-0",
+                    "items": [
+                        {
+                            "id": 1,
+                            "title": "Phone Number",
+                            "data": [
+                                {
+                                    "item": "+1 (692)52 - 95555"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 2,
+                            "title": "Cuisines",
+                            "data": [
+                                {
+                                    "item": "Mexican"
+                                },
+                                {
+                                    "item": "Italian"
+                                },
+                                {
+                                    "item": "Chinese"
+                                },
+                                {
+                                    "item": "Panjabi"
+                                },
+                                {
+                                    "item": "Street Food"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 3,
+                            "title": "Average Cost",
+                            "data": [
+                                {
+                                    "item": "$300 for Two people (approx.)"
+                                },
+                                {
+                                    "item": "Cash and Cards accepted"
+                                },
+                                {
+                                     "item" :"Digital payments accepted"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 4,
+                            "title": "Known For",
+                            "data": [
+                                {
+                                    "item": "Calming Atmosphere, Weekend Brunch,Elaborate Menu,Staff,Fresh Food, Good Quality"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "items": [
+                        {
+                            "id": 1,
+                            "title": "Address",
+                            "data": [
+                                {
+                                    "item": "+874 Trans-Canada Hwy, Peterborough, ON K9J 6X8, Canada"
+                                },
+                                {
+                                    "item": "8970 Trans-Canada Hwy, Emo, ON P0W 1E0, Canada"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 1,
+                            "title": "More Info",
+                            "data": [
+                                {
+                                    "item": "Breakfast"
+                                },
+                                {
+                                    "item": "Takeaway"
+                                },
+                                {
+                                    "item": "Home Delivery"
+                                },
+                                {
+                                    "item": "Valet Parking"
+                                },
+                                {
+                                    "item": "Luxury Dining"
+                                },
+                                {
+                                    "item": "Table booking"
+                                },
+                                {
+                                    "item": "Brunch"
+                                },
+                                {
+                                    "item": "Buffet"
+                                },
+                                {
+                                    "item": "Indoor Seating"
+                                },
+                                {
+                                    "item": "Outdoor Seating"
+                                },
+                                {
+                                    "item": "4/5 Star"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 10,
+            "image_url": "assets/images/product/vp-16.png",
+            "name": "Take It Cheesy",
+            "slug":"take-it-cheesy",
+            "description": "cheesecake, waffles, Cakes,...",
+            "rating": "5.0",
+            "country": "Victoria",
+            "distance": 9,
+            "time": 3,
+            "type": "veg",
+            "value":1,
+            "price": 290,
+            "brand": "assets/images/icons/brand4.png",
+            "coupon": "Buy 1 Get 1 Free",
+            "overView": [
+                {
+                    "id": 1,
+                    "sectionClass": "overview-content mt-0",
+                    "items": [
+                        {
+                            "id": 1,
+                            "title": "Phone Number",
+                            "data": [
+                                {
+                                    "item": "+1 (692)52 - 95555"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 2,
+                            "title": "Cuisines",
+                            "data": [
+                                {
+                                    "item": "Mexican"
+                                },
+                                {
+                                    "item": "Italian"
+                                },
+                                {
+                                    "item": "Chinese"
+                                },
+                                {
+                                    "item": "Panjabi"
+                                },
+                                {
+                                    "item": "Street Food"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 3,
+                            "title": "Average Cost",
+                            "data": [
+                                {
+                                    "item": "$300 for Two people (approx.)"
+                                },
+                                {
+                                    "item": "Cash and Cards accepted"
+                                },
+                                {
+                                     "item" :"Digital payments accepted"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 4,
+                            "title": "Known For",
+                            "data": [
+                                {
+                                    "item": "Calming Atmosphere, Weekend Brunch,Elaborate Menu,Staff,Fresh Food, Good Quality"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "items": [
+                        {
+                            "id": 1,
+                            "title": "Address",
+                            "data": [
+                                {
+                                    "item": "+874 Trans-Canada Hwy, Peterborough, ON K9J 6X8, Canada"
+                                },
+                                {
+                                    "item": "8970 Trans-Canada Hwy, Emo, ON P0W 1E0, Canada"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 1,
+                            "title": "More Info",
+                            "data": [
+                                {
+                                    "item": "Breakfast"
+                                },
+                                {
+                                    "item": "Takeaway"
+                                },
+                                {
+                                    "item": "Home Delivery"
+                                },
+                                {
+                                    "item": "Valet Parking"
+                                },
+                                {
+                                    "item": "Luxury Dining"
+                                },
+                                {
+                                    "item": "Table booking"
+                                },
+                                {
+                                    "item": "Brunch"
+                                },
+                                {
+                                    "item": "Buffet"
+                                },
+                                {
+                                    "item": "Indoor Seating"
+                                },
+                                {
+                                    "item": "Outdoor Seating"
+                                },
+                                {
+                                    "item": "4/5 Star"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
