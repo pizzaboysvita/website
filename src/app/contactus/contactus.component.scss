@@ -1,0 +1,264 @@
+
+.breadcrumb-section {
+  // background: linear-gradient(90deg, #840a0a, #c40404); // dark gradient
+  padding: 40px 0;
+  text-align: center;
+  color:#0b0301 !important;
+
+  .breadcrumb-content {
+    h2 {
+      font-size: 36px;
+    
+      margin: 0;
+    }
+
+    p {
+      margin-top: 8px;
+      font-size: 16px;
+     
+
+      a {
+       
+        text-decoration: none;
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: #ffb84d; // highlight on hover
+        }
+      }
+
+      .separator {
+        color: #ffb84d;
+        margin: 0 6px;
+      }
+
+     
+    }
+  }
+}
+.pizza-feedback-section {
+  background-image: url('/assets/img/bggcontact.avif'); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 600px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-left: 60px;
+}
+
+.form-row {
+      display: flex;
+      justify-content: center;
+      margin-top: 1.5rem;
+
+      .submit-btn {
+        background-color: #101010;
+        color: #fff;
+        padding: 0.75rem 2rem;
+        border: none;
+        border-radius: 6px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+
+        &:hover {
+          background-color: #dcd3d0;
+          transform: translateY(-2px);
+        }
+
+        &:active {
+          transform: scale(0.98);
+        }
+
+        &:focus {
+          outline: none;
+          box-shadow: 0 0 0 3px rgba(255, 87, 34, 0.3);
+        }
+      }
+    }
+.signup-section {
+  background-color: #e31937;
+  color: #fff;
+  padding: 50px 20px;
+  text-align: center;
+
+  h2 {
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 28px;
+  }
+
+  p {
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+
+      input,
+      select {
+        flex: 1 1 28%;
+        min-width: 240px;
+        height: 45px;
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        border-radius: 4px;
+      }
+
+      select {
+        appearance: none;
+      }
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      text-align: left;
+
+      input[type='checkbox'] {
+        margin-top: 4px;
+        margin-right: 10px;
+        width: 18px;
+        height: 18px;
+      }
+
+      label {
+        font-size: 14px;
+        max-width: 800px;
+      }
+    }
+
+    .note {
+      text-align: left;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    .links {
+      text-align: left;
+      margin-top: 10px;
+
+      a {
+        color: #fff;
+        font-size: 14px;
+        margin-right: 20px;
+        text-decoration: underline;
+
+        &:hover {
+          color: #ddd;
+        }
+      }
+    }
+  }
+
+}.contact-cards {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 20px;
+  padding: 40px;
+  background: #fdfaf4;
+
+  .card {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    max-width: 480px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    .card-image {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 25px;
+      text-align: center;
+
+      h2 {
+        font-size: 22px;
+        color: #d62300;
+        margin-bottom: 10px;
+        font-weight: 800;
+      }
+
+      p {
+        font-size: 16px;
+        color: #333;
+        margin-bottom: 20px;
+      }
+
+      .btn {
+        background: #d62300;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 25px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+
+        &:hover {
+          background: #b91c00;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    padding: 20px;
+
+    .card {
+      max-width: 100%;
+    }
+  }
+}
+
+.feedback-box {
+  background-color: rgba(0, 0, 0, 0.6); // semi-transparent black background
+  color: white;
+  padding: 30px;
+  max-width: 400px;
+  border-radius: 10px;
+
+  h2 {
+    font-size: 26px;
+    color: #ffd700;
+    margin-bottom: 15px;
+  }
+
+  p {
+    font-size: 16px;
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+}
+
+
+
+
+
