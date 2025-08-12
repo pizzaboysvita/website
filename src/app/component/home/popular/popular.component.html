@@ -1,0 +1,42 @@
+<section class="popular-restaurant banner-section section-b-space ratio3_2 overflow-hidden">
+    <div class="title animated-title">
+        <div class="d-flex align-items-center justify-content-between flex-wrap w-100">
+            <div>
+                <h2>Popular Picks</h2>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row g-md-4 g-3">
+            @for (item of categories; track item) {
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="vertical-product-box product-style-3">
+                    <div class="vertical-product-box-img">
+                        <a>
+                            <img class="product-img-top w-100 bg-img" [src]="item.category_image" alt="vp1">
+                        </a>
+                    </div>
+                    <div class="vertical-product-body">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <a>
+                                <h4 class="vertical-product-title">{{item.name}}</h4>
+                            </a>
+                            <h6 class="rating-star">
+                                <span class="star"><i class="ri-star-s-fill"></i></span>4.5
+                            </h6>
+                        </div>
+                        <h5 class="product-items">{{item.name}}</h5>
+                        <div class="location-distance d-flex align-items-center justify-content-between pt-sm-3 pt-2">
+                            <h5 class="place">NZ</h5>
+                            <ul class="distance">
+                                <li><i class="ri-map-pin-fill icon"></i> 0.5 km</li>
+                                <li><i class="ri-time-fill icon"></i> 3 min</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</section>
