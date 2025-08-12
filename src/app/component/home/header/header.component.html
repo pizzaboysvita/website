@@ -20,19 +20,30 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-center flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link"  href="javascript:void(0)">Home</a>
+                            <a class="nav-link" routerLink="/home" routerLinkActive="active"
+                                [routerLinkActiveOptions]="{ exact: true }">
+                                Home
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" routerLink="menu" href="javascript:void(0)">Menu</a>
+                            <a class="nav-link" routerLink="/menu" routerLinkActive="active">
+                                Menu
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="javascript:void(0)">Stores</a>
+                            <a class="nav-link" routerLink="/stores" routerLinkActive="active">
+                                Stores
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="javascript:void(0)">Offers</a>
+                            <a class="nav-link" routerLink="/offers" routerLinkActive="active">
+                                Offers
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="javascript:void(0)">Contact</a>
+                            <a class="nav-link" routerLink="/contactus" routerLinkActive="active">
+                                Contact
+                            </a>
                         </li>
                     </ul>
                 </div>
