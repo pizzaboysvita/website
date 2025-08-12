@@ -8,35 +8,21 @@ import { CarouselModule, OwlOptions } from "ngx-owl-carousel-o";
   styleUrl: "./offers.component.scss",
 })
 export class OffersComponent {
-  public customOptions: OwlOptions = {
+  customOptions = {
     loop: true,
     autoplay: true,
-    autoplayTimeout: 0,
+    autoplayTimeout: 3000,
     autoplayHoverPause: true,
-    dots: false,
-    margin: 32,
-    items: 2.5,
-    autoplaySpeed: 10000,
-    touchDrag: true,
+    dots: false, // hide dots
+    nav: true, // enable arrows
+    navText: [
+      '<span class="carousel-control-prev-icon" aria-hidden="true"></span>',
+      '<span class="carousel-control-next-icon" aria-hidden="true"></span>',
+    ],
     responsive: {
-      0: {
-        items: 1,
-      },
-      375: {
-        items: 1.2,
-      },
-      425: {
-        items: 1.3,
-      },
-      576: {
-        items: 1.5,
-      },
-      768: {
-        items: 2,
-      },
-      992: {
-        items: 2.5,
-      },
+      0: { items: 1 },
+      600: { items: 1 },
+      1000: { items: 1 },
     },
   };
 }
