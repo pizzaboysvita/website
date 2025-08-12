@@ -1,101 +1,36 @@
-.bg-dark {
-  background-color: #0a0a0a !important;
+.categories-section .categories-style .food-categories {
+  background-color: black;
+}
+.categories-section .categories-style .food-categories:hover h4 {
+  color: red !important;
 }
 
-.category-carousel {
-  position: relative;
-  padding: 10px 40px;
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: red;
+  border: none;
+  color: #fff;
+  font-size: 22px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(201, 194, 194, 0.25);
+  transition: background-color 0.2s ease;
 
-  .owl-carousel {
-    .owl-stage-outer {
-      padding: 10px 0;
-    }
+  &.prev {
+    left: 0; // Aligned to the very edge of the container
   }
 
-  .category-item {
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-    color: #fff;
-
-    img {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      border: 2px solid transparent;
-      transition: all 0.2s ease;
-    }
-    .d-none {
-      display: none !important;
-    }
-    span {
-      margin-top: 8px;
-      font-size: 14px;
-      font-weight: 500;
-      text-align: center;
-    }
-
-    &:hover {
-      transform: scale(1.05);
-    }
+  &.next {
+    right: 20px; // Aligned to the very edge of the container
   }
 
-  .nav-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: #1203b3;
-    border: none;
-    color: #fff;
-    font-size: 22px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    cursor: pointer;
-    z-index: 2;
-    box-shadow: 0 2px 8px rgba(201, 194, 194, 0.25);
-    transition: background-color 0.2s ease;
-
-    &.prev {
-      left: 0; // Aligned to the very edge of the container
-    }
-
-    &.next {
-      right: 0; // Aligned to the very edge of the container
-    }
-
-    &:hover {
-      background-color: #2b2b2b; // Slightly lighter hover effect
-    }
-  }
-  .spinner-container {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #1a1818; // Match card background
-  }
-
-  .spinner {
-    width: 40px;
-    height: 40px;
-    border: 4px solid rgba(255, 255, 255, 0.3);
-    border-top-color: #fff;
-    border-radius: 50%;
-    animation: spin 1s ease-in-out infinite;
-  }
-
-  @keyframes spin {
-    to {
-      transform: rotate(360deg);
-    }
+  &:hover {
+    background-color: white; // Slightly lighter hover effect
+    color: red;
   }
 }
