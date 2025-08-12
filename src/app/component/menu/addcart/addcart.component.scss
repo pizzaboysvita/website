@@ -1,0 +1,284 @@
+.main {
+  background-color: #0a0a0a; // Dark background
+}
+.dish-detail-container {
+  display: flex;
+  background-color: #221f1f; // Dark background
+  color: #fff;
+  padding: 20px;
+  gap: 20px;
+  height: 100vh;
+}
+
+/* Left Column: Fixed content */
+.left-column {
+  background-color: #221f1f;
+  flex: 0 0 500px; // Fixed width for the left column
+  max-width: 50%;
+  position: sticky;
+  top: 0; // Sticks the column to the top of the viewport
+  height: 100vh;
+  overflow: hidden; // Ensures nothing spills out
+  display: flex;
+  flex-direction: column;
+}
+
+.dish-image {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  //   border-radius: 12px;
+}
+
+.dish-info-card {
+  background-color: #1a1818;
+  padding: 20px;
+  //   border-radius: 12px;
+  //   margin-top: 20px;
+  flex-grow: 1; // Allows it to fill remaining vertical space
+  display: flex;
+  flex-direction: column;
+}
+
+.dish-info-card h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0 0 5px 0;
+}
+
+.dish-description {
+  color: #ccc;
+  font-size: 1rem;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.quantity-control {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  button {
+    color: whitesmoke;
+    background-color: rgb(232, 14, 14);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1.6rem;
+    cursor: pointer;
+  }
+}
+
+.notes-label {
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+
+.notes-textarea {
+  width: 100%;
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 10px;
+  min-height: 80px;
+  resize: vertical;
+}
+
+.bottom-info {
+  margin-top: auto; // Pushes content to the bottom
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.total-price {
+  .label {
+    display: block;
+    font-size: 0.9rem;
+    color: #ccc;
+  }
+
+  .price-value {
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+}
+
+.add-to-cart-btn {
+  background-color: #e63946;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* Right Column: Scrollable content */
+.right-column {
+  background-color: #221f1f;
+  flex-grow: 1;
+  overflow-y: auto; // Enables vertical scrolling
+  padding-left: 20px; // Spacing between columns
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.option-group {
+  background-color: #1a1818;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.option-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+
+  h2 {
+    font-size: 1.5rem;
+    margin: 0;
+  }
+
+  .required-text {
+    font-size: 0.9rem;
+    color: #ccc;
+  }
+}
+
+.option-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px; // Increased padding for better touch targets
+  border-bottom: 1px solid #333;
+  cursor: pointer;
+  border-radius: 8px;
+  margin-bottom: 5px;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  .option-item-left {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    span {
+      font-size: 1rem;
+    }
+  }
+
+  .add-drink-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+}
+/* Custom Radio Button Styles */
+.custom-radio {
+  position: relative;
+  display: flex; /* Align with text */
+  align-items: center;
+  gap: 10px; /* Space between radio and label */
+  cursor: pointer;
+  user-select: none;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+
+  .checkmark {
+    flex-shrink: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #333;
+    border-radius: 50%;
+    border: 2px solid #555;
+    transition: all 0.2s ease-in-out;
+  }
+
+  input:checked ~ .checkmark {
+    background-color: #e63946;
+    border-color: #e63946;
+  }
+
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+
+  input:checked ~ .checkmark:after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #fff;
+  }
+}
+
+/* Custom Checkbox Styles (if needed) */
+.custom-checkbox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .checkmark {
+    flex-shrink: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #333;
+    border: 2px solid #555;
+    transition: all 0.2s ease-in-out;
+  }
+
+  input:checked ~ .checkmark {
+    background-color: #e63946;
+    border-color: #e63946;
+  }
+
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+
+  input:checked ~ .checkmark:after {
+    display: block;
+    position: absolute;
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+}
