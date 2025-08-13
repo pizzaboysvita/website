@@ -1,10 +1,12 @@
 import { Component } from "@angular/core";
 import { HeaderComponent } from "../../home/header/header.component";
 import { FooterComponent } from "../../home/footer/footer.component";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { HomeService } from "../../../services/home.service";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { CartService } from "../../../services/cart.service";
+
 @Component({
   selector: "app-addcart",
   imports: [
@@ -25,13 +27,17 @@ export class AddcartComponent {
   total = 0;
   selectedOptions: any[] = [];
   selectedDrinks: any[] = [];
-  constructor(private route: ActivatedRoute, private apiService: HomeService) {}
+
+  constructor(
+    private route: ActivatedRoute,
+    private apiService: HomeService,
+    private cartService: CartService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       this.dishId = Number(params.get("id"));
-      console.log("Dish ID from route:", this.dishId);
-
       if (this.dishId) {
         this.getDishDetails(this.dishId);
       }
@@ -39,8 +45,6 @@ export class AddcartComponent {
   }
 
   getDishDetails(id: number): void {
-    console.log("Looking for dish with ID:", id);
-
     this.apiService.getDishes().subscribe({
       next: (response: any) => {
         const allProducts = response.data.map((dish: any) => ({
@@ -52,8 +56,6 @@ export class AddcartComponent {
         this.dish = allProducts.find((item: any) => item.dish_id === id);
 
         if (this.dish) {
-          console.log("Matched dish:", this.dish);
-
           if (this.dish.dish_option_set_json) {
             try {
               const optionSets = JSON.parse(this.dish.dish_option_set_json);
@@ -83,13 +85,9 @@ export class AddcartComponent {
             this.dish.optionGroups = [];
           }
 
-          /** -------------------
-           * Parse ingredients
-           * ------------------- */
           if (this.dish.dish_ingredients_json) {
             try {
               const ingredients = JSON.parse(this.dish.dish_ingredients_json);
-              // Expecting [{name:"Tomato Base"}, {name:"Pineapple"}]
               this.dish.ingredients = ingredients.map(
                 (ing: any) => ing.name || ""
               );
@@ -102,8 +100,6 @@ export class AddcartComponent {
           }
 
           this.calculateTotal();
-        } else {
-          console.warn(`Dish with ID ${id} not found.`);
         }
       },
       error: (err) => {
@@ -138,14 +134,12 @@ export class AddcartComponent {
     if (this.dish) {
       let basePrice = this.dish.price;
 
-      // Add prices of selected options
       this.selectedOptions.forEach((option) => {
         if (option && option.price) {
           basePrice += option.price;
         }
       });
 
-      // Add prices of selected drinks
       this.selectedDrinks.forEach((drink) => {
         basePrice += drink.price;
       });
@@ -164,7 +158,11 @@ export class AddcartComponent {
         selectedDrinks: this.selectedDrinks,
         total: this.total,
       };
-      console.log("Adding to cart:", order);
+
+      this.cartService.addItem(order);
+
+      console.log("Added to cart:", order);
+      this.router.navigate(["/menu"]);
     }
   }
 }

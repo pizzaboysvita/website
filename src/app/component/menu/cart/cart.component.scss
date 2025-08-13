@@ -1,0 +1,103 @@
+.cart-page {
+  background: #111;
+
+  min-height: 100vh;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+
+  .card {
+    background: #1c1c1c;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+  }
+
+  .store-info {
+    .store-name {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .store-address {
+      font-size: 14px;
+      color: #aaa;
+    }
+  }
+
+  .cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .item-left {
+      .item-name {
+        font-size: 16px;
+        font-weight: 500;
+      }
+      .item-price {
+        color: #ffcc00;
+        font-size: 14px;
+      }
+    }
+
+    .item-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      .qty-btn {
+        background: #ff4444;
+        border: none;
+        color: #fff;
+        font-size: 18px;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .qty {
+        font-size: 16px;
+        min-width: 20px;
+        text-align: center;
+      }
+    }
+  }
+
+  .note-section {
+    textarea {
+      width: 100%;
+      background: #111;
+      border: none;
+      color: #fff;
+      padding: 10px;
+      border-radius: 8px;
+      resize: none;
+      height: 60px;
+    }
+  }
+
+  .price-summary {
+    .row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .total {
+      font-size: 18px;
+      color: #ffcc00;
+    }
+  }
+
+  .checkout-btn {
+    width: 100%;
+    padding: 15px;
+    background: #ff4444;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+  }
+}
