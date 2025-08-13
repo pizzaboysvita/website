@@ -1,33 +1,58 @@
 <header class="header-light">
     <div class="custom-container">
-        <nav class="navbar navbar-expand-lg p-0 w-100">
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#offcanvasNavbar">
+        <nav class="navbar navbar-expand-lg p-0">
+            <!-- Toggle Button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon">
                     <i class="ri-menu-line"></i>
                 </span>
             </button>
 
-            <a href="javascript:void(0)" class="navbar-brand">
+            <!-- Logo -->
+            <a href="javascript:void(0)">
                 <img class="img-fluid logo" src="assets/img/pizza-black-1.png" alt="logo">
             </a>
 
-            <div class="collapse navbar-collapse justify-content-center" id="offcanvasNavbar">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="javascript:void(0)">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" routerLink="menu" href="javascript:void(0)">Menu</a></li>
-                    <li class="nav-item"><a class="nav-link" href="javascript:void(0)">Stores</a></li>
-                    <li class="nav-item"><a class="nav-link" href="javascript:void(0)">Offers</a></li>
-                    <li class="nav-item"><a class="nav-link" href="javascript:void(0)">Contact</a></li>
-                </ul>
+            <!-- Offcanvas Menu -->
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">PizzaBoyz</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-center flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/home" routerLinkActive="active"
+                                [routerLinkActiveOptions]="{ exact: true }">
+                                Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/menu" routerLinkActive="active">
+                                Menu
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/stores" routerLinkActive="active">
+                                Stores
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/offers" routerLinkActive="active">
+                                Offers
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/contactus" routerLinkActive="active">
+                                Contact
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-
-            <div class="cart-container ms-auto d-flex align-items-center" (click)="goToCart()">
-                <i class="ri-shopping-cart-2-line"></i>
-                <span class="cart-count" *ngIf="cartCount > 0">{{ cartCount }}</span>
-            </div>
-
-
         </nav>
     </div>
 </header>

@@ -1,53 +1,30 @@
 <section class="section-b-space testimonial-section">
-    <div class="container">
-        <div class="swiper testimonial mb-xl-5 mb-sm-4 mb-3">
-            <div class="swiper-wrapper">
-                <owl-carousel-o [options]="customOptions">
-                    <ng-template carouselSlide>
-                        <div class="swiper-slide">
-                            <div class="testimonial-box">
-                                <img class="img-fluid img" src="assets/img/deals1.jpeg"
-                                    alt="p1">
-                            </div>
-                        </div>
-                    </ng-template>
+    <div class="container-fluid">
+        <div class="carousel-wrapper">
+            <owl-carousel-o #owlCarousel [options]="customOptions" class="owl-theme">
+                <ng-template carouselSlide *ngFor="let item of testimonials">
+                    <div class="testimonial-box">
+                        <img class="img-fluid img" [src]="item.image" [alt]="item.name" />
+                    </div>
+                </ng-template>
+            </owl-carousel-o>
 
-                    <ng-template carouselSlide>
-                        <div class="swiper-slide">
-                            <div class="testimonial-box">
-                                <img class="img-fluid img"
-                                    src="assets/img/deals2.jpeg" alt="p2">
-                            </div>
-                        </div>
-                    </ng-template>
+            <!-- overlay prev/next buttons on left & right of slider -->
+            <button class="custom-nav prev" aria-label="Previous" (click)="prev()">
+                <!-- SVG left -->
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M15 6 L9 12 L15 18" stroke="white" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </button>
 
-                    <ng-template carouselSlide>
-                        <div class="swiper-slide">
-                            <div class="testimonial-box">
-                                <img class="img-fluid img" src="assets/img/deals3.jpeg" alt="p3">
-                            </div>
-                        </div>
-                    </ng-template>
-
-                    <ng-template carouselSlide>
-                        <div class="swiper-slide">
-                            <div class="testimonial-box">
-                                <img class="img-fluid img"
-                                    src="assets/img/deals4.jpeg" alt="p4">
-                            </div>
-                        </div>
-                    </ng-template>
-
-                    <ng-template carouselSlide>
-                        <div class="swiper-slide">
-                            <div class="testimonial-box">
-                                <img class="img-fluid img"
-                                    src="assets/img/deals5.jpeg" alt="p5">
-                            </div>
-                        </div>
-                    </ng-template>
-                </owl-carousel-o>
-            </div>
+            <button class="custom-nav next" aria-label="Next" (click)="next()">
+                <!-- SVG right -->
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M9 6 L15 12 L9 18" stroke="white" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </button>
         </div>
     </div>
 </section>

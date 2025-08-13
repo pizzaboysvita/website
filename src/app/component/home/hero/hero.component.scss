@@ -23,6 +23,50 @@
   .hero-video.show {
     opacity: 1; /* Fade in */
   }
+
+  /* Video Buttons Container */
+  .video-buttons {
+    position: absolute;
+    bottom: 30px; /* distance from bottom */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+    z-index: 10; /* above video */
+  }
+
+  /* Buttons Style */
+  .video-buttons .btn {
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 25px;
+    cursor: pointer;
+    border: none;
+    transition: background 0.3s, transform 0.2s;
+  }
+
+  .video-buttons .btn-primary {
+    background-color: red;
+    color: white;
+  }
+
+  .video-buttons .btn-primary:hover {
+    background-color: white;
+    color: red;
+    transform: scale(1.05);
+  }
+
+  .video-buttons .btn-secondary {
+    background-color: black;
+    color: red;
+  }
+
+  .video-buttons .btn-secondary:hover {
+    background-color: white;
+    color: red;
+    transform: scale(1.05);
+  }
+
 }
 
 .hero__courtains {
