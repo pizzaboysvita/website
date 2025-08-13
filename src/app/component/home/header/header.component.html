@@ -1,21 +1,26 @@
 <header class="header-light">
     <div class="custom-container">
         <nav class="navbar navbar-expand-lg p-0">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#offcanvasNavbar">
+            <!-- Toggle Button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon">
                     <i class="ri-menu-line"></i>
                 </span>
             </button>
+
+            <!-- Logo -->
             <a href="javascript:void(0)">
                 <img class="img-fluid logo" src="assets/img/pizza-black-1.png" alt="logo">
             </a>
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasSkeleton">
+
+            <!-- Offcanvas Menu -->
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasSkeletonLabel">
-                        Menu
-                    </h5>
-                    <button class="navbar-toggler btn-close" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#offcanvasSkeleton" data-bs-dismiss="offcanvas"></button>
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">PizzaBoyz</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-center flex-grow-1">
