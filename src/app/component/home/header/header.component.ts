@@ -1,14 +1,14 @@
-import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
-import { Router, RouterLink } from "@angular/router";
+import { CommonModule } from "@angular/common";
+import { Router, RouterModule } from "@angular/router";
 import { CartService } from "../../../services/cart.service";
 
 @Component({
   selector: "app-header",
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterModule],
   templateUrl: "./header.component.html",
-  styleUrls: ["./header.component.scss"], // styleUrls (plural)
+  styleUrls: ["./header.component.scss"],
 })
 export class HeaderComponent {
   cartCount = 0;
@@ -18,7 +18,7 @@ export class HeaderComponent {
   ngOnInit() {
     this.cartService.cartItems$.subscribe((items) => {
       console.log("Cart items updated:", items);
-      
+
       this.cartCount = items.length;
     });
   }
