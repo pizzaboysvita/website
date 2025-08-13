@@ -1,61 +1,56 @@
 <app-header class="head"></app-header>
 
-<div>
-  <app-category (categorySelected)="onCategorySelected($event)"></app-category>
-</div>
-
 <div class="row bg-dark">
   <div class="col-sm-11 m-auto">
-    <section class="menu-section bg-dark">
-      <div class="category-section">
-        <h2 class="category-title text-light">{{ selectedCategoryName }}</h2>
+    <div class="bg-dark">
+      <app-category (categorySelected)="onCategorySelected($event)"></app-category>
+    </div>
 
-        <div class="product-list" [@listAnimation]>
-          <ng-container *ngFor="let item of filteredProducts; trackBy: trackByProductId">
-            <a [routerLink]="['/dishDetail', item.dish_id]" class="card-link">
-              <div class="product-card">
-                <div class="product-image">
-                  <img
-                    [src]="item.dish_image"
-                    [alt]="item.dish_name"
-                    (load)="item.imageLoaded = true"
-                    [class.hidden]="!item.imageLoaded"
-                  />
-                  <div *ngIf="!item.imageLoaded" class="spinner-container">
-                    <div class="spinner"></div>
-                  </div>
-                </div>
+    <div class="row bg-dark">
+      <div class="">
+        <section class="menu-section bg-dark">
+          <div class="category-section">
+            <h2 class="category-title text-light">{{ selectedCategoryName }}</h2>
 
-                <div class="product-info">
-                  <h3 class="product-name">{{ item.dish_name }}</h3>
-                  <p class="product-desc">{{ item.description }}</p>
-                  <div class="product-footer">
-                    <span class="product-price">₹{{ item.dish_price }}</span>
+            <div class="product-list" [@listAnimation]>
+              <ng-container *ngFor="let item of filteredProducts; trackBy: trackByProductId">
+                <a [routerLink]="['/dishDetail', item.dish_id]" class="card-link">
+                  <div class="product-card">
+                    <div class="product-image">
+                      <img [src]="item.dish_image" [alt]="item.dish_name" (load)="item.imageLoaded = true"
+                        [class.hidden]="!item.imageLoaded" />
+                      <div *ngIf="!item.imageLoaded" class="spinner-container">
+                        <div class="spinner"></div>
+                      </div>
+                    </div>
 
-                    <button
-                      type="button"
-                      class="favorite-btn"
-                      (click)="toggleFavorite(item, $event)"
-                      [attr.aria-pressed]="item.isFavorite"
-                      [class.active]="item.isFavorite"
-                      title="Toggle favorite"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" [attr.fill]="item.isFavorite ? '#ff4d4d' : 'none'" stroke="#ff4d4d" stroke-width="1.2">
-                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 
+                    <div class="product-info">
+                      <h3 class="product-name">{{ item.dish_name }}</h3>
+                      <p class="product-desc">{{ item.description }}</p>
+                      <div class="product-footer">
+                        <span class="product-price">₹{{ item.dish_price }}</span>
+
+                        <button type="button" class="favorite-btn" (click)="toggleFavorite(item, $event)"
+                          [attr.aria-pressed]="item.isFavorite" [class.active]="item.isFavorite"
+                          title="Toggle favorite">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"
+                            [attr.fill]="item.isFavorite ? '#ff4d4d' : 'none'" stroke="#ff4d4d" stroke-width="1.2">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 
                           2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09
                           C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5
-                          c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                      </svg>
-                    </button>
+                          c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            </a>
-          </ng-container>
-        </div>
+                </a>
+              </ng-container>
+            </div>
+          </div>
+        </section>
       </div>
-    </section>
+    </div>
   </div>
 </div>
-
 <app-footer></app-footer>
