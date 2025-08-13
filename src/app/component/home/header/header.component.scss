@@ -5,7 +5,10 @@
 
 .header-light .navbar {
   border-bottom: none;
+  z-index: 1050 !important;
 }
+
+
 
 .navbar-nav {
   text-align: center; // Ensures links are centered in mobile
