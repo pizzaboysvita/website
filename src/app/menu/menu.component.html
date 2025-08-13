@@ -1,16 +1,16 @@
 <app-header class="head"></app-header>
 
-<div class="row bg-dark">
+<div class="row">
   <div class="col-sm-11 m-auto">
-    <div class="bg-dark">
+    <div class="">
       <app-category (categorySelected)="onCategorySelected($event)"></app-category>
     </div>
 
-    <div class="row bg-dark">
+    <div class="row">
       <div class="">
-        <section class="menu-section bg-dark">
+        <section class="menu-section">
           <div class="category-section">
-            <h2 class="category-title text-light">{{ selectedCategoryName }}</h2>
+            <h2 class="category-title">{{ selectedCategoryName }}</h2>
 
             <div class="product-list" [@listAnimation]>
               <ng-container *ngFor="let item of filteredProducts; trackBy: trackByProductId">

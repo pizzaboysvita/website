@@ -1,11 +1,12 @@
 import { Routes } from "@angular/router";
 import { HomeComponent } from "./home/home.component";
-import { MenuComponent } from "./component/menu/menu.component";
 import { AddcartComponent } from "./component/menu/addcart/addcart.component";
 import { ContactusComponent } from "./contactus/contactus.component";
 import { StoreComponent } from "./store/store.component";
 import { OfferComponent } from "./offer/offer.component";
 import { CartComponent } from "./component/menu/cart/cart.component";
+import { MenuComponent } from "./menu/menu.component";
+
 
 export const routes: Routes = [
   {
