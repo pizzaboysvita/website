@@ -19,7 +19,7 @@
                 aria-labelledby="offcanvasSkeletonLabel">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title" id="offcanvasSkeletonLabel">
-                        Menu
+                        Pizza Boyz
                     </h5>
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
@@ -59,6 +59,10 @@
                         </li>
                     </ul>
                 </div>
+            </div>
+            <div class="cart-container ms-auto d-flex align-items-center" (click)="goToCart()">
+                <i class="ri-shopping-cart-2-line"></i>
+                <span class="cart-count" *ngIf="cartCount > 0">{{ cartCount }}</span>
             </div>
         </nav>
     </div>
