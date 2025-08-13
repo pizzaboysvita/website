@@ -11,7 +11,7 @@
 
             <!-- Logo -->
             <a href="javascript:void(0)">
-                <img class="img-fluid logo" src="assets/img/pizza-black-1.png" alt="logo">
+                <img class="img-fluid logo" src="assets/img/pizza-black-1.png" alt="logo" />
             </a>
 
             <!-- Offcanvas Menu -->
@@ -25,8 +25,7 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-center flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link" routerLink="/home" routerLinkActive="active"
-                                [routerLinkActiveOptions]="{ exact: true }">
+                            <a class="nav-link" routerLink="/home" routerLinkActive="active">
                                 Home
                             </a>
                         </li>
@@ -52,6 +51,11 @@
                         </li>
                     </ul>
                 </div>
+            </div>
+
+            <div class="cart-container ms-auto d-flex align-items-center" (click)="goToCart()">
+                <i class="ri-shopping-cart-2-line"></i>
+                <span class="cart-count" *ngIf="cartCount > 0">{{ cartCount }}</span>
             </div>
         </nav>
     </div>

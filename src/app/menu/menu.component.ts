@@ -7,13 +7,14 @@ import {
   query,
   stagger,
 } from "@angular/animations";
-import { HeaderComponent } from "../home/header/header.component";
-import { CategoryComponent } from "../home/category/category.component";
 import { CommonModule } from "@angular/common";
-import { HomeService } from "../../services/home.service";
-import { FooterComponent } from "../home/footer/footer.component";
 import { RouterLink } from "@angular/router";
-import { Subscription } from "rxjs";
+import { Subject, of } from "rxjs";
+import { takeUntil, catchError } from "rxjs/operators";
+import { HeaderComponent } from "../component/home/header/header.component";
+import { FooterComponent } from "../component/home/footer/footer.component";
+import { CategoryComponent } from "../component/home/category/category.component";
+import { HomeService } from "../services/home.service";
 
 interface Dish {
   dish_id: number;
@@ -83,7 +84,7 @@ export class MenuComponent implements OnInit, OnDestroy {
   categories: any[] = [];
   selectedCategoryName = "All Dishes";
 
-  private subscriptions: Subscription[] = [];
+  private destroy$ = new Subject<void>();
   private readonly FAVORITES_KEY = "my_app_favorites_v1";
 
   constructor(
@@ -92,55 +93,63 @@ export class MenuComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    // categories
-    const cat = this.apiService.getCategories().subscribe((response: any) => {
-      this.categories = response?.categories || [];
-    });
-    this.subscriptions.push(cat);
+    // Load categories
+    this.apiService
+      .getCategories()
+      .pipe(
+        takeUntil(this.destroy$),
+        catchError(err => {
+          console.error("Failed to fetch categories", err);
+          return of({ categories: [] });
+        })
+      )
+      .subscribe((response: any) => {
+        this.categories = response?.categories || [];
+      });
 
-    // dishes
-    const dishs = this.apiService.getDishes().subscribe((response: any) => {
-      const remoteDishes: any[] = response?.data || [];
-      const favorites = this.loadFavorites();
-      this.allProducts = remoteDishes.map((dish: any) => {
-        const normalized: Dish = {
+    // Load dishes
+    this.apiService
+      .getDishes()
+      .pipe(
+        takeUntil(this.destroy$),
+        catchError(err => {
+          console.error("Failed to fetch dishes", err);
+          return of({ data: [] });
+        })
+      )
+      .subscribe((response: any) => {
+        const favorites = this.loadFavorites();
+        this.allProducts = (response?.data || []).map((dish: any) => ({
           ...dish,
           quantity: 1,
           imageLoaded: false,
           isFavorite: !!favorites[dish.dish_id],
-        };
-        return normalized;
-      });
+        }));
 
-      this.filteredProducts = [...this.allProducts];
-      this.cdr.detectChanges();
-    });
-    this.subscriptions.push(dishs);
+        this.filteredProducts = [...this.allProducts];
+        this.cdr.detectChanges();
+      });
 
     document.body.classList.add("bg-color");
   }
 
   trackByProductId = (index: number, product: Dish): number =>
-    product?.dish_id || (product as any)?.id || index;
+    product?.dish_id || index;
 
   onCategorySelected(category: any | null) {
-    if (!category) {
-      this.filteredProducts = [...this.allProducts];
-      this.selectedCategoryName = "All Dishes";
-    } else {
-      this.filteredProducts = this.allProducts.filter(
-        (dish) => dish.dish_category_id === category.id
-      );
-      this.selectedCategoryName = category.name;
-    }
+    this.filteredProducts = category
+      ? this.allProducts.filter(
+          dish => dish.dish_category_id === category.id
+        )
+      : [...this.allProducts];
+
+    this.selectedCategoryName = category?.name || "All Dishes";
     this.cdr.detectChanges();
   }
 
   toggleFavorite(product: Dish, event?: MouseEvent) {
-    if (event) {
-      event.stopPropagation();
-      event.preventDefault();
-    }
+    event?.stopPropagation();
+    event?.preventDefault();
     product.isFavorite = !product.isFavorite;
     this.persistFavorites();
   }
@@ -148,14 +157,12 @@ export class MenuComponent implements OnInit, OnDestroy {
   private persistFavorites() {
     try {
       const map: Record<number, boolean> = {};
-      for (const p of this.allProducts) {
+      this.allProducts.forEach(p => {
         if (p.isFavorite) {
           map[p.dish_id] = true;
         }
-      }
+      });
       localStorage.setItem(this.FAVORITES_KEY, JSON.stringify(map));
-      // Optionally sync with server if you have an API
-      // this.syncFavoritesToServer(map);
     } catch (err) {
       console.error("Failed to save favorites", err);
     }
@@ -163,17 +170,15 @@ export class MenuComponent implements OnInit, OnDestroy {
 
   private loadFavorites(): Record<number, boolean> {
     try {
-      const raw = localStorage.getItem(this.FAVORITES_KEY);
-      if (!raw) return {};
-      return JSON.parse(raw);
-    } catch (err) {
-      console.warn("Failed to load favorites", err);
+      return JSON.parse(localStorage.getItem(this.FAVORITES_KEY) || "{}");
+    } catch {
       return {};
     }
   }
 
   ngOnDestroy() {
     document.body.classList.remove("bg-color");
-    this.subscriptions.forEach((s) => s.unsubscribe());
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
