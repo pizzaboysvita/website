@@ -1,9 +1,9 @@
 <header class="header-light">
     <div class="custom-container">
         <nav class="navbar navbar-expand-lg p-0">
-            <!-- Toggle Button -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-                aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <!-- Toggle button for mobile -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSkeleton"
+                aria-controls="offcanvasSkeleton">
                 <span class="navbar-toggler-icon">
                     <i class="ri-menu-line"></i>
                 </span>
@@ -11,42 +11,49 @@
 
             <!-- Logo -->
             <a href="javascript:void(0)">
-                <img class="img-fluid logo" src="assets/img/pizza-black-1.png" alt="logo">
+                <img class="img-fluid logo" src="assets/img/pizza-black-1.png" alt="logo" />
             </a>
 
-            <!-- Offcanvas Menu -->
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
-                aria-labelledby="offcanvasNavbarLabel">
+            <!-- Offcanvas menu -->
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasSkeleton"
+                aria-labelledby="offcanvasSkeletonLabel">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">PizzaBoyz</h5>
+                    <h5 class="offcanvas-title" id="offcanvasSkeletonLabel">
+                        Menu
+                    </h5>
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
                 </div>
+
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-center flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link" routerLink="/home" routerLinkActive="active"
-                                [routerLinkActiveOptions]="{ exact: true }">
+                                [routerLinkActiveOptions]="{ exact: true }" data-bs-dismiss="offcanvas">
                                 Home
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" routerLink="/menu" routerLinkActive="active">
+                            <a class="nav-link" routerLink="/menu" routerLinkActive="active"
+                                data-bs-dismiss="offcanvas">
                                 Menu
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" routerLink="/stores" routerLinkActive="active">
+                            <a class="nav-link" routerLink="/stores" routerLinkActive="active"
+                                data-bs-dismiss="offcanvas">
                                 Stores
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" routerLink="/offers" routerLinkActive="active">
+                            <a class="nav-link" routerLink="/offers" routerLinkActive="active"
+                                data-bs-dismiss="offcanvas">
                                 Offers
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" routerLink="/contactus" routerLinkActive="active">
+                            <a class="nav-link" routerLink="/contactus" routerLinkActive="active"
+                                data-bs-dismiss="offcanvas">
                                 Contact
                             </a>
                         </li>
