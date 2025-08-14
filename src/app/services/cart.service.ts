@@ -18,6 +18,8 @@ export class CartService {
   cartItems$ = this.cartItems.asObservable();
 
   addItem(item: Partial<CartItem>) {
+    console.log(item, 'item from cart');
+    
     const current = [...this.cartItems.value];
     const existing = current.find(ci => ci.id === item.id);
 

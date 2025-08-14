@@ -1,21 +1,48 @@
+.page-header {
+  background: radial-gradient(
+    80% 120% at 50% -20%,
+    #2a2a2a 0%,
+    #171717 60%,
+    #121212 100%
+  );
+}
+
+.breadcrumb {
+  background-color: transparent;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  content: "/";
+  color: rgba(255, 255, 255, 0.6);
+  padding: 0 5px 0px 5px;
+}
+
+.breadcrumb a {
+  color: #ccc !important;
+}
+
+.breadcrumb a:hover {
+  color: #fff !important;
+}
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  // background-color: black;
+  background-color: #000000;
 }
 
 .head {
-  background-color: black;
+  background-color: #000000;
   color: #fff;
 }
 
 .bg-dark {
-  background-color: #0a0a0a !important;
+  background-color: #000000 !important;
 }
 
 .menu-section {
   padding: 2rem 0;
-  // background-color: black;
+  background-color: #000000;
 }
 
 .category-section {
@@ -25,8 +52,7 @@ body {
     font-size: 1.5rem;
     font-weight: bold;
     margin-bottom: 1rem;
- 
-   
+    color: #fff;
   }
 
   .product-list {
@@ -37,12 +63,12 @@ body {
 
   .product-card {
     display: flex;
-    flex-direction: row; 
-    background-color: #1a1818;
+    flex-direction: row; // default: row layout for larger screens
+    background-color: #212121;
     border-radius: 12px;
     color: #fff;
     overflow: hidden;
-    height: 100%;
+    height: 180px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 
     &:hover {
@@ -96,7 +122,6 @@ body {
 
     .product-footer {
       display: flex;
-      align-items: center;
       justify-content: space-between;
       margin-top: 1rem;
 
@@ -104,17 +129,18 @@ body {
         font-size: 1.2rem;
         font-weight: bold;
         color: #fff;
+        padding: 0;
       }
 
       .favorite-btn {
         background: none;
-        border: none;
+        // border: none;
         font-size: 1.4rem;
         color: #fff;
         cursor: pointer;
         display: inline-flex;
-        align-items: center;
         justify-content: center;
+        align-items: center;
         width: 38px;
         height: 38px;
         border-radius: 50%;
@@ -169,23 +195,20 @@ body {
   .category-title {
     font-size: 1.4rem;
   }
-
-  .product-card .product-image {
-    height: 220px;
-  }
 }
 
 /* Mobile: 1 column */
 @media (max-width: 768px) {
   .product-list {
-    grid-template-columns: 1fr; // single column
+    grid-template-columns: 1fr !important ; // single column
   }
 
   .product-card {
-    flex-direction: column;
+    flex-direction: column; // Changes card content to a vertical stack
+    height: auto; // Allows the card to grow with its content
 
     .product-image {
-      flex: none;
+      flex: none; // Disables flex properties for the image
       height: 180px;
     }
   }

@@ -72,7 +72,6 @@ export class AddcartComponent {
                   console.error("Error parsing option_set_combo_json", err);
                 }
 
-                // Use the 'select_multiple' property from the JSON
                 const isMultiple = set.select_multiple === 1;
 
                 return {
@@ -82,7 +81,6 @@ export class AddcartComponent {
                   required: set.required === 1,
                 };
               });
-              // Initialize selectedOptions with empty arrays for multiple selections
               this.selectedOptions = this.dish.optionGroups.map((group: any) =>
                 group.isMultiple ? [] : null
               );
@@ -94,7 +92,6 @@ export class AddcartComponent {
             this.dish.optionGroups = [];
           }
 
-          // ... (rest of the getDishDetails method remains the same)
           this.calculateTotal();
         }
       },
@@ -104,7 +101,6 @@ export class AddcartComponent {
     });
   }
 
-  // Helper method to check if a checkbox option is selected
   isOptionSelected(option: any, groupIndex: number): boolean {
     const selectedGroup = this.selectedOptions[groupIndex];
     return (
@@ -113,7 +109,6 @@ export class AddcartComponent {
     );
   }
 
-  // Method to toggle a checkbox option
   toggleOption(option: any, groupIndex: number): void {
     const selectedGroup = this.selectedOptions[groupIndex];
     if (!selectedGroup) {
@@ -128,28 +123,24 @@ export class AddcartComponent {
     this.calculateTotal();
   }
 
-  // Method for single-choice radio buttons
   selectOption(option: any, groupIndex: number): void {
     this.selectedOptions[groupIndex] = option;
     this.calculateTotal();
   }
 
-  // Calculate total method
   calculateTotal(): void {
     if (this.dish) {
-      let basePrice = parseFloat(this.dish.dish_price); // Use float for price calculation
+      let basePrice = parseFloat(this.dish.dish_price); 
 
       this.selectedOptions.forEach((selectedItem) => {
         if (selectedItem) {
           if (Array.isArray(selectedItem)) {
-            // It's a multiple-choice group (checkboxes)
             selectedItem.forEach((option) => {
               if (option.price) {
                 basePrice += option.price;
               }
             });
           } else {
-            // It's a single-choice group (radio buttons)
             if (selectedItem.price) {
               basePrice += selectedItem.price;
             }

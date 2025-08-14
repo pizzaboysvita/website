@@ -18,10 +18,11 @@ export class CartComponent implements OnInit {
   constructor(private cartService:CartService) {}
 
   ngOnInit(): void {
-    // Subscribe to cart changes
     this.cartService.cartItems$.subscribe(items => {
       this.cartItems = items;
       this.calculateTotal();
+      console.log('Cart items updated:', this.cartItems);
+      
     });
   }
 

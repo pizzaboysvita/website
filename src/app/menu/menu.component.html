@@ -1,16 +1,27 @@
 <app-header class="head"></app-header>
+<div class="page-header bg-dark text-white p-4 text-center shadow-sm">
+  <div class="container align-items-center">
+    <h2 class="mb-1">Menu Grid</h2>
 
-<div class="row">
+    <li class="breadcrumb-item">
+      <a href="#" class="text-decoration-none text-light"> Home</a>
+    </li>
+    <li class="breadcrumb-item active text-white" aria-current="page">
+      Menu Grid
+    </li>
+
+  </div>
+</div>
+
+<main class="row bg-dark">
   <div class="col-sm-11 m-auto">
-    <div class="">
-      <app-category (categorySelected)="onCategorySelected($event)"></app-category>
-    </div>
+    <app-category (categorySelected)="onCategorySelected($event)"></app-category>
 
-    <div class="row">
+    <div class="row bg-dark">
       <div class="">
-        <section class="menu-section">
+        <section class="menu-section bg-dark">
           <div class="category-section">
-            <h2 class="category-title">{{ selectedCategoryName }}</h2>
+            <h2 class="category-title text-light">{{ selectedCategoryName }}</h2>
 
             <div class="product-list" [@listAnimation]>
               <ng-container *ngFor="let item of filteredProducts; trackBy: trackByProductId">
@@ -35,10 +46,10 @@
                           title="Toggle favorite">
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"
                             [attr.fill]="item.isFavorite ? '#ff4d4d' : 'none'" stroke="#ff4d4d" stroke-width="1.2">
-                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 
-                          2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09
-                          C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5
-                          c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+                            2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09
+                            C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5
+                            c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
                           </svg>
                         </button>
                       </div>
@@ -52,5 +63,5 @@
       </div>
     </div>
   </div>
-</div>
+</main>
 <app-footer></app-footer>
