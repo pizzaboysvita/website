@@ -1,0 +1,26 @@
+.page-header {
+  background: radial-gradient(
+    80% 120% at 50% -20%,
+    #2a2a2a 0%,
+    #171717 60%,
+    #121212 100%
+  );
+}
+
+.breadcrumb {
+  background-color: transparent;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  content: "/";
+  color: rgba(255, 255, 255, 0.6);
+  padding: 0 5px 0px 5px;
+}
+
+.breadcrumb a {
+  color: #ccc !important;
+}
+
+.breadcrumb a:hover {
+  color: #fff !important;
+}
