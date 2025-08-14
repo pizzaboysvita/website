@@ -3,7 +3,7 @@
   min-height: 500px;
   max-height: 500px;
   position: relative;
-  background-image: url('/assets/img/home-hero-background-40th.png');
+  background-image: url("/assets/img/home-hero-background-40th.png");
   background-size: cover;
   background-position: center;
   overflow: hidden;
@@ -68,7 +68,6 @@
     color: red;
     transform: scale(1.05);
   }
-
 }
 
 .hero__courtains {
@@ -99,24 +98,36 @@
 
   &__left {
     left: 0;
-    background-image: url('/assets/img/courtain-left.jpg');
+    background-image: url("/assets/img/courtain-left.jpg");
     transform: translateX(0);
   }
 
   &__right {
     right: 0;
-    background-image: url('/assets/img/courtain-right.jpg');
+    background-image: url("/assets/img/courtain-right.jpg");
     transform: translateX(0);
   }
 
-
-
   h1 {
+    // font-size: clamp(2rem, 5vw + 1rem, 4.5rem);
     font-size: clamp(1.5rem, 4vw + 0.5rem, 3rem);
+    // font-size: clamp(1.25rem, 2.5vw + 0.25rem, 1.75rem);
     font-weight: 800;
     color: #fff;
     text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     animation: fadeInText 1s ease-in-out;
+    &.left {
+      position: absolute;
+      bottom: 50%;
+      right: 20px;
+      text-align: right;
+    }
+    &.right {
+      position: absolute;
+      bottom: 50%;
+      left: 20px;
+      text-align: left;
+    }
   }
 
   &.open {
