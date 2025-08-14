@@ -10,25 +10,25 @@
         </li>
     </div>
 </div>
-<div class="container-fluid">
+<div class="container-fluid p-1">
     <div class="row g-3">
         <div class="col-sm-6 position-relative">
             <div id="map"></div>
         </div>
         <div class="col-sm-6">
-            <div> <input id="search-input" type="text" placeholder="🔍 Search places in Karimnagar"></div>
+            <div> <input id="search-input" type="text" placeholder="🔍 Street number, Name or Postal Code"></div>
             <div class="location-list">
                 <div *ngFor="let loc of locations" class="location-card mt-3"
                     (click)="goToLocation(loc.lat, loc.lng, loc)">
                     <div class="location-header">
                         <div class="location-info">
                             <h3>{{ loc.name }}</h3>
-                            <p>{{ loc.address }}</p>
+                            <p class="text-success">{{ loc.distance }} . {{ loc.address }}</p>
                         </div>
                     </div>
                     <!-- FUTURE BUTTON -->
                     <div *ngIf="loc.showHours" class="mt-2">
-                        <button class="btn btn-primary btn-sm mb-2">Future</button>
+                        <button class="btn btn-primary btn-sm mb-2">Future Order</button>
                         <ul class="list-group">
                             <li *ngFor="let day of (loc.hours | keyvalue)" class="list-group-item">
                                 <strong>{{ day.key }}:</strong> {{ day.value }}
