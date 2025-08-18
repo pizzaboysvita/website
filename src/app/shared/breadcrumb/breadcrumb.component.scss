@@ -1,0 +1,48 @@
+.breadcrumb-section {
+  background: #111;
+  padding: 1rem 0;
+  text-align: center;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+
+  .page-title {
+    font-size: 23px;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #fff;
+  }
+
+  .breadcrumb {
+    display: inline-flex;
+    background: transparent;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 14px;
+
+    .breadcrumb-item {
+      color: #ccc;
+
+      a {
+        color: #ff6b35;
+        text-decoration: none;
+        font-weight: 500;
+
+        i {
+          margin-right: 5px;
+        }
+      }
+
+      &.active {
+        color: #fff;
+        font-weight: 600;
+      }
+
+      & + .breadcrumb-item::before {
+        content: "/";
+        color: #999;
+        padding: 0 0.5rem;
+      }
+    }
+  }
+}
