@@ -1,0 +1,18 @@
+<div class="breadcrumb-section">
+  <div class="container">
+    <!-- Page Title -->
+    <h2 class="page-title">{{ breadcrumbs[breadcrumbs.length - 1].label }}</h2>
+
+    <!-- Breadcrumb Navigation -->
+    <nav aria-label="breadcrumb" *ngIf="breadcrumbs.length">
+      <ol class="breadcrumb">
+        <li *ngFor="let bc of breadcrumbs; let last = last" class="breadcrumb-item" [class.active]="last">
+          <a *ngIf="!last; else lastBreadcrumb" [routerLink]="bc.url">
+            <i *ngIf="bc.label.toLowerCase() === 'home'" class="ri-home-4-line"></i> {{ bc.label }}
+          </a>
+          <ng-template #lastBreadcrumb> {{ bc.label }}</ng-template>
+        </li>
+      </ol>
+    </nav>
+  </div>
+</div>

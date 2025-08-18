@@ -15,6 +15,7 @@ import { HeaderComponent } from "../component/home/header/header.component";
 import { FooterComponent } from "../component/home/footer/footer.component";
 import { CategoryComponent } from "../component/home/category/category.component";
 import { HomeService } from "../services/home.service";
+import { BreadcrumbComponent } from "../shared/breadcrumb/breadcrumb.component";
 
 interface Dish {
   dish_id: number;
@@ -38,7 +39,8 @@ interface Dish {
     FooterComponent,
     CategoryComponent,
     RouterLink,
-  ],
+    BreadcrumbComponent
+],
   templateUrl: "./menu.component.html",
   styleUrls: ["./menu.component.scss"],
   animations: [

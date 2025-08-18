@@ -4,9 +4,10 @@ import { HeaderComponent } from "../component/home/header/header.component";
 import { FooterComponent } from "../component/home/footer/footer.component";
 import { NgZone } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { BreadcrumbComponent } from "../shared/breadcrumb/breadcrumb.component";
 @Component({
   selector: "app-store",
-  imports: [HeaderComponent, FooterComponent, CommonModule],
+  imports: [HeaderComponent, FooterComponent, CommonModule, BreadcrumbComponent],
   templateUrl: "./store.component.html",
   styleUrl: "./store.component.scss",
 })

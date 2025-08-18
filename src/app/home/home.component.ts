@@ -16,7 +16,7 @@ import { PopularComponent } from "../component/home/popular/popular.component";
     OffersComponent,
     // StoresComponent,
     CategoryComponent,
-    PopularComponent
+    PopularComponent,
 ],
   templateUrl: "./home.component.html",
   styleUrl: "./home.component.scss",

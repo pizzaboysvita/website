@@ -4,12 +4,13 @@ import { HeaderComponent } from "../../home/header/header.component";
 import { FooterComponent } from "../../home/footer/footer.component";
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BreadcrumbComponent } from "../../../shared/breadcrumb/breadcrumb.component";
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss'],
-  imports: [HeaderComponent, FooterComponent, CommonModule, FormsModule, ReactiveFormsModule]
+  imports: [HeaderComponent, FooterComponent, CommonModule, FormsModule, ReactiveFormsModule, BreadcrumbComponent]
 })
 export class CartComponent implements OnInit {
   cartItems: any[] = [];
