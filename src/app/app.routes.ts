@@ -7,33 +7,46 @@ import { OfferComponent } from "./offer/offer.component";
 import { CartComponent } from "./component/menu/cart/cart.component";
 import { MenuComponent } from "./menu/menu.component";
 
-
 export const routes: Routes = [
   {
     path: "",
     component: HomeComponent,
+    data: { breadcrumb: "Home" },
   },
   {
     path: "home",
     component: HomeComponent,
+    data: { breadcrumb: "Home" },
   },
   {
     path: "menu",
     component: MenuComponent,
+    data: { breadcrumb: "Menu" },
   },
   {
     path: "dishDetail/:id",
     component: AddcartComponent,
+    data: { breadcrumb: "Dish Detail" },
   },
   {
     path: "contactus",
     component: ContactusComponent,
+    data: { breadcrumb: "Contact Us" },
   },
   {
     path: "cart",
     component: CartComponent,
+    data: { breadcrumb: "Cart" },
   },
-  { path: "stores", component: StoreComponent },
-  { path: "offers", component: OfferComponent },
+  { 
+    path: "stores", 
+    component: StoreComponent, 
+    data: { breadcrumb: "Stores" } 
+  },
+  { 
+    path: "offers", 
+    component: OfferComponent, 
+    data: { breadcrumb: "Offers" } 
+  },
   { path: "**", redirectTo: "pages/404" },
 ];

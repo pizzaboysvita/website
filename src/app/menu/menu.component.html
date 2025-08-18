@@ -1,18 +1,6 @@
 <app-header class="head"></app-header>
-<div class="page-header bg-dark text-white p-4 text-center shadow-sm">
-  <div class="container align-items-center">
-    <h2 class="mb-1">Menu</h2>
 
-    <li class="breadcrumb-item">
-      <a href="#" class="text-decoration-none text-light"> Home</a>
-    </li>
-    <li class="breadcrumb-item active text-danger" aria-current="page">
-      Menu
-    </li>
-
-  </div>
-</div>
-
+<app-breadcrumb></app-breadcrumb>
 <main class="row bg-dark">
   <div class="col-sm-10 m-auto">
     <app-category (categorySelected)="onCategorySelected($event)"></app-category>
