@@ -1,5 +1,10 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, tap, catchError, throwError } from "rxjs";
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpErrorResponse,
+} from "@angular/common/http";
 
 export interface CartItem {
   id: number;
@@ -7,63 +12,94 @@ export interface CartItem {
   price: number;
   image?: string;
   quantity: number;
-  options?: any[];
+  options?: any;
 }
 
 @Injectable({
   providedIn: "root",
 })
 export class CartService {
+  private apiUrl = "http://localhost:3003/api/cart";
   private cartItems = new BehaviorSubject<CartItem[]>([]);
   cartItems$ = this.cartItems.asObservable();
 
-  addItem(item: Partial<CartItem>) {
-    console.log(item, 'item from cart');
-    
-    const current = [...this.cartItems.value];
-    const existing = current.find(ci => ci.id === item.id);
+  constructor(private http: HttpClient) {}
 
-    if (existing) {
-      existing.quantity += item.quantity || 1;
-    } else {
-      current.push({
-        id: item.id!,
-        name: item.name!,
-        price: item.price!,
-        image: item.image,
-        quantity: item.quantity || 1,
-        options: item.options || []
-      });
-    }
+  private getHeaders(): { headers: HttpHeaders } {
+    const token =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJfaWQiOjF9LCJpYXQiOjE3NTU2MDUzMzMsImV4cCI6MTc1NTYwODkzM30.a3rYG8Zerpu-8PLOdZIVZjpxdIjtJ2JCX58AfIO-0G4";
+    // const token = localStorage.getItem("auth_token");
+    // if (!token) {
+    //   console.error("Authentication token not found.");
+    //   return { headers: new HttpHeaders() };
+    // }
 
-    this.cartItems.next(current);
+    return {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      }),
+    };
   }
 
-  removeItem(id: number) {
-    this.cartItems.next(this.cartItems.value.filter(ci => ci.id !== id));
+  loadCart() {
+    this.http
+      .get<CartItem[]>(this.apiUrl, this.getHeaders())
+      .pipe(
+        tap((items) => this.cartItems.next(items)),
+        catchError((error: HttpErrorResponse) => {
+          console.error("Failed to load cart items:", error);
+          return throwError(() => new Error("Failed to load cart items."));
+        })
+      )
+      .subscribe();
   }
 
-  increaseQuantity(id: number) {
-    const updated = this.cartItems.value.map(ci =>
-      ci.id === id ? { ...ci, quantity: ci.quantity + 1 } : ci
+  addItem(
+    userId: number,
+    dishId: number,
+    storeId: number,
+    price: number,
+    quantity: number,
+    options: any
+  ) {
+    const body = {
+      user_id: userId,
+      dish_id: dishId,
+      store_id: storeId,
+      quantity: quantity,
+      price: price,
+      options_json: JSON.stringify(options),
+    };
+
+    return this.http.post(this.apiUrl, body, this.getHeaders()).pipe(
+      tap(() => this.loadCart()),
+      catchError((error: HttpErrorResponse) => {
+        console.error("Failed to add item to cart:", error);
+        return throwError(() => new Error("Failed to add item to cart."));
+      })
     );
-    this.cartItems.next(updated);
   }
 
-  decreaseQuantity(id: number) {
-    const updated = this.cartItems.value.map(ci =>
-      ci.id === id && ci.quantity > 1
-        ? { ...ci, quantity: ci.quantity - 1 }
-        : ci
-    );
-    this.cartItems.next(updated);
+  removeItem(cartItemId: number) {
+    return this.http
+      .delete(`${this.apiUrl}/${cartItemId}`, this.getHeaders())
+      .pipe(
+        tap(() => this.loadCart()),
+        catchError((error: HttpErrorResponse) => {
+          console.error("Failed to remove item from cart:", error);
+          return throwError(
+            () => new Error("Failed to remove item from cart.")
+          );
+        })
+      );
   }
 
   clearCart() {
     this.cartItems.next([]);
   }
 
-  getTotalPrice() {
+  getTotalPrice(): number {
     return this.cartItems.value.reduce(
       (total, item) => total + item.price * item.quantity,
       0

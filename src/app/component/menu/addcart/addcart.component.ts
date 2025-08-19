@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { HeaderComponent } from "../../home/header/header.component";
 import { FooterComponent } from "../../home/footer/footer.component";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -9,6 +9,7 @@ import { CartService } from "../../../services/cart.service";
 
 @Component({
   selector: "app-addcart",
+  standalone: true, // Added standalone: true since this is a common practice
   imports: [
     HeaderComponent,
     CommonModule,
@@ -19,7 +20,7 @@ import { CartService } from "../../../services/cart.service";
   templateUrl: "./addcart.component.html",
   styleUrl: "./addcart.component.scss",
 })
-export class AddcartComponent {
+export class AddcartComponent implements OnInit {
   dishId: number | null = null;
   dish: any | undefined;
   quantity = 1;
@@ -34,6 +35,7 @@ export class AddcartComponent {
     private cartService: CartService,
     private router: Router
   ) {}
+
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       this.dishId = Number(params.get("id"));
@@ -130,7 +132,7 @@ export class AddcartComponent {
 
   calculateTotal(): void {
     if (this.dish) {
-      let basePrice = parseFloat(this.dish.dish_price); 
+      let basePrice = parseFloat(this.dish.dish_price);
 
       this.selectedOptions.forEach((selectedItem) => {
         if (selectedItem) {
@@ -164,21 +166,42 @@ export class AddcartComponent {
     }
   }
 
+  /** 🔹 Corrected addToCart method */
   addToCart(): void {
-    if (this.dish) {
-      const order = {
-        dish: this.dish,
-        quantity: this.quantity,
-        notes: this.notes,
-        selectedOptions: this.selectedOptions,
-        selectedDrinks: this.selectedDrinks,
-        total: this.total,
-      };
+    if (!this.dish) return;
 
-      this.cartService.addItem(order);
+    // Use a hardcoded ID for now, but a real app should get this from an auth service
+    const userId = 101;
+    const storeId = this.dish.store_id || 33;
+    const dishId = this.dish.dish_id;
+    const quantity = this.quantity;
 
-      console.log("Added to cart:", order);
-      this.router.navigate(["/menu"]);
-    }
+    // Calculate the total unit price (including options)
+    let unitPrice = parseFloat(this.dish.dish_price);
+    this.selectedOptions.forEach((selectedItem) => {
+      if (Array.isArray(selectedItem)) {
+        selectedItem.forEach((opt) => (unitPrice += opt.price || 0));
+      } else if (selectedItem?.price) {
+        unitPrice += selectedItem.price;
+      }
+    });
+
+    const options = {
+      notes: this.notes,
+      selectedOptions: this.selectedOptions,
+      selectedDrinks: this.selectedDrinks,
+    };
+
+    this.cartService
+      .addItem(userId, dishId, storeId, unitPrice, quantity, options)
+      .subscribe({
+        next: () => {
+          console.log("✅ Added to backend cart successfully.");
+          this.router.navigate(["/menu"]);
+        },
+        error: (err) => {
+          console.error("❌ Error adding to cart:", err);
+        },
+      });
   }
 }
