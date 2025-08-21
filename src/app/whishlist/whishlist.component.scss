@@ -1,0 +1,123 @@
+.wishlist-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); // Always 4 per row
+  gap: 20px;
+  padding: 100px;
+}
+
+.wishlist-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  position: relative;
+  height: auto;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+  }
+
+  .card-image {
+    position: relative;
+    
+    img {
+      width: 80%;
+      height: 200px;
+      object-fit: contain;
+      border-radius: 12px 12px 0 0;
+      transition: transform 0.3s ease;
+    }
+     img:hover {
+      transform: scale(1.2); /* Zoom in */
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: #fff;
+      border: none;
+      border-radius: 50%;
+      font-size: 18px;
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .offer {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      background: #670213;
+      color: #fff;
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 6px;
+
+      span {
+        font-weight: bold;
+        margin-left: 4px;
+      }
+    }
+
+    .best-seller {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: #0f0e0d;
+      color: #fff;
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 6px;
+    }
+  }
+
+  .card-content {
+    padding: 12px 14px;
+
+    h4 {
+      font-size: 16px;
+      margin: 0 0 4px;
+      font-weight: 600;
+    }
+
+    p {
+      font-size: 13px;
+      color: #666;
+      margin: 0 0 6px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .rating {
+      font-size: 14px;
+      color: #22c55e;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #555;
+
+      span {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+    }
+  }
+  hr {
+  border: none;
+  height: 2px;
+  background: linear-gradient(to right, #7d050f, #910505); // gradient color
+  margin: 20px 0;
+  border-radius: 5px;
+}
+
+}
