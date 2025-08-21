@@ -26,4 +26,7 @@ export class HeaderComponent {
   goToCart() {
     this.router.navigate(["/cart"]);
   }
+  goToWishList() {
+    this.router.navigate(["/wishlist"]);
+  }
 }

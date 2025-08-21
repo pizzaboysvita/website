@@ -57,8 +57,23 @@
                                 Contact
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/signup" routerLinkActive="active"
+                                data-bs-dismiss="offcanvas">
+                                Signup
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/login" routerLinkActive="active"
+                                data-bs-dismiss="offcanvas">
+                                Login
+                            </a>
+                        </li>
                     </ul>
                 </div>
+            </div>
+            <div class="cart-container ms-auto d-flex align-items-center" (click)="goToWishList()">
+                <i class="ri-heart-3-line"></i>
             </div>
             <div class="cart-container ms-auto d-flex align-items-center" (click)="goToCart()">
                 <i class="ri-shopping-cart-2-line"></i>

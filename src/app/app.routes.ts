@@ -6,6 +6,8 @@ import { StoreComponent } from "./store/store.component";
 import { OfferComponent } from "./offer/offer.component";
 import { CartComponent } from "./component/menu/cart/cart.component";
 import { MenuComponent } from "./menu/menu.component";
+import { SignupComponent } from "./signup/signup.component";
+import { LoginComponent } from "./login/login.component";
 
 export const routes: Routes = [
   {
@@ -47,6 +49,14 @@ export const routes: Routes = [
     path: "offers", 
     component: OfferComponent, 
     data: { breadcrumb: "Offers" } 
+  },
+  { 
+    path: "signup", 
+    component: SignupComponent, 
+  },
+  { 
+    path: "login", 
+    component: LoginComponent, 
   },
   { path: "**", redirectTo: "pages/404" },
 ];

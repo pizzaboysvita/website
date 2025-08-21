@@ -1,0 +1,84 @@
+<app-header></app-header>
+<div class="signup-container">
+    <div class="signup-card">
+        <div class="logo" style="color: white;">🍕 Pizza Boys</div>
+        <p class="subtitle">Join Pizza Boys and start ordering!</p>
+
+        <form>
+            <!-- First Name -->
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input id="firstName" type="text" formControlName="firstName" placeholder="Enter your first name" />
+                <small class="error"
+                    *ngIf="signupForm.get('firstName')?.touched && signupForm.get('firstName')?.invalid">
+                    First name is required (min 2 characters).
+                </small>
+            </div>
+
+            <!-- Last Name -->
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input id="lastName" type="text" formControlName="lastName" placeholder="Enter your last name" />
+                <small class="error" *ngIf="signupForm.get('lastName')?.touched && signupForm.get('lastName')?.invalid">
+                    Last name is required (min 2 characters).
+                </small>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input id="email" type="email" formControlName="email" placeholder="Enter your email" />
+                <small class="error" *ngIf="signupForm.get('email')?.touched && signupForm.get('email')?.invalid">
+                    Please enter a valid email.
+                </small>
+            </div>
+
+            <!-- Password -->
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input id="password" type="password" formControlName="password" placeholder="Create a password" />
+                <small class="error" *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.invalid">
+                    Password must be at least 6 characters.
+                </small>
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input id="confirmPassword" type="password" formControlName="confirmPassword"
+                    placeholder="Confirm your password" />
+                <small class="error"
+                    *ngIf="signupForm.hasError('mismatch') && signupForm.get('confirmPassword')?.touched">
+                    Passwords do not match.
+                </small>
+            </div>
+
+            <button type="submit" class="btn-login">Sign Up</button>
+
+            <!-- Forgot Password -->
+            <a href="#" class="forgot-link">Forgot password?</a>
+
+            <!-- OR divider -->
+            <div class="divider"><span>OR</span></div>
+
+            <!-- Social signup -->
+            <div class="social-signup">
+                <button type="button" class="btn-social google">
+                    <img src="https://cdn-icons-png.flaticon.com/512/281/281764.png" alt="Google" />
+                    Sign up with Google
+                </button>
+
+                <button type="button" class="btn-social apple">
+                    <img src="https://cdn-icons-png.flaticon.com/512/0/747.png" alt="Apple" />
+                    Sign up with Apple
+                </button>
+            </div>
+        </form>
+
+        <!-- Already have account -->
+        <p class="switch-link">
+            Already have an account? <a href="/login">Login</a>
+        </p>
+    </div>
+</div>
+<app-footer></app-footer>
