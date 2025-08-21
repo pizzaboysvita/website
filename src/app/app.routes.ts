@@ -8,6 +8,8 @@ import { CartComponent } from "./component/menu/cart/cart.component";
 import { MenuComponent } from "./menu/menu.component";
 import { SignupComponent } from "./signup/signup.component";
 import { LoginComponent } from "./login/login.component";
+import { WhishlistComponent } from "./whishlist/whishlist.component";
+import { OrderhistoryComponent } from "./orderhistory/orderhistory.component";
 
 export const routes: Routes = [
   {
@@ -49,6 +51,16 @@ export const routes: Routes = [
     path: "offers", 
     component: OfferComponent, 
     data: { breadcrumb: "Offers" } 
+  },
+  { 
+    path: "wishlist", 
+    component: WhishlistComponent, 
+    data: { breadcrumb: "wishlist" } 
+  },
+  { 
+    path: "myorders", 
+    component: OrderhistoryComponent, 
+    data: { breadcrumb: "myorders" }  
   },
   { 
     path: "signup", 

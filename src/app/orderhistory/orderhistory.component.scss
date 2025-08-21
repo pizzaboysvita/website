@@ -1,0 +1,161 @@
+.account-container {
+  display: flex;
+  gap: 30px;
+  padding: 30px;
+  background: #f8f9fa;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 280px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  padding: 25px;
+  text-align: center;
+  height:100px;
+
+  .profile-img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+  }
+
+  .name {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 5px 0;
+  }
+
+  .email {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 20px;
+  }
+
+  .menu {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+
+    li {
+      padding: 12px 15px;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      font-size: 15px;
+      color: #444;
+      cursor: pointer;
+      transition: 0.3s;
+
+      i {
+        margin-right: 10px;
+        color: #0b0403;
+      }
+
+      &:hover,
+      &.active {
+        background: #fff3ed;
+        color: #080200;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+/* Orders Section */
+.orders-section {
+  flex: 1;
+  background: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+
+  .section-title {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #f1f1f1;
+    padding-bottom: 10px;
+  }
+
+  
+  .order-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fafafa;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    transition: all 0.3s;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .order-left {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+
+      .brand-logo {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: contain;
+      }
+
+      .brand-name {
+        font-size: 18px;
+        font-weight: 600;
+        margin: 0;
+      }
+
+      .transaction,
+      .amount {
+        font-size: 14px;
+        color: #666;
+
+        span {
+          font-weight: 600;
+          color: #222;
+        }
+      }
+    }
+
+    .order-right {
+      text-align: right;
+
+      .time {
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 8px;
+      }
+
+      .details-btn {
+        border: 1px solid #0e0402;
+        background: transparent;
+        padding: 6px 15px;
+        border-radius: 20px;
+        color: #0a0301;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.3s;
+
+        &:hover {
+          background: #860202;
+          color: #fff;
+        }
+      }
+    }
+  }
+}
+
