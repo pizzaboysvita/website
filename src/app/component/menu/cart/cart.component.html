@@ -1,60 +1,84 @@
 <app-header></app-header>
 <app-breadcrumb></app-breadcrumb>
-<div class="row bg-dark">
-  <div class="col-sm-10 m-auto">
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="cart-page">
-          {{cartItems }}
-          <!-- Cart Items -->
-          <div class="cart-items">
-            <div class="cart-item" *ngFor="let item of cartItems">
-              <div class="item-left">
-                <img [src]="item.dish_image" alt="{{ item.dish_name }}" class="cart-item-img" />
-                <div class="item-name">{{ item.name }}</div>
-                <p>{{ item.description }}</p>
-                <div class="item-price">₹{{ item.dish_price }}</div>
-              </div>
-              <div class="item-right">
-                <button class="qty-btn" (click)="decreaseQuantity(item)">-</button>
-                <span class="qty">{{ item.quantity }}</span>
-                <button class="qty-btn" (click)="increaseQuantity(item)">+</button>
-              </div>
-            </div>
-          </div>
+<div class="row main">
+  <div class="cart-container">
+    <h2 class="cart-title">Cart</h2>
+    <div class="cart-main">
 
-          
-          <!-- Price Summary -->
-          <div class="price-summary card">
-            <div class="row">
-              <span>Subtotal</span>
-              <span>₹{{ totalPrice | currency }}</span>
-            </div>
-            <div class="row total">
-              <strong>Total</strong>
-              <strong>₹{{ totalPrice | currency }}</strong>
-            </div>
-          </div>
+      <div class="cart-details">
 
-          <!-- Checkout Button -->
-          <button class="checkout-btn" (click)="checkout()">
-            Proceed to Checkout
-          </button>
+
+        <div *ngIf="cartItems.length === 0" class="empty-cart-message">
+          Your cart is currently empty.
         </div>
-      </div>
-      <div class="col-sm-6">
-        <div class="cart-page">
-          <!-- Store Info -->
-          <div class="store-info card text-white">
-            <div class="p-4">
-              <div class="store-name p-2">Pizza Boyz</div>
-              <div class="store-address p-2">Adress of the store</div>
+
+        <div *ngIf="cartItems.length > 0" class="cart-items">
+          <div class="cart-item" *ngFor="let item of cartItems; let i = index">
+            <div class="item-info">
+              <h3 class="item-name">{{ item.name }} Item Name </h3>
+              <div class="item-options">
+                <p *ngIf="item.options?.size">Size: {{ item.options.size }} Size</p>
+                <p *ngIf="item.options?.base">Base: {{ item.options.base }} Base</p>
+                <p *ngIf="item.options?.notes">Note: {{ item.options.notes }} Notes</p>
+              </div>
             </div>
+            <span class="item-price">{{ item.price | currency:'INR' }}</span>
+
+            <div class="item-quantity">
+              <button (click)="decreaseQuantity(i)">-</button>
+              <span>{{ item.quantity }}</span>
+              <button (click)="increaseQuantity(i)">+</button>
+            </div>
+            <span class="item-total-price">{{ item.price * item.quantity | currency:'INR' }}</span>
+            <button (click)="removeItem(i)" class="delete-btn">
+              <i class="fas fa-trash-alt"></i>
+            </button>
           </div>
+        </div>
+
+        <div class="notes-section">
+          <label for="notes">Note</label>
+          <textarea id="notes" [(ngModel)]="notes" rows="4"></textarea>
+        </div>
+
+        <div class="price-summary">
+          <div class="summary-row">
+            <span>Sub total</span>
+            <span>{{ totalPrice | currency:'INR' }}</span>
+          </div>
+          <div class="summary-row total">
+            <span>Total</span>
+            <span>{{ totalPrice | currency:'INR' }}</span>
+          </div>
+        </div>
+
+        <button class="checkout-btn" (click)="checkout()" [disabled]="cartItems.length === 0">Checkout</button>
+      </div>
+
+      <div class="store-info-card">
+        <h3 class="store-name">Pizza Boyz Store</h3>
+        <div class="store-tags">
+          <span class="tag tag-call-orders">Call Orders</span>
+          <span class="tag tag-standard">Standard</span>
+        </div>
+        <div class="store-schedule">
+          <p>Delivery 20 min | Collection 15 min</p>
+        </div>
+        <div class="store-status">
+          <span class="status-indicator"></span>
+          <span class="status-text">open now</span>
+        </div>
+        <p class="store-address">5/182 West Coast Road, Glen Eden, Auckland 0602</p>
+        <div class="store-contact">
+          <span class="phone-number">09 600 1116</span>
+          <button class="phone-btn">
+            <i class="ri-phone-line"></i>
+          </button>
         </div>
       </div>
     </div>
   </div>
 </div>
+
 
 <app-footer></app-footer>
