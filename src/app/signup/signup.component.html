@@ -1,11 +1,10 @@
 <app-header></app-header>
 <div class="signup-container">
     <div class="signup-card">
-        <div class="logo" style="color: white;">🍕 Pizza Boys</div>
+        <div class="logo" style="color: white">🍕 Pizza Boys</div>
         <p class="subtitle">Join Pizza Boys and start ordering!</p>
 
-        <form>
-            <!-- First Name -->
+        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
                 <label for="firstName">First Name</label>
                 <input id="firstName" type="text" formControlName="firstName" placeholder="Enter your first name" />
@@ -15,7 +14,6 @@
                 </small>
             </div>
 
-            <!-- Last Name -->
             <div class="form-group">
                 <label for="lastName">Last Name</label>
                 <input id="lastName" type="text" formControlName="lastName" placeholder="Enter your last name" />
@@ -24,7 +22,6 @@
                 </small>
             </div>
 
-            <!-- Email -->
             <div class="form-group">
                 <label for="email">Email</label>
                 <input id="email" type="email" formControlName="email" placeholder="Enter your email" />
@@ -33,7 +30,6 @@
                 </small>
             </div>
 
-            <!-- Password -->
             <div class="form-group">
                 <label for="password">Password</label>
                 <input id="password" type="password" formControlName="password" placeholder="Create a password" />
@@ -42,7 +38,6 @@
                 </small>
             </div>
 
-            <!-- Confirm Password -->
             <div class="form-group">
                 <label for="confirmPassword">Confirm Password</label>
                 <input id="confirmPassword" type="password" formControlName="confirmPassword"
@@ -55,27 +50,8 @@
 
             <button type="submit" class="btn-login">Sign Up</button>
 
-            <!-- Forgot Password -->
-            <a href="#" class="forgot-link">Forgot password?</a>
-
-            <!-- OR divider -->
-            <div class="divider"><span>OR</span></div>
-
-            <!-- Social signup -->
-            <div class="social-signup">
-                <button type="button" class="btn-social google">
-                    <img src="https://cdn-icons-png.flaticon.com/512/281/281764.png" alt="Google" />
-                    Sign up with Google
-                </button>
-
-                <button type="button" class="btn-social apple">
-                    <img src="https://cdn-icons-png.flaticon.com/512/0/747.png" alt="Apple" />
-                    Sign up with Apple
-                </button>
-            </div>
         </form>
 
-        <!-- Already have account -->
         <p class="switch-link">
             Already have an account? <a href="/login">Login</a>
         </p>
