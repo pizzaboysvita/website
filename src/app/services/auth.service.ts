@@ -1,0 +1,39 @@
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Observable } from "rxjs";
+
+@Injectable({
+  providedIn: "root",
+})
+export class AuthService {
+  private apiUrl = "http://localhost:3003/api";
+
+  constructor(private http: HttpClient) {}
+
+  login(credentials: { email: string; password: string }): Observable<any> {
+    return this.http.post(`${this.apiUrl}/loginUser`, credentials);
+  }
+
+  signup(userData: any, imageFile?: File): Observable<any> {
+    const formData = new FormData();
+
+    if (imageFile) {
+      formData.append("image", imageFile);
+    }
+    formData.append("body", JSON.stringify(userData));
+
+    return this.http.post(`${this.apiUrl}/user`, formData);
+  }
+
+  setToken(token: string) {
+    localStorage.setItem("token", token);
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem("token");
+  }
+
+  logout() {
+    localStorage.removeItem("token");
+  }
+}

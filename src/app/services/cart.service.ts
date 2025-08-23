@@ -19,7 +19,7 @@ export interface CartItem {
   providedIn: "root",
 })
 export class CartService {
-  private apiUrl = "http://localhost:3003/api/cart";
+  private apiUrl = "http://78.142.47.247:3003/api/cart";
   private cartItems = new BehaviorSubject<CartItem[]>([]);
   cartItems$ = this.cartItems.asObservable();
 
@@ -27,7 +27,7 @@ export class CartService {
 
   private getHeaders(): { headers: HttpHeaders } {
     const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJfaWQiOjF9LCJpYXQiOjE3NTU2MDUzMzMsImV4cCI6MTc1NTYwODkzM30.a3rYG8Zerpu-8PLOdZIVZjpxdIjtJ2JCX58AfIO-0G4";
+      "=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJfaWQiOjF9LCJpYXQiOjE3NTU3NjY2NjEsImV4cCI6MTc1NTc3MDI2MX0.7WoRHnv7i5RnrtzIueHJvnCj8TDKwMGWUmFYvGYV2LU";
     // const token = localStorage.getItem("auth_token");
     // if (!token) {
     //   console.error("Authentication token not found.");
