@@ -27,7 +27,7 @@ export class CartService {
 
   private getHeaders(): { headers: HttpHeaders } {
     const token =
-      "=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJfaWQiOjF9LCJpYXQiOjE3NTU3NjY2NjEsImV4cCI6MTc1NTc3MDI2MX0.7WoRHnv7i5RnrtzIueHJvnCj8TDKwMGWUmFYvGYV2LU";
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJfaWQiOjF9LCJpYXQiOjE3NTU5NjU5OTksImV4cCI6MTc1NTk2OTU5OX0.3RrhzmApB8bUQeUMwjCvoDo401aq-BRKplDlGTT_1oY";
     // const token = localStorage.getItem("auth_token");
     // if (!token) {
     //   console.error("Authentication token not found.");

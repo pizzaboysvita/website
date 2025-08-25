@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { Router, RouterModule } from "@angular/router";
 import { HeaderComponent } from "../component/home/header/header.component";
 import { FooterComponent } from "../component/home/footer/footer.component";
 import {
@@ -21,6 +22,7 @@ import { AuthService } from "../services/auth.service";
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    RouterModule
   ],
   templateUrl: "./signup.component.html",
   styleUrl: "./signup.component.scss",
