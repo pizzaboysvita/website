@@ -52,12 +52,18 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" routerLink="/aboutus" routerLinkActive="active"
+                                data-bs-dismiss="offcanvas">
+                                About
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" routerLink="/contactus" routerLinkActive="active"
                                 data-bs-dismiss="offcanvas">
                                 Contact
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link" routerLink="/signup" routerLinkActive="active"
                                 data-bs-dismiss="offcanvas">
                                 Signup
@@ -68,17 +74,20 @@
                                 data-bs-dismiss="offcanvas">
                                 Login
                             </a>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
             </div>
-            <div class="cart-container ms-auto d-flex align-items-center" (click)="goToWishList()">
+            <a class="nav-link" routerLink="/login" routerLinkActive="active" data-bs-dismiss="offcanvas">
+                Login
+            </a>
+            <!-- <div class="cart-container ms-auto d-flex align-items-center" (click)="goToWishList()">
                 <i class="ri-heart-3-line"></i>
             </div>
             <div class="cart-container ms-auto d-flex align-items-center" (click)="goToCart()">
                 <i class="ri-shopping-cart-2-line"></i>
                 <span class="cart-count" *ngIf="cartCount > 0">{{ cartCount }}</span>
-            </div>
+            </div> -->
         </nav>
     </div>
 </header>

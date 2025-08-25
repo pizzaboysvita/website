@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { Router, RouterModule } from "@angular/router";
 import { FooterComponent } from "../component/home/footer/footer.component";
 import { HeaderComponent } from "../component/home/header/header.component";
 import {
@@ -9,7 +10,6 @@ import {
   ReactiveFormsModule,
 } from "@angular/forms";
 import { AuthService } from "../services/auth.service";
-import { Router } from "@angular/router";
 
 @Component({
   selector: "app-login",
@@ -19,6 +19,7 @@ import { Router } from "@angular/router";
     HeaderComponent,
     CommonModule,
     ReactiveFormsModule,
+    RouterModule
   ],
   templateUrl: "./login.component.html",
   styleUrl: "./login.component.scss",
