@@ -1,5 +1,7 @@
+// src/app/component/menu/cart/cart.component.ts
+
 import { Component, OnInit } from "@angular/core";
-import { CartService, CartItem } from "../../../services/cart.service";
+import { CartService } from "../../../services/cart.service";
 import { HeaderComponent } from "../../home/header/header.component";
 import { FooterComponent } from "../../home/footer/footer.component";
 import { CommonModule } from "@angular/common";
@@ -21,7 +23,7 @@ import { BreadcrumbComponent } from "../../../shared/breadcrumb/breadcrumb.compo
   ],
 })
 export class CartComponent implements OnInit {
-  cartItems: CartItem[] = [];
+  cartItems: any[] = [];
   totalPrice: number = 0;
   notes: string = "";
   userId = 101;
@@ -31,7 +33,12 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.cartService.cartItems$.subscribe((items) => {
-      this.cartItems = items;
+      this.cartItems = items.map((item) => {
+        if (item.options_json) {
+          item.options = JSON.parse(item.options_json);
+        }
+        return item;
+      });
       this.calculateTotal();
       console.log("Cart items updated:", this.cartItems);
     });
