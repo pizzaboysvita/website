@@ -7,8 +7,9 @@ import { Observable } from "rxjs";
 export class AuthService {
   private apiUrl = "http://78.142.47.247:3003/api";
   constructor(private http: HttpClient) {}
-  login(credentials: { email: string; password: string }): Observable<any> {
-    return this.http.post(`${this.apiUrl}/loginUser`, credentials);
+  login(credentials: { email: string; password_hash: string }): Observable<any> {
+    console.log("credentioals",credentials);
+    return this.http.post(`${this.apiUrl}/loginUser?store_id=-1&type=web`, credentials);
   }
   signup(userData: any, imageFile?: File): Observable<any> {
     const formData = new FormData();

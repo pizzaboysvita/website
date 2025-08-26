@@ -10,7 +10,6 @@ import {
   ReactiveFormsModule,
 } from "@angular/forms";
 import { AuthService } from "../services/auth.service";
-
 @Component({
   selector: "app-login",
   standalone: true,
@@ -19,48 +18,41 @@ import { AuthService } from "../services/auth.service";
     HeaderComponent,
     CommonModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
   ],
   templateUrl: "./login.component.html",
-  styleUrl: "./login.component.scss",
+  styleUrls: ["./login.component.scss"], // ✅ fixed plural
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   submitted = false;
-
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router
   ) {}
-
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       email: ["", [Validators.required, Validators.email]],
-      password: ["", [Validators.required, Validators.minLength(6)]],
+      password_hash: ["", [Validators.required, Validators.minLength(6)]],
     });
   }
-
   // A getter for easy access to form fields in the template
   get f() {
     return this.loginForm.controls;
   }
-
   onSubmit(): void {
     this.submitted = true;
-
     if (this.loginForm.invalid) {
       return;
     }
-
-    const { email, password } = this.loginForm.value;
-
-    this.authService.login({ email, password }).subscribe({
+    const { email, password_hash } = this.loginForm.value;
+    this.authService.login({ email, password_hash }).subscribe({
       next: (res) => {
-        console.log("Login successful:", res);
-        if (res.code === 1) {
+        console.log("Login response:", res);
+        if (res && res.code == 1) {
           this.authService.setToken(res.access_token);
-          this.router.navigate(["/home"]);   
+          this.router.navigate(["/home"]);
           alert("Login successful!");
         } else {
           alert("Login failed. Please check your credentials.");
@@ -68,7 +60,7 @@ export class LoginComponent implements OnInit {
       },
       error: (err) => {
         console.error("Login failed:", err);
-        alert("Login failed. Please check your credentials.");
+        alert("Something went wrong. Please try again.");
       },
     });
   }

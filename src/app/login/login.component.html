@@ -4,7 +4,6 @@
     <div class="logo">🍕 Pizza Boys</div>
     <p class="subtitle">Join Pizza Boys and start ordering now</p>
     <h2>Login</h2>
-
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
         <input type="email" formControlName="email" placeholder="Email" />
@@ -13,32 +12,15 @@
           <small *ngIf="f['email'].errors['email']">Enter a valid email</small>
         </div>
       </div>
-
       <div class="form-group">
-        <input type="password" formControlName="password" placeholder="Password" />
-        <div class="error" *ngIf="submitted && f['password'].errors">
-          <small *ngIf="f['password'].errors['required']">Password is required</small>
-          <small *ngIf="f['password'].errors['minlength']">Min 6 characters</small>
+        <input type="password" formControlName="password_hash" placeholder="Password" />
+        <div class="error" *ngIf="submitted && f['password_hash'].errors">
+          <small *ngIf="f['password_hash'].errors['required']">Password is required</small>
+          <small *ngIf="f['password_hash'].errors['minlength']">Min 6 characters</small>
         </div>
       </div>
-
-      <button type="submit" class="btn-login">Login</button>
-
-      <!-- <a href="#" class="forgot-link">Forgot Password?</a> -->
-
+      <button  type="submit" [disabled]="loginForm.invalid" class="btn-login">Login</button>
       <div class="divider"><span>OR</span></div>
-
-      <!-- <div class="social-signup">
-        <button type="button" class="btn-social google">
-          <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" />
-          Login with Google
-        </button>
-        <button type="button" class="btn-social apple">
-          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/apple.svg" alt="Apple" />
-          Login with Apple
-        </button>
-      </div> -->
-
       <p class="switch-auth">
         Don't have an account?
         <a routerLink="/signup" routerLinkActive="active">Signup</a>
@@ -46,5 +28,4 @@
     </form>
   </div>
 </div>
-
 <app-footer></app-footer>
