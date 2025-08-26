@@ -63,37 +63,50 @@
                                 Contact
                             </a>
                         </li>
-                        
+
                         <div class="order-box">
-                            <span class="location-icon">📍</span>
-                            <input type="text" placeholder="Select your order ..." />
+                            <!-- <span class="location-icon">📍</span>
+                            <input type="text" placeholder="Select your order ..." /> -->
                             <button class="order-btn" (click)="openOrderDialog()">ORDER NOW</button>
                         </div>
-
-                        <!-- <li class="nav-item">
-                            <a class="nav-link" routerLink="/signup" routerLinkActive="active"
-                                data-bs-dismiss="offcanvas">
-                                Signup
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" routerLink="/login" routerLinkActive="active"
-                                data-bs-dismiss="offcanvas">
-                                Login
-                            </a>
-                        </li> -->
                     </ul>
                 </div>
             </div>
-            <a class="nav-link" routerLink="/login" routerLinkActive="active" data-bs-dismiss="offcanvas">
+            <!-- If not logged in -->
+            <a *ngIf="!token" class="nav-link ms-auto" routerLink="/login" routerLinkActive="active"
+                data-bs-dismiss="offcanvas">
                 Login
             </a>
-            <div class="cart-container ms-auto d-flex align-items-center" (click)="goToWishList()">
-                <i class="ri-heart-3-line"></i>
-            </div>
-            <div class="cart-container ms-auto d-flex align-items-center" (click)="goToCart()">
-                <i class="ri-shopping-cart-2-line"></i>
-                <span class="cart-count" *ngIf="cartCount > 0">{{ cartCount }}</span>
+            <!-- If logged in -->
+            <div *ngIf="token" class="d-flex align-items-center ms-auto gap-3">
+                <!-- Wishlist -->
+                <div class="cart-container d-flex align-items-center" (click)="goToWishList()">
+                    <i class="ri-heart-3-line"></i>
+                </div>
+                <!-- Cart -->
+                <div class="cart-container d-flex align-items-center" (click)="goToCart()">
+                    <i class="ri-shopping-cart-2-line"></i>
+                    <span class="cart-count" *ngIf="cartCount > 0">{{ cartCount }}</span>
+                </div>
+                <!-- Profile Dropdown -->
+                <div class="dropdown">
+                    <a class="d-flex align-items-center dropdown-toggle profile-link" href="#" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="ri-user-line me-1"></i>
+                        <span>Hi, {{ userName }}</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <!-- <li><a class="dropdown-item" routerLink="/profile">Profile</a></li> -->
+                        <li><a class="dropdown-item" routerLink="/myorders">My Orders</a></li>
+                        <!-- <li><a class="dropdown-item" routerLink="/address">Saved Address</a></li>
+                        <li><a class="dropdown-item" routerLink="/cards">Saved Cards</a></li>
+                        <li><a class="dropdown-item" routerLink="/settings">Settings</a></li> -->
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item text-danger" (click)="logout()">Logout</a></li>
+                    </ul>
+                </div>
             </div>
         </nav>
     </div>

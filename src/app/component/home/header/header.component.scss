@@ -60,6 +60,14 @@
     text-align: center;
   }
 }
+
+.profile-link {
+  font-weight: 600;
+  cursor: pointer;
+  i {
+    font-size: 1.2rem;
+  }
+}
 .order-box {
   display: flex;
   align-items: center;

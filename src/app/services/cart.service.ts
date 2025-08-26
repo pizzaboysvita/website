@@ -5,6 +5,7 @@ import {
   HttpHeaders,
   HttpErrorResponse,
 } from "@angular/common/http";
+import { AuthService } from "./auth.service";
 
 @Injectable({
   providedIn: "root",
@@ -14,10 +15,12 @@ export class CartService {
   private cartItems = new BehaviorSubject<any[]>([]);
   cartItems$ = this.cartItems.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private authService: AuthService) {}
 
-  private getHeaders(): { headers: HttpHeaders } {
-    const token = localStorage.getItem("token");
+ private getHeaders(): { headers: HttpHeaders } {
+    // const token =
+    //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJfaWQiOjF9LCJpYXQiOjE3NTU5NjU5OTksImV4cCI6MTc1NTk2OTU5OX0.3RrhzmApB8bUQeUMwjCvoDo401aq-BRKplDlGTT_1oY";
+    const token = this.authService.getToken();
     if (!token) {
       console.error("Authentication token not found.");
       return { headers: new HttpHeaders() };
