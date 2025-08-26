@@ -4,6 +4,7 @@ import { Router, RouterModule } from "@angular/router";
 import { CartService } from "../../../services/cart.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { OrderComponent } from "../../../order/order.component";
+import { AuthService } from "../../../services/auth.service";
 
 @Component({
   selector: "app-header",
@@ -13,15 +14,23 @@ import { OrderComponent } from "../../../order/order.component";
   styleUrls: ["./header.component.scss"],
 })
 export class HeaderComponent {
+   token: string | null = null;
   cartCount = 0;
+  userName: string = "Mark Jecno";
 
   constructor(
     private cartService: CartService,
+    private authService: AuthService,
     private router: Router,
     private modalService: NgbModal
   ) {}
 
   ngOnInit() {
+    this.token = this.authService.getToken();
+    if (!this.token) {
+      console.error("Authentication token not found.");
+    }
+
     this.cartService.cartItems$.subscribe((items) => {
       console.log("Cart items updated:", items);
 
@@ -34,6 +43,12 @@ export class HeaderComponent {
   }
   goToWishList() {
     this.router.navigate(["/wishlist"]);
+  }
+
+  logout() {
+    this.authService.logout();
+    this.token = null;
+    this.router.navigate(["/login"]);
   }
 
   openOrderDialog() {
