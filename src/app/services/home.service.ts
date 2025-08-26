@@ -12,13 +12,13 @@ export class HomeService {
   constructor(private http: HttpClient) {}
 
   getCategories(): Observable<any> {
-    const params = new HttpParams().set("user_id", "1").set("type", "web");
+    const params = new HttpParams().set("store_id", "-1").set("type", "web");
 
     return this.http.get(this.categoryUrl, { params: params });
   }
 
   getDishes(): Observable<any> {
-    const params = new HttpParams().set("user_id", "1").set("type", "web");
+    const params = new HttpParams().set("store_id", "-1").set("type", "web");
 
     return this.http.get(this.dishUrl, { params: params });
   }
