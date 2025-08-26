@@ -60,3 +60,47 @@
     text-align: center;
   }
 }
+.order-box {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 50px;
+  padding: 5px 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: fit-content;
+  margin-left: 20px;
+
+  .location-icon {
+    font-size: 18px;
+    margin-right: 8px;
+    color: #000;
+  }
+
+  input {
+    border: none;
+    outline: none;
+    font-size: 16px;
+    flex: 1;
+    color: #000;
+
+    &::placeholder {
+      color: #333;
+      opacity: 0.8;
+    }
+  }
+
+  .order-btn {
+    background-color: #0b0c0a;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+
+    &:hover {
+      background-color: #3d5726;
+    }
+  }
+}

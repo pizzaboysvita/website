@@ -1,0 +1,157 @@
+<div>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">🍕 Order Options</h5>
+      <button type="button" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()">
+        ×
+      </button>
+    </div>
+
+    <!-- Body -->
+    <div class="modal-body dialog-content">
+      <div class="d-flex justify-content-center mb-4">
+        <button class="btn toggle-btn me-2" [ngClass]="{ 'active': selectedOrderType === 'asap' }"
+          (click)="selectOrderType('asap')">
+          🚀 ASAP
+        </button>
+        <button class="btn toggle-btn" [ngClass]="{ 'active': selectedOrderType === 'future' }"
+          (click)="selectOrderType('future')">
+          📅 Future
+        </button>
+      </div>
+
+      <!-- ASAP Section -->
+      <div *ngIf="selectedOrderType === 'asap'">
+
+        <!-- Tabs -->
+        <ul class="nav nav-pills justify-content-center mb-4" id="asapTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" [class.active]="activeTab === 'delivery'" id="delivery-tab" data-bs-toggle="tab"
+              data-bs-target="#delivery" type="button" role="tab" aria-controls="delivery" aria-selected="true"
+              (click)="onTabChange(0)">🚚 Delivery</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" [class.active]="activeTab === 'pickup'" id="pickup-tab" data-bs-toggle="tab"
+              data-bs-target="#pickup" type="button" role="tab" aria-controls="pickup" aria-selected="false"
+              (click)="onTabChange(1)">🏬 Pickup</button>
+          </li>
+        </ul>
+
+        <div class="tab-content" id="asapTabContent">
+
+          <!-- Delivery -->
+          <div class="tab-pane fade" [class.show]="activeTab === 'delivery'" [class.active]="activeTab === 'delivery'">
+            <div *ngIf="!showAddressForm && !showAuthForm" class="text-center">
+              <button class="btn w-100" (click)="showAddressForm = true">
+                ➕ Add Address
+              </button>
+            </div>
+
+            <!-- Address Form -->
+            <div *ngIf="showAddressForm">
+              <form>
+                <div class="mb-3">
+                  <label for="streetAddress">Street Address</label>
+                  <input type="text" class="form-control" id="streetAddress" placeholder="123 Main St">
+                </div>
+                <div class="mb-3">
+                  <label for="aptSuite">Apartment / Suite</label>
+                  <input type="text" class="form-control" id="aptSuite">
+                </div>
+                <div class="d-flex justify-content-between">
+                  <button type="button" class="btn" (click)="showAddressForm = false">⬅ Back</button>
+                  <button type="submit" class="btn">💾 Save</button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Sign In / Register -->
+            <div *ngIf="!showAddressForm && !showAuthForm" class="mt-4 text-center">
+              <h6>Saved Addresses</h6>
+              <p>Sign in or create an account to save your address.</p>
+              <div class="d-flex justify-content-around mt-3">
+                <button class="btn" (click)="openAuthForm('signin')">Sign In</button>
+                <button class="btn" (click)="openAuthForm('create-account')">Register</button>
+              </div>
+            </div>
+
+            <!-- Auth Forms -->
+            <div *ngIf="showAuthForm" class="mt-4">
+              <!-- Sign In Form -->
+              <form *ngIf="activeAuthTab === 'signin'">
+                <h5>🔑 Sign In</h5>
+                <div class="mb-3">
+                  <label>Email</label>
+                  <input type="email" class="form-control" placeholder="Enter email">
+                </div>
+                <div class="mb-3">
+                  <label>Password</label>
+                  <input type="password" class="form-control" placeholder="Enter password">
+                </div>
+                <div class="d-flex justify-content-between">
+                  <button type="button" class="btn" (click)="closeAuthForm()">⬅ Back</button>
+                  <button type="submit" class="btn">Login</button>
+                </div>
+              </form>
+
+              <!-- Register Form -->
+              <form *ngIf="activeAuthTab === 'create-account'">
+                <h5>🆕 Create Account</h5>
+                <div class="mb-3">
+                  <label>Full Name</label>
+                  <input type="text" class="form-control" placeholder="Enter full name">
+                </div>
+                <div class="mb-3">
+                  <label>Email</label>
+                  <input type="email" class="form-control" placeholder="Enter email">
+                </div>
+                <div class="mb-3">
+                  <label>Password</label>
+                  <input type="password" class="form-control" placeholder="Enter password">
+                </div>
+                <div class="d-flex justify-content-between">
+                  <button type="button" class="btn" (click)="closeAuthForm()">⬅ Back</button>
+                  <button type="submit" class="btn">Register</button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Pickup -->
+          <div class="tab-pane fade" [class.show]="activeTab === 'pickup'" [class.active]="activeTab === 'pickup'">
+            <div class="search-box">
+              <input id="search-input" type="text" placeholder="🔍 Search for hotels..." class="form-control" />
+              <div id="map" style="height: 200px; width: 100%;"></div>
+            </div>
+            <div class="location-list mt-3">
+              <div *ngFor="let loc of locations" class="location-card" (click)="goToLocation(loc.lat, loc.lng, loc)">
+                <h5>{{ loc.name }}</h5>
+                <p>{{ loc.address }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Future Order -->
+      <div *ngIf="selectedOrderType === 'future'">
+        <div class="mb-3">
+          <label for="futureDate">Choose a date</label>
+          <input type="date" class="form-control" id="futureDate" [(ngModel)]="selectedDate">
+          <p *ngIf="selectedDate">📅 Selected: {{ selectedDate | date }}</p>
+        </div>
+        <div class="mb-3">
+          <label for="futureTime">Choose a time</label>
+          <input type="time" class="form-control" id="futureTime" [(ngModel)]="selectedTime">
+          <p *ngIf="selectedTime">⏰ Selected: {{ selectedTime }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="modal-footer d-flex justify-content-between">
+      <button type="button" class="btn" data-bs-dismiss="modal" (click)="dismissModal()">Close</button>
+      <button type="button" class="btn">Proceed →</button>
+    </div>
+  </div>
+</div>
