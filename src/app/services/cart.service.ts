@@ -7,26 +7,17 @@ import {
 } from "@angular/common/http";
 import { AuthService } from "./auth.service";
 
-export interface CartItem {
-  id: number;
-  name: string;
-  price: number;
-  image?: string;
-  quantity: number;
-  options?: any;
-}
-
 @Injectable({
   providedIn: "root",
 })
 export class CartService {
   private apiUrl = "http://78.142.47.247:3003/api/cart";
-  private cartItems = new BehaviorSubject<CartItem[]>([]);
+  private cartItems = new BehaviorSubject<any[]>([]);
   cartItems$ = this.cartItems.asObservable();
 
   constructor(private http: HttpClient,private authService: AuthService) {}
 
-  private getHeaders(): { headers: HttpHeaders } {
+ private getHeaders(): { headers: HttpHeaders } {
     // const token =
     //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJfaWQiOjF9LCJpYXQiOjE3NTU5NjU5OTksImV4cCI6MTc1NTk2OTU5OX0.3RrhzmApB8bUQeUMwjCvoDo401aq-BRKplDlGTT_1oY";
     const token = this.authService.getToken();
@@ -45,7 +36,7 @@ export class CartService {
 
   loadCart() {
     this.http
-      .get<CartItem[]>(this.apiUrl, this.getHeaders())
+      .get<any[]>(this.apiUrl, this.getHeaders())
       .pipe(
         tap((items) => this.cartItems.next(items)),
         catchError((error: HttpErrorResponse) => {
