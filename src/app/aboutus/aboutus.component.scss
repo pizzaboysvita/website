@@ -1,16 +1,12 @@
-
 .about-us {
-  background: #111;
   color: #f5f5f5;
   padding: 60px 20px;
   text-align: center;
 }
-
 .about-us .container {
   max-width: 900px;
   margin: 0 auto;
 }
-
 .about-us h2 {
   font-size: 2.5rem;
   color: #e63946; /* Red heading */
@@ -19,23 +15,21 @@
   letter-spacing: 2px;
   text-align: center;
 }
-
 .about-us p {
   font-size: 1.1rem;
   line-height: 1.8;
-  color: #ddd;
+  color: #0b0b0b;
   margin-bottom: 40px;
 }
-
 .features {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 20px;
 }
-h1{
-    text-align: center;
+h1 {
+  text-align: center;
   margin-bottom: 30px;
-   font-size:larger;
+  font-size: larger;
 }
 .feature {
   background: #1a1a1a;
@@ -52,34 +46,29 @@ h1{
   padding: 50px 0;
   background: #fff;
 }
-
 .section-title {
   font-size: 28px;
   font-weight: bold;
   margin-bottom: 30px;
 }
-
 .testimonial-slider {
   display: flex;
   justify-content: center;
   gap: 50px;
   flex-wrap: wrap;
 }
-
 .testimonial-card {
   background: #fff;
   border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   padding: 20px;
   width: 280px;
   transition: transform 0.5s ease-in-out;
   animation: zoomEffect 4s ease-in-out infinite;
 }
-
 .testimonial-card:hover {
   transform: scale(1.05);
 }
-
 .client-img {
   width: 80px;
   height: 80px;
@@ -87,59 +76,52 @@ h1{
   border: 3px solid #ff4757;
   margin-bottom: 15px;
 }
-
 .testimonial-card p {
   font-style: italic;
   font-size: 15px;
   color: #333;
   margin-bottom: 15px;
 }
-
 .testimonial-card h4 {
   color: #e63946;
   font-weight: bold;
   margin-bottom: 10px;
 }
-
 .stars img {
   width: 22px;
   height: 22px;
 }
-
 /* Auto zoom animation */
 @keyframes zoomEffect {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
   }
   50% {
     transform: scale(1.05);
   }
-}//dowload app
+} //dowload app
 .app-download {
   color: #0f0c0c;
   text-align: center;
   padding: 80px 20px;
 }
-
 .logo {
   font-size: 40px;
   font-weight: bold;
   color: #fff;
-   font-family: 'Brush Script MT', cursive;
+  font-family: "Brush Script MT", cursive;
   margin-bottom: 10px;
-  
-  animation: fadeInDown 1.5s ease;
- 
-}
 
+  animation: fadeInDown 1.5s ease;
+}
 .title {
   font-size: 32px;
   font-weight: bold;
-  color:#7d0505; /* yellow */
+  color: #7d0505; /* yellow */
   margin-bottom: 20px;
   animation: zoomIn 1.5s ease;
 }
-
 .desc {
   font-size: 16px;
   line-height: 1.6;
@@ -147,7 +129,6 @@ h1{
   margin: 0 auto 30px;
   animation: fadeInUp 2s ease;
 }
-
 .app-buttons {
   display: flex;
   justify-content: center;
@@ -155,7 +136,6 @@ h1{
   flex-wrap: wrap;
   animation: fadeInUp 2.5s ease;
 }
-
 .store-btn {
   display: flex;
   align-items: center;
@@ -168,34 +148,30 @@ h1{
   font-weight: bold;
   transition: transform 0.3s ease;
 }
-
 .store-btn:hover {
   transform: scale(1.1);
 }
-
 .store-btn img {
   // width: 30px;
   margin-right: 10px;
 }
 .about-section {
-  background: url("https://img.freepik.com/free-photo/black-textured-background_53876-94041.jpg") no-repeat center center/cover;
+  background: url("https://img.freepik.com/free-photo/black-textured-background_53876-94041.jpg")
+    no-repeat center center/cover;
   color: #fff;
   padding: 80px 20px;
   text-align: center;
-
   .about-content {
     max-width: 900px;
     margin: 0 auto;
   }
-
   .logo {
     font-size: 36px;
-    font-family: 'Brush Script MT', cursive;
+    font-family: "Brush Script MT", cursive;
     color: #fff;
     margin-bottom: 10px;
     animation: fadeInDown 1.5s ease;
   }
-
   .tagline {
     font-size: 26px;
     font-style: italic;
@@ -203,29 +179,24 @@ h1{
     margin-bottom: 30px;
     animation: fadeInUp 1.5s ease;
   }
-
   .stats {
     display: flex;
     justify-content: center;
     gap: 40px;
     flex-wrap: wrap;
     margin-bottom: 30px;
-
     h3 {
       font-size: 28px;
       font-weight: 800;
       text-transform: uppercase;
-
       .yellow {
         color: #f1c40f;
       }
-
       .red {
         color: #e74c3c;
       }
     }
   }
-
   .description {
     font-size: 16px;
     line-height: 1.8;
@@ -233,19 +204,32 @@ h1{
     animation: fadeIn 2s ease;
   }
 }
-
 /* Animations */
 @keyframes fadeInDown {
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

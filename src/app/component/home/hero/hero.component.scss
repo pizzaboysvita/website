@@ -2,6 +2,7 @@
   width: 100%;
   min-height: 500px;
   max-height: 500px;
+  margin-top: 80px; // ✅ pushes hero below header (adjust based on header height)
   position: relative;
   background-image: url("/assets/img/home-hero-background-40th.png");
   background-size: cover;
@@ -9,7 +10,6 @@
   overflow: hidden;
   border-radius: 1%;
   z-index: 1;
-
   .hero-video {
     position: absolute;
     top: 0;
@@ -17,27 +17,21 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-
-    opacity: 0; /* Start invisible */
-    transition: opacity 1.5s ease-in-out; /* Smooth fade */
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
   }
-
   .hero-video.show {
-    opacity: 1; /* Fade in */
+    opacity: 1;
   }
-
-  /* Video Buttons Container */
   .video-buttons {
     position: absolute;
-    bottom: 30px; /* distance from bottom */
+    bottom: 30px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     gap: 15px;
-    z-index: 10; /* above video */
+    z-index: 10;
   }
-
-  /* Buttons Style */
   .video-buttons .btn {
     padding: 12px 20px;
     font-size: 16px;
@@ -46,30 +40,25 @@
     border: none;
     transition: background 0.3s, transform 0.2s;
   }
-
   .video-buttons .btn-primary {
     background-color: red;
     color: white;
   }
-
   .video-buttons .btn-primary:hover {
     background-color: white;
     color: red;
     transform: scale(1.05);
   }
-
   .video-buttons .btn-secondary {
     background-color: black;
     color: red;
   }
-
   .video-buttons .btn-secondary:hover {
     background-color: white;
     color: red;
     transform: scale(1.05);
   }
 }
-
 .hero__courtains {
   position: absolute;
   z-index: 9;
@@ -79,7 +68,6 @@
   top: 0;
   left: 0;
   overflow: hidden;
-
   &__left,
   &__right {
     position: absolute;
@@ -95,23 +83,18 @@
     text-align: center;
     transition: transform 4.5s ease-in-out;
   }
-
   &__left {
     left: 0;
     background-image: url("/assets/img/courtain-left.jpg");
     transform: translateX(0);
   }
-
   &__right {
     right: 0;
     background-image: url("/assets/img/courtain-right.jpg");
     transform: translateX(0);
   }
-
   h1 {
-    // font-size: clamp(2rem, 5vw + 1rem, 4.5rem);
     font-size: clamp(1.5rem, 4vw + 0.5rem, 3rem);
-    // font-size: clamp(1.25rem, 2.5vw + 0.25rem, 1.75rem);
     font-weight: 800;
     color: #fff;
     text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -129,7 +112,6 @@
       text-align: left;
     }
   }
-
   &.open {
     .hero__courtains__left {
       transform: translateX(-100%);
@@ -138,12 +120,11 @@
       transform: translateX(100%);
     }
     h1 {
-      opacity: 0; /* Fade text out */
+      opacity: 0;
       transition: opacity 3.8s ease-in-out;
     }
   }
 }
-
 @keyframes fadeInText {
   0% {
     opacity: 0;

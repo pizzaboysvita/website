@@ -4,7 +4,6 @@
 .categories-section .categories-style .food-categories:hover h4 {
   color: red !important;
 }
-
 .nav-btn {
   position: absolute;
   top: 50%;
@@ -20,15 +19,12 @@
   z-index: 2;
   box-shadow: 0 2px 8px rgba(201, 194, 194, 0.25);
   transition: background-color 0.2s ease;
-
   &.prev {
     left: 0; // Aligned to the very edge of the container
   }
-
   &.next {
     right: 20px; // Aligned to the very edge of the container
   }
-
   &:hover {
     background-color: white; // Slightly lighter hover effect
     color: red;

@@ -1,8 +1,8 @@
 import { Component } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
-import { HeaderComponent } from "../component/home/header/header.component";
-import { FooterComponent } from "../component/home/footer/footer.component";
+import { HeaderComponent } from "../component/common/header/header.component";
+import { FooterComponent } from "../component/common/footer/footer.component";
 import {
   AbstractControl,
   FormBuilder,

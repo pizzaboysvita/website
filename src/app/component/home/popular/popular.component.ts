@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Output } from "@angular/core";
 import { HomeService } from "../../../services/home.service";
-
 @Component({
   selector: "app-popular",
   imports: [],
@@ -9,11 +8,8 @@ import { HomeService } from "../../../services/home.service";
 })
 export class PopularComponent {
   public categories: any[] = [];
-
   @Output() categorySelected = new EventEmitter<number>();
-
   constructor(private apiService: HomeService) {}
-
   ngOnInit(): void {
     this.apiService.getCategories().subscribe((response) => {
       if (response && response.categories) {
@@ -24,7 +20,6 @@ export class PopularComponent {
       }
     });
   }
-
   selectCategory(categoryId: any) {
     this.categorySelected.emit(categoryId);
     console.log(`Category selected: ${categoryId}`);

@@ -1,12 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-import { HeaderComponent } from "../../home/header/header.component";
-import { FooterComponent } from "../../home/footer/footer.component";
+import { HeaderComponent } from "../../common/header/header.component";
+import { FooterComponent } from "../../common/footer/footer.component";
 import { ActivatedRoute, Router } from "@angular/router";
 import { HomeService } from "../../../services/home.service";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { CartService } from "../../../services/cart.service";
-
 @Component({
   selector: "app-addcart",
   standalone: true, // Added standalone: true since this is a common practice
@@ -28,14 +27,12 @@ export class AddcartComponent implements OnInit {
   total = 0;
   selectedOptions: any[] = [];
   selectedDrinks: any[] = [];
-
   constructor(
     private route: ActivatedRoute,
     private apiService: HomeService,
     private cartService: CartService,
     private router: Router
   ) {}
-
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       this.dishId = Number(params.get("id"));
@@ -44,7 +41,6 @@ export class AddcartComponent implements OnInit {
       }
     });
   }
-
   getDishDetails(id: number): void {
     this.apiService.getDishes().subscribe({
       next: (response: any) => {
@@ -53,9 +49,7 @@ export class AddcartComponent implements OnInit {
           quantity: 1,
           imageLoaded: false,
         }));
-
         this.dish = allProducts.find((item: any) => item.dish_id === id);
-
         if (this.dish) {
           if (this.dish.dish_option_set_json) {
             try {
@@ -73,9 +67,7 @@ export class AddcartComponent implements OnInit {
                 } catch (err) {
                   console.error("Error parsing option_set_combo_json", err);
                 }
-
                 const isMultiple = set.select_multiple === 1;
-
                 return {
                   title: set.dispaly_name || set.option_set_name || "Options",
                   options,
@@ -93,7 +85,6 @@ export class AddcartComponent implements OnInit {
           } else {
             this.dish.optionGroups = [];
           }
-
           this.calculateTotal();
         }
       },
@@ -102,7 +93,6 @@ export class AddcartComponent implements OnInit {
       },
     });
   }
-
   isOptionSelected(option: any, groupIndex: number): boolean {
     const selectedGroup = this.selectedOptions[groupIndex];
     return (
@@ -110,7 +100,6 @@ export class AddcartComponent implements OnInit {
       selectedGroup.some((o) => o.id === option.id)
     );
   }
-
   toggleOption(option: any, groupIndex: number): void {
     const selectedGroup = this.selectedOptions[groupIndex];
     if (!selectedGroup) {
@@ -124,16 +113,13 @@ export class AddcartComponent implements OnInit {
     }
     this.calculateTotal();
   }
-
   selectOption(option: any, groupIndex: number): void {
     this.selectedOptions[groupIndex] = option;
     this.calculateTotal();
   }
-
   calculateTotal(): void {
     if (this.dish) {
       let basePrice = parseFloat(this.dish.dish_price);
-
       this.selectedOptions.forEach((selectedItem) => {
         if (selectedItem) {
           if (Array.isArray(selectedItem)) {
@@ -149,33 +135,27 @@ export class AddcartComponent implements OnInit {
           }
         }
       });
-
       this.total = basePrice * this.quantity;
     }
   }
-
   incrementQuantity(): void {
     this.quantity++;
     this.calculateTotal();
   }
-
   decrementQuantity(): void {
     if (this.quantity > 1) {
       this.quantity--;
       this.calculateTotal();
     }
   }
-
   /** 🔹 Corrected addToCart method */
   addToCart(): void {
     if (!this.dish) return;
-
     // Use a hardcoded ID for now, but a real app should get this from an auth service
     const userId = 101;
     const storeId = this.dish.store_id || 33;
     const dishId = this.dish.dish_id;
     const quantity = this.quantity;
-
     // Calculate the total unit price (including options)
     let unitPrice = parseFloat(this.dish.dish_price);
     this.selectedOptions.forEach((selectedItem) => {
@@ -185,13 +165,11 @@ export class AddcartComponent implements OnInit {
         unitPrice += selectedItem.price;
       }
     });
-
     const options = {
       notes: this.notes,
       selectedOptions: this.selectedOptions,
       selectedDrinks: this.selectedDrinks,
     };
-
     this.cartService
       .addItem(userId, dishId, storeId, unitPrice, quantity, options)
       .subscribe({

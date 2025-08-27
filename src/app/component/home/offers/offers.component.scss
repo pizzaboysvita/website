@@ -2,7 +2,6 @@
 .carousel-wrapper {
   position: relative;
 }
-
 /* slide box */
 .testimonial-box {
   width: 100%;
@@ -11,7 +10,6 @@
   border-radius: 10px;
   overflow: hidden;
   box-sizing: border-box;
-
   img {
     width: 100%;
     height: 100%;
@@ -19,12 +17,10 @@
     display: block;
   }
 }
-
 /* hide the library's generated nav (we use our own) */
 ::ng-deep .owl-nav {
   display: none !important;
 }
-
 /* custom overlay nav buttons */
 .custom-nav {
   position: absolute;
@@ -45,29 +41,24 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease; /* smoother hover */
   padding: 0;
-
   &:hover {
     background-color: white;
     color: red;
   }
-
   /* For Angular ViewEncapsulation, force hover colors */
   &:hover,
   &:hover svg {
     color: red !important;
     fill: red !important;
   }
-
   svg {
     display: block;
   }
 }
-
 /* left / right placement */
 .custom-nav.prev {
   left: 12px;
 }
-
 .custom-nav.next {
   right: 12px;
 }

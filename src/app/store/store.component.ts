@@ -1,13 +1,18 @@
 import { GoogleMap } from "@angular/google-maps";
 import { Component } from "@angular/core";
-import { HeaderComponent } from "../component/home/header/header.component";
-import { FooterComponent } from "../component/home/footer/footer.component";
+import { HeaderComponent } from "../component/common/header/header.component";
+import { FooterComponent } from "../component/common/footer/footer.component";
 import { NgZone } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { BreadcrumbComponent } from "../shared/breadcrumb/breadcrumb.component";
+import { BreadcrumbComponent } from "../component/common/breadcrumb/breadcrumb.component";
 @Component({
   selector: "app-store",
-  imports: [HeaderComponent, FooterComponent, CommonModule, BreadcrumbComponent],
+  imports: [
+    HeaderComponent,
+    FooterComponent,
+    CommonModule,
+    BreadcrumbComponent,
+  ],
   templateUrl: "./store.component.html",
   styleUrl: "./store.component.scss",
 })

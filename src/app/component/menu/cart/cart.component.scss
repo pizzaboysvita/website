@@ -3,73 +3,60 @@
   background-color: #1a1a1a;
   color: #f0f0f0;
   font-family: Arial, sans-serif;
-
   .cart-container {
     max-width: 80%;
     margin: auto;
   }
-
   .cart-title {
     font-size: 2.5em;
     font-weight: bold;
     margin-bottom: 20px;
   }
-
   .cart-main {
     display: flex;
     gap: 30px;
-
     .cart-details {
       flex: 2;
       background-color: #1a1a1a;
       padding: 10px;
       border-radius: 8px;
-
       .cart-items {
         .cart-item {
           border-bottom: 1px solid #444;
           padding-bottom: 20px;
           margin-bottom: 20px;
-
           .item-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-
             .item-name {
               font-size: 1.2em;
               font-weight: 600;
             }
-
             .item-price {
               font-weight: bold;
             }
           }
-
           .item-options {
             font-size: 0.9em;
             color: #aaa;
             margin-top: 10px;
           }
-
           .item-actions {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-top: 15px;
-
             .delete-btn {
               background: none;
               border: none;
               color: #aaa;
               cursor: pointer;
             }
-
             .quantity-control {
               display: flex;
               align-items: center;
               gap: 10px;
-
               .quantity-btn {
                 background-color: #333;
                 color: #fff;
@@ -84,23 +71,19 @@
           }
         }
       }
-
       .empty-cart-message {
         text-align: center;
         padding: 50px;
         color: #aaa;
         font-size: 1.2em;
       }
-
       .notes-section {
         margin-top: 20px;
-
         label {
           display: block;
           font-weight: bold;
           margin-bottom: 5px;
         }
-
         textarea {
           width: 100%;
           background-color: #333;
@@ -111,15 +94,12 @@
           box-sizing: border-box;
         }
       }
-
       .price-summary {
         margin-top: 30px;
-
         .summary-row {
           display: flex;
           justify-content: space-between;
           padding: 5px 0;
-
           &.total {
             font-weight: bold;
             font-size: 1.2em;
@@ -128,7 +108,6 @@
           }
         }
       }
-
       .checkout-btn {
         width: 100%;
         background-color: #ff0000;
@@ -140,29 +119,24 @@
         font-weight: bold;
         cursor: pointer;
         margin-top: 20px;
-
         &:disabled {
           background-color: #660000;
           cursor: not-allowed;
         }
       }
     }
-
     .store-info-card {
       flex: 1;
       background-color: #1a1a1a;
       padding: 10px;
       border-radius: 8px;
-
       .store-name {
         font-size: 1.5em;
         font-weight: bold;
       }
-
       .store-tags {
         margin: 10px 0;
       }
-
       .tag {
         background-color: #333;
         color: #aaa;
@@ -171,17 +145,14 @@
         font-size: 0.8em;
         margin-right: 5px;
       }
-
       .store-schedule {
         margin: 10px 0;
         font-size: 0.9em;
       }
-
       .store-status {
         display: flex;
         align-items: center;
         margin: 10px 0;
-
         .status-indicator {
           width: 8px;
           height: 8px;
@@ -189,25 +160,21 @@
           border-radius: 50%;
           margin-right: 8px;
         }
-
         .status-text {
           color: #33ff33;
           font-weight: bold;
         }
       }
-
       .store-address {
         font-size: 0.9em;
         color: #aaa;
       }
-
       .store-contact {
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin-top: 20px;
         font-size: 1.2em;
-
         .phone-btn {
           background-color: #ff0000;
           color: #fff;

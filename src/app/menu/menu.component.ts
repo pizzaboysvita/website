@@ -11,12 +11,11 @@ import { CommonModule } from "@angular/common";
 import { RouterLink } from "@angular/router";
 import { Subject, of } from "rxjs";
 import { takeUntil, catchError } from "rxjs/operators";
-import { HeaderComponent } from "../component/home/header/header.component";
-import { FooterComponent } from "../component/home/footer/footer.component";
+import { HeaderComponent } from "../component/common/header/header.component";
+import { FooterComponent } from "../component/common/footer/footer.component";
 import { CategoryComponent } from "../component/home/category/category.component";
 import { HomeService } from "../services/home.service";
-import { BreadcrumbComponent } from "../shared/breadcrumb/breadcrumb.component";
-
+import { BreadcrumbComponent } from "../component/common/breadcrumb/breadcrumb.component";
 interface Dish {
   dish_id: number;
   dish_name: string;
@@ -29,7 +28,6 @@ interface Dish {
   isFavorite?: boolean;
   [key: string]: any;
 }
-
 @Component({
   selector: "app-menu",
   standalone: true,
@@ -39,8 +37,8 @@ interface Dish {
     FooterComponent,
     CategoryComponent,
     RouterLink,
-    BreadcrumbComponent
-],
+    BreadcrumbComponent,
+  ],
   templateUrl: "./menu.component.html",
   styleUrls: ["./menu.component.scss"],
   animations: [
@@ -80,27 +78,23 @@ export class MenuComponent implements OnInit, OnDestroy {
     page: "Home",
     sub_page: "Menu Grid",
   };
-
   allProducts: Dish[] = [];
   filteredProducts: Dish[] = [];
   categories: any[] = [];
   selectedCategoryName = "All Dishes";
-
   private destroy$ = new Subject<void>();
   private readonly FAVORITES_KEY = "my_app_favorites_v1";
-
   constructor(
     private apiService: HomeService,
     private cdr: ChangeDetectorRef
   ) {}
-
   ngOnInit() {
     // Load categories
     this.apiService
       .getCategories()
       .pipe(
         takeUntil(this.destroy$),
-        catchError(err => {
+        catchError((err) => {
           console.error("Failed to fetch categories", err);
           return of({ categories: [] });
         })
@@ -108,13 +102,12 @@ export class MenuComponent implements OnInit, OnDestroy {
       .subscribe((response: any) => {
         this.categories = response?.categories || [];
       });
-
     // Load dishes
     this.apiService
       .getDishes()
       .pipe(
         takeUntil(this.destroy$),
-        catchError(err => {
+        catchError((err) => {
           console.error("Failed to fetch dishes", err);
           return of({ data: [] });
         })
@@ -127,39 +120,30 @@ export class MenuComponent implements OnInit, OnDestroy {
           imageLoaded: false,
           isFavorite: !!favorites[dish.dish_id],
         }));
-
         this.filteredProducts = [...this.allProducts];
         this.cdr.detectChanges();
       });
-
     document.body.classList.add("bg-color");
   }
-
   trackByProductId = (index: number, product: Dish): number =>
     product?.dish_id || index;
-
   onCategorySelected(category: any | null) {
     this.filteredProducts = category
-      ? this.allProducts.filter(
-          dish => dish.dish_category_id === category.id
-        )
+      ? this.allProducts.filter((dish) => dish.dish_category_id === category.id)
       : [...this.allProducts];
-
     this.selectedCategoryName = category?.name || "All Dishes";
     this.cdr.detectChanges();
   }
-
   toggleFavorite(product: Dish, event?: MouseEvent) {
     event?.stopPropagation();
     event?.preventDefault();
     product.isFavorite = !product.isFavorite;
     this.persistFavorites();
   }
-
   private persistFavorites() {
     try {
       const map: Record<number, boolean> = {};
-      this.allProducts.forEach(p => {
+      this.allProducts.forEach((p) => {
         if (p.isFavorite) {
           map[p.dish_id] = true;
         }
@@ -169,7 +153,6 @@ export class MenuComponent implements OnInit, OnDestroy {
       console.error("Failed to save favorites", err);
     }
   }
-
   private loadFavorites(): Record<number, boolean> {
     try {
       return JSON.parse(localStorage.getItem(this.FAVORITES_KEY) || "{}");
@@ -177,7 +160,6 @@ export class MenuComponent implements OnInit, OnDestroy {
       return {};
     }
   }
-
   ngOnDestroy() {
     document.body.classList.remove("bg-color");
     this.destroy$.next();

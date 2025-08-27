@@ -1,0 +1,92 @@
+<header>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg p-0">
+            <!-- Toggle button for mobile -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSkeleton"
+                aria-controls="offcanvasSkeleton">
+                <span class="navbar-toggler-icon">
+                    <i class="ri-menu-line"></i>
+                </span>
+            </button>
+            <!-- Logo -->
+            <a href="javascript:void(0)">
+                <img class="img-fluid logo" src="assets/img/pizza-black-1.png" alt="logo" />
+            </a>
+            <!-- Location Button -->
+            <a (click)="openOrderDialog()"
+                class="btn btn-sm theme-btn location-btn mt-0 ms-3 d-flex align-content-center gap-1">
+                <i class="ri-map-pin-line"></i> ORDER NOW
+            </a>
+            <!-- Offcanvas menu -->
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasSkeleton"
+                aria-labelledby="offcanvasSkeletonLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasSkeletonLabel">Menu</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-center flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/home" routerLinkActive="active"
+                                [routerLinkActiveOptions]="{ exact: true }" data-bs-dismiss="offcanvas">
+                                Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/menu" routerLinkActive="active"
+                                data-bs-dismiss="offcanvas">Menu</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/stores" routerLinkActive="active"
+                                data-bs-dismiss="offcanvas">Stores</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/offers" routerLinkActive="active"
+                                data-bs-dismiss="offcanvas">Offers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/aboutus" routerLinkActive="active"
+                                data-bs-dismiss="offcanvas">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/contactus" routerLinkActive="active"
+                                data-bs-dismiss="offcanvas">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Right side options -->
+            <div class="nav-option order-md-2" *ngIf="token">
+                <!-- Cart -->
+                <div class="dropdown-button">
+                    <div class="cart-button" (click)="goToCart()">
+                        <span *ngIf="cartCount > 0">{{ cartCount }}</span>
+                        <i class="ri-shopping-cart-line text-white cart-bag"></i>
+                    </div>
+                </div>
+                <!-- Profile -->
+                <div class="profile-part dropdown-button order-md-2 dropdown">
+                    <img class="img-fluid profile-pic" src="{{user?.profiles}}" alt="profile">
+                    <div>
+                        <h6 class="fw-normal" *ngIf="user">Hi, {{ user?.first_name }}</h6>
+                        <h5 class="fw-medium dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">My Account
+                        </h5>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" routerLink="/myorders">My Orders</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item text-danger" (click)="logout()">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Show login if not logged in -->
+            <a *ngIf="!token" class="nav-link ms-auto" routerLink="/login" routerLinkActive="active"
+                data-bs-dismiss="offcanvas">
+                Login
+            </a>
+        </nav>
+    </div>
+</header>

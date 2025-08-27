@@ -6,7 +6,6 @@ import {
   HttpErrorResponse,
 } from "@angular/common/http";
 import { AuthService } from "./auth.service";
-
 @Injectable({
   providedIn: "root",
 })
@@ -14,10 +13,8 @@ export class CartService {
   private apiUrl = "http://78.142.47.247:3003/api/cart";
   private cartItems = new BehaviorSubject<any[]>([]);
   cartItems$ = this.cartItems.asObservable();
-
-  constructor(private http: HttpClient,private authService: AuthService) {}
-
- private getHeaders(): { headers: HttpHeaders } {
+  constructor(private http: HttpClient, private authService: AuthService) {}
+  private getHeaders(): { headers: HttpHeaders } {
     // const token =
     //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJfaWQiOjF9LCJpYXQiOjE3NTU5NjU5OTksImV4cCI6MTc1NTk2OTU5OX0.3RrhzmApB8bUQeUMwjCvoDo401aq-BRKplDlGTT_1oY";
     const token = this.authService.getToken();
@@ -25,7 +22,6 @@ export class CartService {
       console.error("Authentication token not found.");
       return { headers: new HttpHeaders() };
     }
-
     return {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
@@ -33,7 +29,6 @@ export class CartService {
       }),
     };
   }
-
   loadCart() {
     this.http
       .get<any[]>(this.apiUrl, this.getHeaders())
@@ -46,7 +41,6 @@ export class CartService {
       )
       .subscribe();
   }
-
   addItem(
     userId: number,
     dishId: number,
@@ -63,7 +57,6 @@ export class CartService {
       price: price,
       options_json: JSON.stringify(options),
     };
-
     return this.http.post(this.apiUrl, body, this.getHeaders()).pipe(
       tap(() => this.loadCart()),
       catchError((error: HttpErrorResponse) => {
@@ -72,7 +65,6 @@ export class CartService {
       })
     );
   }
-
   removeItem(cartItemId: number) {
     return this.http
       .delete(`${this.apiUrl}/${cartItemId}`, this.getHeaders())
@@ -86,11 +78,9 @@ export class CartService {
         })
       );
   }
-
   clearCart() {
     this.cartItems.next([]);
   }
-
   getTotalPrice(): number {
     return this.cartItems.value.reduce(
       (total, item) => total + item.price * item.quantity,

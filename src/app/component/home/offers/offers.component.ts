@@ -5,7 +5,6 @@ import {
   CarouselComponent,
   OwlOptions,
 } from "ngx-owl-carousel-o";
-
 @Component({
   selector: "app-offers",
   standalone: true, // <-- important
@@ -15,7 +14,6 @@ import {
 })
 export class OffersComponent {
   @ViewChild("owlCarousel", { static: false }) owlCarousel!: CarouselComponent;
-
   testimonials = [
     { name: "Deal 1", image: "assets/img/deals1.jpeg" },
     { name: "Deal 2", image: "assets/img/deals2.jpeg" },
@@ -23,7 +21,6 @@ export class OffersComponent {
     { name: "Deal 4", image: "assets/img/deals4.jpeg" },
     { name: "Deal 5", image: "assets/img/deals5.jpeg" },
   ];
-
   customOptions: OwlOptions = {
     loop: true,
     autoplay: false, // only navigate via buttons
@@ -40,7 +37,6 @@ export class OffersComponent {
       992: { items: 1 },
     },
   };
-
   // safe prev: try different API method names depending on library version
   prev(): void {
     if (!this.owlCarousel) return;
@@ -53,7 +49,6 @@ export class OffersComponent {
       return c.to(idx);
     }
   }
-
   // safe next
   next(): void {
     if (!this.owlCarousel) return;

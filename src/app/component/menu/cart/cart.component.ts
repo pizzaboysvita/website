@@ -1,13 +1,11 @@
 // src/app/component/menu/cart/cart.component.ts
-
 import { Component, OnInit } from "@angular/core";
 import { CartService } from "../../../services/cart.service";
-import { HeaderComponent } from "../../home/header/header.component";
-import { FooterComponent } from "../../home/footer/footer.component";
+import { HeaderComponent } from "../../common/header/header.component";
+import { FooterComponent } from "../../common/footer/footer.component";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { BreadcrumbComponent } from "../../../shared/breadcrumb/breadcrumb.component";
-
+import { BreadcrumbComponent } from "../../common/breadcrumb/breadcrumb.component";
 @Component({
   selector: "app-cart",
   standalone: true,
@@ -28,9 +26,7 @@ export class CartComponent implements OnInit {
   notes: string = "";
   userId = 101;
   storeId = 33;
-
   constructor(private cartService: CartService) {}
-
   ngOnInit(): void {
     this.cartService.cartItems$.subscribe((items) => {
       this.cartItems = items.map((item) => {
@@ -42,17 +38,14 @@ export class CartComponent implements OnInit {
       this.calculateTotal();
       console.log("Cart items updated:", this.cartItems);
     });
-
     this.cartService.loadCart();
   }
-
   removeItem(index: number): void {
     const cartItemId = this.cartItems[index].id;
     this.cartService.removeItem(cartItemId).subscribe({
       error: (err) => console.error("Error removing item:", err),
     });
   }
-
   increaseQuantity(index: number): void {
     const item = this.cartItems[index];
     this.cartService
@@ -68,7 +61,6 @@ export class CartComponent implements OnInit {
         error: (err) => console.error("Error increasing quantity:", err),
       });
   }
-
   decreaseQuantity(index: number): void {
     const item = this.cartItems[index];
     if (item.quantity > 1) {
@@ -88,17 +80,14 @@ export class CartComponent implements OnInit {
       this.removeItem(index);
     }
   }
-
   calculateTotal(): void {
     this.totalPrice = this.cartItems.reduce((sum, item) => {
       return sum + item.price * item.quantity;
     }, 0);
   }
-
   clearCart(): void {
     this.cartService.clearCart();
   }
-
   checkout(): void {
     console.log("Proceed to checkout", this.cartItems);
   }

@@ -6,7 +6,6 @@
         ×
       </button>
     </div>
-
     <!-- Body -->
     <div class="modal-body dialog-content">
       <div class="d-flex justify-content-center mb-4">
@@ -19,10 +18,8 @@
           📅 Future
         </button>
       </div>
-
       <!-- ASAP Section -->
       <div *ngIf="selectedOrderType === 'asap'">
-
         <!-- Tabs -->
         <ul class="nav nav-pills justify-content-center mb-4" id="asapTab" role="tablist">
           <li class="nav-item" role="presentation">
@@ -36,9 +33,7 @@
               (click)="onTabChange(1)">🏬 Pickup</button>
           </li>
         </ul>
-
         <div class="tab-content" id="asapTabContent">
-
           <!-- Delivery -->
           <div class="tab-pane fade" [class.show]="activeTab === 'delivery'" [class.active]="activeTab === 'delivery'">
             <div *ngIf="!showAddressForm && !showAuthForm" class="text-center">
@@ -46,7 +41,6 @@
                 ➕ Add Address
               </button>
             </div>
-
             <!-- Address Form -->
             <div *ngIf="showAddressForm">
               <form>
@@ -64,7 +58,6 @@
                 </div>
               </form>
             </div>
-
             <!-- Sign In / Register -->
             <div *ngIf="!showAddressForm && !showAuthForm" class="mt-4 text-center">
               <h6>Saved Addresses</h6>
@@ -74,7 +67,6 @@
                 <button class="btn" (click)="openAuthForm('create-account')">Register</button>
               </div>
             </div>
-
             <!-- Auth Forms -->
             <div *ngIf="showAuthForm" class="mt-4">
               <!-- Sign In Form -->
@@ -93,7 +85,6 @@
                   <button type="submit" class="btn">Login</button>
                 </div>
               </form>
-
               <!-- Register Form -->
               <form *ngIf="activeAuthTab === 'create-account'">
                 <h5>🆕 Create Account</h5>
@@ -116,7 +107,6 @@
               </form>
             </div>
           </div>
-
           <!-- Pickup -->
           <div class="tab-pane fade" [class.show]="activeTab === 'pickup'" [class.active]="activeTab === 'pickup'">
             <div class="search-box">
@@ -132,7 +122,6 @@
           </div>
         </div>
       </div>
-
       <!-- Future Order -->
       <div *ngIf="selectedOrderType === 'future'">
         <div class="mb-3">
@@ -147,7 +136,6 @@
         </div>
       </div>
     </div>
-
     <!-- Footer -->
     <div class="modal-footer d-flex justify-content-between">
       <button type="button" class="btn" data-bs-dismiss="modal" (click)="dismissModal()">Close</button>

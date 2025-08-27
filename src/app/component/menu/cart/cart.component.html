@@ -6,30 +6,22 @@
     <div class="cart-main">
       <div class="cart-details">
         <div class="cart-items" *ngIf="cartItems.length > 0">
-          <div
-            class="cart-item card p-4 bg-dark text-light"
-            *ngFor="let item of cartItems; let i = index"
-          >
+          <div class="cart-item card p-4 bg-dark text-light" *ngFor="let item of cartItems; let i = index">
             <div class="item-header">
               <h3 class="item-name">{{ item.dish_id }}</h3>
               <span class="item-price">{{
                 item.price | currency : "INR"
-              }}</span>
+                }}</span>
             </div>
-
             <div class="item-options">
               <p *ngIf="item.options?.notes">
                 <span>Note</span> {{ item.options.notes }}
               </p>
-
               <p *ngIf="item.options?.selectedOptions?.length > 0">
                 <span>Selected Option</span>
               </p>
             </div>
-
-            <div
-              class="item-actions card-footer d-flex justify-content-between align-items-center"
-            >
+            <div class="item-actions card-footer d-flex justify-content-between align-items-center">
               <button (click)="removeItem(i)" class="delete-btn">
                 <i class="ri-delete-bin-line text-danger"></i>
               </button>
@@ -45,16 +37,13 @@
             </div>
           </div>
         </div>
-
         <div *ngIf="cartItems.length === 0" class="empty-cart-message">
           Your cart is currently empty.
         </div>
-
         <div class="notes-section">
           <label for="notes">Note</label>
           <textarea id="notes" [(ngModel)]="notes" rows="4"></textarea>
         </div>
-
         <div class="price-summary">
           <div class="summary-row">
             <span>Sub total</span>
@@ -65,16 +54,10 @@
             <span>{{ totalPrice | currency : "INR" }}</span>
           </div>
         </div>
-
-        <button
-          class="checkout-btn"
-          (click)="checkout()"
-          [disabled]="cartItems.length === 0"
-        >
+        <button class="checkout-btn" (click)="checkout()" [disabled]="cartItems.length === 0">
           Checkout
         </button>
       </div>
-
       <div class="store-info-card">
         <div class="card p-4 bg-dark text-light">
           <h3 class="store-name">Pizza Boyz Store</h3>

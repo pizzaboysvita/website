@@ -1,0 +1,31 @@
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; // stays above hero
+  background: #fff; // solid background so it’s readable
+  .navbar {
+    .nav-link {
+      color: #0b0b0b; // default color
+      transition: color 0.3s ease;
+      &:hover {
+        color: #ea1b1b !important; // hover red
+      }
+      &.active {
+        color: #ea1b1b !important; // active red
+        font-weight: 600;
+      }
+    }
+    .theme-btn {
+      background: #0b0b0b !important;
+      color: #ea1b1b !important;
+    }
+  }
+}
+.navbar .profile-part h5 {
+  color: #0b0b0b;
+}
+.navbar .profile-part h6 {
+  color: #0b0b0b;
+}

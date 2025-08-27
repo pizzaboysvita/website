@@ -8,7 +8,6 @@ import {
 import { CarouselModule, OwlOptions } from "ngx-owl-carousel-o";
 import { CommonModule } from "@angular/common";
 import { HomeService } from "../../../services/home.service";
-
 @Component({
   selector: "app-category",
   standalone: true,
@@ -18,7 +17,6 @@ import { HomeService } from "../../../services/home.service";
 })
 export class CategoryComponent {
   public categories: any[] = [];
-
   @Output() categorySelected = new EventEmitter<number>();
   public customOptions: OwlOptions = {
     loop: true,
@@ -34,7 +32,6 @@ export class CategoryComponent {
     },
   };
   constructor(private apiService: HomeService) {}
-
   ngOnInit(): void {
     this.apiService.getCategories().subscribe((response) => {
       if (response && response.categories) {
@@ -45,7 +42,6 @@ export class CategoryComponent {
       }
     });
   }
-
   selectCategory(categoryId: any) {
     this.categorySelected.emit(categoryId);
     console.log(`Category selected: ${categoryId}`);

@@ -1,16 +1,13 @@
 <app-header class="head"></app-header>
-
 <app-breadcrumb></app-breadcrumb>
 <main class="row bg-dark">
   <div class="col-sm-10 m-auto">
     <app-category (categorySelected)="onCategorySelected($event)"></app-category>
-
     <div class="row bg-dark">
       <div class="">
         <section class="menu-section bg-dark">
           <div class="category-section">
             <h2 class="category-title text-light">{{ selectedCategoryName }}</h2>
-
             <div class="product-list" [@listAnimation]>
               <ng-container *ngFor="let item of filteredProducts; trackBy: trackByProductId">
                 <a [routerLink]="['/dishDetail', item.dish_id]" class="card-link">
@@ -22,13 +19,11 @@
                         <div class="spinner"></div>
                       </div>
                     </div>
-
                     <div class="product-info">
                       <h3 class="product-name">{{ item.dish_name }}</h3>
                       <p class="product-desc">{{ item.description }}</p>
                       <div class="product-footer">
                         <span class="product-price">₹{{ item.dish_price }}</span>
-
                         <button type="button" class="favorite-btn" (click)="toggleFavorite(item, $event)"
                           [attr.aria-pressed]="item.isFavorite" [class.active]="item.isFavorite"
                           title="Toggle favorite">

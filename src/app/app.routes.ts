@@ -8,10 +8,9 @@ import { CartComponent } from "./component/menu/cart/cart.component";
 import { MenuComponent } from "./menu/menu.component";
 import { SignupComponent } from "./signup/signup.component";
 import { LoginComponent } from "./login/login.component";
-import { OrderhistoryComponent } from "./orderhistory/orderhistory.component";
-import { WhishlistComponent } from "./whishlist/whishlist.component";
 import { AboutusComponent } from "./aboutus/aboutus.component";
-
+import { WhishlistComponent } from "./component/dashboard/whishlist/whishlist.component";
+import { OrderhistoryComponent } from "./component/dashboard/orderhistory/orderhistory.component";
 export const routes: Routes = [
   {
     path: "",
@@ -43,38 +42,38 @@ export const routes: Routes = [
     component: CartComponent,
     data: { breadcrumb: "Cart" },
   },
-  { 
-    path: "stores", 
-    component: StoreComponent, 
-    data: { breadcrumb: "Stores" } 
+  {
+    path: "stores",
+    component: StoreComponent,
+    data: { breadcrumb: "Stores" },
   },
-  { 
-    path: "offers", 
-    component: OfferComponent, 
-    data: { breadcrumb: "Offers" } 
+  {
+    path: "offers",
+    component: OfferComponent,
+    data: { breadcrumb: "Offers" },
   },
-  { 
-    path: "wishlist", 
-    component: WhishlistComponent, 
-    data: { breadcrumb: "wishlist" } 
+  {
+    path: "wishlist",
+    component: WhishlistComponent,
+    data: { breadcrumb: "wishlist" },
   },
-  { 
-    path: "myorders", 
-    component: OrderhistoryComponent, 
-    data: { breadcrumb: "myorders" }  
+  {
+    path: "myorders",
+    component: OrderhistoryComponent,
+    data: { breadcrumb: "myorders" },
   },
-  { 
-    path: "aboutus", 
-    component: AboutusComponent, 
-    data: { breadcrumb: "aboutus" }  
+  {
+    path: "aboutus",
+    component: AboutusComponent,
+    data: { breadcrumb: "aboutus" },
   },
-  { 
-    path: "signup", 
-    component: SignupComponent, 
+  {
+    path: "signup",
+    component: SignupComponent,
   },
-  { 
-    path: "login", 
-    component: LoginComponent, 
+  {
+    path: "login",
+    component: LoginComponent,
   },
   { path: "**", redirectTo: "pages/404" },
 ];

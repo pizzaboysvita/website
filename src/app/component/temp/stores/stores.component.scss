@@ -11,14 +11,9 @@
 .quote-panel {
   transform: translateY(-18px); /* removed rotate(-1deg) */
   padding: calc(10px + 5 * (100vw - 320px) / 1600) 0;
-  background: linear-gradient(
-    to right,
-    rgba(255, 0, 0, 1),
-    rgba(0, 0, 0, 1)
-  );
+  background: linear-gradient(to right, rgba(255, 0, 0, 1), rgba(0, 0, 0, 1));
   overflow: hidden;
 }
-
 .quote-panel .marquee {
   display: flex;
   gap: calc(15px + 10 * (100vw - 320px) / 1600);

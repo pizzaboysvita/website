@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { Router, RouterModule } from "@angular/router";
-import { FooterComponent } from "../component/home/footer/footer.component";
-import { HeaderComponent } from "../component/home/header/header.component";
+import { FooterComponent } from "../component/common/footer/footer.component";
+import { HeaderComponent } from "../component/common/header/header.component";
 import {
   FormBuilder,
   FormGroup,
@@ -52,6 +52,7 @@ export class LoginComponent implements OnInit {
         console.log("Login response:", res);
         if (res && res.code == 1) {
           this.authService.setToken(res.access_token);
+          localStorage.setItem("user", JSON.stringify(res.user));
           this.router.navigate(["/home"]);
           alert("Login successful!");
         } else {

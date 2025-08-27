@@ -7,7 +7,6 @@
   gap: 20px;
   height: 100%;
 }
-
 .left-column {
   flex: 0 0 40%;
   max-width: 40%;
@@ -18,39 +17,33 @@
   display: flex;
   flex-direction: column;
 }
-
 .dish-image {
   padding: 20px;
   width: 300px;
   height: 300px;
   object-fit: cover;
 }
-
 .dish-info-card {
   padding: 20px;
-  flex-grow: 1; 
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
 }
-
 .dish-info-card h1 {
   font-size: 1.5rem;
   font-weight: bold;
   margin: 0 0 5px 0;
 }
-
 .dish-description {
   color: #ccc;
   font-size: 1rem;
   margin-top: 10px;
   margin-bottom: 20px;
 }
-
 .quantity-control {
   display: flex;
   align-items: center;
   gap: 15px;
-
   button {
     color: whitesmoke;
     background-color: rgb(232, 14, 14);
@@ -62,12 +55,10 @@
     cursor: pointer;
   }
 }
-
 .notes-label {
   font-size: 1rem;
   margin-bottom: 5px;
 }
-
 .notes-textarea {
   width: 100%;
   background-color: #333;
@@ -78,27 +69,23 @@
   min-height: 80px;
   resize: vertical;
 }
-
 .bottom-info {
-  margin-top: auto; 
+  margin-top: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-
 .total-price {
   .label {
     display: block;
     font-size: 0.9rem;
     color: #ccc;
   }
-
   .price-value {
     font-size: 1.8rem;
     font-weight: bold;
   }
 }
-
 .add-to-cart-btn {
   background-color: #e63946;
   color: #fff;
@@ -108,63 +95,52 @@
   font-size: 1rem;
   cursor: pointer;
 }
-
 .right-column {
   flex-grow: 1;
-  overflow-y: auto; 
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
-
 .option-group {
   background-color: #1a1818;
   padding: 20px;
   border-radius: 12px;
 }
-
 .option-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 15px;
-
   h2 {
     font-size: 1.5rem;
     margin: 0;
   }
-
   .required-text {
     font-size: 0.9rem;
     color: #ccc;
   }
 }
-
 .option-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px; 
+  padding: 10px;
   border-bottom: 1px solid #333;
   cursor: pointer;
   border-radius: 8px;
   margin-bottom: 5px;
-
   &:last-child {
     border-bottom: none;
   }
-
   .option-item-left {
     display: flex;
     flex-direction: column;
     gap: 5px;
-
     span {
       font-size: 1rem;
     }
   }
-
-
 }
 /* Custom Radio Button Styles */
 .custom-radio {
@@ -174,7 +150,6 @@
   gap: 10px; /* Space between radio and label */
   cursor: pointer;
   user-select: none;
-
   input {
     position: absolute;
     opacity: 0;
@@ -182,7 +157,6 @@
     height: 0;
     width: 0;
   }
-
   .checkmark {
     flex-shrink: 0;
     height: 20px;
@@ -192,18 +166,15 @@
     border: 2px solid #555;
     transition: all 0.2s ease-in-out;
   }
-
   input:checked ~ .checkmark {
     background-color: #e63946;
     border-color: #e63946;
   }
-
   .checkmark:after {
     content: "";
     position: absolute;
     display: none;
   }
-
   input:checked ~ .checkmark:after {
     display: block;
     position: absolute;
@@ -216,7 +187,6 @@
     background: #fff;
   }
 }
-
 /* Custom Checkbox Styles (if needed) */
 .custom-checkbox {
   position: relative;
@@ -224,13 +194,11 @@
   align-items: center;
   gap: 10px;
   cursor: pointer;
-
   input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
   }
-
   .checkmark {
     flex-shrink: 0;
     height: 20px;
@@ -239,18 +207,15 @@
     border: 2px solid #555;
     transition: all 0.2s ease-in-out;
   }
-
   input:checked ~ .checkmark {
     background-color: #e63946;
     border-color: #e63946;
   }
-
   .checkmark:after {
     content: "";
     position: absolute;
     display: none;
   }
-
   input:checked ~ .checkmark:after {
     display: block;
     position: absolute;

@@ -1,67 +1,54 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { AfterViewInit, NgZone, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { CommonModule } from "@angular/common";
+import { Component } from "@angular/core";
+import {
+  AfterViewInit,
+  NgZone,
+  OnInit,
+  ViewChild,
+  ElementRef,
+} from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 declare var bootstrap: any;
-
 @Component({
-  selector: 'app-order',
+  selector: "app-order",
   imports: [CommonModule, FormsModule],
-  templateUrl: './order.component.html',
-  styleUrl: './order.component.scss'
+  templateUrl: "./order.component.html",
+  styleUrl: "./order.component.scss",
 })
 export class OrderComponent {
-
-  selectedOrderType: 'asap' | 'future' = 'asap';
+  selectedOrderType: "asap" | "future" = "asap";
   showAddressForm = false;
   showAuthForm = false;
   showPickupMap = false;
   selectedDate: Date | null = null;
-  selectedTime: string = '';
-
-  activeTab: 'delivery' | 'pickup' = 'delivery'; // New variable for Bootstrap tabs
-  activeAuthTab: 'signin' | 'create-account' = 'signin'; 
-  
-// New variable for auth tabs
-
+  selectedTime: string = "";
+  activeTab: "delivery" | "pickup" = "delivery"; // New variable for Bootstrap tabs
+  activeAuthTab: "signin" | "create-account" = "signin";
+  // New variable for auth tabs
   // map!: google.maps.Map;
   // markers: google.maps.Marker[] = [];
-
-
-  @ViewChild('pickupMap', { static: false }) pickupMapRef!: ElementRef;
-
-
-  ngOnInit(): void { }
-
-
-  selectOrderType(type: 'asap' | 'future') {
+  @ViewChild("pickupMap", { static: false }) pickupMapRef!: ElementRef;
+  ngOnInit(): void {}
+  selectOrderType(type: "asap" | "future") {
     this.selectedOrderType = type;
     this.showAddressForm = false;
     this.showAuthForm = false;
-    this.showPickupMap = type === 'asap' && this.activeTab === 'pickup';
-
-
+    this.showPickupMap = type === "asap" && this.activeTab === "pickup";
   }
-  openAuthForm(type: 'signin' | 'create-account') {
+  openAuthForm(type: "signin" | "create-account") {
     this.activeAuthTab = type;
     this.showAuthForm = true;
   }
-
   closeAuthForm() {
     this.showAuthForm = false;
-    this.activeAuthTab = 'signin'; // reset to default
+    this.activeAuthTab = "signin"; // reset to default
   }
-  
-
-
   onTabChange(tabIndex: number) {
-    this.activeTab = tabIndex === 0 ? 'delivery' : 'pickup';
-    this.showPickupMap = this.selectedOrderType === 'asap' && this.activeTab === 'pickup';
-
-
+    this.activeTab = tabIndex === 0 ? "delivery" : "pickup";
+    this.showPickupMap =
+      this.selectedOrderType === "asap" && this.activeTab === "pickup";
   }
-
   map!: google.maps.Map;
   markers: google.maps.Marker[] = [];
   defaultLocations = [
@@ -135,12 +122,7 @@ export class OrderComponent {
     },
   ];
   locations: any[] = [];
-
-
-
-
-
-  constructor(private ngZone: NgZone,public activeModal: NgbActiveModal) { }
+  constructor(private ngZone: NgZone, public activeModal: NgbActiveModal) {}
   toggleHours(location: any) {
     // Hide hours for all other locations
     this.locations.forEach((loc) => {
@@ -239,15 +221,11 @@ export class OrderComponent {
     this.markers.forEach((marker) => marker.setMap(null));
     this.markers = [];
   }
-  
-
   // Optional custom close function
   closeModal() {
-    this.activeModal.close();   // closes with success
+    this.activeModal.close(); // closes with success
   }
-
   dismissModal() {
     this.activeModal.dismiss(); // closes with cancel/dismiss
   }
-
 }
