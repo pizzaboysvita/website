@@ -7,7 +7,6 @@
                     <div class="left-column">
                         <div class="justify-content-center align-items-center d-flex">
                             <img [src]="dish.dish_image" [alt]="dish.name" class="dish-image" />
-
                         </div>
                         <div class="dish-info-card ">
                             <div class="d-flex justify-content-between">
@@ -25,7 +24,6 @@
                             </div>
                             <label for="notes" class="notes-label">Notes</label>
                             <textarea id="notes" [(ngModel)]="notes" class="notes-textarea"></textarea>
-
                             <div class="bottom-info">
                                 <div class="total-price">
                                     <span class="label">Total</span>
@@ -35,13 +33,10 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="right-column">
                         <div *ngIf="dish.optionGroups?.length; else noOptions">
                             <div *ngFor="let optionGroup of dish.optionGroups; let i = index" class="option-group">
                                 <div class="card p-4 bg-dark text-light">
-
-
                                     <div class="option-header">
                                         <h2>{{ optionGroup.title }}</h2>
                                         <span class="required-text">
@@ -53,7 +48,6 @@
                                             </ng-container>
                                         </span>
                                     </div>
-
                                     <div *ngFor="let option of optionGroup.options" class="option-item"
                                         [class.selected]="optionGroup.isMultiple ? isOptionSelected(option, i) : (selectedOptions[i]?.id === option.id)"
                                         (click)="optionGroup.isMultiple ? toggleOption(option, i) : selectOption(option, i)">
@@ -61,7 +55,6 @@
                                             <span>{{ option.name }}</span>
                                             <span *ngIf="option.price">{{ option.price | currency: 'R' }}</span>
                                         </div>
-
                                         <div class="option-item-right">
                                             <ng-container *ngIf="!optionGroup.isMultiple">
                                                 <label class="custom-radio">
@@ -71,7 +64,6 @@
                                                     <span class="checkmark"></span>
                                                 </label>
                                             </ng-container>
-
                                             <ng-container *ngIf="optionGroup.isMultiple">
                                                 <label class="custom-checkbox">
                                                     <input type="checkbox" [checked]="isOptionSelected(option, i)"
@@ -84,7 +76,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <ng-template #noOptions>
                             <p class="no-options-text">No extra options available for this dish.</p>
                         </ng-template>

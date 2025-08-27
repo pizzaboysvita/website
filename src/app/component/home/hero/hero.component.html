@@ -1,25 +1,21 @@
-<div class="container">
-    <div class="hero">
-        <!-- Curtains -->
-        <div class="hero__courtains" [ngClass]="{ 'open': isCurtainsOpen }">
-            <div class="hero__courtains__left">
-                <h1 class="left">Welcome to</h1>
-            </div>
-            <div class="hero__courtains__right" style="background-color: blue;">
-                <h1 class="right">Flavour Country</h1>
-            </div>
+<section class="hero container">
+    <!-- Curtains -->
+    <div class="hero__courtains" [ngClass]="{ 'open': isCurtainsOpen }">
+        <div class="hero__courtains__left">
+            <h1 class="left">Welcome to</h1>
         </div>
-
-        <!-- Video -->
-        <video #introVideo class="hero-video" [hidden]="!isCurtainsOpen" autoplay muted loop playsinline>
-            <source src="assets/videos/pizza_boyz.mp4" type="video/mp4" class="mt-1">
-            Your browser does not support the video tag.
-        </video>
-
-        <!-- Buttons -->
-        <div class="video-buttons">
-            <button class="btn btn-primary">Order online</button>
-            <button class="btn btn-secondary">Take away</button>
+        <div class="hero__courtains__right">
+            <h1 class="right">Flavour Country</h1>
         </div>
     </div>
-</div>
+    <!-- Video -->
+    <video #introVideo class="hero-video" [hidden]="!isCurtainsOpen" autoplay muted loop playsinline>
+        <source src="assets/videos/pizza_boyz.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <!-- Buttons -->
+    <div class="video-buttons">
+        <button class="btn btn-primary">Order online</button>
+        <button class="btn btn-secondary">Take away</button>
+    </div>
+</section>

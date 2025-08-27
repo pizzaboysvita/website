@@ -4,9 +4,8 @@
   align-items: center;
   height: 100vh;
   background: #555; // gray bg like screenshot
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
-
 .auth-modal {
   background: #1e1e1e;
   padding: 2rem;
@@ -15,27 +14,22 @@
   width: 380px;
   text-align: center;
   color: #fff;
-
   .logo {
     font-size: 1.6rem;
     font-weight: 600;
     margin-bottom: 0.3rem;
   }
-
   .subtitle {
     font-size: 0.9rem;
     color: #aaa;
     margin-bottom: 1rem;
   }
-
   h2 {
     margin-bottom: 1.2rem;
     color: #fff;
   }
-
   .form-group {
     margin-bottom: 1rem;
-
     input {
       width: 100%;
       padding: 0.75rem;
@@ -44,23 +38,19 @@
       background: #2a2a2a;
       color: #fff;
       outline: none;
-
       &:focus {
         border-color: #ff3131;
       }
     }
-
     .error {
       text-align: left;
       margin-top: 4px;
-
       small {
         color: #ff4d4d;
         font-size: 0.8rem;
       }
     }
   }
-
   .btn-login {
     width: 100%;
     padding: 0.85rem;
@@ -73,35 +63,29 @@
     cursor: pointer;
     margin-bottom: 1rem;
     transition: 0.3s;
-
     &:hover {
       background: #e12c2c;
     }
   }
-
   .forgot-link {
     display: block;
     margin-top: -5px;
     margin-bottom: 1rem;
     color: #bbb;
     font-size: 0.85rem;
-
     &:hover {
       color: #fff;
     }
   }
-
   .divider {
     display: flex;
     align-items: center;
     margin: 1rem 0;
-
     span {
       color: #aaa;
       font-size: 0.85rem;
       margin: 0 10px;
     }
-
     &::before,
     &::after {
       content: "";
@@ -110,12 +94,10 @@
       background: #333;
     }
   }
-
   .social-signup {
     display: flex;
     flex-direction: column;
     gap: 10px;
-
     .btn-social {
       display: flex;
       align-items: center;
@@ -130,30 +112,24 @@
       color: #fff;
       cursor: pointer;
       transition: 0.3s;
-
       img {
         width: 18px;
         height: 18px;
       }
-
       &:hover {
         background: #333;
       }
-
       &.google {
         border-color: #db4437;
         color: #db4437;
-
         &:hover {
           background: #db4437;
           color: #fff;
         }
       }
-
       &.apple {
         border-color: #aaa;
         color: #aaa;
-
         &:hover {
           background: #fff;
           color: #000;
@@ -161,25 +137,19 @@
       }
     }
   }
-
   .switch-auth {
     margin-top: 1.2rem;
     font-size: 0.85rem;
     color: #bbb;
-
     a {
       color: #ff3131;
       font-weight: 600;
-
       &:hover {
         text-decoration: underline;
       }
     }
   }
 }
-*{
-    font-family:Arial, Helvetica, sans-serif;
+* {
+  font-family: Arial, Helvetica, sans-serif;
 }
-
-
-

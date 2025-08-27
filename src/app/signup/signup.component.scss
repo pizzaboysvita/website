@@ -1,173 +1,148 @@
-
-        .signup-container {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
-            font-family: "Poppins", sans-serif;
+.signup-container {
+  margin-top: 80px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
+  font-family: "Poppins", sans-serif;
+}
+.signup-card {
+  background: #222;
+  padding: 35px;
+  border-radius: 14px;
+  width: 380px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  h2 {
+    color: #fff;
+    margin-bottom: 5px;
+  }
+  .subtitle {
+    color: #aaa;
+    font-size: 14px;
+    margin-bottom: 25px;
+  }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-bottom: 15px;
+    label {
+      font-size: 13px;
+      color: #bbb;
+      margin-bottom: 6px;
+    }
+    input {
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px solid #444;
+      background: #111;
+      color: #fff;
+      outline: none;
+      transition: 0.3s;
+      &:focus {
+        border-color: #e63946;
+      }
+    }
+  }
+  .btn-login {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    background: #e63946;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    &:hover {
+      background: #c62839;
+    }
+  }
+  .forgot-link {
+    display: block;
+    margin-top: 12px;
+    font-size: 13px;
+    color: #aaa;
+    text-decoration: none;
+    transition: 0.3s;
+    &:hover {
+      color: #e63946;
+    }
+  }
+  .divider {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+    span {
+      color: #aaa;
+      font-size: 13px;
+      margin: 0 12px;
+    }
+    &::before,
+    &::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #333;
+    }
+  }
+  .social-signup {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    .btn-social {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border-radius: 6px;
+      padding: 12px;
+      font-size: 15px;
+      font-weight: 500;
+      border: 1px solid #444;
+      background: #222;
+      color: #fff;
+      cursor: pointer;
+      transition: 0.3s;
+      img {
+        width: 20px;
+        height: 20px;
+      }
+      &:hover {
+        background: #333;
+      }
+      &.google {
+        border-color: #db4437;
+        color: #db4437;
+        &:hover {
+          background: #db4437;
+          color: #fff;
         }
-
-        .signup-card {
-            background: #222;
-            padding: 35px;
-            border-radius: 14px;
-            width: 380px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-            text-align: center;
-
-            h2 {
-                color: #fff;
-                margin-bottom: 5px;
-            }
-
-            .subtitle {
-                color: #aaa;
-                font-size: 14px;
-                margin-bottom: 25px;
-            }
-
-            .form-group {
-                display: flex;
-                flex-direction: column;
-                text-align: left;
-                margin-bottom: 15px;
-
-                label {
-                    font-size: 13px;
-                    color: #bbb;
-                    margin-bottom: 6px;
-                }
-
-                input {
-                    padding: 12px;
-                    border-radius: 6px;
-                    border: 1px solid #444;
-                    background: #111;
-                    color: #fff;
-                    outline: none;
-                    transition: 0.3s;
-
-                    &:focus {
-                        border-color: #e63946;
-                    }
-                }
-            }
-
-            .btn-login {
-                width: 100%;
-                padding: 12px;
-                margin-top: 10px;
-                background: #e63946;
-                border: none;
-                border-radius: 6px;
-                color: #fff;
-                font-weight: 600;
-                cursor: pointer;
-                transition: 0.3s;
-
-                &:hover {
-                    background: #c62839;
-                }
-            }
-
-            .forgot-link {
-                display: block;
-                margin-top: 12px;
-                font-size: 13px;
-                color: #aaa;
-                text-decoration: none;
-                transition: 0.3s;
-
-                &:hover {
-                    color: #e63946;
-                }
-            }
-
-            .divider {
-                display: flex;
-                align-items: center;
-                margin: 20px 0;
-
-                span {
-                    color: #aaa;
-                    font-size: 13px;
-                    margin: 0 12px;
-                }
-
-                &::before,
-                &::after {
-                    content: "";
-                    flex: 1;
-                    height: 1px;
-                    background: #333;
-                }
-            }
-
-            .social-signup {
-                display: flex;
-                flex-direction: column;
-                gap: 12px;
-
-                .btn-social {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    gap: 10px;
-                    border-radius: 6px;
-                    padding: 12px;
-                    font-size: 15px;
-                    font-weight: 500;
-                    border: 1px solid #444;
-                    background: #222;
-                    color: #fff;
-                    cursor: pointer;
-                    transition: 0.3s;
-
-                    img {
-                        width: 20px;
-                        height: 20px;
-                    }
-
-                    &:hover {
-                        background: #333;
-                    }
-
-                    &.google {
-                        border-color: #db4437;
-                        color: #db4437;
-
-                        &:hover {
-                            background: #db4437;
-                            color: #fff;
-                        }
-                    }
-
-                    &.apple {
-                        border-color: #aaa;
-                        color: #aaa;
-
-                        &:hover {
-                            background: #fff;
-                            color: #000;
-                        }
-                    }
-                }
-            }
-
-            .switch-link {
-                margin-top: 20px;
-                font-size: 13px;
-                color: #aaa;
-
-                a {
-                    color: #e63946;
-                    text-decoration: none;
-                    font-weight: 600;
-
-                    &:hover {
-                        text-decoration: underline;
-                    }
-                }
-            }
+      }
+      &.apple {
+        border-color: #aaa;
+        color: #aaa;
+        &:hover {
+          background: #fff;
+          color: #000;
         }
+      }
+    }
+  }
+  .switch-link {
+    margin-top: 20px;
+    font-size: 13px;
+    color: #aaa;
+    a {
+      color: #e63946;
+      text-decoration: none;
+      font-weight: 600;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

@@ -6,25 +6,20 @@
     #121212 100%
   );
 }
-
 .breadcrumb {
   background-color: transparent;
 }
-
 .breadcrumb-item + .breadcrumb-item::before {
   content: "/";
   color: rgba(255, 255, 255, 0.6);
   padding: 0 5px 0px 5px;
 }
-
 .breadcrumb a {
   color: #ccc !important;
 }
-
 .breadcrumb a:hover {
   color: #fff !important;
 }
-
 .pizza-feedback-section {
   background-image: url("/assets/img/bggcontact.avif");
   background-size: cover;
@@ -36,12 +31,10 @@
   align-items: center;
   padding-left: 60px;
 }
-
 .form-row {
   display: flex;
   justify-content: center;
   margin-top: 1.5rem;
-
   .submit-btn {
     background-color: #101010;
     color: #fff;
@@ -52,16 +45,13 @@
     font-weight: 600;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
-
     &:hover {
       background-color: #dcd3d0;
       transform: translateY(-2px);
     }
-
     &:active {
       transform: scale(0.98);
     }
-
     &:focus {
       outline: none;
       box-shadow: 0 0 0 3px rgba(255, 87, 34, 0.3);
@@ -73,34 +63,28 @@
   color: #fff;
   padding: 50px 20px;
   text-align: center;
-
   h2 {
     margin-bottom: 10px;
     font-weight: bold;
     font-size: 28px;
   }
-
   p {
     font-size: 18px;
     margin-bottom: 30px;
   }
-
   .container {
     max-width: 900px;
     margin: 0 auto;
   }
-
   .form {
     display: flex;
     flex-direction: column;
     gap: 20px;
-
     .form-row {
       display: flex;
       flex-wrap: wrap;
       gap: 20px;
       justify-content: center;
-
       input,
       select {
         flex: 1 1 28%;
@@ -111,47 +95,39 @@
         border: none;
         border-radius: 4px;
       }
-
       select {
         appearance: none;
       }
     }
-
     .checkbox-row {
       display: flex;
       align-items: flex-start;
       justify-content: flex-start;
       text-align: left;
-
       input[type="checkbox"] {
         margin-top: 4px;
         margin-right: 10px;
         width: 18px;
         height: 18px;
       }
-
       label {
         font-size: 14px;
         max-width: 800px;
       }
     }
-
     .note {
       text-align: left;
       font-size: 14px;
       margin-top: 10px;
     }
-
     .links {
       text-align: left;
       margin-top: 10px;
-
       a {
         color: #fff;
         font-size: 14px;
         margin-right: 20px;
         text-decoration: underline;
-
         &:hover {
           color: #ddd;
         }
@@ -166,7 +142,6 @@
   gap: 20px;
   padding: 40px;
   background: #fdfaf4;
-
   .card {
     background: #fff;
     border-radius: 10px;
@@ -176,30 +151,25 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-
     .card-image {
       width: 100%;
       height: auto;
       object-fit: cover;
     }
-
     .card-content {
       padding: 25px;
       text-align: center;
-
       h2 {
         font-size: 22px;
         color: #d62300;
         margin-bottom: 10px;
         font-weight: 800;
       }
-
       p {
         font-size: 16px;
         color: #333;
         margin-bottom: 20px;
       }
-
       .btn {
         background: #d62300;
         color: white;
@@ -209,37 +179,31 @@
         font-size: 16px;
         cursor: pointer;
         transition: background 0.3s ease;
-
         &:hover {
           background: #b91c00;
         }
       }
     }
   }
-
   @media (max-width: 768px) {
     flex-direction: column;
     padding: 20px;
-
     .card {
       max-width: 100%;
     }
   }
 }
-
 .feedback-box {
   background-color: rgba(0, 0, 0, 0.6); // semi-transparent black background
   color: white;
   padding: 30px;
   max-width: 400px;
   border-radius: 10px;
-
   h2 {
     font-size: 26px;
     color: #ffd700;
     margin-bottom: 15px;
   }
-
   p {
     font-size: 16px;
     margin-bottom: 10px;
