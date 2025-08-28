@@ -58,11 +58,17 @@
             </div>
             <!-- Right side options -->
             <div class="nav-option order-md-2" *ngIf="token">
+                <!-- Wishlist -->
+                <div class="dropdown-button">
+                    <div class="cart-button" (click)="goToWishList()">
+                        <i class="ri-heart-line"></i>
+                    </div>
+                </div>
                 <!-- Cart -->
                 <div class="dropdown-button">
                     <div class="cart-button" (click)="goToCart()">
                         <span *ngIf="cartCount > 0">{{ cartCount }}</span>
-                        <i class="ri-shopping-cart-line text-white cart-bag"></i>
+                        <i class="ri-shopping-cart-line cart-bag"></i>
                     </div>
                 </div>
                 <!-- Profile -->

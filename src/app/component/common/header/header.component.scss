@@ -23,9 +23,26 @@ header {
     }
   }
 }
+.navbar .navbar-toggler .navbar-toggler-icon i {
+  color: #ea1b1b !important;
+}
 .navbar .profile-part h5 {
   color: #0b0b0b;
 }
 .navbar .profile-part h6 {
   color: #0b0b0b;
+}
+.cart-button {
+  color: #ea1b1b !important;
+}
+.navbar .dropdown-menu li .dropdown-item {
+  color: #0b0b0b; // default color
+  transition: color 0.3s ease;
+  &:hover {
+    color: #ea1b1b !important; // hover red
+  }
+  &.active {
+    color: #ea1b1b !important; // active red
+    font-weight: 600;
+  }
 }
