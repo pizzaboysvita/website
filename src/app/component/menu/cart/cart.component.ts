@@ -6,6 +6,7 @@ import { FooterComponent } from "../../common/footer/footer.component";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BreadcrumbComponent } from "../../common/breadcrumb/breadcrumb.component";
+import { Router } from "@angular/router";
 @Component({
   selector: "app-cart",
   standalone: true,
@@ -26,7 +27,7 @@ export class CartComponent implements OnInit {
   notes: string = "";
   userId = 101;
   storeId = 33;
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService, private router: Router) {}
   ngOnInit(): void {
     this.cartService.cartItems$.subscribe((items) => {
       this.cartItems = items.map((item) => {
@@ -90,5 +91,6 @@ export class CartComponent implements OnInit {
   }
   checkout(): void {
     console.log("Proceed to checkout", this.cartItems);
+    this.router.navigate(["/myorders"]);
   }
 }
