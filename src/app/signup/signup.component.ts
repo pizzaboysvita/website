@@ -69,7 +69,7 @@ export class SignupComponent {
     }
     const userPayload = {
       type: "insert",
-      role_id: 5,
+      role_id: 1,
       store_id: 4,
       first_name: this.signupForm.value.first_name,
       last_name: this.signupForm.value.last_name,
