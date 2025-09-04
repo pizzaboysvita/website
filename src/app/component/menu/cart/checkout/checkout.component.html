@@ -1,0 +1,30 @@
+<app-header></app-header>
+<div class="payment-success-container mt-5">
+    <div class="success-card mt-5">
+        <div class="checkmark">
+            <i class="fa fa-check-circle"></i>
+        </div>
+
+        <h2 class="title">Payment Successful 🎉</h2>
+        <p class="subtitle">Thank you! Your order has been placed successfully.</p>
+
+        <div class="order-summary">
+            <h4>Order Summary</h4>
+            <!-- my-orders.component.html -->
+            <div *ngIf="order">
+                <ul>
+                    <li><span>Order ID:</span> <strong>{{ order.orderId }}</strong></li>
+                    <li><span>Amount Paid:</span> <strong>₹{{ order.amountPaid }}</strong></li>
+                    <li><span>Payment Method:</span> <strong>{{ order.paymentMethod }}</strong></li>
+                    <li><span>Status:</span> <strong class="status">{{ order.status }}</strong></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <button class="btn btn-primary mt-3" routerLink="/myorders" (click)="goToOrders()">
+            View My Orders
+        </button>
+    </div>
+</div>
+<app-footer></app-footer>
