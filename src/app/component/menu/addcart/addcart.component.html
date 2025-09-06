@@ -1,4 +1,5 @@
 <app-header class="head"></app-header>
+<app-breadcrumb></app-breadcrumb>
 <div class="container-fluid main">
     <div class="row">
         <div class="col-sm-11 m-auto p-4">
@@ -27,7 +28,7 @@
                             <div class="bottom-info">
                                 <div class="total-price">
                                     <span class="label">Total</span>
-                                    <span class="price-value">{{ total | currency: 'R' }}</span>
+                                    <span class="price-value">{{ total | currency: '$' }}</span>
                                 </div>
                                 <button class="add-to-cart-btn" (click)="addToCart()">Add to cart</button>
                             </div>

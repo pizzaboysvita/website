@@ -20,90 +20,24 @@
     </div>
     <!-- Orders Section -->
     <div class="orders-section">
-        <h2 class="section-title">My Order</h2>
-        <!-- Order Card -->
-        <div class="order-card">
+        <h2 class="section-title">My Orders</h2>
+
+        <div class="order-card" *ngFor="let order of orders; let i = index">
             <div class="order-left">
-                <img src="assets/img/dessert_pizzas/M and M Pizza.webp" alt="logo" class="brand-logo" />
+                <img [src]="order.image" alt="Order Image" (error)="onImageError($event)"  class="order-img"/>
                 <div>
-                    <h4 class="brand-name">Glen Eden</h4>
-                    <p class="transaction">Order Id : <span>1</span></p>
-                    <p class="transaction">Transaction Id : <span>#ACB12345458</span></p>
-                    <p class="amount">Total Amount : <span>$ 220</span></p>
+                    <h4 class="brand-name">{{ order.restaurantName }}</h4>
+                    <p class="transaction">Order Id : <span>{{ order.orderId }}</span></p>
+                    <p class="transaction">Transaction Id : <span>{{ order.transactionId }}</span></p>
+                    <p class="amount">Total Price : <span>$ {{ order.totalprice }}</span></p>
                 </div>
             </div>
             <div class="order-right">
-                <p class="time">05:00 PM</p>
+                <p class="time">{{ order.time }}</p>
                 <button class="details-btn">Details</button>
             </div>
         </div>
-        <div class="order-card">
-            <div class="order-left">
-                <img src="assets/img/dessert_pizzas/banana and caramel Pizza .webp" alt="logo" class="brand-logo" />
-                <div>
-                    <h4 class="brand-name">Hillsborough</h4>
-                    <p class="transaction">Order Id : <span>2</span></p>
-                    <p class="transaction">Transaction Id : <span>#ACB12345459</span></p>
-                    <p class="amount">Total Amount : <span>$ 220</span></p>
-                </div>
-            </div>
-            <div class="order-right">
-                <p class="time">05:00 PM</p>
-                <button class="details-btn">Details</button>
-            </div>
-        </div>
-        <div class="order-card">
-            <div class="order-left">
-                <img src="assets/img/chicken_pizzas/Chipotle Chicken Pizza.webp" alt="logo" class="brand-logo" />
-                <div>
-                    <h4 class="brand-name">Flat Bush</h4>
-                    <p class="transaction">Order Id : <span>3</span></p>
-                    <p class="transaction">Transaction Id : <span>#ACB123456678</span></p>
-                    <p class="amount">Total Amount : <span>$ 90</span></p>
-                </div>
-            </div>
-            <div class="order-right">
-                <p class="time">05:00 PM</p>
-                <button class="details-btn">Details</button>
-            </div>
-        </div>
-        <!-- McDonald's -->
-        <!-- Pizza Hut -->
-        <div class="order-card">
-            <div class="order-left">
-                <img src="assets/img/chicken_pizzas/Chilli Chicken Pizza .webp" alt="logo" class="brand-logo" />
-                <div>
-                    <h4 class="brand-name">Sandringham</h4>
-                    <p class="transaction">Order Id : <span>4</span></p>
-                    <p class="transaction">Transaction Id : <span>#ACB12345461</span></p>
-                    <p class="amount">Total Amount : <span>$ 90</span></p>
-                </div>
-            </div>
-            <div class="order-right">
-                <p class="time">07:30 PM</p>
-                <button class="details-btn">Details</button>
-            </div>
-        </div>
-        <!-- KFC -->
-        <!-- Burger King -->
-        <!-- Domino's -->
-        <!-- <div class="order-card">
-            <div class="order-left">
-                <img src="/assets/img/chicken_pizzas/Chilli Chicken Pizza .webp" alt="logo"
-                    class="brand-logo" />
-                <div>
-                    <h4 class="brand-name">Ellerslie</h4>
-                      <p class="transaction">Order Id : <span>5</span></p>
-                    <p class="transaction">Transaction Id : <span>#ACB12345464</span></p>
-                   
-                    <p class="amount">Total Amount : <span>$ 120</span></p>
-                </div>
-            </div>
-            <div class="order-right">
-                <p class="time">09:45 PM</p>
-                <button class="details-btn">Details</button>
-            </div>
-        </div> -->
     </div>
+
 </div>
 <app-footer></app-footer>

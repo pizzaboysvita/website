@@ -87,7 +87,7 @@ export class MenuComponent implements OnInit, OnDestroy {
   constructor(
     private apiService: HomeService,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) { }
   ngOnInit() {
     // Load categories
     this.apiService
@@ -135,11 +135,43 @@ export class MenuComponent implements OnInit, OnDestroy {
     this.cdr.detectChanges();
   }
   toggleFavorite(product: Dish, event?: MouseEvent) {
-    event?.stopPropagation();
-    event?.preventDefault();
+    console.log("👉 Product before toggle:", product);
+
     product.isFavorite = !product.isFavorite;
-    this.persistFavorites();
+    console.log("🔄 Product after toggle:", product);
+
+    // Get user details from localStorage
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+    const user_id = user?.user_id || null;
+    const store_id = user?.store_id || null;
+
+    // Dish ID should come from product
+    const dish_id = product?.dish_id || null;
+
+    if (product.isFavorite) {
+      // Build request body with snake_case keys
+      const requestBody = {
+        user_id: user_id,
+        store_id: 33,
+        dish_id: dish_id,
+      };
+
+      
+
+      this.apiService.addwhishlist(requestBody).subscribe({
+        next: (data: any) => {
+          console.log(" Added to wishlist:", data);
+        },
+        error: (err) => {
+          console.error(" Error adding to wishlist:", err);
+        },
+      });
+    }
   }
+
+
+
+
   private persistFavorites() {
     try {
       const map: Record<number, boolean> = {};
@@ -165,4 +197,5 @@ export class MenuComponent implements OnInit, OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
   }
+
 }

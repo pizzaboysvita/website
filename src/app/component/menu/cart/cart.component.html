@@ -10,7 +10,7 @@
             <div class="item-header">
               <h3 class="item-name">{{ item.dish_id }}</h3>
               <span class="item-price">{{
-                item.price | currency : "INR"
+                item.price | currency : "$"
                 }}</span>
             </div>
             <div class="item-options">
@@ -47,11 +47,11 @@
         <div class="price-summary">
           <div class="summary-row">
             <span>Sub total</span>
-            <span>{{ totalPrice | currency : "INR" }}</span>
+            <span>{{ totalPrice | currency : "$" }}</span>
           </div>
           <div class="summary-row total">
             <span>Total</span>
-            <span>{{ totalPrice | currency : "INR" }}</span>
+            <span>{{ totalPrice | currency : "$" }}</span>
           </div>
         </div>
         <button class="checkout-btn" (click)="checkout()" [disabled]="cartItems.length === 0">

@@ -7,6 +7,7 @@ import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BreadcrumbComponent } from "../../common/breadcrumb/breadcrumb.component";
 import { Router } from "@angular/router";
+import { HomeService } from "../../../services/home.service";
 @Component({
   selector: "app-cart",
   standalone: true,
@@ -27,7 +28,9 @@ export class CartComponent implements OnInit {
   notes: string = "";
   userId = 101;
   storeId = 33;
-  constructor(private cartService: CartService, private router: Router) {}
+  subtotal = 1792.30;
+  total = 1792.30;
+  constructor(private cartService: CartService, private router: Router, private apiservce: HomeService) { }
   ngOnInit(): void {
     this.cartService.cartItems$.subscribe((items) => {
       this.cartItems = items.map((item) => {
@@ -90,7 +93,93 @@ export class CartComponent implements OnInit {
     this.cartService.clearCart();
   }
   checkout(): void {
-    console.log("Proceed to checkout", this.cartItems);
-    this.router.navigate(["/myorders"]);
+    console.log(" Proceed to checkout (hardcoded payload)");
+    const orderData = {
+      orderId: '#12345',              // later you can replace with backend ID
+      amountPaid: this.total,
+      paymentMethod: 'Cash',
+      status: 'Completed'
+    };
+    const requestBody = {
+      total_price: 500,
+      total_quantity: 2,
+      store_id: 1,
+      order_type: "test",
+      pickup_datetime: "2025-08-18 15:00:00",
+      delivery_address: null,
+      delivery_fees: 0,
+      delivery_datetime: null,
+      order_notes: "Customer will pick up",
+      order_status: "Order_placed",
+      order_created_by: 101,
+      topping_details: [
+        {
+          dish_id: 142,
+          name: "extra_cheese",
+          price: 250,
+          quantity: 1
+        },
+        {
+          dish_id: 142,
+          name: "extra_sauce",
+          price: 250,
+          quantity: 1
+        }
+      ],
+      ingredients_details: [
+        {
+          dish_id: 142,
+          name: "extra onions",
+          price: 1,
+          quantity: 1
+        }
+      ],
+      order_details_json: [
+        {
+          dish_id: 158,
+          dish_note: "abc",
+          quantity: 1,
+          price: 250
+        },
+        {
+          dish_id: 142,
+          dish_note: "abcd",
+          quantity: 1,
+          price: 250,
+          base: "small",
+          base_price: 2
+        }
+      ],
+      payment_method: "Cash",
+      payment_status: "Completed",
+      payment_amount: 500,
+      is_pos_order: 1,
+      order_due: null,
+      order_due_datetime: null,
+      unitnumber: "POS-001",
+      delivery_notes: null,
+      gst_price: 2.25
+    };
+
+    console.log(" Hardcoded Order Payload:", JSON.stringify(requestBody, null, 2));
+
+    this.apiservce.addOrder(requestBody).subscribe({
+      next: (data: any) => {
+        console.log(" Order placed:", data);
+
+        // optional: clear cart
+        this.cartItems = [];
+        localStorage.removeItem("cart");
+
+        this.router.navigate(["/checkout"], { state: { order: orderData } });
+      },
+      error: (err) => {
+        console.error(" Error placing order:", err);
+      }
+    });
   }
+
+
+
+
 }

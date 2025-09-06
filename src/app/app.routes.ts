@@ -11,6 +11,7 @@ import { LoginComponent } from "./login/login.component";
 import { AboutusComponent } from "./aboutus/aboutus.component";
 import { WhishlistComponent } from "./component/dashboard/whishlist/whishlist.component";
 import { OrderhistoryComponent } from "./component/dashboard/orderhistory/orderhistory.component";
+import { CheckoutComponent } from "./component/menu/cart/checkout/checkout.component";
 export const routes: Routes = [
   {
     path: "",
@@ -55,17 +56,17 @@ export const routes: Routes = [
   {
     path: "wishlist",
     component: WhishlistComponent,
-    data: { breadcrumb: "wishlist" },
+    data: { breadcrumb: "Wishlist" },
   },
   {
     path: "myorders",
     component: OrderhistoryComponent,
-    data: { breadcrumb: "myorders" },
+    data: { breadcrumb: "My Orders" },
   },
   {
     path: "aboutus",
     component: AboutusComponent,
-    data: { breadcrumb: "aboutus" },
+    data: { breadcrumb: "About Us" },
   },
   {
     path: "signup",
@@ -74,6 +75,10 @@ export const routes: Routes = [
   {
     path: "login",
     component: LoginComponent,
+  },
+  {
+    path:"checkout",
+    component:CheckoutComponent
   },
   { path: "**", redirectTo: "pages/404" },
 ];
