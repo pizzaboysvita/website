@@ -6,6 +6,7 @@ import { HomeService } from "../../../services/home.service";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { CartService } from "../../../services/cart.service";
+import { BreadcrumbComponent } from "../../common/breadcrumb/breadcrumb.component";
 @Component({
   selector: "app-addcart",
   standalone: true, // Added standalone: true since this is a common practice
@@ -15,6 +16,7 @@ import { CartService } from "../../../services/cart.service";
     FooterComponent,
     FormsModule,
     ReactiveFormsModule,
+    BreadcrumbComponent
   ],
   templateUrl: "./addcart.component.html",
   styleUrl: "./addcart.component.scss",

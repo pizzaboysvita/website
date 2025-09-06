@@ -14,7 +14,7 @@
             <div *ngIf="order">
                 <ul>
                     <li><span>Order ID:</span> <strong>{{ order.orderId }}</strong></li>
-                    <li><span>Amount Paid:</span> <strong>₹{{ order.amountPaid }}</strong></li>
+                    <li><span>Amount Paid:</span> <strong>${{ order.amountPaid }}</strong></li>
                     <li><span>Payment Method:</span> <strong>{{ order.paymentMethod }}</strong></li>
                     <li><span>Status:</span> <strong class="status">{{ order.status }}</strong></li>
                 </ul>

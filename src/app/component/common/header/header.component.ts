@@ -63,7 +63,7 @@ export class HeaderComponent {
     new google.maps.Marker({
       position: { lat: 17.385044, lng: 78.486671 },
       map,
-      title: "Pizza Boys",
+      title: "Pizza Boyz",
     });
   }
 }

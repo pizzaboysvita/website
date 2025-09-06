@@ -56,17 +56,17 @@ export const routes: Routes = [
   {
     path: "wishlist",
     component: WhishlistComponent,
-    data: { breadcrumb: "wishlist" },
+    data: { breadcrumb: "Wishlist" },
   },
   {
     path: "myorders",
     component: OrderhistoryComponent,
-    data: { breadcrumb: "myorders" },
+    data: { breadcrumb: "My Orders" },
   },
   {
     path: "aboutus",
     component: AboutusComponent,
-    data: { breadcrumb: "aboutus" },
+    data: { breadcrumb: "About Us" },
   },
   {
     path: "signup",
