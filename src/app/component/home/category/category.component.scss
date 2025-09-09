@@ -1,32 +1,53 @@
-.categories-section .categories-style .food-categories {
-  background-color: black;
-}
-.categories-section .categories-style .food-categories:hover h4 {
-  color: red !important;
-}
-.nav-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: red;
-  border: none;
-  color: #fff;
-  font-size: 22px;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-  z-index: 2;
-  box-shadow: 0 2px 8px rgba(201, 194, 194, 0.25);
-  transition: background-color 0.2s ease;
-  &.prev {
-    left: 0; // Aligned to the very edge of the container
+.categories-section {
+  padding: 3rem 0; // overall breathing space
+  // light background to separate
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
   }
-  &.next {
-    right: 20px; // Aligned to the very edge of the container
+  .category-slide {
+    display: flex;
+    justify-content: center;
   }
-  &:hover {
-    background-color: white; // Slightly lighter hover effect
-    color: red;
+  .category-card {
+    background: #0a0808;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    padding: 1.5rem 1rem;
+    width: 200px;
+    transition: all 0.3s ease;
+    border-radius: 15px;
+    padding: 10px;
+    transition: transform 0.3s, box-shadow 0.3s;
+
+    img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 14px;
+      margin-bottom: 1rem;
+    }
+
+    h6 {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: white;
+    }
+
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  .category-swiper {
+    position: relative;
+    padding: 20px 0;
   }
 }
+
+/* Import Swiper styles */
+@import "swiper/swiper-bundle.css";

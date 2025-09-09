@@ -1,24 +1,36 @@
-<section class="categories-section section-b-space">
-  <div class="container">
-    <div class="theme-arrow">
-      <div class="swiper categories-slider categories-style">
-        <div class="swiper-wrapper">
-          <owl-carousel-o [options]="customOptions" #owlCar>
-            @for (item of categories; track item) {
-            <ng-template carouselSlide>
-              <div class="swiper-slide" style="margin-right: 20px;" (click)="selectCategory(item)">
-                <a class="food-categories">
-                  <img class="img-fluid categories-img p-1" [src]="item.category_image" alt="" />
-                  <h6 class="text-white p-2">{{item.name}}</h6>
-                </a>
-              </div>
-            </ng-template>
-            }
-          </owl-carousel-o>
-          <button class="nav-btn prev" (click)="owlCar.prev()">&#10094;</button>
-          <button class="nav-btn next" (click)="owlCar.next()">&#10095;</button>
-        </div>
+<div class="container">
+  <section class="categories-section">
+
+    <!-- Case 1: Only 1–2 categories -->
+    <div *ngIf="showStaticTwo" class="d-flex justify-content-center gap-4 flex-wrap">
+      <div *ngFor="let item of categories" class="category-card">
+        <img [src]="item.category_image" alt="{{ item.name }}" />
+        <h6>{{ item.name }}</h6>
       </div>
     </div>
-  </div>
-</section>
+
+    <!-- Case 2: Between 3–6 categories -->
+    <div *ngIf="showStaticGrid" class="d-flex justify-content-center gap-4 flex-wrap">
+      <div *ngFor="let item of categories" class="category-card">
+        <img [src]="item.category_image" alt="{{ item.name }}" />
+        <h6>{{ item.name }}</h6>
+      </div>
+    </div>
+
+    <!-- Case 3: More than 6 categories (Swiper active) -->
+    <swiper-container *ngIf="showSwiper" slides-per-view="4" space-between="10" navigation="true"
+      class="category-swiper swiper-wrapper">
+      <swiper-slide *ngFor="let item of categories" class="swiper-slide category-slide">
+        <div class="category-card">
+          <div class="image-wrapper">
+            <img [src]="item.category_image" alt="{{ item.name }}" />
+          </div>
+          <h6>{{ item.name }}</h6>
+        </div>
+      </swiper-slide>
+    </swiper-container>
+
+
+
+  </section>
+</div>

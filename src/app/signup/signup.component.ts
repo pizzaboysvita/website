@@ -65,6 +65,7 @@ export class SignupComponent {
   onSubmit() {
     if (this.signupForm.invalid) {
       this.signupForm.markAllAsTouched();
+      console.log("⚠️ Form invalid");
       return;
     }
     const userPayload = {
@@ -106,14 +107,20 @@ export class SignupComponent {
       },
     };
     this.authService.signup(userPayload, this.selectedFile).subscribe({
-      next: (res: any) => {
-        console.log("Signup success:", res);
-        alert("Signup successful!");
-      },
-      error: (err: any) => {
-        console.error("Signup failed:", err);
-        alert("Signup failed. Try again.");
-      },
-    });
+  next: (res: any) => {
+    console.log("Signup success:", res);
+
+    if (res.token) {
+      localStorage.setItem("token", res.token); // 🔑 Save token
+    }
+
+    alert("Signup successful!");
+  },
+  error: (err: any) => {
+    console.error("Signup failed:", err);
+    alert("Signup failed. Try again.");
+  },
+});
+
   }
 }

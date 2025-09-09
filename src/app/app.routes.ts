@@ -12,6 +12,7 @@ import { AboutusComponent } from "./aboutus/aboutus.component";
 import { WhishlistComponent } from "./component/dashboard/whishlist/whishlist.component";
 import { OrderhistoryComponent } from "./component/dashboard/orderhistory/orderhistory.component";
 import { CheckoutComponent } from "./component/menu/cart/checkout/checkout.component";
+import { HelpComponent } from "./help/help.component";
 export const routes: Routes = [
   {
     path: "",
@@ -79,6 +80,10 @@ export const routes: Routes = [
   {
     path:"checkout",
     component:CheckoutComponent
+  },
+  {
+    path:"help",
+    component:HelpComponent
   },
   { path: "**", redirectTo: "pages/404" },
 ];

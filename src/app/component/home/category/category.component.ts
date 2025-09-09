@@ -1,49 +1,55 @@
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  Output,
-  ViewChild,
-} from "@angular/core";
-import { CarouselModule, OwlOptions } from "ngx-owl-carousel-o";
+
+import {Component,EventEmitter,Output,} from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HomeService } from "../../../services/home.service";
+
+
 @Component({
   selector: "app-category",
   standalone: true,
-  imports: [CarouselModule, CommonModule],
+  imports: [ CommonModule,],
   templateUrl: "./category.component.html",
   styleUrl: "./category.component.scss",
+    schemas: [CUSTOM_ELEMENTS_SCHEMA] 
 })
 export class CategoryComponent {
-  public categories: any[] = [];
-  @Output() categorySelected = new EventEmitter<number>();
-  public customOptions: OwlOptions = {
-    loop: true,
-    margin: 0,
-    dots: false,
-    nav: false,
-    autoplay: false,
-    responsive: {
-      0: { items: 2 },
-      480: { items: 3 },
-      768: { items: 4 },
-      1024: { items: 6 },
-    },
-  };
+    categories: any[] = [];
+
+  @Output() categorySelected = new EventEmitter<any>();
+
   constructor(private apiService: HomeService) {}
+
   ngOnInit(): void {
-    this.apiService.getCategories().subscribe((response) => {
-      if (response && response.categories) {
-        this.categories = response.categories.map((cat: any) => ({
+  this.apiService.getCategories().subscribe((response) => {
+    if (response && response.categories) {
+      this.categories = response.categories
+        //  .slice(0, 2) // ✅ only first 2 items for testing
+        .map((cat: any) => ({
           ...cat,
           imageLoaded: false,
         }));
-      }
-    });
-  }
+    }
+  });
+ }
+
+
   selectCategory(categoryId: any) {
     this.categorySelected.emit(categoryId);
     console.log(`Category selected: ${categoryId}`);
   }
-}
+
+  // ✅ conditions
+  get showStaticTwo() {
+    return this.categories.length <= 2;
+  }
+
+  get showStaticGrid() {
+    return this.categories.length > 2 && this.categories.length <= 6;
+  }
+
+  get showSwiper() {
+    return this.categories.length > 6;
+  }
+  }
+
