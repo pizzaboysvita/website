@@ -73,13 +73,15 @@
                 </div>
                 <!-- Profile -->
                 <div class="profile-part dropdown-button order-md-2 dropdown">
-                    <img class="img-fluid profile-pic" src="{{user?.profiles}}" alt="profile">
+                    <img class="img-fluid profile-pic" src="{{ user?.profiles }}" alt="profile" (click)="goToProfile()">
+
                     <div>
                         <h6 class="fw-normal" *ngIf="user">Hi, {{ user?.first_name }}</h6>
                         <h5 class="fw-medium dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">My Account
                         </h5>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" routerLink="/myorders">My Orders</a></li>
+
                             <li>
                                 <hr class="dropdown-divider">
                             </li>

@@ -22,7 +22,7 @@ export class HeaderComponent {
     private authService: AuthService,
     private router: Router,
     private modalService: NgbModal
-  ) {}
+  ) { }
   ngOnInit() {
     this.token = this.authService.getToken();
     let user1 = localStorage.getItem('user');
@@ -42,6 +42,9 @@ export class HeaderComponent {
   }
   goToWishList() {
     this.router.navigate(["/wishlist"]);
+  }
+  goToProfile() {
+    this.router.navigate(['/profile']);
   }
   logout() {
     this.authService.logout();
