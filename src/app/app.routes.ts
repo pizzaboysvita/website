@@ -16,6 +16,9 @@ import { HelpComponent } from "./help/help.component";
 import { TermsndconditionsComponent } from "./termsndconditions/termsndconditions.component";
 import { FeedbackComponent } from "./feedback/feedback.component";
 import { DeliverypolicyComponent } from "./deliverypolicy/deliverypolicy.component";
+import { PrivacypolicyComponent } from "./privacypolicy/privacypolicy.component";
+import { ReviewComponent } from "./review/review.component";
+import { ProfileComponent } from "./profile/profile.component";
 export const routes: Routes = [
   {
     path: "",
@@ -97,5 +100,8 @@ export const routes: Routes = [
   {
     path:"deliverypolicy",component:DeliverypolicyComponent
   },
+  {path:"privacypolicy",component:PrivacypolicyComponent},
+  {path:"review",component:ReviewComponent},
+  {path:"profile",component:ProfileComponent},
   { path: "**", redirectTo: "pages/404" },
 ];
