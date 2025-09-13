@@ -1,0 +1,91 @@
+<app-header></app-header>
+<!-- Bootstrap & Font Awesome -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+<section class="terms-section py-5">
+  <div class="container">
+    <h2 class="fw-bold text-uppercase text-center  section-title mt-5 ">
+      📜 Terms & Conditions
+    </h2>
+
+    <div class="accordion custom-accordion" id="termsAccordion">
+
+      <!-- Order Policy -->
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#policy1">
+            <i class="fas fa-pizza-slice me-2"></i> Order Policy
+          </button>
+        </h2>
+        <div id="policy1" class="accordion-collapse collapse" data-bs-parent="#termsAccordion">
+          <div class="accordion-body">
+            All orders must be placed through our website or official partners.
+          </div>
+        </div>
+      </div>
+
+      <!-- Delivery -->
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#policy2">
+            <i class="fas fa-clock me-2"></i> Delivery Time
+          </button>
+        </h2>
+        <div id="policy2" class="accordion-collapse collapse" data-bs-parent="#termsAccordion">
+          <div class="accordion-body">
+            We aim to deliver within 30-45 minutes. However, times may vary based on location and traffic.
+          </div>
+        </div>
+      </div>
+
+      <!-- Payment -->
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#policy3">
+            <i class="fas fa-credit-card me-2"></i> Payment
+          </button>
+        </h2>
+        <div id="policy3" class="accordion-collapse collapse" data-bs-parent="#termsAccordion">
+          <div class="accordion-body">
+            Secure online payments and cash on delivery are accepted.
+          </div>
+        </div>
+      </div>
+
+      <!-- Cancellations -->
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#policy4">
+            <i class="fas fa-ban me-2"></i> Cancellations
+          </button>
+        </h2>
+        <div id="policy4" class="accordion-collapse collapse" data-bs-parent="#termsAccordion">
+          <div class="accordion-body">
+            Orders once prepared cannot be cancelled. Refunds apply only for failed deliveries.
+          </div>
+        </div>
+      </div>
+
+      <!-- Quality -->
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#policy5">
+            <i class="fas fa-shield-alt me-2"></i> Quality Assurance
+          </button>
+        </h2>
+        <div id="policy5" class="accordion-collapse collapse" data-bs-parent="#termsAccordion">
+          <div class="accordion-body">
+            If you face any issue with your order, please contact us within 24 hours.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<app-footer></app-footer>

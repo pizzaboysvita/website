@@ -2,35 +2,45 @@
   <section class="categories-section">
 
     <!-- Case 1: Only 1–2 categories -->
-    <div *ngIf="showStaticTwo" class="d-flex justify-content-center gap-4 flex-wrap">
-      <div *ngFor="let item of categories" class="category-card">
-        <img [src]="item.category_image" alt="{{ item.name }}" />
-        <h6>{{ item.name }}</h6>
+    @if (showStaticTwo) {
+      <div class="d-flex justify-content-center gap-4 flex-wrap">
+        @for (item of categories; track item.id) {
+          <div class="category-card" (click)="selectCategory(item)">
+            <img [src]="item.category_image" alt="{{ item.name }}" />
+            <h6>{{ item.name }}</h6>
+          </div>
+        }
       </div>
-    </div>
+    }
 
     <!-- Case 2: Between 3–6 categories -->
-    <div *ngIf="showStaticGrid" class="d-flex justify-content-center gap-4 flex-wrap">
-      <div *ngFor="let item of categories" class="category-card">
-        <img [src]="item.category_image" alt="{{ item.name }}" />
-        <h6>{{ item.name }}</h6>
+    @if (showStaticGrid) {
+      <div class="d-flex justify-content-center gap-4 flex-wrap">
+        @for (item of categories; track item.id) {
+          <div class="category-card" (click)="selectCategory(item)">
+            <img [src]="item.category_image" alt="{{ item.name }}" />
+            <h6>{{ item.name }}</h6>
+          </div>
+        }
       </div>
-    </div>
+    }
 
     <!-- Case 3: More than 6 categories (Swiper active) -->
-    <swiper-container *ngIf="showSwiper" slides-per-view="4" space-between="10" navigation="true"
-      class="category-swiper swiper-wrapper">
-      <swiper-slide *ngFor="let item of categories" class="swiper-slide category-slide">
-        <div class="category-card">
-          <div class="image-wrapper">
-            <img [src]="item.category_image" alt="{{ item.name }}" />
-          </div>
-          <h6>{{ item.name }}</h6>
-        </div>
-      </swiper-slide>
-    </swiper-container>
-
-
+    @if (showSwiper) {
+      <swiper-container slides-per-view="4" space-between="10" navigation="true"
+        class="category-swiper swiper-wrapper">
+        @for (item of categories; track item.id) {
+          <swiper-slide class="swiper-slide category-slide">
+            <div class="category-card" (click)="selectCategory(item)">
+              <div class="image-wrapper">
+                <img [src]="item.category_image" alt="{{ item.name }}" />
+              </div>
+              <h6>{{ item.name }}</h6>
+            </div>
+          </swiper-slide>
+        }
+      </swiper-container>
+    }
 
   </section>
 </div>

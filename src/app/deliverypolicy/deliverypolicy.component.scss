@@ -1,0 +1,57 @@
+/* Section Styling */
+.delivery-section {
+  background-color: #000; /* Black background */
+  color: #fff;
+  padding: 60px 20px;
+  border-radius: 12px;
+}
+
+/* Title */
+.section-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #e63946; /* Red */
+}
+
+.section-title span {
+  color: #fff;
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  color: #bbb;
+}
+
+/* Policy Card */
+.policy-card {
+  background: #111;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+  border-left: 5px solid #e63946;
+}
+
+/* List */
+.policy-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.policy-list li {
+  padding: 12px 0;
+  font-size: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.policy-list li:last-child {
+  border-bottom: none;
+}
+
+/* Note */
+.note {
+  margin-top: 15px;
+  font-size: 0.95rem;
+  color: #f8d210; /* Yellow note */
+  font-style: italic;
+}

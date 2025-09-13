@@ -1,0 +1,68 @@
+.feedback-section {
+  background: #111;
+  color: #fff;
+}
+
+.feedback-section h2 {
+  color: #e63946; /* bold red heading */
+}
+
+.feedback-section .intro {
+  color: #bbb;
+  font-size: 1rem;
+}
+
+.feedback-card {
+  background: #1a1a1a;
+  border-radius: 12px;
+  border: 1px solid #333;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.feedback-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(230, 57, 70, 0.4);
+}
+
+.feedback-card em {
+  color: #ddd;
+  font-size: 0.95rem;
+}
+
+.feedback-card p {
+  color: #e63946;
+  font-size: 0.9rem;
+}
+
+.form-control {
+  background: #222;
+  border: 1px solid #444;
+  color: #fff;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.form-control::placeholder {
+  color: #888;
+}
+
+.form-control:focus {
+  background: #222;
+  border-color: #e63946;
+  box-shadow: 0 0 8px rgba(230, 57, 70, 0.6);
+  color: #fff;
+}
+
+.btn-danger {
+  background: #e63946;
+  border: none;
+  font-weight: 600;
+  padding: 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-danger:hover {
+  background: #b71c1c;
+  box-shadow: 0 4px 12px rgba(230, 57, 70, 0.5);
+}

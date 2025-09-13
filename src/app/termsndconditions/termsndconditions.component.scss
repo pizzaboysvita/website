@@ -1,0 +1,57 @@
+/* Section Styling */
+.terms-section {
+  background-color: #000; /* black */
+  color: #fff;
+  border-radius: 10px;
+}
+
+/* Title */
+.section-title {
+  color: #92101b; /* red */
+  font-size: 2rem;
+  letter-spacing: 1px;
+}
+
+/* Accordion */
+.custom-accordion .accordion-item {
+  background-color: #111;
+  border: none;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgba(230, 57, 70, 0.3);
+}
+
+.custom-accordion .accordion-button {
+  background-color: #111;
+  color: #fff;
+  font-weight: 600;
+  padding: 15px;
+  border: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.custom-accordion .accordion-button i {
+  color: #850c16; /* red icons */
+}
+
+.custom-accordion .accordion-button::after {
+  filter: invert(100%); /* white arrow */
+}
+
+.custom-accordion .accordion-button:not(.collapsed) {
+  background-color: #6a050e; /* red when active */
+  color: #fff;
+}
+
+.custom-accordion .accordion-button:not(.collapsed) i {
+  color: #fff; /* white icon when active */
+}
+
+.custom-accordion .accordion-body {
+  background: #1a1a1a;
+  color: #ddd;
+  padding: 20px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
