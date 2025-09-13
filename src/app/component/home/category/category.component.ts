@@ -1,5 +1,5 @@
 
-import {Component,EventEmitter,Output,} from "@angular/core";
+import { Component, EventEmitter, Output, } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HomeService } from "../../../services/home.service";
@@ -8,30 +8,30 @@ import { HomeService } from "../../../services/home.service";
 @Component({
   selector: "app-category",
   standalone: true,
-  imports: [ CommonModule,],
+  imports: [CommonModule,],
   templateUrl: "./category.component.html",
   styleUrl: "./category.component.scss",
-    schemas: [CUSTOM_ELEMENTS_SCHEMA] 
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CategoryComponent {
-    categories: any[] = [];
+  categories: any[] = [];
 
   @Output() categorySelected = new EventEmitter<any>();
 
-  constructor(private apiService: HomeService) {}
+  constructor(private apiService: HomeService) { }
 
   ngOnInit(): void {
-  this.apiService.getCategories().subscribe((response) => {
-    if (response && response.categories) {
-      this.categories = response.categories
-        //  .slice(0, 2) // ✅ only first 2 items for testing
-        .map((cat: any) => ({
-          ...cat,
-          imageLoaded: false,
-        }));
-    }
-  });
- }
+    this.apiService.getCategories().subscribe((response) => {
+      if (response && response.categories) {
+        this.categories = response.categories
+          //  .slice(0, 5) // ✅ only first 2 items for testing
+          .map((cat: any) => ({
+            ...cat,
+            imageLoaded: false,
+          }));
+      }
+    });
+  }
 
 
   selectCategory(categoryId: any) {
@@ -51,5 +51,6 @@ export class CategoryComponent {
   get showSwiper() {
     return this.categories.length > 6;
   }
-  }
+}
+
 

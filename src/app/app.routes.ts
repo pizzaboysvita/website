@@ -13,6 +13,9 @@ import { WhishlistComponent } from "./component/dashboard/whishlist/whishlist.co
 import { OrderhistoryComponent } from "./component/dashboard/orderhistory/orderhistory.component";
 import { CheckoutComponent } from "./component/menu/cart/checkout/checkout.component";
 import { HelpComponent } from "./help/help.component";
+import { TermsndconditionsComponent } from "./termsndconditions/termsndconditions.component";
+import { FeedbackComponent } from "./feedback/feedback.component";
+import { DeliverypolicyComponent } from "./deliverypolicy/deliverypolicy.component";
 export const routes: Routes = [
   {
     path: "",
@@ -84,6 +87,15 @@ export const routes: Routes = [
   {
     path:"help",
     component:HelpComponent
+  },
+  {
+    path:"terms",component:TermsndconditionsComponent
+  },
+  {
+    path:"feedback",component:FeedbackComponent
+  },
+  {
+    path:"deliverypolicy",component:DeliverypolicyComponent
   },
   { path: "**", redirectTo: "pages/404" },
 ];
