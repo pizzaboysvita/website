@@ -1,35 +1,38 @@
 <app-header></app-header>
 <app-breadcrumb></app-breadcrumb>
 <div class="wishlist-container">
-  <div class="wishlist-card" *ngFor="let item of wishlist; let i = index">
-    <div class="card-image">
-      <img [src]="item.image" [alt]="item.restaurantName">
-      <!-- <button class="close-btn" (click)="removeItem(i)">×</button> -->
-
-      <!-- Fav Checkbox -->
-      <input type="checkbox" [id]="'fav' + i" class="fav-checkbox">
-      <label [for]="'fav' + i" class="fav-label"><i class="bi bi-heart"></i></label>
-
-      <hr>
-      <div *ngIf="item.offer" class="offer">upto {{item.offer}} <span>50% OFF</span></div>
-      <div *ngIf="item.bestSeller" class="best-seller">Best Seller</div>
-    </div>
-
-    <div class="card-content">
-      <h4>{{ item.restaurantName }}</h4>
-      <p>{{ item.pizzaName }}</p>
-      <div class="rating">{{ item.rating }}</div>
-      <div class="info">
-        <span>• {{ item.location }}</span>
-        <span>
-          <img src="/assets/images/icons/location.png" alt="location" class="location-img" /> {{ item.distance }}
-        </span>
-        <span>
-          <img src="/assets/images/icons/clock.png" alt="clock" class="location-img" /> {{ item.time }}
-        </span>
-      </div>
-    </div>
-  </div>
+  
+        <div class="row g-md-4 g-3">
+            @for (item of wishlist; track item) {
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="vertical-product-box product-style-3">
+                    <div class="vertical-product-box-img">
+                        <a>
+                            <img class="product-img-top w-100 bg-img" [src]="item.category_image" alt="vp1" (error)="onImageError($event)" >
+                        </a>
+                    </div>
+                    <div class="vertical-product-body">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <a>
+                                <h4 class="vertical-product-title">{{item.dish_name}}</h4>
+                            </a>
+                            <h6 class="rating-star">
+                                <span class="star"><i class="ri-star-s-fill"></i></span>4.5
+                            </h6>
+                        </div>
+                        <h5 class="product-items">{{item.store_name}}</h5>
+                        <div class="location-distance d-flex align-items-center justify-content-between pt-sm-3 pt-2">
+                            <h5 class="place">{{item.dish_price}}</h5>
+                            <ul class="distance">
+                                <li><i class="ri-map-pin-fill icon"></i> 0.5 km</li>
+                                <li><i class="ri-time-fill icon"></i> 3 min</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
 </div>
 
 <app-footer></app-footer>
