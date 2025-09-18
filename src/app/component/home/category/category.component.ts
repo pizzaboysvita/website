@@ -23,14 +23,23 @@ export class CategoryComponent {
   ngOnInit(): void {
     this.apiService.getCategories().subscribe((response) => {
       if (response && response.categories) {
+        console.log('Total categories received from API:', response.categories.length);
+
         this.categories = response.categories
-          //  .slice(0, 5) // ✅ only first 2 items for testing
+          // .slice(0, 6) // only first 6 items
           .map((cat: any) => ({
             ...cat,
             imageLoaded: false,
           }));
+
+        console.log('Categories assigned to component (after slice):', this.categories.length);
+      } else {
+        console.warn('No categories found in API response');
       }
+    }, (error) => {
+      console.error('Error fetching categories:', error);
     });
+
   }
 
 
@@ -45,11 +54,11 @@ export class CategoryComponent {
   }
 
   get showStaticGrid() {
-    return this.categories.length > 2 && this.categories.length <= 6;
+    return this.categories.length > 2 && this.categories.length <= 5;
   }
 
   get showSwiper() {
-    return this.categories.length > 6;
+    return this.categories.length > 5;
   }
 }
 
