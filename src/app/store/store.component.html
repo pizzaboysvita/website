@@ -6,28 +6,47 @@
             <div id="map"></div>
         </div>
         <div class="col-sm-6">
-            <div> <input id="search-input" type="text" placeholder="🔍 Street number, Name or Postal Code"></div>
+            <!-- 🔍 Search Box -->
+            <div class="mb-3">
+                <input id="search-input" type="text" class="form-control shadow-sm"
+                    placeholder="🔍 Search by Store Name, Street or City">
+            </div>
+
+            <!-- 📍 Store List -->
             <div class="location-list">
-                <div *ngFor="let loc of locations" class="location-card mt-3"
-                    (click)="goToLocation(loc.lat, loc.lng, loc)">
-                    <div class="location-header">
-                        <div class="location-info">
-                            <h3>{{ loc.name }}</h3>
-                            <p class="text-success">{{ loc.distance }} . {{ loc.address }}</p>
+                <div *ngFor="let store of locations" class="location-card card shadow-sm border-0 p-3 mb-3"
+                    (click)="goToLocation(store.lat, store.lng, store)">
+
+                    <div class="d-flex align-items-start">
+
+
+                        <!-- Store Info -->
+                        <div class="flex-grow-1">
+                            <h5 class="mb-1 fw-bold">{{ store.name }}</h5>
+                            <p class="text-muted mb-1">📍 {{ store.address }}</p>
                         </div>
                     </div>
-                    <!-- FUTURE BUTTON -->
-                    <div *ngIf="loc.showHours" class="mt-2">
-                        <button class="btn btn-primary btn-sm mb-2">Future Order</button>
-                        <ul class="list-group">
-                            <li *ngFor="let day of (loc.hours | keyvalue)" class="list-group-item">
-                                <strong>{{ day.key }}:</strong> {{ day.value }}
+
+                    <!-- ⏰ Working Hours + Future Order Button -->
+                    <div *ngIf="store.showHours" class="mt-3">
+                        <button class="btn btn-danger btn-sm rounded-pill px-3 mb-2" (click)="markStoreOnMap(store)">
+                            Future Order
+                        </button>
+
+                        <ul class="list-group small">
+                            <li *ngFor="let day of store.hours"
+                                class="list-group-item d-flex justify-content-between align-items-center">
+                                <strong>{{ day.day }}</strong>
+                                <span>{{ day.from }} - {{ day.to }}</span>
                             </li>
                         </ul>
                     </div>
+
                 </div>
             </div>
         </div>
+
+
     </div>
 </div>
 <app-footer></app-footer>
