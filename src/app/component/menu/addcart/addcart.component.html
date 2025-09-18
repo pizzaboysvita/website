@@ -54,7 +54,7 @@
                                         (click)="optionGroup.isMultiple ? toggleOption(option, i) : selectOption(option, i)">
                                         <div class="option-item-left">
                                             <span>{{ option.name }}</span>
-                                            <span *ngIf="option.price">{{ option.price | currency: 'R' }}</span>
+                                            <span *ngIf="option.price">{{ option.price | currency: '$ ' }}</span>
                                         </div>
                                         <div class="option-item-right">
                                             <ng-container *ngIf="!optionGroup.isMultiple">
