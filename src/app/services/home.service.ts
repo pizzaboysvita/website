@@ -8,7 +8,8 @@ export class HomeService {
   private categoryUrl = "http://78.142.47.247:3003/api/category";
   private dishUrl = "http://78.142.47.247:3003/api/dish";
   private apiUrl = "http://78.142.47.247:3003/api/wishlist";
-  private apiorder = "http://78.142.47.247:3003/api/"
+  private apiorder = "http://78.142.47.247:3003/api/";
+  private storeUrl = "http://78.142.47.247:3003/api/store";
 
 
 
@@ -35,15 +36,17 @@ export class HomeService {
     return this.http.post(`${this.apiUrl}`, body, { headers });
   }
   //get wishlist
-  getWishlist(): Observable<any> {
+  getWishlist(userId: number): Observable<any> {
     const token = localStorage.getItem('token');
 
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
+    let headers = new HttpHeaders();
+    if (token) {
+      headers = headers.set('Authorization', `Bearer ${token}`);
+    }
 
+    const params = new HttpParams().set('user_id', userId.toString());
 
-    return this.http.get<any>(this.apiUrl, { headers });
+    return this.http.get<any>(this.apiUrl, { headers, params });
   }
    // get all order
   getOrders(): Observable<any> {
@@ -77,6 +80,10 @@ export class HomeService {
   return this.http.post(`${this.apiorder}order`, order, { headers });
 }
 
+getstores(): Observable<any> {
+  const params = new HttpParams().set("type", "web");
+  return this.http.get(this.storeUrl, { params: params });
+}
 
 
 
