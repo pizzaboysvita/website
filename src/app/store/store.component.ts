@@ -21,12 +21,24 @@ export class StoreComponent {
   map!: google.maps.Map;
   markers: google.maps.Marker[] = [];
   locations: any[] = [];
+  allLocations: any[] = [];
 
   constructor(
     private ngZone: NgZone,
     private service: HomeService
   ) { }
+   isSimilar(str: string, query: string): boolean {
+    if (!str || !query) return false;
 
+    str = str.toLowerCase();
+    query = query.toLowerCase();
+
+    // Exact contains
+    if (str.includes(query)) return true;
+
+    // Simple fuzzy match → మొదటి 3 letters చూసి
+    return str.includes(query.substring(0, Math.min(2, query.length)));
+  }
   ngOnInit(): void {
     // 🚀 Fetch stores from backend immediately when component loads
     this.getStoresFromAPI();
@@ -54,8 +66,11 @@ export class StoreComponent {
     });
   }
 
+  // master list (API data)
+
+
   initMap(): void {
-    const defaultLocation = { lat: -40.9006, lng: 174.8860 }; // Center on India for example
+    const defaultLocation = { lat: -40.9006, lng: 174.8860 }; // default center
     this.map = new google.maps.Map(document.getElementById('map') as HTMLElement, {
       center: defaultLocation,
       zoom: 5,
@@ -68,47 +83,50 @@ export class StoreComponent {
       searchBox.setBounds(this.map.getBounds() as google.maps.LatLngBounds);
     });
 
-    // ✅ Load stores from API instead of defaultLocations
+    // ✅ Load stores from API
     this.getStoresFromAPI();
 
-    searchBox.addListener('places_changed', () => {
-      this.ngZone.run(() => {
-        const places = searchBox.getPlaces();
-        if (!places || places.length === 0) {
-          this.getStoresFromAPI();
-          return;
-        }
+    // ✅ Setup search filter
+    searchBox.addListener("places_changed", () => {
+  this.ngZone.run(() => {
+    const query = input.value.toLowerCase();
 
-        const searchResults: any[] = [];
-        places.forEach((place) => {
-          if (!place.geometry || !place.geometry.location) return;
-          searchResults.push({
-            name: place.name,
-            address: place.formatted_address || place.vicinity || '',
-            lat: place.geometry.location.lat(),
-            lng: place.geometry.location.lng(),
-            showHours: false,
-            hours: null,
-          });
-        });
+    if (!query) {
+      this.locations = [...this.allLocations];
+    } else {
+      this.locations = this.allLocations.filter(
+        (store) =>
+          this.isSimilar(store.name, query) ||
+          this.isSimilar(store.address, query)
+      );
+    }
 
-        this.locations = searchResults;
-        this.showMarkers(searchResults);
-      });
-    });
+    if (this.locations.length === 0) {
+      alert("❌ This location not found");
+      this.locations = [...this.allLocations]; // reset to all
+    }
+
+    console.log("🔎 Filtered Stores:", this.locations);
+    this.showMarkers(this.locations);
+  });
+});
+
+
+
+
   }
 
   // ✅ Fetch stores from backend
   getStoresFromAPI(): void {
-    console.log("📡 Calling API to fetch stores...");
+    console.log("Calling API to fetch stores...");
 
     this.service.getstores().subscribe({
       next: (response: any[]) => {
         console.log("✅ API Response received:", response);
 
         const geocoder = new google.maps.Geocoder();
+        this.allLocations = []; // reset before pushing
 
-        // Process each store
         response.forEach((store: any, index: number) => {
           const fullAddress = `${store.street_address}, ${store.city}, ${store.state}, ${store.country}`;
           console.log(`\n🔍 Geocoding store[${index}] address: ${fullAddress}`);
@@ -126,26 +144,24 @@ export class StoreComponent {
                 hours: store.working_hours ? JSON.parse(store.working_hours) : null,
               };
 
-              console.log(`📍 Geocoded Store[${index}]:`, mappedStore);
+              this.allLocations.push(mappedStore);
 
-              // Push to locations array
-              this.locations.push(mappedStore);
-
-              // Add marker to map
+              // Show all by default
+              this.locations = [...this.allLocations];
               this.showMarkers(this.locations);
             } else {
-              console.error(" Geocode failed for store:", store.store_name, "Status:", status);
+              console.error("❌ Geocode failed for:", store.store_name, "Status:", status);
             }
           });
         });
       },
       error: (err) => {
-        console.error(" Error fetching stores:", err);
+        console.error("❌ Error fetching stores:", err);
       },
     });
   }
 
-
+  // ✅ Show markers on map
   showMarkers(locations: any[]) {
     this.clearMarkers();
     const bounds = new google.maps.LatLngBounds();
@@ -174,17 +190,21 @@ export class StoreComponent {
     }
   }
 
+  // ✅ Go to single location
   goToLocation(lat: number, lng: number, location: any) {
     this.map.setCenter({ lat, lng });
     this.map.setZoom(16);
     this.toggleHours(location);
   }
 
+  // ✅ Toggle store working hours
   toggleHours(location: any) {
     this.locations.forEach((loc) => {
       loc.showHours = loc === location ? !loc.showHours : false;
     });
   }
+
+  // ✅ Mark specific store
   markStoreOnMap(store: any) {
     const lat = Number(store.lat);
     const lng = Number(store.lng);
@@ -194,14 +214,11 @@ export class StoreComponent {
       return;
     }
 
-    // Center map
     this.map.setCenter({ lat, lng });
     this.map.setZoom(16);
 
-    // Clear old markers (if you only want one marker)
     this.clearMarkers();
 
-    // Drop marker
     const marker = new google.maps.Marker({
       position: { lat, lng },
       map: this.map,
@@ -220,8 +237,10 @@ export class StoreComponent {
     this.markers.push(marker);
   }
 
+  // ✅ Clear all markers
   clearMarkers(): void {
     this.markers.forEach((marker) => marker.setMap(null));
     this.markers = [];
   }
+
 }

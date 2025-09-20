@@ -1,19 +1,14 @@
-import { HomeService } from "./../../../services/home.service";
+import { HomeService } from './../../../services/home.service';
 import { Component } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { HeaderComponent } from "../../common/header/header.component";
 import { FooterComponent } from "../../common/footer/footer.component";
 import { BreadcrumbComponent } from "../../common/breadcrumb/breadcrumb.component";
-import { AuthService } from "../../../services/auth.service";
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: "app-whishlist",
-  imports: [
-    HeaderComponent,
-    FooterComponent,
-    CommonModule,
-    BreadcrumbComponent,
-  ],
+  imports: [HeaderComponent, FooterComponent, CommonModule, BreadcrumbComponent],
   templateUrl: "./whishlist.component.html",
   styleUrl: "./whishlist.component.scss",
 })
@@ -22,11 +17,12 @@ export class WhishlistComponent {
   user: any;
   wishlist: any[] = [];
 
-  constructor(private service: HomeService, private authService: AuthService) {}
+  constructor(private service: HomeService,
+    private authService: AuthService) { }
 
   ngOnInit(): void {
     this.token = this.authService.getToken();
-    let user1 = localStorage.getItem("user");
+    let user1 = localStorage.getItem('user');
     if (user1) {
       this.user = JSON.parse(user1);
     }
@@ -36,19 +32,50 @@ export class WhishlistComponent {
   }
 
   loadWishlist(userId: number): void {
-    console.log("➡️ Fetching wishlist for user_id:", userId);
+    console.log(' Fetching wishlist for user_id:', userId);
 
     this.service.getWishlist(userId).subscribe({
       next: (res) => {
-        console.log("✅ Wishlist API Response:", res);
+        console.log(' Wishlist API Response:', res);
         this.wishlist = res.data;
       },
-      error: (err) => console.error("❌ Error fetching wishlist:", err),
+      error: (err) => console.error(' Error fetching wishlist:', err),
     });
   }
 
-  onImageError(event: any) {
-  event.target.src = 'assets/img/chicken_pizzas/Apricot Chicken Pizza.webp';
-}
+  // Component.ts
+  deleteItem(item: any) {
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+    const user_id = user?.user_id || null;
+    const store_id = user?.store_id || null;
+    const wishlist_id = item?.wishlist_id || null;
+    const dish_id = item?.dish_id || null;
+
+    const requestBody = {
+      type: "delete",
+      wishlist_id: wishlist_id,  
+      user_id: user_id,
+      dish_id: dish_id,
+      store_id: store_id || 33
+    };
+
+    this.service.addwhishlist(requestBody).subscribe({
+      next: (data: any) => {
+        console.log(" Removed from wishlist:", data);
+        // remove from UI
+        this.wishlist = this.wishlist.filter(i => i.wishlist_id !== wishlist_id);
+      },
+      error: (err) => {
+        console.error(" Error removing from wishlist:", err);
+      },
+    });
+  }
+
+
 
 }
+
+
+
+
+

@@ -1,38 +1,43 @@
 <app-header></app-header>
 <app-breadcrumb></app-breadcrumb>
-<div class="wishlist-container">
-  
-        <div class="row g-md-4 g-3">
-            @for (item of wishlist; track item) {
-            <div class="col-xl-3 col-lg-4 col-md-6">
-                <div class="vertical-product-box product-style-3">
-                    <div class="vertical-product-box-img">
-                        <a>
-                            <img class="product-img-top w-100 bg-img" [src]="item.category_image" alt="vp1" (error)="onImageError($event)" >
-                        </a>
-                    </div>
-                    <div class="vertical-product-body">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <a>
-                                <h4 class="vertical-product-title">{{item.dish_name}}</h4>
-                            </a>
-                            <h6 class="rating-star">
-                                <span class="star"><i class="ri-star-s-fill"></i></span>4.5
-                            </h6>
-                        </div>
-                        <h5 class="product-items">{{item.store_name}}</h5>
-                        <div class="location-distance d-flex align-items-center justify-content-between pt-sm-3 pt-2">
-                            <h5 class="place">{{item.dish_price}}</h5>
-                            <ul class="distance">
-                                <li><i class="ri-map-pin-fill icon"></i> 0.5 km</li>
-                                <li><i class="ri-time-fill icon"></i> 3 min</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            }
+<div class="container mt-4">
+  <div class="wishlist-grid" *ngIf="wishlist && wishlist.length > 0; else noData">
+    <div class="wishlist-card" *ngFor="let item of wishlist">
+      <div class="wishlist-img">
+        <img [src]="item.dish_image" alt="{{ item.dish_name }}" class="dishimg">
+        <button class="close-icon"  (click)="deleteItem(item)"><i class="ri-close-line"></i></button>
+      </div>
+
+      <div class="wishlist-content">
+        <h4 class="dish-name">{{ item.dish_name }}</h4>
+        <p class="dish-price">Price: ${{ item.dish_price }}</p>
+        <p class="store-name">Store: {{ item.store_name }}</p>
+
+        <div class="location-distance">
+          <div class="location">
+            <i class="ri-map-pin-fill icon"></i> {{ item.location || 'n/z' }}
+          </div>
+          <div class="time">
+            <i class="ri-time-fill icon"></i> {{ item.time || 'N/A' }}
+          </div>
         </div>
+
+        <div class="wishlist-actions">
+          <button class="cart-btn">Add to Cart</button>
+        
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noData>
+    <p class="no-data">No wishlist items found.</p>
+  </ng-template>
 </div>
+
+
+
+
+
 
 <app-footer></app-footer>

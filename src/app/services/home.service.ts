@@ -1,92 +1,71 @@
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
+import { AuthService } from "./auth.service";
 @Injectable({
   providedIn: "root",
 })
 export class HomeService {
-  private categoryUrl = "http://78.142.47.247:3003/api/category";
-  private dishUrl = "http://78.142.47.247:3003/api/dish";
-  private apiUrl = "http://78.142.47.247:3003/api/wishlist";
-  private apiorder = "http://78.142.47.247:3003/api/";
-  private storeUrl = "http://78.142.47.247:3003/api/store";
+  private baseurl = "http://78.142.47.247:3003/api/";
 
 
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
+  private getHeaders(contentType: boolean = true): { headers: HttpHeaders } {
+    const token = this.authService.getToken(); 
+    if (!token) {
+      console.error(" No token found.");
+      return { headers: new HttpHeaders() };
+    }
 
-  constructor(private http: HttpClient) { }
+    let headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
 
+    if (contentType) {
+      headers = headers.set("Content-Type", "application/json");
+    }
 
+    return { headers };
+  }
   getCategories(): Observable<any> {
     const params = new HttpParams().set("store_id", "-1").set("type", "web");
-    return this.http.get(this.categoryUrl, { params: params });
+    return this.http.get(`${this.baseurl}category`, { params });
   }
   getDishes(): Observable<any> {
     const params = new HttpParams().set("store_id", "-1").set("type", "web");
-    return this.http.get(this.dishUrl, { params: params });
+    return this.http.get(`${this.baseurl}dish` ,{ params });
   }
-  //addwhishlist
   addwhishlist(body: any): Observable<any> {
-    const token = localStorage.getItem("token");
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    });
-
-    return this.http.post(`${this.apiUrl}`, body, { headers });
+    return this.http.post(`${this.baseurl}wishlist`, body, this.getHeaders());
   }
-  //get wishlist
   getWishlist(userId: number): Observable<any> {
-    const token = localStorage.getItem('token');
+    const params = new HttpParams().set("user_id", userId.toString());
+    return this.http.get<any>(`${this.baseurl}wishlist`, { ...this.getHeaders(false), params });
+  }
+  getOrders(): Observable<any> {
+    const params = new HttpParams()
+      .set("store_id", "-1")
+      .set("type", "web");
 
-    let headers = new HttpHeaders();
-    if (token) {
-      headers = headers.set('Authorization', `Bearer ${token}`);
+    return this.http.get(`${this.baseurl}order`, { ...this.getHeaders(false), params });
+  }
+
+  addOrder(order: any): Observable<any> {
+    const token = this.authService.getToken();
+    if (!token) {
+      console.error(" No token found. Please log in.");
+      return throwError(() => new Error("Not logged in"));
     }
 
-    const params = new HttpParams().set('user_id', userId.toString());
-
-    return this.http.get<any>(this.apiUrl, { headers, params });
+    return this.http.post(`${this.baseurl}order`, order, this.getHeaders());
   }
-   // get all order
-  getOrders(): Observable<any> {
-    const token = localStorage.getItem('token');
-
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
+  getstores(): Observable<any> {
+    const params = new HttpParams().set("type", "web");
+    return this.http.get(`${this.baseurl}store`, {
+      ...this.getHeaders(false),
+      params,
     });
-
-    const params = new HttpParams()
-
-      .set('store_id', '-1')
-      .set('type', 'web');
-
-    return this.http.get(`${this.apiorder}order`, { params, headers });
-  }
-  // addorder
-  addOrder(order: any): Observable<any> {
-  const token = localStorage.getItem("token"); // 👈 check if token exists
-
-  if (!token) {
-    console.error("⚠️ No token found in localStorage. Please login first.");
-    return throwError(() => new Error("Not logged in"));
-  }
-
-  const headers = new HttpHeaders({
-    Authorization: `Bearer ${token}`,  // 👈 send token here
-    "Content-Type": "application/json"
-  });
-
-  return this.http.post(`${this.apiorder}order`, order, { headers });
-}
-
-getstores(): Observable<any> {
-  const params = new HttpParams().set("type", "web");
-  return this.http.get(this.storeUrl, { params: params });
-}
-
-
-
-}
+  }}
 
 
