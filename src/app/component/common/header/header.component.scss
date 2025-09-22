@@ -1,8 +1,11 @@
 header {
+  font-family: "Poppins", sans-serif;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
+  // padding: 20px 30px;
+  // margin-top: 0px;
   z-index: 1000; // stays above hero
   background: #fff; // solid background so it’s readable
   .navbar {

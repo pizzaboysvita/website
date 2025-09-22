@@ -107,7 +107,7 @@ export class OrderhistoryComponent {
             let url = firstItemWithImage.image_url.replace(/\\/g, '');
             // prepend domain if url is relative
             if (!url.startsWith('http')) {
-              url = `http://78.142.47.247:3004/${url}`;
+              url = `http://78.142.47.247:3003/${url}`;
             }
             image = url || image; // use API image if available, else dummy
           }
@@ -159,7 +159,7 @@ export class OrderhistoryComponent {
 
   //           // If image doesn't start with http, prepend domain
   //           if (!rawUrl.startsWith('http')) {
-  //             rawUrl = `http://78.142.47.247:3004/${rawUrl}`;
+  //             rawUrl = `http://78.142.47.247:3003/${rawUrl}`;
   //           }
 
   //           image = rawUrl;

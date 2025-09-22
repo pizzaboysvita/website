@@ -10,5 +10,22 @@
   transition: transform 0.3s, box-shadow 0.3s;
 }
 .vertical-product-box:hover{
-  border-bottom: 2px dashed rgba(var(--dashed-line), 2);
+  border-bottom: 3px dashed rgba(var(--dashed-line), 3);
 }
+.vertical-product-box-img {
+  width: 100%;
+  height: 200px; /* adjust as needed */
+  overflow: hidden; /* hide overflow */
+  border-radius: 8px; /* optional, matches card style */
+}
+
+.vertical-product-box-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* crop instead of stretch */
+  display: block;
+}
+
+
+
+

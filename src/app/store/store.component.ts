@@ -84,7 +84,7 @@ export class StoreComponent {
     });
 
     // ✅ Load stores from API
-    this.getStoresFromAPI();
+    // this.getStoresFromAPI();
 
     // ✅ Setup search filter
     searchBox.addListener("places_changed", () => {

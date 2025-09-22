@@ -1,6 +1,6 @@
 <app-header></app-header>
 <app-breadcrumb></app-breadcrumb>
-<section class="sectionbg">
+<div class="sectionbg">
   <div class="container mt-4">
     <div class="wishlist-grid" *ngIf="wishlist && wishlist.length > 0; else noData">
       <div class="wishlist-card" *ngFor="let item of wishlist">
@@ -35,5 +35,5 @@
       <p class="no-data">No wishlist items found.</p>
     </ng-template>
   </div>
-</section>
+</div>
 <app-footer></app-footer>
