@@ -1,5 +1,5 @@
-<div class="container">
-  <section class="categories-section">
+<div class="sectionbg">
+  <section class="container categories-section">
     <!-- Case 1: Only 1–2 categories -->
     @if (showStaticTwo) {
     <div class="d-flex justify-content-center gap-4 flex-wrap">
@@ -32,8 +32,7 @@
     '768': { slidesPerView: 3 },
     '992': { slidesPerView: 4 },
     
-  }" navigation="true" loop="false" autoplay='{"delay": 2000, "disableOnInteraction": false}' 
-      class="category-swiper">
+  }" navigation="true" loop="false" autoplay='{"delay": 2000, "disableOnInteraction": false}' class="category-swiper">
       @for (item of categories; track item.id) {
       <swiper-slide class="category-slide">
         <div class="category-card" (click)="selectCategory(item)">
@@ -44,6 +43,5 @@
       }
     </swiper-container>
     }
-
   </section>
 </div>

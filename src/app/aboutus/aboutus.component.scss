@@ -1,4 +1,5 @@
 .about-us {
+  background-color: rgb(36 33 31);
   color: #f5f5f5;
   padding: 60px 20px;
   text-align: center;
@@ -18,7 +19,7 @@
 .about-us p {
   font-size: 1.1rem;
   line-height: 1.8;
-  color: #0b0b0b;
+  color: #fff;
   margin-bottom: 40px;
 }
 .features {
@@ -44,7 +45,8 @@ h1 {
 .testimonial-section {
   text-align: center;
   padding: 50px 0;
-  background: #fff;
+  color: #fff;
+  background-color: rgb(36 33 31);
 }
 .section-title {
   font-size: 28px;
@@ -102,7 +104,8 @@ h1 {
   }
 } //dowload app
 .app-download {
-  color: #0f0c0c;
+  background-color: rgb(36 33 31);
+  color: #fff;
   text-align: center;
   padding: 80px 20px;
 }
@@ -156,8 +159,9 @@ h1 {
   margin-right: 10px;
 }
 .about-section {
-  background: url("https://img.freepik.com/free-photo/black-textured-background_53876-94041.jpg")
-    no-repeat center center/cover;
+  background-color: rgb(36 33 31);
+  // background: url("https://img.freepik.com/free-photo/black-textured-background_53876-94041.jpg")
+  //   no-repeat center center/cover;
   color: #fff;
   padding: 80px 20px;
   text-align: center;

@@ -1,43 +1,39 @@
 <app-header></app-header>
 <app-breadcrumb></app-breadcrumb>
-<div class="container mt-4">
-  <div class="wishlist-grid" *ngIf="wishlist && wishlist.length > 0; else noData">
-    <div class="wishlist-card" *ngFor="let item of wishlist">
-      <div class="wishlist-img">
-        <img [src]="item.dish_image" alt="{{ item.dish_name }}" class="dishimg">
-        <button class="close-icon"  (click)="deleteItem(item)"><i class="ri-close-line"></i></button>
-      </div>
-
-      <div class="wishlist-content">
-        <h4 class="dish-name">{{ item.dish_name }}</h4>
-        <p class="dish-price">Price: ${{ item.dish_price }}</p>
-        <p class="store-name">Store: {{ item.store_name }}</p>
-
-        <div class="location-distance">
-          <div class="location">
-            <i class="ri-map-pin-fill icon"></i> {{ item.location || 'n/z' }}
-          </div>
-          <div class="time">
-            <i class="ri-time-fill icon"></i> {{ item.time || 'N/A' }}
-          </div>
+<section class="sectionbg">
+  <div class="container mt-4">
+    <div class="wishlist-grid" *ngIf="wishlist && wishlist.length > 0; else noData">
+      <div class="wishlist-card" *ngFor="let item of wishlist">
+        <div class="wishlist-img">
+          <img [src]="item.dish_image" alt="{{ item.dish_name }}" class="dishimg">
+          <button class="close-icon" (click)="deleteItem(item)"><i class="ri-close-line"></i></button>
         </div>
 
-        <div class="wishlist-actions">
-          <button class="cart-btn">Add to Cart</button>
-        
+        <div class="wishlist-content">
+          <h4 class="dish-name">{{ item.dish_name }}</h4>
+          <p class="dish-price">Price: ${{ item.dish_price }}</p>
+          <p class="store-name">Store: {{ item.store_name }}</p>
+
+          <!-- <div class="location-distance">
+            <div class="location">
+              <i class="ri-map-pin-fill icon"></i> {{ item.location || 'n/z' }}
+            </div>
+            <div class="time">
+              <i class="ri-time-fill icon"></i> {{ item.time || 'N/A' }}
+            </div>
+          </div> -->
+
+          <div class="wishlist-actions">
+            <button class="cart-btn"  (click)="addToCart(item)">Add to Cart</button>
+
+          </div>
         </div>
       </div>
     </div>
+
+    <ng-template #noData>
+      <p class="no-data">No wishlist items found.</p>
+    </ng-template>
   </div>
-
-  <ng-template #noData>
-    <p class="no-data">No wishlist items found.</p>
-  </ng-template>
-</div>
-
-
-
-
-
-
+</section>
 <app-footer></app-footer>

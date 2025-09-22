@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { Router } from "@angular/router";
 @Component({
   selector: "app-hero",
   standalone: true,
@@ -10,6 +11,7 @@ import { CommonModule } from "@angular/common";
 export class HeroComponent implements OnInit {
   isCurtainsOpen = false;
   @ViewChild("introVideo") introVideoRef!: ElementRef<HTMLVideoElement>;
+  constructor(private router: Router) {}
   ngOnInit(): void {
     // Start curtain animation
     setTimeout(() => {
@@ -24,4 +26,9 @@ export class HeroComponent implements OnInit {
       }, 1600); // Matches curtain animation time
     }, 5000);
   }
+  
+  goToCart() {
+    this.router.navigate(["/cart"]);
+  }
+
 }

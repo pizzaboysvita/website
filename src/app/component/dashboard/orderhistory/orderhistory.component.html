@@ -1,43 +1,45 @@
 <app-header></app-header>
 <app-breadcrumb></app-breadcrumb>
-<div class="account-container">
-    <!-- Sidebar -->
-    <div class="sidebar h-100vh">
-        <div class="profile-card">
-            <img src="https://i.pravatar.cc/150" alt="Profile" class="profile-img" />
-            <h3 class="name">Mark Jecno</h3>
-            <p class="email">mark-jecnogmail.com</p>
+<section class="sectionbg">
+    <div class="account-container">
+        <!-- Sidebar -->
+        <div class="sidebar h-100vh">
+            <div class="profile-card">
+                <img src="{{ user2?.profiles }}" alt="Profile" class="profile-img" />
+                <h3 class="name">{{user2.first_name}}</h3>
+                <p class="email">{{user2.email}}</p>
+            </div>
+            <ul class="menu">
+                <!-- <li><i class="fa fa-user"></i> Change Profile</li> -->
+                <li class="active"><i class="fa fa-box"></i> My Order</li>
+                <!-- <li><i class="fa fa-map-marker"></i> Saved Address</li> -->
+                <!-- <li><i class="fa fa-credit-card"></i> Saved Card</li><br> -->
+                <!-- <li><i class="fa fa-question-circle"></i> Help</li><br> -->
+                <!-- <li><i class="fa fa-cog"></i> Setting</li><br> -->
+                <li><i class="fa fa-sign-out" (click)="logout()"></i> Log Out</li>
+            </ul>
         </div>
-        <ul class="menu">
-            <li><i class="fa fa-user"></i> Change Profile</li>
-            <li class="active"><i class="fa fa-box"></i> My Order</li>
-            <li><i class="fa fa-map-marker"></i> Saved Address</li>
-            <li><i class="fa fa-credit-card"></i> Saved Card</li><br>
-            <li><i class="fa fa-question-circle"></i> Help</li><br>
-            <li><i class="fa fa-cog"></i> Setting</li><br>
-            <li><i class="fa fa-sign-out"></i> Log Out</li>
-        </ul>
-    </div>
-    <!-- Orders Section -->
-    <div class="orders-section">
-        <h2 class="section-title">My Orders</h2>
+        <!-- Orders Section -->
+        <div class="orders-section">
+            <h2 class="section-title text-white">My Orders</h2>
 
-        <div class="order-card" *ngFor="let order of orders; let i = index">
-            <div class="order-left">
-                <img [src]="order.image" alt="Order Image" (error)="onImageError($event)"  class="order-img"/>
-                <div>
-                    <h4 class="brand-name">{{ order.restaurantName }}</h4>
-                    <p class="transaction">Order Id : <span>{{ order.orderId }}</span></p>
-                    <p class="transaction">Transaction Id : <span>{{ order.transactionId }}</span></p>
-                    <p class="amount">Total Price : <span>$ {{ order.totalprice }}</span></p>
+            <div class="order-card" *ngFor="let order of orders; let i = index">
+                <div class="order-left">
+                    <img [src]="order.image" alt="Order Image" (error)="onImageError($event)" class="order-img" />
+                    <div>
+                        <!-- <h4 class="brand-name">{{ order.restaurantName }}</h4> -->
+                        <p class="transaction">Order Id : <span>{{ order.orderId }}</span></p>
+                        <p class="transaction">Transaction Id : <span>{{ order.transactionId }}</span></p>
+                        <p class="amount">Total Price : <span>$ {{ order.totalprice }}</span></p>
+                    </div>
+                </div>
+                <div class="order-right">
+                    <p class="time">{{ order.time }}</p>
+                    <!-- <button class="details-btn">Details</button> -->
                 </div>
             </div>
-            <div class="order-right">
-                <p class="time">{{ order.time }}</p>
-                <button class="details-btn">Details</button>
-            </div>
         </div>
-    </div>
 
-</div>
+    </div>
+</section>
 <app-footer></app-footer>

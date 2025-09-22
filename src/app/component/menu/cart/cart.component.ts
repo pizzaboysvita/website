@@ -8,6 +8,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BreadcrumbComponent } from "../../common/breadcrumb/breadcrumb.component";
 import { Router } from "@angular/router";
 import { HomeService } from "../../../services/home.service";
+import { AuthService } from "../../../services/auth.service";
+import { of, Subject } from "rxjs";
 @Component({
   selector: "app-cart",
   standalone: true,
@@ -23,26 +25,83 @@ import { HomeService } from "../../../services/home.service";
   ],
 })
 export class CartComponent implements OnInit {
+  token: string | null = null;
+  user: any;
   cartItems: any[] = [];
+  cartItems1: any[] = [];
+  cartWithDishDetails: any[] = [];
   totalPrice: number = 0;
   notes: string = "";
   userId = 101;
   storeId = 33;
-  subtotal = 1792.30;
-  total = 1792.30;
-  constructor(private cartService: CartService, private router: Router, private apiservce: HomeService) { }
+  subtotal = 1792.3;
+  total = 1792.3;
+  private destroy$ = new Subject<void>();
+  constructor(
+    private cartService: CartService,
+    private router: Router,
+    private apiservce: HomeService,
+    private authService: AuthService
+  ) {}
+
   ngOnInit(): void {
-    this.cartService.cartItems$.subscribe((items) => {
-      this.cartItems = items.map((item) => {
-        if (item.options_json) {
-          item.options = JSON.parse(item.options_json);
-        }
-        return item;
-      });
-      this.calculateTotal();
-      console.log("Cart items updated:", this.cartItems);
+    this.token = this.authService.getToken();
+
+    const user1 = localStorage.getItem("user");
+    if (user1) {
+      this.user = JSON.parse(user1);
+    }
+    this.userId = this.user.user_id; // e.g., 63
+
+    // Load dishes first
+    this.apiservce.getDishes().subscribe({
+      next: (res) => {
+        this.cartItems1 = res.data; // ✅ all dishes
+
+        // Now subscribe to cart items after dishes are available
+        this.cartService.cartItems$.subscribe((items) => {
+          this.cartItems = items.map((item) => {
+            if (item.options_json) {
+              item.options = JSON.parse(item.options_json);
+            }
+            return item;
+          });
+
+          console.log("Cart items updated:", this.cartItems);
+
+          // 🔗 Filter by user_id + Merge cart + dishes
+          this.cartWithDishDetails = this.cartItems
+            .filter((item) => item.user_id === this.userId) // ✅ only this user’s cart
+            .map((item) => {
+              const dish = this.cartItems1.find(
+                (d) => d.dish_id === item.dish_id
+              );
+              return {
+                ...item,
+                dish_name: dish?.dish_name || "Unknown Dish",
+                dish_price: dish?.dish_price || item.price,
+                dish_image: dish?.dish_image || null,
+              };
+            });
+          this.calculateTotal();
+          console.log(
+            "cartWithDishDetails (User Only)",
+            this.cartWithDishDetails
+          );
+        });
+
+        // Load cart
+        this.cartService.loadCart();
+      },
+      error: (err) => console.error("❌ Error fetching dishes:", err),
     });
-    this.cartService.loadCart();
+  }
+  removeItem1(index: number): void {
+    const cartItemId = this.cartWithDishDetails[index].cart_id;
+    const userId = this.cartWithDishDetails[index].user_id;
+    this.cartService.removeItem1(cartItemId, userId).subscribe({
+      error: (err) => console.error("Error removing item:", err),
+    });
   }
   removeItem(index: number): void {
     const cartItemId = this.cartItems[index].id;
@@ -51,11 +110,11 @@ export class CartComponent implements OnInit {
     });
   }
   increaseQuantity(index: number): void {
-    const item = this.cartItems[index];
+    const item = this.cartWithDishDetails[index];
     this.cartService
       .addItem(
         this.userId,
-        item.id,
+        item.dish_id,
         this.storeId,
         item.price,
         item.quantity + 1,
@@ -66,7 +125,7 @@ export class CartComponent implements OnInit {
       });
   }
   decreaseQuantity(index: number): void {
-    const item = this.cartItems[index];
+    const item = this.cartWithDishDetails[index];
     if (item.quantity > 1) {
       this.cartService
         .addItem(
@@ -85,7 +144,9 @@ export class CartComponent implements OnInit {
     }
   }
   calculateTotal(): void {
-    this.totalPrice = this.cartItems.reduce((sum, item) => {
+    this.totalPrice = this.cartWithDishDetails.reduce((sum, item) => {
+      console.log("Calculating item:", item);
+
       return sum + item.price * item.quantity;
     }, 0);
   }
@@ -95,10 +156,10 @@ export class CartComponent implements OnInit {
   checkout(): void {
     console.log(" Proceed to checkout (hardcoded payload)");
     const orderData = {
-      orderId: '#12345',              // later you can replace with backend ID
+      orderId: "#12345", // later you can replace with backend ID
       amountPaid: this.total,
-      paymentMethod: 'Cash',
-      status: 'Completed'
+      paymentMethod: "Cash",
+      status: "Completed",
     };
     const requestBody = {
       total_price: 500,
@@ -117,29 +178,29 @@ export class CartComponent implements OnInit {
           dish_id: 142,
           name: "extra_cheese",
           price: 250,
-          quantity: 1
+          quantity: 1,
         },
         {
           dish_id: 142,
           name: "extra_sauce",
           price: 250,
-          quantity: 1
-        }
+          quantity: 1,
+        },
       ],
       ingredients_details: [
         {
           dish_id: 142,
           name: "extra onions",
           price: 1,
-          quantity: 1
-        }
+          quantity: 1,
+        },
       ],
       order_details_json: [
         {
           dish_id: 158,
           dish_note: "abc",
           quantity: 1,
-          price: 250
+          price: 250,
         },
         {
           dish_id: 142,
@@ -147,8 +208,8 @@ export class CartComponent implements OnInit {
           quantity: 1,
           price: 250,
           base: "small",
-          base_price: 2
-        }
+          base_price: 2,
+        },
       ],
       payment_method: "Cash",
       payment_status: "Completed",
@@ -158,10 +219,13 @@ export class CartComponent implements OnInit {
       order_due_datetime: null,
       unitnumber: "POS-001",
       delivery_notes: null,
-      gst_price: 2.25
+      gst_price: 2.25,
     };
 
-    console.log(" Hardcoded Order Payload:", JSON.stringify(requestBody, null, 2));
+    console.log(
+      " Hardcoded Order Payload:",
+      JSON.stringify(requestBody, null, 2)
+    );
 
     this.apiservce.addOrder(requestBody).subscribe({
       next: (data: any) => {
@@ -175,11 +239,7 @@ export class CartComponent implements OnInit {
       },
       error: (err) => {
         console.error(" Error placing order:", err);
-      }
+      },
     });
   }
-
-
-
-
 }

@@ -5,6 +5,8 @@ import { HeaderComponent } from "../../common/header/header.component";
 import { FooterComponent } from "../../common/footer/footer.component";
 import { BreadcrumbComponent } from "../../common/breadcrumb/breadcrumb.component";
 import { AuthService } from '../../../services/auth.service';
+import { CartService } from '../../../services/cart.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: "app-whishlist",
@@ -18,7 +20,9 @@ export class WhishlistComponent {
   wishlist: any[] = [];
 
   constructor(private service: HomeService,
-    private authService: AuthService) { }
+      private cartService: CartService,
+    private authService: AuthService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.token = this.authService.getToken();
@@ -69,6 +73,39 @@ export class WhishlistComponent {
         console.error(" Error removing from wishlist:", err);
       },
     });
+  }
+
+  addToCart(item: any) {
+    const userId = this.user?.user_id || null;
+    const storeId = item?.store_id || null;
+    const dishId = item?.dish_id || null;
+
+    const quantity = 1;
+    // Calculate the total unit price (including options)
+    let unitPrice = parseFloat(item.dish_price);
+    // this.selectedOptions.forEach((selectedItem) => {
+    //   if (Array.isArray(selectedItem)) {
+    //     selectedItem.forEach((opt) => (unitPrice += opt.price || 0));
+    //   } else if (selectedItem?.price) {
+    //     unitPrice += selectedItem.price;
+    //   }
+    // });
+    const options = {
+      notes:  '',
+      selectedOptions: '',
+      selectedDrinks: '',
+    };
+    this.cartService
+      .addItem(userId, dishId, storeId, unitPrice, quantity, options)
+      .subscribe({
+        next: () => {
+          console.log("✅ Added to backend cart successfully.");
+          this.router.navigate(["/menu"]);
+        },
+        error: (err) => {
+          console.error("❌ Error adding to cart:", err);
+        },
+      });
   }
 
 

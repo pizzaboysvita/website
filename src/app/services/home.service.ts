@@ -6,13 +6,12 @@ import { AuthService } from "./auth.service";
   providedIn: "root",
 })
 export class HomeService {
-  private baseurl = "http://78.142.47.247:3003/api/";
-
+  private baseurl = "http://78.142.47.247:3004/api/";
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   private getHeaders(contentType: boolean = true): { headers: HttpHeaders } {
-    const token = this.authService.getToken(); 
+    const token = this.authService.getToken();
     if (!token) {
       console.error(" No token found.");
       return { headers: new HttpHeaders() };
@@ -34,23 +33,46 @@ export class HomeService {
   }
   getDishes(): Observable<any> {
     const params = new HttpParams().set("store_id", "-1").set("type", "web");
-    return this.http.get(`${this.baseurl}dish` ,{ params });
+    return this.http.get(`${this.baseurl}dish`, { params });
   }
   addwhishlist(body: any): Observable<any> {
     return this.http.post(`${this.baseurl}wishlist`, body, this.getHeaders());
   }
   getWishlist(userId: number): Observable<any> {
     const params = new HttpParams().set("user_id", userId.toString());
-    return this.http.get<any>(`${this.baseurl}wishlist`, { ...this.getHeaders(false), params });
+    return this.http.get<any>(`${this.baseurl}wishlist`, {
+      ...this.getHeaders(false),
+      params,
+    });
   }
-  getOrders(): Observable<any> {
+  // getOrders(): Observable<any> {
+  //   const params = new HttpParams()
+  //     .set("store_id", "-1")
+  //     .set("type", "web");
+
+  //   return this.http.get(`${this.baseurl}order`, { ...this.getHeaders(false), params });
+  // }
+  getOrders(userId: number, storeId: number): Observable<any> {
+    const token = localStorage.getItem("token");
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
     const params = new HttpParams()
-      .set("store_id", "-1")
+      .set("user_id", userId.toString())
+      .set("store_id", storeId.toString())
       .set("type", "web");
 
-    return this.http.get(`${this.baseurl}order`, { ...this.getHeaders(false), params });
+    return this.http.get(`${this.baseurl}order`, { params, headers });
   }
 
+  getOrderById(orderId: number, type: string = "web"): Observable<any> {
+    const url = `${this.baseurl}/order?order_id=${orderId}&type=${type}`;
+    return this.http.get(url);
+  }
+
+  ///add order
   addOrder(order: any): Observable<any> {
     const token = this.authService.getToken();
     if (!token) {
@@ -66,6 +88,5 @@ export class HomeService {
       ...this.getHeaders(false),
       params,
     });
-  }}
-
-
+  }
+}

@@ -1,3 +1,7 @@
+.sectionbg {
+  background-color: rgb(36 33 31);
+  font-family: "Poppins", sans-serif;
+}
 .page-header {
   background: radial-gradient(
     80% 120% at 50% -20%,
@@ -25,16 +29,13 @@
   height: 500px;
   width: 100%;
   border-radius: 10px;
+  background: #fff;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
 }
 #search-input {
-  margin-top: 10px;
   margin-left: 10px;
-  padding: 10px 15px;
-  width: 90%;
-  max-width: 350px;
+  padding: 10px 10px;
   font-size: 15px;
-  position: absolute;
   z-index: 5;
   background: white;
   border: 1px solid #ddd;
@@ -47,8 +48,7 @@
   height: 500px;
   overflow-y: auto;
   padding: 15px;
-  margin-top: 50px;
-  background: #fff;
+  margin-top: 20px;
   border-radius: 10px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
