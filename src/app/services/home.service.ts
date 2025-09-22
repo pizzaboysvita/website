@@ -6,7 +6,7 @@ import { AuthService } from "./auth.service";
   providedIn: "root",
 })
 export class HomeService {
-  private baseurl = "http://78.142.47.247:3004/api/";
+  private baseurl = "http://78.142.47.247:3003/api/";
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
@@ -45,6 +45,7 @@ export class HomeService {
       params,
     });
   }
+ 
   // getOrders(): Observable<any> {
   //   const params = new HttpParams()
   //     .set("store_id", "-1")

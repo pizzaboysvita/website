@@ -1,47 +1,29 @@
 <div class="sectionbg">
-  <section class="container categories-section">
-    <!-- Case 1: Only 1–2 categories -->
-    @if (showStaticTwo) {
-    <div class="d-flex justify-content-center gap-4 flex-wrap">
-      @for (item of categories; track item.id) {
-      <div class="category-card" (click)="selectCategory(item)">
+  <div class="container">
+    <!-- Case 1 & 2: Static layout for 1–6 categories -->
+    <div *ngIf="showStaticTwo || showStaticGrid" class="categories-grid">
+      <div *ngFor="let item of categories; " class="category-card" (click)="selectCategory(item)
+    " [ngClass]="{ 'highlighted': selectedCategoryId === item.id }">
         <img [src]="item.category_image" alt="{{ item.name }}" />
         <h6>{{ item.name }}</h6>
       </div>
-      }
     </div>
-    }
-
-    <!-- Case 2: 3–6 categories -->
-    @if (showStaticGrid) {
-    <div class="d-flex justify-content-center gap-4 flex-wrap">
-      @for (item of categories; track item.id) {
-      <div class="category-card" (click)="selectCategory(item)">
-        <img [src]="item.category_image" alt="{{ item.name }}" />
-        <h6>{{ item.name }}</h6>
-      </div>
-      }
-    </div>
-    }
-
-    <!-- Case 3: More than 6 categories (Swiper) -->
-    @if (showSwiper) {
-    <swiper-container [slidesPerView]="'auto'" [spaceBetween]="2" [breakpoints]="{
-    '0': { slidesPerView: 1 },
-    '576': { slidesPerView: 2 },
-    '768': { slidesPerView: 3 },
-    '992': { slidesPerView: 4 },
-    
-  }" navigation="true" loop="false" autoplay='{"delay": 2000, "disableOnInteraction": false}' class="category-swiper">
-      @for (item of categories; track item.id) {
-      <swiper-slide class="category-slide">
-        <div class="category-card" (click)="selectCategory(item)">
+    <!-- Case 3: Swiper layout for more than 6 categories -->
+    <swiper-container *ngIf="showSwiper" [slidesPerView]="'auto'" [spaceBetween]="5" [breakpoints]="{
+                      '0': { slidesPerView: 1 },
+                      '576': { slidesPerView: 2 },
+                      '768': { slidesPerView: 3 },
+                      '992': { slidesPerView: 4 },
+                      '1000': { slidesPerView: 5 }
+                    }" navigation="true" loop="false" autoplay='{"delay": 2000, "disableOnInteraction": false}'
+      class="category-swiper">
+      <swiper-slide *ngFor="let item of categories;" class="category-slide p-5">
+        <div class="category-card" (click)="selectCategory(item)"
+          [ngClass]="{ 'highlighted': selectedCategoryId === item.id }">
           <img [src]="item.category_image" alt="{{ item.name }}" />
           <h6>{{ item.name }}</h6>
         </div>
       </swiper-slide>
-      }
     </swiper-container>
-    }
-  </section>
+  </div>
 </div>

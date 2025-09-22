@@ -7,21 +7,31 @@ import { HomeService } from "../../../services/home.service";
   styleUrl: "./popular.component.scss",
 })
 export class PopularComponent {
-  public categories: any[] = [];
+  public dishes: any[] = [];
   @Output() categorySelected = new EventEmitter<number>();
   constructor(private apiService: HomeService) {}
-  ngOnInit(): void {
-    this.apiService.getCategories().subscribe((response) => {
-      if (response && response.categories) {
-        this.categories = response.categories.map((cat: any) => ({
-          ...cat,
-          imageLoaded: false,
-        }));
-      }
-    });
-  }
-  selectCategory(categoryId: any) {
-    this.categorySelected.emit(categoryId);
-    console.log(`Category selected: ${categoryId}`);
-  }
+ngOnInit(): void {
+  this.apiService.getDishes().subscribe((response) => {
+    console.log("Get Dishes Response :", response);
+
+    if (response && Array.isArray(response.data)) {
+      this.dishes = response.data.slice(0, 12).map((dish: any) => ({
+        dish_id: dish.id,
+        dish_name: dish.dish_name,
+        dish_price: dish.dish_price,
+        dish_image: dish.dish_image,
+        description: dish.description || '',
+        imageLoaded: false,
+      }));
+    } else {
+      console.warn("No dishes found in API response");
+      this.dishes = [];
+    }
+  });
+}
+
+  // selectCategory(categoryId: any) {
+  //   this.categorySelected.emit(categoryId);
+  //   console.log(`Category selected: ${categoryId}`);
+  // }
 }

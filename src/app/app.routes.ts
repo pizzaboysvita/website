@@ -19,6 +19,7 @@ import { DeliverypolicyComponent } from "./deliverypolicy/deliverypolicy.compone
 import { PrivacypolicyComponent } from "./privacypolicy/privacypolicy.component";
 import { ReviewComponent } from "./review/review.component";
 import { ProfileComponent } from "./profile/profile.component";
+import { TestpaymentComponent } from "./testpayment/testpayment.component";
 export const routes: Routes = [
   {
     path: "",
@@ -104,4 +105,5 @@ export const routes: Routes = [
   {path:"review",component:ReviewComponent},
   {path:"profile",component:ProfileComponent},
   { path: "**", redirectTo: "pages/404" },
+  {path:"testpayment",component:TestpaymentComponent},
 ];

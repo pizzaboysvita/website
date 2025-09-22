@@ -10,7 +10,7 @@ import { AuthService } from "./auth.service";
   providedIn: "root",
 })
 export class CartService {
-  private apiUrl = "http://78.142.47.247:3004/api/cart";
+  private apiUrl = "http://78.142.47.247:3003/api/cart";
   private cartItems = new BehaviorSubject<any[]>([]);
   cartItems$ = this.cartItems.asObservable();
   constructor(private http: HttpClient, private authService: AuthService) {}

@@ -14,8 +14,11 @@ import { HomeService } from "../../../services/home.service";
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CategoryComponent {
+  selectedCategoryId: number | null = null;
   categories: any[] = [];
+  isSelected = false;
 
+ 
   @Output() categorySelected = new EventEmitter<any>();
 
   constructor(private apiService: HomeService) { }
@@ -43,11 +46,13 @@ export class CategoryComponent {
   }
 
 
-  selectCategory(categoryId: any) {
-    this.categorySelected.emit(categoryId);
-    console.log(`Category selected: ${categoryId}`);
-  }
-
+  selectCategory(item: any) {
+  this.selectedCategoryId = item.id;       // remember which category was clicked
+  this.categorySelected.emit(item);        // still emit if needed
+  console.log('Category selected:', item.id);
+}
+  
+  
   // ✅ conditions
   get showStaticTwo() {
     return this.categories.length <= 2;

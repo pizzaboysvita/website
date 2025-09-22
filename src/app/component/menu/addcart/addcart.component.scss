@@ -1,5 +1,5 @@
 .main {
-  background-color: #0a0a0a;
+  background-color: #24211f;
 }
 .dish-detail-container {
   display: flex;
@@ -11,6 +11,8 @@
   flex: 0 0 40%;
   max-width: 40%;
   position: sticky;
+  background: #1a1818;
+  border-radius: 12px;
   top: 0;
   height: 100%;
   overflow: hidden;

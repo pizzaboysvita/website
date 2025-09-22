@@ -2,116 +2,64 @@
   background-color: rgb(36 33 31);
   font-family: "Poppins", sans-serif;
 }
-
-.categories-section {
-  padding: 3rem 0; // overall breathing space
-  // light background to separate
-
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-  }
-  .category-slide {
-    display: flex;
-    justify-content: center;
-  }
-  .category-card {
-    background: #0a0808;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-    text-align: center;
-    padding: 1.5rem 1rem;
-    width: 180px;
-    transition: all 0.3s ease;
-    border-radius: 15px;
-    padding: 10px;
-    transition: transform 0.3s, box-shadow 0.3s;
-
-    img {
-      width: 100%;
-      height: 140px;
-      object-fit: cover;
-      border-radius: 14px;
-      margin-bottom: 1rem;
-    }
-
-    h6 {
-      margin: 0;
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: white;
-    }
-
-    &:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-    }
-  }
-
-  .category-swiper {
-    position: relative;
-    padding: 20px 0;
-  }
+.category-swiper .swiper-slide {
+  display: flex;
+  justify-content: center;
 }
-/* Navigation buttons (prev/next) */
-/* Swiper navigation buttons */
-swiper-container::part(button-prev),
+.category-card {
+  width: 200px;
+  color: #fff;
+  flex: 0 0 auto;
+  text-align: center;
+  background-color: #0f100b;
+  border-radius: 12px;
+  padding: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  align-items: center;
+  justify-content: space-around;
+  border: 2px solid transparent; /* default border */
+  cursor: pointer;
+  transition: border-color 0.3s, transform 0.2s;
+}
+.category-card img {
+  width: 70px; /* slightly smaller image */
+  height: 70px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 6px;
+}
+.category-card h6 {
+  font-size: 13px;
+  margin: auto;
+  color: white;
+}
+.category-card.highlighted {
+  border-color: #ff0000; /* red highlight */
+  transform: scale(1.05); /* optional zoom effect */
+}
+swiper-container::part(button-prev) {
+  right: -40px;
+  background-color: #ff0000; /* Red background */
+  color: #fff; /* White arrow */
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: flex;
+  cursor: pointer;
+  padding: 10px;
+  justify-content: space-between;
+  align-items: center; /* move more left (outside carousel) */
+}
 swiper-container::part(button-next) {
   background-color: #ff0000; /* Red background */
   color: #fff; /* White arrow */
-  width: 35px; /* Button size */
-  height: 35px;
-  border-radius: 100%; /* Perfect circle */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px; /* Arrow size */
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
-  transition: background 0.3s ease;
-}
-
-/* Arrow style */
-swiper-container::part(button-prev)::after,
-swiper-container::part(button-next)::after {
-  font-size: 18px; /* Bigger arrow */
-  font-weight: bold;
-  color: #fff; /* Force white arrow */
-}
-
-/* Hover effect */
-swiper-container::part(button-prev):hover,
-swiper-container::part(button-next):hover {
-  background-color: #cc0000; /* Darker red */
-}
-
-.custom-button {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: red;
-  color: #fff;
-  width: 45px;
-  height: 45px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   display: flex;
-  justify-content: center;
-  align-items: center;
   cursor: pointer;
-  z-index: 10;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+  padding: 10px;
+  justify-content: space-between;
+  align-items: center; /* move more left (outside carousel) */
 }
-
-.custom-prev {
-  left: -60px; /* adjust as needed */
-}
-
-.custom-next {
-  right: -60px; /* adjust as needed */
-}
-
-.custom-button:hover {
-  background: #d40000;
-}
-
-/* Import Swiper styles */
-@import "swiper/swiper-bundle.css";

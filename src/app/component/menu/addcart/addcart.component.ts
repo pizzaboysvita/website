@@ -7,6 +7,7 @@ import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { CartService } from "../../../services/cart.service";
 import { BreadcrumbComponent } from "../../common/breadcrumb/breadcrumb.component";
+import { AuthService } from "../../../services/auth.service";
 @Component({
   selector: "app-addcart",
   standalone: true, // Added standalone: true since this is a common practice
@@ -22,6 +23,9 @@ import { BreadcrumbComponent } from "../../common/breadcrumb/breadcrumb.componen
   styleUrl: "./addcart.component.scss",
 })
 export class AddcartComponent implements OnInit {
+  token: string | null = null;
+  user: any;
+  userId = 101;
   dishId: number | null = null;
   dish: any | undefined;
   quantity = 1;
@@ -33,9 +37,18 @@ export class AddcartComponent implements OnInit {
     private route: ActivatedRoute,
     private apiService: HomeService,
     private cartService: CartService,
+    private authService: AuthService,
     private router: Router
   ) {}
   ngOnInit(): void {
+    this.token = this.authService.getToken();
+
+    const user1 = localStorage.getItem("user");
+    if (user1) {
+      this.user = JSON.parse(user1);
+    }
+    this.userId = this.user.user_id; // e.g., 63
+
     this.route.paramMap.subscribe((params) => {
       this.dishId = Number(params.get("id"));
       if (this.dishId) {
@@ -154,8 +167,8 @@ export class AddcartComponent implements OnInit {
   addToCart(): void {
     if (!this.dish) return;
     // Use a hardcoded ID for now, but a real app should get this from an auth service
-    const userId = 101;
-    const storeId = this.dish.store_id || 33;
+    const userId = this.userId; // e.g., 63
+    const storeId = this.dish.store_id;
     const dishId = this.dish.dish_id;
     const quantity = this.quantity;
     // Calculate the total unit price (including options)

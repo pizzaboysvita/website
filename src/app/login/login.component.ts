@@ -37,7 +37,6 @@ export class LoginComponent implements OnInit {
       password_hash: ["", [Validators.required, Validators.minLength(6)]],
     });
   }
-  // A getter for easy access to form fields in the template
   get f() {
     return this.loginForm.controls;
   }
