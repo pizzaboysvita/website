@@ -135,25 +135,24 @@ export class MenuComponent implements OnInit, OnDestroy {
     this.cdr.detectChanges();
   }
   toggleFavorite(product: Dish, event?: MouseEvent) {
-    console.log("👉 Product before toggle:", product);
+    console.log("Product before toggle:", product);
 
     product.isFavorite = !product.isFavorite;
-    console.log("🔄 Product after toggle:", product);
+    console.log(" Product after toggle:", product);
 
     // Get user details from localStorage
     const user = JSON.parse(localStorage.getItem("user") || "{}");
     const user_id = user?.user_id || null;
     const store_id = user?.store_id || null;
 
-    // Dish ID should come from product
     const dish_id = product?.dish_id || null;
 
     if (product.isFavorite) {
-      // Build request body with snake_case keys
       const requestBody = {
         user_id: user_id,
         store_id: 33,
         dish_id: dish_id,
+         type: "insert"
       };
 
       

@@ -1,35 +1,39 @@
 <app-header></app-header>
 <app-breadcrumb></app-breadcrumb>
-<div class="wishlist-container">
-  <div class="wishlist-card" *ngFor="let item of wishlist; let i = index">
-    <div class="card-image">
-      <img [src]="item.image" [alt]="item.restaurantName">
-      <!-- <button class="close-btn" (click)="removeItem(i)">×</button> -->
+<section class="sectionbg">
+  <div class="container mt-4">
+    <div class="wishlist-grid" *ngIf="wishlist && wishlist.length > 0; else noData">
+      <div class="wishlist-card" *ngFor="let item of wishlist">
+        <div class="wishlist-img">
+          <img [src]="item.dish_image" alt="{{ item.dish_name }}" class="dishimg">
+          <button class="close-icon" (click)="deleteItem(item)"><i class="ri-close-line"></i></button>
+        </div>
 
-      <!-- Fav Checkbox -->
-      <input type="checkbox" [id]="'fav' + i" class="fav-checkbox">
-      <label [for]="'fav' + i" class="fav-label"><i class="bi bi-heart"></i></label>
+        <div class="wishlist-content">
+          <h4 class="dish-name">{{ item.dish_name }}</h4>
+          <p class="dish-price">Price: ${{ item.dish_price }}</p>
+          <p class="store-name">Store: {{ item.store_name }}</p>
 
-      <hr>
-      <div *ngIf="item.offer" class="offer">upto {{item.offer}} <span>50% OFF</span></div>
-      <div *ngIf="item.bestSeller" class="best-seller">Best Seller</div>
-    </div>
+          <!-- <div class="location-distance">
+            <div class="location">
+              <i class="ri-map-pin-fill icon"></i> {{ item.location || 'n/z' }}
+            </div>
+            <div class="time">
+              <i class="ri-time-fill icon"></i> {{ item.time || 'N/A' }}
+            </div>
+          </div> -->
 
-    <div class="card-content">
-      <h4>{{ item.restaurantName }}</h4>
-      <p>{{ item.pizzaName }}</p>
-      <div class="rating">{{ item.rating }}</div>
-      <div class="info">
-        <span>• {{ item.location }}</span>
-        <span>
-          <img src="/assets/images/icons/location.png" alt="location" class="location-img" /> {{ item.distance }}
-        </span>
-        <span>
-          <img src="/assets/images/icons/clock.png" alt="clock" class="location-img" /> {{ item.time }}
-        </span>
+          <div class="wishlist-actions">
+            <button class="cart-btn"  (click)="addToCart(item)">Add to Cart</button>
+
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
+    <ng-template #noData>
+      <p class="no-data">No wishlist items found.</p>
+    </ng-template>
+  </div>
+</section>
 <app-footer></app-footer>

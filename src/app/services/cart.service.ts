@@ -10,7 +10,7 @@ import { AuthService } from "./auth.service";
   providedIn: "root",
 })
 export class CartService {
-  private apiUrl = "http://78.142.47.247:3003/api/cart";
+  private apiUrl = "http://78.142.47.247:3004/api/cart";
   private cartItems = new BehaviorSubject<any[]>([]);
   cartItems$ = this.cartItems.asObservable();
   constructor(private http: HttpClient, private authService: AuthService) {}
@@ -50,6 +50,7 @@ export class CartService {
     options: any
   ) {
     const body = {
+      type: "insert",
       user_id: userId,
       dish_id: dishId,
       store_id: storeId,
@@ -65,9 +66,25 @@ export class CartService {
       })
     );
   }
+  removeItem1(cartItemId: number,userId: number) {
+    const body = {
+      type: "delete_item",
+      user_id: userId,
+      cart_id: cartItemId
+    };
+    return this.http.post(this.apiUrl, body, this.getHeaders()).pipe(
+        tap(() => this.loadCart()),
+        catchError((error: HttpErrorResponse) => {
+          console.error("Failed to remove item from cart:", error);
+          return throwError(
+            () => new Error("Failed to remove item from cart.")
+          );
+        })
+      );
+  }
   removeItem(cartItemId: number) {
     return this.http
-      .delete(`${this.apiUrl}/${cartItemId}`, this.getHeaders())
+      .post(`${this.apiUrl}/${cartItemId}`, this.getHeaders())
       .pipe(
         tap(() => this.loadCart()),
         catchError((error: HttpErrorResponse) => {

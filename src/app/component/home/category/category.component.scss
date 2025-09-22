@@ -1,3 +1,8 @@
+.sectionbg {
+  background-color: rgb(36 33 31);
+  font-family: "Poppins", sans-serif;
+}
+
 .categories-section {
   padding: 3rem 0; // overall breathing space
   // light background to separate
@@ -16,7 +21,7 @@
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
     text-align: center;
     padding: 1.5rem 1rem;
-    width: 200px;
+    width: 180px;
     transition: all 0.3s ease;
     border-radius: 15px;
     padding: 10px;
@@ -47,6 +52,65 @@
     position: relative;
     padding: 20px 0;
   }
+}
+/* Navigation buttons (prev/next) */
+/* Swiper navigation buttons */
+swiper-container::part(button-prev),
+swiper-container::part(button-next) {
+  background-color: #ff0000; /* Red background */
+  color: #fff; /* White arrow */
+  width: 35px; /* Button size */
+  height: 35px;
+  border-radius: 100%; /* Perfect circle */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px; /* Arrow size */
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+  transition: background 0.3s ease;
+}
+
+/* Arrow style */
+swiper-container::part(button-prev)::after,
+swiper-container::part(button-next)::after {
+  font-size: 18px; /* Bigger arrow */
+  font-weight: bold;
+  color: #fff; /* Force white arrow */
+}
+
+/* Hover effect */
+swiper-container::part(button-prev):hover,
+swiper-container::part(button-next):hover {
+  background-color: #cc0000; /* Darker red */
+}
+
+.custom-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: red;
+  color: #fff;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.custom-prev {
+  left: -60px; /* adjust as needed */
+}
+
+.custom-next {
+  right: -60px; /* adjust as needed */
+}
+
+.custom-button:hover {
+  background: #d40000;
 }
 
 /* Import Swiper styles */

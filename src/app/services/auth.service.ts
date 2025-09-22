@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, tap } from "rxjs";
 @Injectable({
   providedIn: "root",
 })
 export class AuthService {
-  private apiUrl = "http://78.142.47.247:3003/api";
+  private apiUrl = "http://78.142.47.247:3004/api";
   constructor(private http: HttpClient) {}
   login(credentials: {
     email: string;
@@ -34,4 +34,18 @@ export class AuthService {
   logout() {
     localStorage.removeItem("token");
   }
-}
+  refreshToken(): Observable<any> {
+    const refreshToken = localStorage.getItem('refreshToken');
+    if (!refreshToken) throw new Error('Refresh token not available');
+    return this.http.post(`${this.apiUrl}refreshToken`, { token: refreshToken })
+      .pipe(
+        tap((res: any) => {
+          if (res.accessToken) {
+            localStorage.setItem('accessToken', res.accessToken);
+            console.log('Access token refreshed');
+          } else {
+            console.warn('Failed to refresh token', res);
+          }
+        })
+      );
+}}

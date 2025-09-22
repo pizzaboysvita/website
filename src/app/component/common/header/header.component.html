@@ -13,10 +13,10 @@
                 <img class="img-fluid logo" src="assets/img/pizza-black-1.png" alt="logo" />
             </a>
             <!-- Location Button -->
-            <a (click)="openOrderDialog()"
+            <!-- <a (click)="openOrderDialog()"
                 class="btn btn-sm theme-btn location-btn mt-0 ms-3 d-flex align-content-center gap-1">
                 <i class="ri-map-pin-line"></i> ORDER NOW
-            </a>
+            </a> -->
             <!-- Offcanvas menu -->
             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasSkeleton"
                 aria-labelledby="offcanvasSkeletonLabel">
@@ -67,7 +67,7 @@
                 <!-- Cart -->
                 <div class="dropdown-button">
                     <div class="cart-button" (click)="goToCart()">
-                        <span *ngIf="cartCount > 0">{{ cartCount }}</span>
+                        <!-- <span *ngIf="cartCount > 0">{{ cartCount }}</span> -->
                         <i class="ri-shopping-cart-line cart-bag"></i>
                     </div>
                 </div>

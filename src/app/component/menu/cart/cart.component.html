@@ -5,12 +5,12 @@
     <h2 class="cart-title">Cart</h2>
     <div class="cart-main">
       <div class="cart-details">
-        <div class="cart-items" *ngIf="cartItems.length > 0">
-          <div class="cart-item card p-4 bg-dark text-light" *ngFor="let item of cartItems; let i = index">
+        <div class="cart-items" *ngIf="cartWithDishDetails.length > 0">
+          <div class="cart-item card p-4 bg-dark text-light" *ngFor="let item of cartWithDishDetails; let i = index">
             <div class="item-header">
-              <h3 class="item-name">{{ item.dish_id }}</h3>
+              <h3 class="item-name">{{ item.dish_name }}</h3>
               <span class="item-price">{{
-                item.price | currency : "$"
+                item.dish_price | currency : "$"
                 }}</span>
             </div>
             <div class="item-options">
@@ -22,7 +22,7 @@
               </p>
             </div>
             <div class="item-actions card-footer d-flex justify-content-between align-items-center">
-              <button (click)="removeItem(i)" class="delete-btn">
+              <button (click)="removeItem1(i)" class="delete-btn">
                 <i class="ri-delete-bin-line text-danger"></i>
               </button>
               <div class="quantity-control">
@@ -54,7 +54,7 @@
             <span>{{ totalPrice | currency : "$" }}</span>
           </div>
         </div>
-        <button class="checkout-btn" (click)="checkout()" [disabled]="cartItems.length === 0">
+        <button class="checkout-btn" (click)="checkout()" [disabled]="cartWithDishDetails.length === 0">
           Checkout
         </button>
       </div>

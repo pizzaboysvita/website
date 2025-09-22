@@ -1,46 +1,47 @@
-<div class="container">
-  <section class="categories-section">
-
+<div class="sectionbg">
+  <section class="container categories-section">
     <!-- Case 1: Only 1–2 categories -->
     @if (showStaticTwo) {
-      <div class="d-flex justify-content-center gap-4 flex-wrap">
-        @for (item of categories; track item.id) {
-          <div class="category-card" (click)="selectCategory(item)">
-            <img [src]="item.category_image" alt="{{ item.name }}" />
-            <h6>{{ item.name }}</h6>
-          </div>
-        }
+    <div class="d-flex justify-content-center gap-4 flex-wrap">
+      @for (item of categories; track item.id) {
+      <div class="category-card" (click)="selectCategory(item)">
+        <img [src]="item.category_image" alt="{{ item.name }}" />
+        <h6>{{ item.name }}</h6>
       </div>
+      }
+    </div>
     }
 
-    <!-- Case 2: Between 3–6 categories -->
+    <!-- Case 2: 3–6 categories -->
     @if (showStaticGrid) {
-      <div class="d-flex justify-content-center gap-4 flex-wrap">
-        @for (item of categories; track item.id) {
-          <div class="category-card" (click)="selectCategory(item)">
-            <img [src]="item.category_image" alt="{{ item.name }}" />
-            <h6>{{ item.name }}</h6>
-          </div>
-        }
+    <div class="d-flex justify-content-center gap-4 flex-wrap">
+      @for (item of categories; track item.id) {
+      <div class="category-card" (click)="selectCategory(item)">
+        <img [src]="item.category_image" alt="{{ item.name }}" />
+        <h6>{{ item.name }}</h6>
       </div>
+      }
+    </div>
     }
 
-    <!-- Case 3: More than 6 categories (Swiper active) -->
+    <!-- Case 3: More than 6 categories (Swiper) -->
     @if (showSwiper) {
-      <swiper-container slides-per-view="4" space-between="10" navigation="true"
-        class="category-swiper swiper-wrapper">
-        @for (item of categories; track item.id) {
-          <swiper-slide class="swiper-slide category-slide">
-            <div class="category-card" (click)="selectCategory(item)">
-              <div class="image-wrapper">
-                <img [src]="item.category_image" alt="{{ item.name }}" />
-              </div>
-              <h6>{{ item.name }}</h6>
-            </div>
-          </swiper-slide>
-        }
-      </swiper-container>
+    <swiper-container [slidesPerView]="'auto'" [spaceBetween]="2" [breakpoints]="{
+    '0': { slidesPerView: 1 },
+    '576': { slidesPerView: 2 },
+    '768': { slidesPerView: 3 },
+    '992': { slidesPerView: 4 },
+    
+  }" navigation="true" loop="false" autoplay='{"delay": 2000, "disableOnInteraction": false}' class="category-swiper">
+      @for (item of categories; track item.id) {
+      <swiper-slide class="category-slide">
+        <div class="category-card" (click)="selectCategory(item)">
+          <img [src]="item.category_image" alt="{{ item.name }}" />
+          <h6>{{ item.name }}</h6>
+        </div>
+      </swiper-slide>
+      }
+    </swiper-container>
     }
-
   </section>
 </div>
