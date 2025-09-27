@@ -1,0 +1,85 @@
+<app-breadcrumb></app-breadcrumb>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-11 col-md-12 m-auto p-3">
+      <div *ngIf="dish" class="dish-detail-container">
+        
+        <!-- Left Column -->
+        <div class="left-column">
+          <div class="image-box d-flex justify-content-center align-items-center">
+            <img [src]="dish.dish_image" [alt]="dish.dish_name" class="dish-image" />
+          </div>
+
+          <div class="dish-info-card">
+            <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+              <div class="dish-title">
+                <h3>{{ dish.dish_name }}</h3>
+                <p class="dish-description">{{ dish.description }}</p>
+              </div>
+              <div class="quantity-control">
+                <button (click)="decrementQuantity()">-</button>
+                <span>{{ quantity }}</span>
+                <button (click)="incrementQuantity()">+</button>
+              </div>
+            </div>
+
+            <!-- Notes -->
+            <label for="notes" class="notes-label">Notes</label>
+            <textarea id="notes" [(ngModel)]="notes" class="notes-textarea"></textarea>
+
+            <!-- Total + Cart -->
+            <div class="bottom-info">
+              <div class="total-price">
+                <span class="label">Total</span>
+                <span class="price-value">{{ total | currency: '$' }}</span>
+              </div>
+              <button class="add-to-cart-btn" (click)="addToCart()">Add to cart</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="right-column">
+          <ng-container *ngIf="dish.optionGroups?.length; else noOptions">
+            <div *ngFor="let optionGroup of dish.optionGroups; let i = index" class="option-group">
+              <div class="card p-3">
+                <div class="option-header">
+                  <h2>{{ optionGroup.title }}</h2>
+                  <span class="required-text">
+                    {{ optionGroup.isMultiple ? 'Optional - Choose multiple' : 'Required - Choose one' }}
+                  </span>
+                </div>
+
+                <div *ngFor="let option of optionGroup.options" 
+                     class="option-item"
+                     [class.selected]="optionGroup.isMultiple ? isOptionSelected(option, i) : (selectedOptions[i]?.id === option.id)"
+                     (click)="optionGroup.isMultiple ? toggleOption(option, i) : selectOption(option, i)">
+                  
+                  <div class="option-item-left">
+                    <span>{{ option.name }}</span>
+                    <small *ngIf="option.description" class="option-description">{{ option.description }}</small>
+                  </div>
+
+                  <div class="option-item-right">
+                    <span *ngIf="option.price">+{{ option.price | currency: '$' }}</span>
+                    <ng-container *ngIf="!optionGroup.isMultiple">
+                      <input type="radio" [name]="optionGroup.title" [checked]="selectedOptions[i]?.id === option.id" />
+                    </ng-container>
+                    <ng-container *ngIf="optionGroup.isMultiple">
+                      <input type="checkbox" [checked]="isOptionSelected(option, i)" />
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+
+          <ng-template #noOptions>
+            <p class="no-options-text">No extra options available for this dish.</p>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

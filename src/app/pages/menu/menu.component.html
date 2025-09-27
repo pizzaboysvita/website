@@ -1,0 +1,51 @@
+<app-breadcrumb></app-breadcrumb>
+
+<main class="menu-container">
+    <div class="container">
+        <app-category (categorySelected)="onCategorySelected($event)"></app-category>
+
+        <div class="menu-section">
+            <h2 class="category-title">{{ selectedCategoryName }}</h2>
+
+            <div class="product-list" [@listAnimation]>
+                <ng-container *ngFor="let item of filteredProducts; trackBy: trackByProductId">
+                    <div class="card-link">
+                        <div class="product-card">
+                            <!-- Dish Image -->
+                            <a [routerLink]="['/item', item.dish_id]" class="product-image">
+                                <img [src]="item.dish_image" [alt]="item.dish_name" (load)="item.imageLoaded = true"
+                                    [class.hidden]="!item.imageLoaded" />
+                                <div *ngIf="!item.imageLoaded" class="spinner-container">
+                                    <div class="spinner"></div>
+                                </div>
+                            </a>
+
+                            <!-- Dish Info -->
+                            <div class="product-info">
+                                <a [routerLink]="['/item', item.dish_id]" class="product-name-link">
+                                    <h3 class="product-name">{{ item.dish_name }}</h3>
+                                </a>
+                                <p class="product-desc">{{ item.description }}</p>
+
+                                <div class="product-footer">
+                                    <span class="product-price">$ {{ item.dish_price }}</span>
+
+                                    <!-- Favorite Button (no router link) -->
+                                    <button type="button" class="favorite-btn"
+                                        (click)="toggleFavorite(item); $event.stopPropagation()"
+                                        [class.active]="item.isFavorite" title="Toggle favorite">
+                                        <i class="fa" [ngClass]="{
+                  'fa-heart text-danger': item.isFavorite,
+                  'fa-heart-o text-white': !item.isFavorite
+                }"></i>
+
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</main>

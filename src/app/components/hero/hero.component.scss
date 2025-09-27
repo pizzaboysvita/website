@@ -1,0 +1,147 @@
+.hero-wrapper {
+  position: relative;
+  min-height: 425px; // 500px reduced by 15%
+  border-radius: 15px;
+  overflow: hidden;
+  background: #000; // fallback
+  transform: scale(0.85); // reduce entire wrapper by 15%
+  transform-origin: top center; // scale from top
+}
+
+/* Background Video */
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+  z-index: 1;
+
+  &.show {
+    opacity: 1;
+  }
+}
+
+/* Fallback Play Button */
+.play-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  cursor: pointer;
+
+  i {
+    font-size: 5rem;
+    color: var(--primary-color);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  &:hover i {
+    transform: scale(1.2);
+  }
+}
+
+/* CTA Buttons */
+.video-buttons {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+
+  .btn {
+    padding: 12px 25px;
+    font-size: 1rem;
+    border-radius: 30px;
+  }
+
+  .btn-primary {
+    background: var(--primary-color);
+    color: var(--text-light);
+    border: none;
+
+    &:hover {
+      background: var(--text-light);
+      color: var(--primary-color);
+    }
+  }
+}
+
+/* Curtains */
+.hero__curtains {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  z-index: 4;
+
+  &__left,
+  &__right {
+    flex: 1;
+    background-size: cover;
+    background-position: center;
+    transition: transform 2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    h1 {
+      font-size: clamp(1.5rem, 4vw, 3rem);
+      font-weight: 700;
+      color: var(--text-light);
+      text-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+    }
+  }
+
+  &__left {
+    background-image: url("/assets/img/courtain-left.jpg");
+    transform: translateX(0);
+  }
+
+  &__right {
+    background-image: url("/assets/img/courtain-right.jpg");
+    transform: translateX(0);
+  }
+
+  &.open {
+    pointer-events: none; // ✅ allow button clicks once open
+
+    .hero__curtains__left {
+      transform: translateX(-100%);
+    }
+
+    .hero__curtains__right {
+      transform: translateX(100%);
+    }
+
+    h1 {
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-wrapper {
+    min-height: 297px; // 350px reduced by 15%
+    transform: scale(0.85); // keep same reduction
+  }
+
+  .video-buttons {
+    bottom: 15px;
+
+    .btn {
+      padding: 8px 18px;
+      font-size: 0.85rem;
+    }
+  }
+
+  .hero__curtains h1 {
+    font-size: 1.2rem !important;
+  }
+}

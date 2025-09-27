@@ -1,0 +1,107 @@
+.payment-success-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  padding: 20px;
+}
+
+.success-card {
+  border-radius: 20px;
+  padding: 40px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  animation: fadeInUp 0.8s ease;
+  background-color: var(--bg-color-light); // Uses global theme
+  color: var(--text-dark); // Uses global text color
+}
+
+.checkmark {
+  font-size: 80px;
+  color: #28a745;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 16px;
+  margin-bottom: 25px;
+}
+
+.order-summary {
+  text-align: left;
+  background: #f5faff;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.order-summary h4 {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.order-summary ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.order-summary li {
+  font-size: 15px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.order-summary span {
+  color: #555;
+}
+
+.status {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.btn {
+  padding: 12px 25px;
+  font-size: 16px;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 576px) {
+  .success-card {
+    padding: 25px;
+  }
+
+  .checkmark {
+    font-size: 60px;
+  }
+
+  .title {
+    font-size: 22px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+  }
+}

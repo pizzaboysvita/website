@@ -1,0 +1,14 @@
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.list-group-item.active {
+  background-color: var(--primary-color); // gold/yellow highlight
+  color: var(--text-light);
+  font-weight: 600;
+}
+
+.store-list {
+  max-height: 300px;
+  overflow-y: auto;
+}

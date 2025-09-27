@@ -1,0 +1,81 @@
+.sectionbg {
+  display: flex;
+  justify-content: center;
+}
+
+.carousel-wrapper {
+  position: relative;
+  width: 80%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.img {
+  width: 100%;
+  height: auto;
+  max-height: 250px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* hide default nav */
+::ng-deep .owl-nav {
+  display: none !important;
+}
+
+/* custom nav buttons */
+.custom-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 999;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  border: none;
+  color: var(--text-light);
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: var(--text-light);
+    color: var(--primary-color);
+
+    svg {
+      stroke: var(--primary-color);
+    }
+  }
+
+  svg {
+    display: block;
+  }
+}
+
+.custom-nav.prev {
+  left: 12px;
+}
+
+.custom-nav.next {
+  right: 12px;
+}
+
+/* responsive */
+@media (max-width: 768px) {
+  .carousel-wrapper {
+    width: 90%;
+  }
+  .img {
+    max-height: 180px;
+  }
+  .custom-nav {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+}
