@@ -1,0 +1,26 @@
+<section class="hero sectionbg">
+    <div class="container hero-wrapper shadow-lg rounded-3">
+        <!-- Curtains -->
+        <div class="hero__curtains" [ngClass]="{ open: isCurtainsOpen }">
+            <div class="hero__curtains__left">
+                <h1 class="left">Welcome to</h1>
+            </div>
+            <div class="hero__curtains__right">
+                <h1 class="right">Flavour Country</h1>
+            </div>
+        </div>
+        <!-- Background Video -->
+        <video #introVideo class="hero-video" [ngClass]="{ show: isCurtainsOpen }" autoplay muted playsinline loop>
+            <source src="assets/videos/pizza_boyz.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>
+        <!-- Fallback Play Button -->
+        <div *ngIf="showPlayButton" class="play-overlay" (click)="playVideo()">
+            <i class="fa fa-play-circle"></i>
+        </div>
+        <!-- CTA Buttons -->
+        <div class="video-buttons">
+            <button class="btn btn-primary" (click)="goToMenu()">Order Online</button>
+        </div>
+    </div>
+</section>

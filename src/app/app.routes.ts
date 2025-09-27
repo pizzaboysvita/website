@@ -1,109 +1,113 @@
 import { Routes } from "@angular/router";
-import { HomeComponent } from "./home/home.component";
-import { AddcartComponent } from "./component/menu/addcart/addcart.component";
-import { ContactusComponent } from "./contactus/contactus.component";
-import { StoreComponent } from "./store/store.component";
-import { OfferComponent } from "./offer/offer.component";
-import { CartComponent } from "./component/menu/cart/cart.component";
-import { MenuComponent } from "./menu/menu.component";
-import { SignupComponent } from "./signup/signup.component";
-import { LoginComponent } from "./login/login.component";
-import { AboutusComponent } from "./aboutus/aboutus.component";
-import { WhishlistComponent } from "./component/dashboard/whishlist/whishlist.component";
-import { OrderhistoryComponent } from "./component/dashboard/orderhistory/orderhistory.component";
-import { CheckoutComponent } from "./component/menu/cart/checkout/checkout.component";
-import { HelpComponent } from "./help/help.component";
-import { TermsndconditionsComponent } from "./termsndconditions/termsndconditions.component";
-import { FeedbackComponent } from "./feedback/feedback.component";
-import { DeliverypolicyComponent } from "./deliverypolicy/deliverypolicy.component";
-import { PrivacypolicyComponent } from "./privacypolicy/privacypolicy.component";
-import { ReviewComponent } from "./review/review.component";
-import { ProfileComponent } from "./profile/profile.component";
-import { TestpaymentComponent } from "./testpayment/testpayment.component";
+
 export const routes: Routes = [
   {
     path: "",
-    component: HomeComponent,
+    loadComponent: () =>
+      import("./pages/home/home.component").then((m) => m.HomeComponent),
     data: { breadcrumb: "Home" },
   },
   {
     path: "home",
-    component: HomeComponent,
+    loadComponent: () =>
+      import("./pages/home/home.component").then((m) => m.HomeComponent),
     data: { breadcrumb: "Home" },
   },
   {
     path: "menu",
-    component: MenuComponent,
+    loadComponent: () =>
+      import("./pages/menu/menu.component").then((m) => m.MenuComponent),
     data: { breadcrumb: "Menu" },
   },
   {
-    path: "dishDetail/:id",
-    component: AddcartComponent,
-    data: { breadcrumb: "Dish Detail" },
-  },
-  {
-    path: "contactus",
-    component: ContactusComponent,
-    data: { breadcrumb: "Contact Us" },
-  },
-  {
-    path: "cart",
-    component: CartComponent,
-    data: { breadcrumb: "Cart" },
-  },
-  {
     path: "stores",
-    component: StoreComponent,
-    data: { breadcrumb: "Stores" },
+    loadComponent: () =>
+      import("./pages/store/store.component").then((m) => m.StoreComponent),
+    data: { breadcrumb: "Store" },
   },
   {
     path: "offers",
-    component: OfferComponent,
-    data: { breadcrumb: "Offers" },
+    loadComponent: () =>
+      import("./pages/offer/offer.component").then((m) => m.OfferComponent),
+    data: { breadcrumb: "Offer" },
   },
   {
-    path: "wishlist",
-    component: WhishlistComponent,
-    data: { breadcrumb: "Wishlist" },
-  },
-  {
-    path: "myorders",
-    component: OrderhistoryComponent,
-    data: { breadcrumb: "My Orders" },
-  },
-  {
-    path: "aboutus",
-    component: AboutusComponent,
+    path: "about",
+    loadComponent: () =>
+      import("./pages/about/about.component").then((m) => m.AboutComponent),
     data: { breadcrumb: "About Us" },
   },
   {
-    path: "signup",
-    component: SignupComponent,
+    path: "contact",
+    loadComponent: () =>
+      import("./pages/contact/contact.component").then(
+        (m) => m.ContactComponent
+      ),
+    data: { breadcrumb: "Contact" },
+  },
+  {
+    path: "register",
+    loadComponent: () =>
+      import("./pages/register/register.component").then(
+        (m) => m.RegisterComponent
+      ),
+    data: { breadcrumb: "Register" },
   },
   {
     path: "login",
-    component: LoginComponent,
+    loadComponent: () =>
+      import("./pages/login/login.component").then(
+        (m) => m.LoginComponent
+      ),
+    data: { breadcrumb: "Login" },
   },
   {
-    path:"checkout",
-    component:CheckoutComponent
+    path: "item/:id",
+    loadComponent: () =>
+      import("./pages/item/item.component").then(
+        (m) => m.ItemComponent
+      ),
+    data: { breadcrumb: "Dish Details" },
   },
   {
-    path:"help",
-    component:HelpComponent
+    path: "myorders",
+    loadComponent: () =>
+      import("./components/myorders/myorders.component").then(
+        (m) => m.MyOrdersComponent
+      ),
+    data: { breadcrumb: "MyOrders" },
   },
   {
-    path:"terms",component:TermsndconditionsComponent
+    path: "wishlist",
+    loadComponent: () =>
+      import("./components/wishlist/wishlist.component").then(
+        (m) => m.WishlistComponent
+      ),
+    data: { breadcrumb: "Wishlist" },
   },
   {
-    path:"feedback",component:FeedbackComponent
+    path: "cartlist",
+    loadComponent: () =>
+      import("./components/cartlist/cartlist.component").then(
+        (m) => m.CartlistComponent
+      ),
+    data: { breadcrumb: "Cartlist" },
   },
   {
-    path:"deliverypolicy",component:DeliverypolicyComponent
+    path: "checkout",
+    loadComponent: () =>
+      import("./components/checkout/checkout.component").then(
+        (m) => m.CheckoutComponent
+      ),
+    data: { breadcrumb: "Checkout" },
   },
-  {path:"privacypolicy",component:PrivacypolicyComponent},
-  {path:"review",component:ReviewComponent},
-  {path:"profile",component:ProfileComponent},
-  { path: "**", redirectTo: "pages/404" },
-  {path:"testpayment",component:TestpaymentComponent},
+  {
+    path: "profile",
+    loadComponent: () =>
+      import("./components/profile/profile.component").then(
+        (m) => m.ProfileComponent
+      ),
+    data: { breadcrumb: "Profile" },
+  },
+  { path: "**", redirectTo: "" },
 ];

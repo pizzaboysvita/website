@@ -1,0 +1,13 @@
+.container {
+  max-width: 960px;
+}
+.hero {
+  background: linear-gradient(135deg, #fceabb 0%, #f8b500 100%);
+  color: #fff;
+}
+
+.offers .card img,
+.popular .card img {
+  height: 200px;
+  object-fit: cover;
+}

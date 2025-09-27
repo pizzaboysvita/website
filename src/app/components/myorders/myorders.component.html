@@ -1,0 +1,39 @@
+<app-breadcrumb></app-breadcrumb>
+
+<div class="sectionbg">
+    <div class="account-container">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="profile-card">
+                <img [src]="user2?.profiles || 'assets/img/default-profile.png'" alt="Profile" class="profile-img" />
+                <h3 class="name">{{ user2?.first_name }}</h3>
+                <p class="email">{{ user2?.email }}</p>
+            </div>
+            <ul class="menu">
+                <li class="active"><i class="fa fa-box"></i> My Order</li>
+                <li><i class="fa fa-sign-out" (click)="logout()"></i> Log Out</li>
+            </ul>
+        </aside>
+
+        <!-- Orders Section -->
+        <section class="orders-section">
+            <h2 class="section-title">My Orders</h2>
+
+            <div class="order-card" *ngFor="let order of orders">
+                <div class="order-left">
+                    <img [src]="order.image" alt="Order Image" (error)="onImageError($event)" class="order-img" />
+                    <div class="order-info">
+                        <p class="transaction">Order Id : <span>{{ order.orderId }}</span></p>
+                        <p class="transaction">Transaction Id : <span>{{ order.transactionId }}</span></p>
+                        <p class="amount">Total Price : <span>$ {{ order.totalprice }}</span></p>
+                    </div>
+                </div>
+                <div class="order-right">
+                    <p class="time">{{ order.time }}</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</div>

@@ -1,0 +1,40 @@
+<div class="popular-restaurant banner-section1 section-b-space overflow-hidden">
+    <div class="container">
+        <div class="title animated-title">
+            <div class="d-flex align-items-center justify-content-between flex-wrap w-100">
+                <h2>Popular Picks</h2>
+            </div>
+        </div>
+
+        <div class="row g-md-4 g-3">
+            @for (item of dishes; track item) {
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                <div class="vertical-product-box product-style-3">
+                    <!-- Dish Image -->
+                    <div class="vertical-product-box-img position-relative">
+                        <img class="product-img-top w-100 bg-img" [src]="item.dish_image" [alt]="item.dish_name" />
+
+                        <!-- Favorite Icon -->
+                        <button type="button" class="favorite-btn" (click)="toggleFavorite(item)">
+                            <i class="fa" [ngClass]="{
+                  'fa-heart text-danger': isFavorite(item),
+                  'fa-heart-o text-white': !isFavorite(item)
+                }"></i>
+                        </button>
+                    </div>
+
+                    <!-- Dish Name & Price -->
+                    <div class="vertical-product-body">
+                        <p class="vertical-product-title text-white">
+                            {{ item.dish_name }}
+                        </p>
+                        <h5 class="vertical-product-title text-white">
+                            $ {{ item.dish_price }}
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</div>

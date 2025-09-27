@@ -1,0 +1,123 @@
+.container {
+  max-width: 960px;
+}
+
+.about-us,
+.testimonial-section,
+.about-section,
+.app-download {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.about-us p {
+  max-width: 900px;
+  margin: 0 auto 2rem;
+  line-height: 1.8;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.feature {
+  background: rgba(255, 255, 255, 0.05); /* keep subtle effect, can override in dark mode */
+  padding: 1rem;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: transform 0.3s ease;
+}
+.feature:hover {
+  transform: translateY(-4px);
+}
+
+/* Testimonials */
+.section-title {
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.testimonial-slider {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.testimonial-card {
+  background: var(--bg-color-light); /* uses global theme color */
+  color: var(--text-dark); /* text color from global theme */
+  border-radius: 12px;
+  padding: 1rem;
+  width: 260px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+body.dark .testimonial-card {
+  background: var(--bg-color-dark);
+  color: var(--text-light);
+}
+.testimonial-card:hover {
+  transform: scale(1.05);
+}
+
+.client-img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  border: 3px solid var(--primary-color); /* use theme primary color */
+}
+
+/* About Section */
+.about-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.logo {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.tagline {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.highlight {
+  color: var(--primary-color); /* use theme primary color */
+  font-weight: 700;
+}
+
+.description {
+  text-align: justify;
+  line-height: 1.6;
+}
+
+/* App Download */
+.app-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.store-btn img {
+  height: 50px;
+  transition: transform 0.3s ease;
+}
+.store-btn img:hover {
+  transform: scale(1.05);
+}

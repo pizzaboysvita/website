@@ -1,0 +1,150 @@
+.sectionbg {
+  min-height: 100vh;
+}
+
+.account-container {
+  display: flex;
+  gap: 30px;
+  padding: 30px;
+  flex-wrap: wrap;
+}
+
+/* Sidebar */
+.sidebar {
+  flex: 0 0 280px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  padding: 25px;
+  text-align: center;
+
+  .profile-img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+  }
+
+  .name,
+  .email {
+    color: #333;
+    margin-bottom: 10px;
+  }
+
+  .menu {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+
+    li {
+      padding: 12px 15px;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      font-size: 15px;
+      color: #333;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s;
+
+      &.active {
+        background: var(--primary-color);
+        color: #fff;
+        font-weight: 600;
+      }
+
+      &:hover {
+        background: #f1f1f1;
+        color: #000;
+        font-weight: 600;
+      }
+
+      i {
+        min-width: 20px;
+        text-align: center;
+        color: var(--primary-color);
+      }
+    }
+  }
+}
+
+/* Orders Section */
+.orders-section {
+  flex: 1;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+
+  .section-title {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #f1f1f1;
+    padding-bottom: 10px;
+  }
+
+  .order-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    transition: all 0.3s;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .order-left {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+
+      .order-img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+      }
+
+      .order-info {
+        .transaction,
+        .amount {
+          font-size: 14px;
+          color: #666;
+
+          span {
+            font-weight: 600;
+            color: #222;
+          }
+        }
+      }
+    }
+
+    .order-right {
+      text-align: right;
+      .time {
+        font-size: 14px;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .account-container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+  }
+}

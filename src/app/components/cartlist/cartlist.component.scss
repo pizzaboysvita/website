@@ -1,0 +1,103 @@
+.details-page {
+  .main {
+    padding: 20px;
+
+    .cart-section {
+      .cart-item {
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        margin-bottom: 15px;
+        padding: 15px;
+        background-color: var(--card-bg);
+        color: var(--text-color);
+
+        .item-header {
+          h4 {
+            font-weight: 600;
+          }
+        }
+
+        .item-actions {
+          margin-top: 10px;
+
+          .delete-btn {
+            background: none;
+            border: 1px solid var(--danger-color);
+            color: var(--danger-color);
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+          }
+
+          .quantity-control {
+            display: flex;
+            gap: 5px;
+
+            button {
+              background: var(--primary-color);
+              border: none;
+              color: #fff;
+              width: 30px;
+              height: 30px;
+              border-radius: 50%;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+
+    .notes-section textarea {
+      width: 100%;
+      border-radius: 5px;
+      padding: 10px;
+      border: 1px solid var(--border-color);
+      background-color: var(--input-bg);
+      color: var(--text-color);
+    }
+
+    .price-summary {
+      .summary-row.total {
+        font-weight: bold;
+        font-size: 1.1em;
+      }
+    }
+
+    .checkout-btn {
+      width: 100%;
+      background-color: var(--primary-color);
+      color: var(--text-light);
+      font-weight: bold;
+      padding: 12px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  .store-section {
+    .card {
+      background-color: var(--card-bg);
+      color: var(--text-color);
+      padding: 15px;
+      border-radius: 8px;
+    }
+  }
+
+  @media (max-width: 991px) {
+    .main {
+      flex-direction: column;
+
+      .cart-section,
+      .store-section {
+        width: 100%;
+        margin-bottom: 20px;
+      }
+    }
+  }
+}

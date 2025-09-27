@@ -1,0 +1,44 @@
+<app-breadcrumb></app-breadcrumb>
+<section class="sectionbg py-4">
+    <div class="container">
+        <div class="row g-3">
+            <!-- Map Section -->
+            <div class="col-lg-6 col-md-12">
+                <div class="map-wrapper shadow-sm rounded overflow-hidden">
+                    <div id="map" aria-label="Store locations map"></div>
+                </div>
+            </div>
+            <!-- Store List Section -->
+            <div class="col-lg-6 col-md-12">
+                <!-- Search Bar -->
+                <div class="mb-3">
+                    <input id="search-input" type="text" class="form-control form-control-lg shadow-sm"
+                        placeholder="🔍 Search by Store Name, Street or City" aria-label="Search stores" />
+                </div>
+                <!-- Store List -->
+                <div class="location-list">
+                    <div *ngFor="let store of locations"
+                        class="location-card card shadow-sm border-0 p-3 mb-3 cursor-pointer"
+                        (click)="goToLocation(store.lat, store.lng, store)" role="button" tabindex="0">
+                        <div class="d-flex align-items-start">
+                            <div class="flex-grow-1">
+                                <h5 class="fw-bold mb-1">{{ store.name }}</h5>
+                                <p class="text-muted mb-1 small">📍 {{ store.address }}</p>
+                            </div>
+                        </div>
+                        <!-- Store Hours -->
+                        <div *ngIf="store.showHours" class="mt-3">
+                            <ul class="list-group list-group-flush small">
+                                <li *ngFor="let day of store.hours"
+                                    class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                    <strong>{{ day.day }}</strong>
+                                    <span>{{ day.from }} - {{ day.to }}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,19 @@
+<div class="modal-header">
+    <h5 class="modal-title">Select Store</h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss()"></button>
+</div>
+<div class="modal-body">
+    <!-- <ul class="list-group">
+        <li *ngFor="let store of stores" class="list-group-item cursor-pointer" (click)="selectStore(store)">
+            {{ store.name }}
+        </li>
+    </ul> -->
+    <div class="store-list">
+        <ul class="list-group">
+            <li *ngFor="let store of stores" (click)="selectStore(store)" class="list-group-item"
+                [class.active]="store.name === storeService.getSelectedStoreName()" style="cursor:pointer;">
+                {{ store.name }}
+            </li>
+        </ul>
+    </div>
+</div>

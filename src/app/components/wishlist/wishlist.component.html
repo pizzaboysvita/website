@@ -1,0 +1,30 @@
+<app-breadcrumb></app-breadcrumb>
+
+<div class="sectionbg">
+    <div class="container mt-4">
+        <div class="wishlist-grid" *ngIf="wishlist.length > 0; else noData">
+            <div class="wishlist-card" *ngFor="let item of wishlist">
+                <div class="wishlist-img">
+                    <img [src]="item.dish_image" alt="{{ item.dish_name }}" class="dishimg" />
+                    <button class="close-icon" (click)="deleteItem(item)">
+                        <i class="ri-close-line"></i>
+                    </button>
+                </div>
+
+                <div class="wishlist-content">
+                    <h4 class="dish-name">{{ item.dish_name }}</h4>
+                    <p class="dish-price">Price: ${{ item.dish_price }}</p>
+                    <p class="store-name">Store: {{ item.store_name }}</p>
+
+                    <div class="wishlist-actions">
+                        <button class="cart-btn" (click)="addToCart(item)">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <ng-template #noData>
+            <p class="no-data">No wishlist items found.</p>
+        </ng-template>
+    </div>
+</div>
