@@ -1,4 +1,4 @@
-<div class="sectionbg">
+<div class="sectionbg" *ngIf="categories.length > 0">
     <div class="container">
         <div class="title animated-title">
             <div class="d-flex align-items-center justify-content-between flex-wrap w-100">
@@ -6,15 +6,23 @@
             </div>
         </div>
         <div class="categories-wrapper">
-            <button class="scroll-btn prev" (click)="scrollLeft()">&#10094;</button>
-            <div class="categories-grid" #categoryContainer>
+            <!-- Scroll buttons only if more than 5 categories -->
+            <button *ngIf="categories.length > 5" class="scroll-btn prev" (click)="scrollLeft()">
+                &#10094;
+            </button>
+
+            <!-- Categories Grid -->
+            <div class="categories-grid" [class.center-content]="categories.length <= 5" #categoryContainer>
                 <div *ngFor="let item of categories" class="category-card" (click)="selectCategory(item)"
                     [ngClass]="{ highlighted: selectedCategoryId === item.id }">
                     <img [src]="item.category_image" alt="{{ item.name }}" />
                     <h6>{{ item.name }}</h6>
                 </div>
             </div>
-            <button class="scroll-btn next" (click)="scrollRight()">&#10095;</button>
+
+            <button *ngIf="categories.length > 5" class="scroll-btn next" (click)="scrollRight()">
+                &#10095;
+            </button>
         </div>
     </div>
 </div>

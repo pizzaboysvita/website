@@ -2,7 +2,7 @@
   background-color: #241f1d;
   color: #fff;
   position: relative;
-  padding: 60px 0 20px;
+  padding-top: calc(5px + 10 * (100vw - 320px) / 1600);
   .footer-img {
     position: absolute;
     top: 0;

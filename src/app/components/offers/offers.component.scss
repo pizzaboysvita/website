@@ -1,6 +1,7 @@
 .sectionbg {
   display: flex;
   justify-content: center;
+  padding-top: calc(5px + 10 * (100vw - 320px) / 1600);
 }
 
 .carousel-wrapper {

@@ -1,5 +1,5 @@
 .banner-section1 {
-  padding: 40px 0;
+  padding-top: calc(5px + 10 * (100vw - 320px) / 1600);
 
   .title {
     margin-bottom: 25px;

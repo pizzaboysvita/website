@@ -1,5 +1,5 @@
 .sectionbg {
-  padding: 20px 0;
+  padding-top: calc(5px + 10 * (100vw - 320px) / 1600);
 
   .title {
     margin-bottom: 25px;
@@ -37,6 +37,11 @@
 
       &::-webkit-scrollbar {
         height: 6px;
+      }
+
+      &.center-content {
+        justify-content: center; // ✅ center if <= 5 items
+        overflow-x: hidden; // ✅ disable horizontal scroll when not needed
       }
     }
   }
