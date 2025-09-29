@@ -1,6 +1,6 @@
 <app-breadcrumb></app-breadcrumb>
 
-<main class="menu-container">
+<main class="menu-container" *ngIf="filteredProducts.length > 0">
     <div class="container">
         <app-category (categorySelected)="onCategorySelected($event)"></app-category>
 

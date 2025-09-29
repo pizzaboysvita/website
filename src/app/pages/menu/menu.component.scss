@@ -20,8 +20,8 @@
       border-radius: 12px;
       overflow: hidden;
       height: 180px;
-      background: var(--bg-color-light);
-      color: var(--text-dark);
+      background: var(--bg-color-dark);
+      color: var(--text-light);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
       position: relative;
 
@@ -68,12 +68,13 @@
         justify-content: space-between;
 
         .product-name {
-          color: var(--text-dark);
+          color: var(--text-light);
           font-size: 1.1rem;
           font-weight: bold;
         }
 
         .product-desc {
+          color: var(--text-light);
           font-size: 0.85rem;
           margin: 0.5rem 0;
           flex-grow: 1;
