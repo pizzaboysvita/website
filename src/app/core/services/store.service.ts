@@ -7,6 +7,7 @@ import { BehaviorSubject } from "rxjs";
 export class StoreService {
   private selectedStoreIdKey = "selectedStoreId";
   private selectedStoreNameKey = "selectedStoreName";
+  private selectedStoreAddressKey = "selectedStoreAddress";
 
   private storeChangedSubject = new BehaviorSubject<string>("Default Store");
   storeChanged$ = this.storeChangedSubject.asObservable();
@@ -34,9 +35,14 @@ export class StoreService {
     return this.storeChangedSubject.value || "Default Store";
   }
 
+  getSelectedStoreAddress(): string {
+    return this.storeChangedSubject.value || "Default Store Location";
+  }
+
   clearSelectedStore() {
     localStorage.removeItem(this.selectedStoreIdKey);
     localStorage.removeItem(this.selectedStoreNameKey);
+    localStorage.removeItem(this.selectedStoreAddressKey);
     this.storeChangedSubject.next("Default Store");
   }
 }
