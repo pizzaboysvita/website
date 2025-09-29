@@ -1,31 +1,42 @@
-.theme-toggle-btn {
+.theme-btn {
   position: fixed;
   top: 50%;
   right: 20px;
   transform: translateY(-50%);
-  z-index: 1050;
+  z-index: 1050; // stays above other elements
 
   background: var(--primary-color);
   color: var(--text-light);
   border: none;
-  border-radius: 50%;
-  width: 48px;
-  height: 48px;
+  padding: 10px 18px;
+  border-radius: 30px;
+  font-family: var(--global-font-family);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
 
   display: flex;
   align-items: center;
   justify-content: center;
-
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-  cursor: pointer;
-  transition: all 0.3s ease;
+  gap: 8px;
 
   &:hover {
-    background: var(--primary-color-dark);
-    transform: translateY(-50%) scale(1.05);
+    background: var(--text-light);
+    color: var(--primary-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
 
-  i {
-    font-size: 1.4rem;
+  &:active {
+    transform: translateY(-50%) scale(0.95);
+  }
+}
+
+/* Smaller button on mobile */
+@media (max-width: 768px) {
+  .theme-btn {
+    padding: 8px 14px;
+    font-size: 0.8rem;
+    right: 10px;
   }
 }

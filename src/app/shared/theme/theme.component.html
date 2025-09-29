@@ -1,4 +1,4 @@
-<button class="theme-toggle-btn" (click)="toggleTheme()">
-  <i class="ri-sun-line" *ngIf="currentTheme === 'light'"></i>
-  <i class="ri-moon-line" *ngIf="currentTheme === 'dark'"></i>
+<!-- theme-toggle.component.html -->
+<button (click)="themeService.toggleTheme()" class="theme-btn">
+  {{ themeService.getTheme() === 'dark' ? '🌞 Light' : '🌙 Dark' }}
 </button>

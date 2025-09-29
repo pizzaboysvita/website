@@ -13,24 +13,24 @@
 
 /* Theme colors */
 :root {
-  --primary-color: #e63946; /* Red / theme color */
+  --primary-color: #ea1919; //#e63946 /* Red / theme color */
   --primary-color-dark: #d32f3f; /* Darker hover */
   --secondary-color: #1d1d1d;
   --text-light: #ffffff;
   --text-dark: #333333;
-  --badge-color: #e63946;
+  --badge-color: #ea1919; //#e63946
   --bg-color-light: #ffffff;
   --bg-color-dark: #121212;
 }
 
 /* Body defaults based on theme class */
 body.light {
-  background: var(--bg-color-light);
+  background: var(--bg-color-light) !important;
   color: var(--text-dark);
 }
 
 body.dark {
-  background: var(--bg-color-dark);
+  background: var(--bg-color-dark) !important;
   color: var(--text-light);
 }
 

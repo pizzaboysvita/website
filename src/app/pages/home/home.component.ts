@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { HeroComponent } from "../../components/hero/hero.component";
 import { OffersComponent } from '../../components/offers/offers.component';
 import { CategoryComponent } from "../../components/category/category.component";
-import { ThemeService } from '../../core/services/theme.service';
 import { PopularComponent } from "../../components/popular/popular.component";
 
 @Component({
@@ -14,10 +13,4 @@ import { PopularComponent } from "../../components/popular/popular.component";
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  
-  constructor(public themeService: ThemeService) {}
-
-  ngOnInit() {
-    this.themeService.toggleTheme();
-  }
 }
