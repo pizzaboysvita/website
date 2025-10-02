@@ -129,10 +129,16 @@
   gap: 15px;
 }
 
+.card {
+  background: var(--bg-color-dark) !important;
+  color: var(--text-light);
+}
+
 .option-group {
-  background: var(--bg-color-dark);
+  background: #121212 !important;
   border-radius: 12px;
   padding: 15px;
+  margin-bottom: 12px;
 }
 
 .option-header {
@@ -156,10 +162,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
-  border-bottom: 1px solid #333;
+  padding: 12px 10px;
+  border-bottom: 1px solid #444;
   cursor: pointer;
   transition: background 0.3s;
+  font-size: 1rem;
 
   &:last-child {
     border-bottom: none;
@@ -170,9 +177,97 @@
     border-radius: 6px;
   }
 
-  .option-description {
-    display: block;
-    font-size: 0.8rem;
-    color: var(--text-muted, #ccc);
+  .option-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    .option-title {
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    .option-price {
+      font-size: 0.9rem;
+      margin-left: 5px;
+      color: var(--primary-color);
+    }
+
+    .option-description {
+      font-size: 0.8rem;
+      color: var(--text-muted, #ccc);
+    }
   }
+
+  .option-check {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    input[type="radio"],
+    input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      accent-color: var(--primary-color);
+    }
+
+    .counter-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      button {
+        background: var(--primary-color);
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 28px;
+        height: 28px;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: all 0.3s;
+
+        &:hover {
+          opacity: 0.85;
+        }
+      }
+
+      span {
+        min-width: 20px;
+        text-align: center;
+      }
+    }
+  }
+}
+
+/* Combo Accordion */
+.combo-group {
+  border: 1px solid #333;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.accordion-header {
+  background: #1e1e1e;
+  padding: 12px 15px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .accordion-icon {
+    font-size: 1.2rem;
+  }
+}
+
+.accordion-body {
+  padding: 12px 15px;
+  background: transparent;
 }

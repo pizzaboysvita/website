@@ -12,7 +12,7 @@ import { AuthService } from "../../core/services/auth.service";
   standalone: true,
   imports: [CommonModule, FormsModule, BreadcrumbComponent],
   templateUrl: "./item.component.html",
-  styleUrl: "./item.component.scss",
+  styleUrls: ["./item.component.scss"],
 })
 export class ItemComponent implements OnInit {
   token: string | null = null;
@@ -23,8 +23,15 @@ export class ItemComponent implements OnInit {
   quantity = 1;
   notes = "";
   total = 0;
+
+  // Selection state for standard dish optionGroups
   selectedOptions: any[] = [];
-  selectedDrinks: any[] = [];
+
+  // For combo dishes: array of { name, dish_id, optionGroups, selectedOptions, open }
+  comboGroups: any[] = [];
+
+  // store full product list returned from API so we can find sub-dish option sets
+  private allProducts: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -46,87 +53,255 @@ export class ItemComponent implements OnInit {
     });
   }
 
-  /** Fetch Dish Details + Parse Option Groups */
+  /** Fetch Dish Details + Parse Options */
   getDishDetails(id: number): void {
     this.apiService.getDishes().subscribe({
       next: (response: any) => {
-        const allProducts = response.data.map((dish: any) => ({
+        // keep full product list locally
+        this.allProducts = (response?.data || []).map((dish: any) => ({
           ...dish,
           quantity: 1,
         }));
-        this.dish = allProducts.find((item: any) => item.dish_id === id);
 
-        if (this.dish?.dish_option_set_json) {
-          try {
-            const optionSets = JSON.parse(this.dish.dish_option_set_json);
-            this.dish.optionGroups = optionSets.map((set: any) => {
-              const options = JSON.parse(set.option_set_combo_json).map(
-                (opt: any, i: number) => ({
-                  id: `${set.option_set_id}-${i}`,
-                  name: opt.name,
-                  description: opt.description || "",
-                  price: opt.price || 0,
-                })
-              );
-              return {
-                title: set.dispaly_name || set.option_set_name || "Options",
-                options,
-                isMultiple: set.select_multiple === 1,
-                required: set.required === 1,
-              };
-            });
-            this.selectedOptions = this.dish.optionGroups.map((g: any) =>
-              g.isMultiple ? [] : null
-            );
-          } catch {
-            this.dish.optionGroups = [];
-          }
+        this.dish = this.allProducts.find((item: any) => item.dish_id === id);
+
+        // reset selection state
+        this.selectedOptions = [];
+        this.comboGroups = [];
+
+        if (!this.dish) return;
+
+        if (this.dish.dish_type === "combo" && this.dish.dish_choices_json) {
+          this.parseComboOptions(this.dish.dish_choices_json);
+        } else if (
+          this.dish.dish_type === "standard" &&
+          this.dish.dish_option_set_json
+        ) {
+          this.dish.optionGroups = this.parseOptionSets(
+            this.dish.dish_option_set_json
+          );
+          this.selectedOptions = [];
+          this.initSelectedOptions(
+            this.dish.optionGroups,
+            this.selectedOptions
+          );
         } else {
           this.dish.optionGroups = [];
         }
+
         this.calculateTotal();
       },
       error: (err) => console.error("Error fetching dishes:", err),
     });
   }
 
-  /** Helpers */
-  isOptionSelected(option: any, groupIndex: number): boolean {
-    const selectedGroup = this.selectedOptions[groupIndex];
-    return (
-      Array.isArray(selectedGroup) &&
-      selectedGroup.some((o) => o.id === option.id)
-    );
+  /** Parse Standard Dish Options */
+  private parseOptionSets(optionSetJson: string): any[] {
+    try {
+      const optionSets = JSON.parse(optionSetJson || "[]");
+      return optionSets.map((set: any) => {
+        const options = JSON.parse(set.option_set_combo_json || "[]").map(
+          (opt: any, i: number) => ({
+            id: `${set.option_set_id}-${i}`,
+            name: opt.name,
+            description: opt.description || "",
+            price: Number(opt.price) || 0,
+            count: 0,
+          })
+        );
+        return {
+          title: set.dispaly_name || set.option_set_name || "Options",
+          options,
+          optionType: (set.option_type || "radio").toLowerCase(),
+          required: set.required === 1,
+        };
+      });
+    } catch (e) {
+      console.error("Error parsing option set JSON", e);
+      return [];
+    }
   }
 
-  toggleOption(option: any, groupIndex: number): void {
-    const group = this.selectedOptions[groupIndex];
-    if (!group) this.selectedOptions[groupIndex] = [option];
-    else if (this.isOptionSelected(option, groupIndex))
-      this.selectedOptions[groupIndex] = group.filter(
+  /** Parse Combo Dish → each sub-dish may have its own option groups (try to find from full product list) */
+  private parseComboOptions(comboJson: string): void {
+    try {
+      const comboData = JSON.parse(comboJson || "[]");
+      this.comboGroups = [];
+
+      // comboData structure can vary — iterate robustly
+      comboData.forEach((choice: any) => {
+        const menuItems = choice.menuItems || [];
+        menuItems.forEach((menu: any) => {
+          const categories = menu.categories || [];
+          categories.forEach((cat: any) => {
+            const dishes = cat.dishes || [];
+            dishes.forEach((d: any) => {
+              // d may contain dishId/dishName or dish_id/dish_name
+              const dishIdFromChoice = d.dishId ?? d.dish_id ?? d.id ?? null;
+              const dishNameFromChoice =
+                d.dishName ?? d.dish_name ?? d.dish_name ?? d.name ?? "Dish";
+
+              // try to find full product in allProducts by id
+              const matched = this.allProducts.find(
+                (p) =>
+                  p.dish_id === dishIdFromChoice ||
+                  p.dishId === dishIdFromChoice
+              );
+
+              const optionGroupsFromProduct =
+                matched && matched.dish_option_set_json
+                  ? this.parseOptionSets(matched.dish_option_set_json)
+                  : [];
+
+              this.comboGroups.push({
+                name: dishNameFromChoice,
+                dish_id: dishIdFromChoice,
+                dish_image: d.image_url ?? matched?.dish_image ?? null,
+                optionGroups: optionGroupsFromProduct,
+                selectedOptions: [],
+                open: false,
+              });
+            });
+          });
+        });
+      });
+
+      // initialize selection arrays per combo group
+      this.comboGroups.forEach((cg) => {
+        cg.selectedOptions = [];
+        this.initSelectedOptions(cg.optionGroups, cg.selectedOptions);
+      });
+    } catch (e) {
+      console.error("❌ Error parsing combo JSON", e);
+      this.comboGroups = [];
+    }
+  }
+
+  /** Initialize Selection State */
+  private initSelectedOptions(
+    optionGroups: any[],
+    selectedOptionsArr: any[] = this.selectedOptions
+  ): void {
+    // clear provided selected options first
+    selectedOptionsArr.length = 0;
+    optionGroups.forEach((g: any) => {
+      if (g.optionType === "radio") selectedOptionsArr.push(null);
+      else if (g.optionType === "checkbox" || g.optionType === "counter")
+        selectedOptionsArr.push([]);
+      else selectedOptionsArr.push(null);
+    });
+  }
+
+  /** Helpers for selecting options (selectedOptionsArr defaults to standard dish's selectedOptions) */
+  isOptionSelected(
+    option: any,
+    groupIndex: number,
+    selectedOptionsArr: any[] = this.selectedOptions
+  ): boolean {
+    const group = selectedOptionsArr[groupIndex];
+    return Array.isArray(group) && group.some((o) => o.id === option.id);
+  }
+
+  toggleCheckbox(
+    option: any,
+    groupIndex: number,
+    selectedOptionsArr: any[] = this.selectedOptions
+  ): void {
+    const group = selectedOptionsArr[groupIndex];
+    if (!group) selectedOptionsArr[groupIndex] = [option];
+    else if (this.isOptionSelected(option, groupIndex, selectedOptionsArr))
+      selectedOptionsArr[groupIndex] = group.filter(
         (o: any) => o.id !== option.id
       );
     else group.push(option);
-
     this.calculateTotal();
   }
 
-  selectOption(option: any, groupIndex: number): void {
-    this.selectedOptions[groupIndex] = option;
+  selectRadio(
+    option: any,
+    groupIndex: number,
+    selectedOptionsArr: any[] = this.selectedOptions
+  ): void {
+    selectedOptionsArr[groupIndex] = option;
     this.calculateTotal();
   }
 
+  incrementCounter(
+    option: any,
+    groupIndex: number,
+    selectedOptionsArr: any[] = this.selectedOptions
+  ): void {
+    option.count++;
+    const group = selectedOptionsArr[groupIndex];
+    if (!group.find((o: any) => o.id === option.id)) {
+      group.push(option);
+    }
+    this.calculateTotal();
+  }
+
+  decrementCounter(
+    option: any,
+    groupIndex: number,
+    selectedOptionsArr: any[] = this.selectedOptions
+  ): void {
+    if (!option) return;
+    if (option.count > 0) {
+      option.count--;
+      if (option.count === 0) {
+        selectedOptionsArr[groupIndex] = selectedOptionsArr[groupIndex].filter(
+          (o: any) => o.id !== option.id
+        );
+      }
+      this.calculateTotal();
+    }
+  }
+
+  /** Price Calculation */
   calculateTotal(): void {
     if (!this.dish) return;
-    let basePrice = parseFloat(this.dish.dish_price);
-    this.selectedOptions.forEach((item) => {
-      if (Array.isArray(item))
-        item.forEach((opt) => (basePrice += opt.price || 0));
-      else if (item?.price) basePrice += item.price;
-    });
+    let basePrice = parseFloat(this.dish.dish_price) || 0;
+
+    // Standard options
+    if (
+      this.dish.dish_type === "standard" &&
+      Array.isArray(this.dish.optionGroups)
+    ) {
+      this.selectedOptions.forEach((item, groupIndex) => {
+        const group = this.dish.optionGroups[groupIndex];
+        basePrice += this.calculateOptionPrice(item, group);
+      });
+    }
+
+    // Combo sub-dishes
+    if (this.dish.dish_type === "combo") {
+      this.comboGroups.forEach((cg) => {
+        if (!cg.selectedOptions) return;
+        cg.selectedOptions.forEach((item: any, groupIndex: number) => {
+          const group = cg.optionGroups[groupIndex];
+          basePrice += this.calculateOptionPrice(item, group);
+        });
+      });
+    }
+
     this.total = basePrice * this.quantity;
   }
 
+  private calculateOptionPrice(item: any, group: any): number {
+    let price = 0;
+    if (!group) return 0;
+
+    if (group.optionType === "checkbox") {
+      if (Array.isArray(item)) item.forEach((opt) => (price += opt.price || 0));
+    } else if (group.optionType === "radio") {
+      if (item?.price) price += item.price;
+    } else if (group.optionType === "counter") {
+      if (Array.isArray(item))
+        item.forEach((opt) => (price += (opt.price || 0) * (opt.count || 0)));
+    }
+    return price;
+  }
+
+  /** Quantity Control */
   incrementQuantity(): void {
     this.quantity++;
     this.calculateTotal();
@@ -142,11 +317,11 @@ export class ItemComponent implements OnInit {
   /** Add Dish to Cart */
   addToCart(): void {
     if (!this.dish) return;
-    const unitPrice = this.calculateUnitPrice();
+    const unitPrice = this.total / this.quantity;
     const options = {
       notes: this.notes,
       selectedOptions: this.selectedOptions,
-      selectedDrinks: this.selectedDrinks,
+      comboGroups: this.comboGroups,
     };
 
     this.cartService
@@ -165,14 +340,5 @@ export class ItemComponent implements OnInit {
         },
         error: (err) => console.error("❌ Error adding to cart:", err),
       });
-  }
-
-  private calculateUnitPrice(): number {
-    let price = parseFloat(this.dish.dish_price);
-    this.selectedOptions.forEach((item) => {
-      if (Array.isArray(item)) item.forEach((opt) => (price += opt.price || 0));
-      else if (item?.price) price += item.price;
-    });
-    return price;
   }
 }
