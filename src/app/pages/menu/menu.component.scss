@@ -38,12 +38,16 @@
       .product-image {
         flex: 0 0 45%;
         position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
         img {
           width: 100%;
           height: 100%;
           border-radius: 8px;
-          object-fit: cover;
+          object-fit: contain; // 👈 shows full image without cropping
+          background-color: #000; // 👈 optional (black padding if aspect ratio differs)
         }
 
         .spinner-container {
