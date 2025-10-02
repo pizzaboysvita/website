@@ -12,11 +12,19 @@
 /* Sidebar */
 .sidebar {
   flex: 0 0 280px;
-  background: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
   padding: 25px;
   text-align: center;
+
+  body.light {
+    background: var(--bg-color-light);
+    color: var(--text-dark);
+  }
+  body.dark {
+    background: var(--bg-color-dark);
+    color: var(--text-light);
+  }
 
   .profile-img {
     width: 90px;
@@ -28,7 +36,14 @@
 
   .name,
   .email {
-    color: #333;
+    body.light {
+      background: var(--bg-color-light);
+      color: var(--text-dark);
+    }
+    body.dark {
+      background: var(--bg-color-dark);
+      color: var(--text-light);
+    }
     margin-bottom: 10px;
   }
 
@@ -42,12 +57,20 @@
       border-radius: 8px;
       margin-bottom: 8px;
       font-size: 15px;
-      color: #333;
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 10px;
       transition: all 0.3s;
+
+      body.light {
+        background: var(--bg-color-light);
+        color: var(--text-dark);
+      }
+      body.dark {
+        background: var(--bg-color-dark);
+        color: var(--text-light);
+      }
 
       &.active {
         background: var(--primary-color);
@@ -56,8 +79,8 @@
       }
 
       &:hover {
-        background: #f1f1f1;
-        color: #000;
+        background: #fff;
+        color: var(--primary-color);
         font-weight: 600;
       }
 
@@ -89,12 +112,19 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 15px;
     margin-bottom: 20px;
     transition: all 0.3s;
+    body.light {
+      background: var(--bg-color-light);
+      color: var(--text-dark);
+    }
+    body.dark {
+      background: var(--bg-color-dark);
+      color: var(--text-light);
+    }
 
     &:hover {
       transform: translateY(-2px);
@@ -115,14 +145,20 @@
       }
 
       .order-info {
+        body.light {
+          background: var(--bg-color-light);
+          color: var(--text-dark);
+        }
+        body.dark {
+          background: var(--bg-color-dark);
+          color: var(--text-light);
+        }
         .transaction,
         .amount {
           font-size: 14px;
-          color: #666;
 
           span {
             font-weight: 600;
-            color: #222;
           }
         }
       }

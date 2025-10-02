@@ -17,26 +17,31 @@
   width: 100%;
   max-width: 400px;
   text-align: center;
-  color: var(--text-dark);
   transition: background-color 0.3s ease, color 0.3s ease;
+
+  body.light {
+    background: var(--bg-color-light);
+    color: var(--text-dark);
+  }
+  body.dark {
+    background: var(--bg-color-dark);
+    color: var(--text-light);
+  }
 
   .logo {
     font-size: 1.6rem;
     font-weight: 600;
     margin-bottom: 0.3rem;
-    color: var(--text-dark);
   }
 
   .subtitle {
     font-size: 0.9rem;
-    color: var(--text-dark);
     opacity: 0.7;
     margin-bottom: 1rem;
   }
 
   h2 {
     margin-bottom: 1.2rem;
-    color: var(--text-dark);
   }
 
   .form-group {
@@ -103,8 +108,16 @@
   .switch-auth {
     margin-top: 1.2rem;
     font-size: 0.85rem;
-    color: var(--text-dark);
     opacity: 0.7;
+    body.light {
+      background: var(--bg-color-light);
+      color: var(--text-dark);
+    }
+    body.dark {
+      background: var(--bg-color-dark);
+      color: var(--text-light);
+    }
+
     a {
       color: var(--primary-color);
       font-weight: 600;
