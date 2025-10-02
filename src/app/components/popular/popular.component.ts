@@ -3,6 +3,7 @@ import { CommonModule } from "@angular/common";
 import { HomeService } from "../../core/services/home.service";
 import { StoreService } from "../../core/services/store.service";
 import { Subject, switchMap, takeUntil } from "rxjs";
+import { RouterLink } from "@angular/router";
 
 interface DishItem {
   dish_id: number;
@@ -24,7 +25,7 @@ interface WishlistItem {
 @Component({
   selector: "app-popular",
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: "./popular.component.html",
   styleUrls: ["./popular.component.scss"],
 })

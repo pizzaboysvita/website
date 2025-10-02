@@ -24,14 +24,16 @@
                     </div>
 
                     <!-- Dish Name & Price -->
-                    <div class="vertical-product-body">
-                        <p class="vertical-product-title text-white">
-                            {{ item.dish_name }}
-                        </p>
-                        <h5 class="vertical-product-title text-white">
-                            $ {{ item.dish_price }}
-                        </h5>
-                    </div>
+                    <a [routerLink]="['/item', item.dish_id]" class="product-image">
+                        <div class="vertical-product-body">
+                            <p class="vertical-product-title text-white">
+                                {{ item.dish_name }}
+                            </p>
+                            <h5 class="vertical-product-title text-white">
+                                $ {{ item.dish_price }}
+                            </h5>
+                        </div>
+                    </a>
                 </div>
             </div>
             }
