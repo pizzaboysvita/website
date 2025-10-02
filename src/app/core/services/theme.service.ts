@@ -7,39 +7,39 @@ export type Theme = "light" | "dark";
   providedIn: "root",
 })
 export class ThemeService {
-  private activeTheme: Theme = "light";
+  private activeTheme: Theme = "dark"; // ✅ default DARK
 
   constructor() {
-    this.loadTheme();
+    this.initTheme();
   }
 
-  /** Set theme (light/dark) */
+  /** Apply a given theme */
   setTheme(theme: Theme): void {
     this.activeTheme = theme;
 
-    // Remove old theme classes first
+    // Remove both theme classes
     document.body.classList.remove("light", "dark");
 
     // Apply new theme
     document.body.classList.add(theme);
 
-    // Save in localStorage
+    // Save choice
     localStorage.setItem("theme", theme);
   }
 
-  /** Toggle theme between light and dark */
+  /** Toggle theme manually */
   toggleTheme(): void {
     const newTheme: Theme = this.activeTheme === "light" ? "dark" : "light";
     this.setTheme(newTheme);
   }
 
-  /** Load theme from localStorage or set default */
-  private loadTheme(): void {
+  /** Load from storage or default (dark) */
+  initTheme(): void {
     const savedTheme = localStorage.getItem("theme") as Theme | null;
-    this.setTheme(savedTheme ?? "light");
+    this.setTheme(savedTheme ?? "dark"); // ✅ dark if nothing saved
   }
 
-  /** Get currently active theme */
+  /** Get current theme */
   getTheme(): Theme {
     return this.activeTheme;
   }

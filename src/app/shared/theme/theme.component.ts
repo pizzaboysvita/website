@@ -9,17 +9,14 @@ import { ThemeService } from "../../core/services/theme.service";
   templateUrl: "./theme.component.html",
   styleUrls: ["./theme.component.scss"],
 })
-export class ThemeComponent implements OnInit {
-  currentTheme: "light" | "dark" = "light";
-
-  constructor(private themeService: ThemeService) {}
-
-  ngOnInit(): void {
-    this.currentTheme = this.themeService.getTheme();
-  }
+export class ThemeComponent {
+  constructor(public themeService: ThemeService) {}
 
   toggleTheme(): void {
-    this.themeService.toggleTheme();
-    this.currentTheme = this.themeService.getTheme();
+    return this.themeService.toggleTheme();
+  }
+
+  get currentTheme() {
+    return this.themeService.getTheme();
   }
 }

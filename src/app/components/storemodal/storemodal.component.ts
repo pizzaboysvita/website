@@ -27,6 +27,7 @@ export class StoreModalComponent implements OnInit {
         this.stores = response.map((store) => ({
           id: store.store_id ?? -1,
           name: store.store_name ?? "Store",
+          address: store.street_address ?? "Store Address",
         }));
       },
       error: (err) => console.error(err),

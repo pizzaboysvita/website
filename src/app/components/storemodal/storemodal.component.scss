@@ -1,10 +1,18 @@
+::ng-deep .modal-dialog {
+  max-width: 50% !important;
+}
+
 .cursor-pointer {
   cursor: pointer;
 }
 
-.list-group-item.active {
-  background-color: var(--primary-color); // gold/yellow highlight
+.list-group-item {
+  background-color: var(--bg-color-dark);
   color: var(--text-light);
+}
+
+.list-group-item.active {
+  background-color: var(--primary-color);
   font-weight: 600;
 }
 
