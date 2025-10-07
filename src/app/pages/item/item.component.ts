@@ -433,7 +433,7 @@ export class ItemComponent implements OnInit {
       .subscribe({
         next: () => {
           console.log("✅ Added to cart");
-          this.router.navigate(["/menu"]);
+          this.router.navigate(["/cartlist"]);
         },
         error: (err) => console.error("❌ Error adding to cart:", err),
       });
