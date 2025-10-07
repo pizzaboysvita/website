@@ -194,9 +194,9 @@ export class CartlistComponent implements OnInit {
 
     this.homeService.addOrder(payload).subscribe({
       next: (res) => {
+        this.removeItem(0);
         this.cartItems = [];
         this.cartWithDishDetails = [];
-        this.removeItem(0);
         const orderData = {
           orderId: "#12345", // later you can replace with backend ID
           amountPaid: this.totalPrice,
