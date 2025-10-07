@@ -4,7 +4,14 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: var(--bg-color);
+  body.light {
+    background: var(--bg-color-light);
+    color: var(--text-dark);
+  }
+  body.dark {
+    background: var(--bg-color-dark);
+    color: var(--text-light);
+  }
   transition: background-color 0.3s ease, color 0.3s ease;
   font-family: "Poppins", sans-serif;
 }
@@ -18,15 +25,6 @@
   max-width: 400px;
   text-align: center;
   transition: background-color 0.3s ease, color 0.3s ease;
-
-  body.light {
-    background: var(--bg-color-light);
-    color: var(--text-dark);
-  }
-  body.dark {
-    background: var(--bg-color-dark);
-    color: var(--text-light);
-  }
 
   .logo {
     font-size: 1.6rem;
@@ -51,8 +49,6 @@
       padding: 0.75rem;
       border-radius: 6px;
       border: 1px solid rgba(0, 0, 0, 0.2);
-      background-color: var(--surface-color);
-      color: var(--text-dark);
       outline: none;
       transition: border-color 0.3s ease;
       &:focus {
