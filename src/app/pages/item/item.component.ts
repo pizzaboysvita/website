@@ -27,7 +27,7 @@ export class ItemComponent implements OnInit {
   // Selection state for standard dish optionGroups
   selectedOptions: any[] = [];
 
-  // For combo dishes: array of { name, dish_id, optionGroups, selectedOptions, open }
+  // For combo dishes: array of { name, dish_id, optionGroups, ingredients, selectedOptions, open }
   comboGroups: any[] = [];
 
   // store full product list returned from API so we can find sub-dish option sets
@@ -53,7 +53,7 @@ export class ItemComponent implements OnInit {
     });
   }
 
-  /** Fetch Dish Details + Parse Options */
+  /** Fetch Dish Details + Parse Options + Ingredients */
   getDishDetails(id: number): void {
     this.apiService.getDishes().subscribe({
       next: (response: any) => {
@@ -71,15 +71,15 @@ export class ItemComponent implements OnInit {
 
         if (!this.dish) return;
 
-        if (this.dish.dish_type === "combo" && this.dish.dish_choices_json) {
-          this.parseComboOptions(this.dish.dish_choices_json);
-        } else if (
+        // Standard dish -> parse optionGroups and ingredients
+        if (
           this.dish.dish_type === "standard" &&
           this.dish.dish_option_set_json
         ) {
           this.dish.optionGroups = this.parseOptionSets(
             this.dish.dish_option_set_json
           );
+          // init selection arrays for optionGroups
           this.selectedOptions = [];
           this.initSelectedOptions(
             this.dish.optionGroups,
@@ -87,6 +87,17 @@ export class ItemComponent implements OnInit {
           );
         } else {
           this.dish.optionGroups = [];
+        }
+
+        // Parse ingredients for standard dish (always after optionGroups)
+        this.dish.ingredients = this.parseIngredients(
+          this.dish.dish_ingredients_json,
+          `${this.dish?.dish_id ?? "dish"}`
+        );
+
+        // Combo dish -> build comboGroups (each sub-dish may have its own optionGroups + ingredients)
+        if (this.dish.dish_type === "combo" && this.dish.dish_choices_json) {
+          this.parseComboOptions(this.dish.dish_choices_json);
         }
 
         this.calculateTotal();
@@ -122,13 +133,35 @@ export class ItemComponent implements OnInit {
     }
   }
 
-  /** Parse Combo Dish → each sub-dish may have its own option groups (try to find from full product list) */
+  /**
+   * Parse ingredients JSON into array of { id, name, checked, price? }
+   * All ingredients default to checked = true
+   */
+  private parseIngredients(
+    ingredientsJson: string | null,
+    idPrefix = ""
+  ): any[] {
+    if (!ingredientsJson) return [];
+    try {
+      const arr = JSON.parse(ingredientsJson || "[]");
+      return arr.map((ing: any, idx: number) => ({
+        id: `${idPrefix}-ing-${idx}`,
+        name: ing?.name ?? ing?.label ?? String(ing),
+        checked: true,
+        price: Number(ing?.price) || 0, // if ingredient has price (rare), keep it
+      }));
+    } catch (e) {
+      console.error("Error parsing ingredients JSON", e);
+      return [];
+    }
+  }
+
+  /** Parse Combo Dish → each sub-dish may have its own option groups & ingredients (try to find from full product list) */
   private parseComboOptions(comboJson: string): void {
     try {
       const comboData = JSON.parse(comboJson || "[]");
       this.comboGroups = [];
 
-      // comboData structure can vary — iterate robustly
       comboData.forEach((choice: any) => {
         const menuItems = choice.menuItems || [];
         menuItems.forEach((menu: any) => {
@@ -139,7 +172,7 @@ export class ItemComponent implements OnInit {
               // d may contain dishId/dishName or dish_id/dish_name
               const dishIdFromChoice = d.dishId ?? d.dish_id ?? d.id ?? null;
               const dishNameFromChoice =
-                d.dishName ?? d.dish_name ?? d.dish_name ?? d.name ?? "Dish";
+                d.dishName ?? d.dish_name ?? d.name ?? "Dish";
 
               // try to find full product in allProducts by id
               const matched = this.allProducts.find(
@@ -153,11 +186,20 @@ export class ItemComponent implements OnInit {
                   ? this.parseOptionSets(matched.dish_option_set_json)
                   : [];
 
+              // parse ingredients either from matched product or from choice item if present
+              const ingredientsFromProduct = this.parseIngredients(
+                matched?.dish_ingredients_json ??
+                  d.dish_ingredients_json ??
+                  null,
+                `${dishIdFromChoice ?? "sub"}`
+              );
+
               this.comboGroups.push({
                 name: dishNameFromChoice,
                 dish_id: dishIdFromChoice,
                 dish_image: d.image_url ?? matched?.dish_image ?? null,
                 optionGroups: optionGroupsFromProduct,
+                ingredients: ingredientsFromProduct,
                 selectedOptions: [],
                 open: false,
               });
@@ -256,6 +298,20 @@ export class ItemComponent implements OnInit {
     }
   }
 
+  /** Ingredient toggles (standard dish) */
+  toggleIngredient(ingredient: any): void {
+    if (!ingredient) return;
+    ingredient.checked = !ingredient.checked;
+  }
+
+  /** Ingredient toggles (combo sub-dish) */
+  toggleComboIngredient(cg: any, ingIndex: number): void {
+    if (!cg || !cg.ingredients) return;
+    const ing = cg.ingredients[ingIndex];
+    if (!ing) return;
+    ing.checked = !ing.checked;
+  }
+
   /** Price Calculation */
   calculateTotal(): void {
     if (!this.dish) return;
@@ -279,6 +335,21 @@ export class ItemComponent implements OnInit {
         cg.selectedOptions.forEach((item: any, groupIndex: number) => {
           const group = cg.optionGroups[groupIndex];
           basePrice += this.calculateOptionPrice(item, group);
+        });
+      });
+    }
+
+    // Ingredients rarely have price, but if they do include them
+    if (this.dish.ingredients && Array.isArray(this.dish.ingredients)) {
+      this.dish.ingredients.forEach((ing: any) => {
+        if (ing.checked && ing.price) basePrice += ing.price;
+      });
+    }
+    if (this.dish.dish_type === "combo") {
+      this.comboGroups.forEach((cg) => {
+        if (!cg.ingredients) return;
+        cg.ingredients.forEach((ing: any) => {
+          if (ing.checked && ing.price) basePrice += ing.price;
         });
       });
     }
@@ -314,14 +385,40 @@ export class ItemComponent implements OnInit {
     }
   }
 
-  /** Add Dish to Cart */
+  /** Add Dish to Cart - includes selected ingredients for standard and combo */
   addToCart(): void {
     if (!this.dish) return;
+
     const unitPrice = this.total / this.quantity;
+
+    // Prepare comboGroups payload with selected options & ingredients
+    const comboPayload = (this.comboGroups || []).map((cg) => {
+      return {
+        dish_id: cg.dish_id,
+        selectedOptions: cg.selectedOptions || [],
+        selectedIngredients:
+          (cg.ingredients || [])
+            .filter((ing: any) => ing.checked)
+            .map((i: any) => ({
+              id: i.id,
+              name: i.name,
+              price: i.price || 0,
+            })) || [],
+      };
+    });
+
     const options = {
       notes: this.notes,
       selectedOptions: this.selectedOptions,
-      comboGroups: this.comboGroups,
+      selectedIngredients:
+        (this.dish.ingredients || [])
+          .filter((ing: any) => ing.checked)
+          .map((i: any) => ({
+            id: i.id,
+            name: i.name,
+            price: i.price || 0,
+          })) || [],
+      comboGroups: comboPayload,
     };
 
     this.cartService
