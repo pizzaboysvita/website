@@ -27,6 +27,7 @@ interface Dish {
   imageLoaded?: boolean;
   isFavorite?: boolean;
   wishlist_id?: number | null;
+  isOnlineHide?: number | null;
   [key: string]: any;
 }
 
@@ -129,7 +130,7 @@ export class MenuComponent implements OnInit, OnDestroy {
     })
       .pipe(takeUntil(this.destroy$))
       .subscribe(({ dishes, favorites }: any) => {
-        const favMap = new Map<number, number>(); // dish_id → wishlist_id
+        const favMap = new Map<number, number>();
         (favorites?.data || []).forEach((f: any) => {
           favMap.set(Number(f.dish_id), Number(f.wishlist_id));
         });
@@ -140,9 +141,14 @@ export class MenuComponent implements OnInit, OnDestroy {
           imageLoaded: false,
           isFavorite: favMap.has(dish.dish_id),
           wishlist_id: favMap.get(dish.dish_id) || null,
+          isOnlineHide: dish.is_online_hide,
         }));
 
-        this.filteredProducts = [...this.allProducts];
+        // ✅ Filter dishes based on isOnlineHide === 0
+        this.filteredProducts = this.allProducts.filter(
+          (dish) => dish.isOnlineHide === 0
+        );
+
         this.cdr.detectChanges();
       });
   }
@@ -151,9 +157,11 @@ export class MenuComponent implements OnInit, OnDestroy {
     product?.dish_id || index;
 
   onCategorySelected(category: any | null) {
-    this.filteredProducts = category
+    let products = category
       ? this.allProducts.filter((d) => d.dish_category_id === category.id)
       : [...this.allProducts];
+
+    this.filteredProducts = products.filter((d) => d.isOnlineHide === 0);
     this.selectedCategoryName = category?.name || "All Dishes";
     this.cdr.detectChanges();
   }
