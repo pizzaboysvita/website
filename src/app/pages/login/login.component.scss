@@ -1,19 +1,20 @@
-/* Login / Auth page */
 .auth-background {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
   body.light {
     background: var(--bg-color-light);
     color: var(--text-dark);
   }
+
   body.dark {
     background: var(--bg-color-dark);
     color: var(--text-light);
   }
-  transition: background-color 0.3s ease, color 0.3s ease;
-  font-family: "Poppins", sans-serif;
 }
 
 .auth-modal {
@@ -44,6 +45,7 @@
 
   .form-group {
     margin-bottom: 1rem;
+
     input {
       width: 100%;
       padding: 0.75rem;
@@ -55,13 +57,17 @@
         border-color: var(--primary-color);
       }
     }
+
+    input.is-invalid {
+      border-color: red;
+      background-color: #ffe6e6;
+    }
+
     .error {
       text-align: left;
       margin-top: 4px;
-      small {
-        color: var(--primary-color);
-        font-size: 0.8rem;
-      }
+      font-size: 0.8rem;
+      color: red;
     }
   }
 
@@ -105,14 +111,6 @@
     margin-top: 1.2rem;
     font-size: 0.85rem;
     opacity: 0.7;
-    body.light {
-      background: var(--bg-color-light);
-      color: var(--text-dark);
-    }
-    body.dark {
-      background: var(--bg-color-dark);
-      color: var(--text-light);
-    }
 
     a {
       color: var(--primary-color);
@@ -142,6 +140,10 @@ body.dark-theme {
       &:focus {
         border-color: var(--primary-color);
       }
+    }
+    input.is-invalid {
+      border-color: red;
+      background-color: #550000;
     }
   }
 }
