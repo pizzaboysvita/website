@@ -5,7 +5,7 @@
   flex-wrap: wrap;
 }
 
-/* Left column */
+/* Left Column */
 .left-column {
   flex: 0 0 40%;
   max-width: 40%;
@@ -89,7 +89,7 @@
   resize: vertical;
 }
 
-/* Bottom section */
+/* Bottom Info */
 .bottom-info {
   display: flex;
   justify-content: space-between;
@@ -122,7 +122,7 @@
   }
 }
 
-/* Right column */
+/* Right Column */
 .right-column {
   flex: 1;
   display: flex;
@@ -135,141 +135,269 @@
   color: var(--text-light);
 }
 
+/* Option Groups & Items */
 .option-group {
   background: #121212 !important;
   border-radius: 12px;
   padding: 15px;
   margin-bottom: 12px;
-}
 
-.option-header {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-
-  h2,
-  h4 {
-    font-size: 1.1rem;
-    margin: 0;
-    font-weight: 600;
-  }
-
-  .required-text {
-    font-size: 0.85rem;
-    color: var(--text-muted, #ccc);
-  }
-}
-
-.option-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 10px;
-  border-bottom: 1px solid #444;
-  cursor: pointer;
-  transition: background 0.3s;
-  font-size: 1rem;
-
-  &:last-child {
-    border-bottom: none;
-  }
-
-  &.selected {
-    background: rgba(230, 57, 70, 0.06);
-    border-radius: 6px;
-  }
-
-  .option-info {
+  .option-header {
     display: flex;
-    flex-direction: column;
-    gap: 2px;
+    justify-content: space-between;
+    margin-bottom: 10px;
 
-    .option-title {
-      font-size: 1rem;
-      font-weight: 500;
+    h2,
+    h4,
+    h6 {
+      font-size: 1.1rem;
+      margin: 0;
+      font-weight: 600;
     }
 
-    .option-price {
-      font-size: 0.9rem;
-      margin-left: 5px;
-      color: var(--primary-color);
-    }
-
-    .option-description {
-      font-size: 0.8rem;
+    .required-text {
+      font-size: 0.85rem;
       color: var(--text-muted, #ccc);
     }
   }
 
-  .option-check {
+  .option-item {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 10px;
+    padding: 5px 0;
+    border-bottom: 1px dashed #eee;
+    cursor: pointer;
+    transition: background 0.3s;
 
-    input[type="radio"],
-    input[type="checkbox"] {
-      width: 20px;
-      height: 20px;
-      cursor: pointer;
-      accent-color: var(--primary-color);
+    &:last-child {
+      border-bottom: none;
     }
 
-    .counter-box {
+    &.selected {
+      background-color: rgba(255, 255, 255, 0.06);
+      border-radius: 6px;
+    }
+
+    .option-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+
+      .option-title {
+        font-size: 1rem;
+        font-weight: 500;
+      }
+
+      .option-price {
+        font-size: 0.9rem;
+        color: var(--primary-color);
+      }
+
+      .option-description {
+        font-size: 0.8rem;
+        color: var(--text-muted, #ccc);
+      }
+    }
+
+    .option-check {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
 
-      button {
-        background: var(--primary-color);
-        color: #fff;
-        border: none;
-        border-radius: 50%;
-        width: 28px;
-        height: 28px;
-        font-size: 1.2rem;
+      input[type="radio"],
+      input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
         cursor: pointer;
-        transition: all 0.3s;
-
-        &:hover {
-          opacity: 0.85;
-        }
+        accent-color: var(--primary-color);
       }
 
-      span {
-        min-width: 20px;
-        text-align: center;
+      .counter-box {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        button {
+          background: var(--primary-color);
+          color: #fff;
+          border: none;
+          border-radius: 50%;
+          width: 28px;
+          height: 28px;
+          font-size: 1.2rem;
+          cursor: pointer;
+          transition: all 0.3s;
+
+          &:hover {
+            opacity: 0.85;
+          }
+        }
+
+        span {
+          min-width: 20px;
+          text-align: center;
+        }
       }
     }
   }
 }
 
-/* Combo Accordion */
-.combo-group {
-  border: 1px solid #333;
+/* Combo & Sub-dish Accordion */
+/* Combo Accordion - Polished Dark UI */
+.accordion {
+  background: transparent;
   border-radius: 12px;
   overflow: hidden;
+
+  .accordion-item {
+    border: 1px solid #2b2b2b;
+    border-radius: 12px;
+    background: var(--bg-color-dark);
+    margin-bottom: 10px;
+    overflow: hidden;
+
+    .accordion-button {
+      background: linear-gradient(90deg, #1e1e1e, #2a2a2a);
+      color: var(--text-light);
+      font-weight: 600;
+      padding: 14px 18px;
+      border: none;
+      outline: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      transition: all 0.3s ease;
+
+      &::after {
+        content: "›";
+        transform: rotate(90deg);
+        transition: transform 0.3s ease;
+        font-size: 1.2rem;
+        color: var(--primary-color);
+      }
+
+      &.collapsed::after {
+        transform: rotate(0);
+      }
+
+      &:hover {
+        background: #262626;
+      }
+    }
+
+    .accordion-collapse {
+      border-top: 1px solid #333;
+      background: #111;
+    }
+
+    .accordion-body {
+      padding: 18px 20px;
+
+      .sub-dish {
+        background: #181818;
+        border: 1px solid #2f2f2f;
+        border-radius: 10px;
+        margin-bottom: 12px;
+        padding: 14px;
+
+        h5 {
+          font-size: 1rem;
+          font-weight: 600;
+          color: var(--text-light);
+          margin-bottom: 8px;
+        }
+
+        .option-group {
+          background: #0f0f0f !important;
+          border-radius: 10px;
+          margin-bottom: 10px;
+          padding: 12px;
+
+          .option-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+
+            h6 {
+              font-size: 0.95rem;
+              margin: 0;
+              font-weight: 600;
+              color: var(--text-light);
+            }
+
+            .required-text {
+              font-size: 0.8rem;
+              color: var(--text-muted);
+            }
+          }
+
+          .option-item {
+            background: transparent;
+            transition: background 0.3s ease, border-color 0.3s;
+            border-bottom: 1px dashed #333;
+
+            &:last-child {
+              border-bottom: none;
+            }
+
+            &.selected {
+              background: rgba(255, 255, 255, 0.06);
+              border-radius: 6px;
+            }
+
+            .option-info {
+              .option-title {
+                font-weight: 500;
+              }
+
+              .option-price {
+                font-size: 0.85rem;
+                color: var(--primary-color);
+              }
+            }
+
+            .option-check {
+              input[type="radio"],
+              input[type="checkbox"] {
+                accent-color: var(--primary-color);
+              }
+
+              .counter-box button {
+                background: var(--primary-color);
+                color: #fff;
+                width: 26px;
+                height: 26px;
+                border-radius: 50%;
+                border: none;
+                font-size: 1rem;
+                cursor: pointer;
+                transition: all 0.3s;
+
+                &:hover {
+                  opacity: 0.85;
+                }
+              }
+            }
+          }
+        }
+
+        /* Ingredients inside Subdish */
+        .option-group:last-child {
+          border-top: 1px solid #2a2a2a;
+          margin-top: 10px;
+          padding-top: 10px;
+        }
+      }
+    }
+  }
 }
 
-.accordion-header {
-  background: #1e1e1e;
-  padding: 12px 15px;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  h3 {
-    margin: 0;
-    font-size: 1rem;
-    font-weight: 600;
-  }
-
-  .accordion-icon {
-    font-size: 1.2rem;
-  }
-}
-
-.accordion-body {
-  padding: 12px 15px;
-  background: transparent;
+/* Small polish */
+.no-options-text {
+  text-align: center;
+  padding: 20px;
+  color: var(--text-muted);
+  font-size: 0.95rem;
 }

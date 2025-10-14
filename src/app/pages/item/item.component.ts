@@ -57,7 +57,7 @@ export class ItemComponent implements OnInit {
   getDishDetails(id: number): void {
     this.apiService.getDishes().subscribe({
       next: (response: any) => {
-        // keep full product list locally
+        // store all products locally
         this.allProducts = (response?.data || []).map((dish: any) => ({
           ...dish,
           quantity: 1,
@@ -65,39 +65,43 @@ export class ItemComponent implements OnInit {
 
         this.dish = this.allProducts.find((item: any) => item.dish_id === id);
 
-        // reset selection state
+        if (!this.dish) return;
+
+        // Reset selection states
         this.selectedOptions = [];
         this.comboGroups = [];
 
-        if (!this.dish) return;
-
-        // Standard dish -> parse optionGroups and ingredients
-        if (
-          this.dish.dish_type === "standard" &&
-          this.dish.dish_option_set_json
-        ) {
-          this.dish.optionGroups = this.parseOptionSets(
-            this.dish.dish_option_set_json
-          );
-          // init selection arrays for optionGroups
-          this.selectedOptions = [];
+        // --- STANDARD DISH ---
+        if (this.dish.dish_type === "standard") {
+          // parse optionGroups
+          this.dish.optionGroups = this.dish.dish_option_set_json
+            ? this.parseOptionSets(this.dish.dish_option_set_json)
+            : [];
           this.initSelectedOptions(
             this.dish.optionGroups,
             this.selectedOptions
           );
-        } else {
-          this.dish.optionGroups = [];
+
+          // parse ingredients
+          this.dish.ingredients = this.parseIngredients(
+            this.dish.dish_ingredients_json,
+            `${this.dish?.dish_id ?? "dish"}`
+          );
+          // default checked
+          this.dish.ingredients.forEach((ing: any) => (ing.checked = true));
         }
 
-        // Parse ingredients for standard dish (always after optionGroups)
-        this.dish.ingredients = this.parseIngredients(
-          this.dish.dish_ingredients_json,
-          `${this.dish?.dish_id ?? "dish"}`
-        );
-
-        // Combo dish -> build comboGroups (each sub-dish may have its own optionGroups + ingredients)
+        // --- COMBO DISH ---
         if (this.dish.dish_type === "combo" && this.dish.dish_choices_json) {
           this.parseComboOptions(this.dish.dish_choices_json);
+
+          // default collapsed + ingredients checked
+          this.comboGroups.forEach((cg: any) => {
+            cg.subDishes?.forEach((sd: any) => {
+              sd.open = false; // collapsed
+              sd.ingredients?.forEach((ing: any) => (ing.selected = true)); // checked
+            });
+          });
         }
 
         this.calculateTotal();
@@ -162,19 +166,19 @@ export class ItemComponent implements OnInit {
       const comboData = JSON.parse(comboJson || "[]");
       this.comboGroups = [];
 
-      comboData.forEach((choice: any) => {
-        const menuItems = choice.menuItems || [];
+      comboData.forEach((combo: any) => {
+        const dishesInCombo: any[] = [];
+
+        const menuItems = combo.menuItems || [];
         menuItems.forEach((menu: any) => {
           const categories = menu.categories || [];
           categories.forEach((cat: any) => {
             const dishes = cat.dishes || [];
             dishes.forEach((d: any) => {
-              // d may contain dishId/dishName or dish_id/dish_name
               const dishIdFromChoice = d.dishId ?? d.dish_id ?? d.id ?? null;
               const dishNameFromChoice =
                 d.dishName ?? d.dish_name ?? d.name ?? "Dish";
 
-              // try to find full product in allProducts by id
               const matched = this.allProducts.find(
                 (p) =>
                   p.dish_id === dishIdFromChoice ||
@@ -186,7 +190,6 @@ export class ItemComponent implements OnInit {
                   ? this.parseOptionSets(matched.dish_option_set_json)
                   : [];
 
-              // parse ingredients either from matched product or from choice item if present
               const ingredientsFromProduct = this.parseIngredients(
                 matched?.dish_ingredients_json ??
                   d.dish_ingredients_json ??
@@ -194,24 +197,28 @@ export class ItemComponent implements OnInit {
                 `${dishIdFromChoice ?? "sub"}`
               );
 
-              this.comboGroups.push({
+              dishesInCombo.push({
                 name: dishNameFromChoice,
                 dish_id: dishIdFromChoice,
                 dish_image: d.image_url ?? matched?.dish_image ?? null,
                 optionGroups: optionGroupsFromProduct,
                 ingredients: ingredientsFromProduct,
                 selectedOptions: [],
-                open: false,
               });
             });
           });
         });
-      });
 
-      // initialize selection arrays per combo group
-      this.comboGroups.forEach((cg) => {
-        cg.selectedOptions = [];
-        this.initSelectedOptions(cg.optionGroups, cg.selectedOptions);
+        // Initialize selection arrays for all sub-dishes
+        dishesInCombo.forEach((d) =>
+          this.initSelectedOptions(d.optionGroups, d.selectedOptions)
+        );
+
+        this.comboGroups.push({
+          comboName: combo.name || "Combo",
+          open: false,
+          subDishes: dishesInCombo,
+        });
       });
     } catch (e) {
       console.error("❌ Error parsing combo JSON", e);
@@ -244,6 +251,12 @@ export class ItemComponent implements OnInit {
     return Array.isArray(group) && group.some((o) => o.id === option.id);
   }
 
+  isSubDishOptionSelected(subDish: any, option: any, groupIndex: number) {
+    return subDish.selectedOptions?.[groupIndex]?.some(
+      (o: any) => o.id === option.id
+    );
+  }
+
   toggleCheckbox(
     option: any,
     groupIndex: number,
@@ -259,6 +272,21 @@ export class ItemComponent implements OnInit {
     this.calculateTotal();
   }
 
+  toggleSubDishCheckbox(subDish: any, option: any, groupIndex: number) {
+    if (!subDish.selectedOptions) subDish.selectedOptions = [];
+    if (!subDish.selectedOptions[groupIndex])
+      subDish.selectedOptions[groupIndex] = [];
+
+    const index = subDish.selectedOptions[groupIndex].findIndex(
+      (o: any) => o.id === option.id
+    );
+    if (index > -1) {
+      subDish.selectedOptions[groupIndex].splice(index, 1);
+    } else {
+      subDish.selectedOptions[groupIndex].push(option);
+    }
+  }
+
   selectRadio(
     option: any,
     groupIndex: number,
@@ -266,6 +294,11 @@ export class ItemComponent implements OnInit {
   ): void {
     selectedOptionsArr[groupIndex] = option;
     this.calculateTotal();
+  }
+
+  selectSubDishRadio(subDish: any, option: any, groupIndex: number) {
+    if (!subDish.selectedOptions) subDish.selectedOptions = [];
+    subDish.selectedOptions[groupIndex] = option;
   }
 
   incrementCounter(
@@ -279,6 +312,13 @@ export class ItemComponent implements OnInit {
       group.push(option);
     }
     this.calculateTotal();
+  }
+
+  incrementSubDishCounter(subDish: any, option: any, groupIndex: number) {
+    if (!option.count) option.count = 0;
+    option.count += 1;
+    if (!subDish.selectedOptions) subDish.selectedOptions = [];
+    subDish.selectedOptions[groupIndex] = option.count;
   }
 
   decrementCounter(
@@ -298,18 +338,34 @@ export class ItemComponent implements OnInit {
     }
   }
 
+  decrementSubDishCounter(subDish: any, option: any, groupIndex: number) {
+    if (!option.count) option.count = 0;
+    if (option.count > 0) option.count -= 1;
+    if (!subDish.selectedOptions) subDish.selectedOptions = [];
+    subDish.selectedOptions[groupIndex] = option.count;
+  }
+
   /** Ingredient toggles (standard dish) */
   toggleIngredient(ingredient: any): void {
     if (!ingredient) return;
     ingredient.checked = !ingredient.checked;
   }
-
   /** Ingredient toggles (combo sub-dish) */
-  toggleComboIngredient(cg: any, ingIndex: number): void {
-    if (!cg || !cg.ingredients) return;
-    const ing = cg.ingredients[ingIndex];
-    if (!ing) return;
-    ing.checked = !ing.checked;
+  toggleSubDishIngredient(ing: any) {
+    ing.selected = !ing.selected;
+  }
+
+  selectComboSubDish(combo: any, subDish: any) {
+    // Only one subDish per combo
+    combo.selectedSubDish = subDish;
+
+    // Optionally reset other subDish selections
+    combo.subDishes.forEach((sd: any) => {
+      if (sd.dish_id !== subDish.dish_id) {
+        sd.selectedOptions = [];
+        sd.ingredients?.forEach((ing: any) => (ing.selected = false));
+      }
+    });
   }
 
   /** Price Calculation */

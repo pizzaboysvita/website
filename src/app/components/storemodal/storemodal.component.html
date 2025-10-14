@@ -8,11 +8,9 @@
             <li *ngFor="let store of stores" (click)="selectStore(store)" class="list-group-item"
                 [class.active]="store.name === storeService.getSelectedStoreName()" style="cursor:pointer;">
                 <div class="flex-grow-1">
-                                <h5 class="fw-bold mb-1">{{ store.name }}</h5>
-                                <p class="mb-1 small">📍 {{ store.address }}</p>
-                            </div>
-                <!-- {{ store.name }}
-                {{ store.address }} -->
+                    <h5 class="fw-bold mb-1">{{ store.name }}</h5>
+                    <p class="mb-1 small">📍 {{ store.address }}</p>
+                </div>
             </li>
         </ul>
     </div>

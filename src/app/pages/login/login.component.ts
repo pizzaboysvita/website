@@ -48,8 +48,11 @@ export class LoginComponent implements OnInit {
         if (res && res.code == 1) {
           this.authService.setToken(res.access_token);
           localStorage.setItem("user", JSON.stringify(res.user));
-          this.router.navigate(["/home"]);
+          // this.router.navigate(["/home"]);
           alert("Login successful!");
+          this.router.navigate(["/home"]).then(() => {
+            window.location.reload(); // reload ensures header picks updated user
+          });
         } else {
           alert("Login failed. Please check your credentials.");
         }
