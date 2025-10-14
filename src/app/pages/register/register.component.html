@@ -4,10 +4,12 @@
         <p class="subtitle">Join Pizza Boyz and start ordering!</p>
 
         <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+
             <!-- First Name -->
             <div class="form-group">
                 <label for="firstName">First Name</label>
-                <input id="firstName" type="text" formControlName="first_name" placeholder="Enter your first name" />
+                <input id="firstName" type="text" formControlName="first_name" placeholder="Enter your first name"
+                    [ngClass]="{'is-invalid': signupForm.get('first_name')?.touched && signupForm.get('first_name')?.invalid}" />
                 <small class="error"
                     *ngIf="signupForm.get('first_name')?.touched && signupForm.get('first_name')?.invalid">
                     First name is required (min 2 characters).
@@ -17,7 +19,8 @@
             <!-- Last Name -->
             <div class="form-group">
                 <label for="lastName">Last Name</label>
-                <input id="lastName" type="text" formControlName="last_name" placeholder="Enter your last name" />
+                <input id="lastName" type="text" formControlName="last_name" placeholder="Enter your last name"
+                    [ngClass]="{'is-invalid': signupForm.get('last_name')?.touched && signupForm.get('last_name')?.invalid}" />
                 <small class="error"
                     *ngIf="signupForm.get('last_name')?.touched && signupForm.get('last_name')?.invalid">
                     Last name is required (min 2 characters).
@@ -27,7 +30,8 @@
             <!-- Email -->
             <div class="form-group">
                 <label for="email">Email</label>
-                <input id="email" type="email" formControlName="email" placeholder="Enter your email" />
+                <input id="email" type="email" formControlName="email" placeholder="Enter your email"
+                    [ngClass]="{'is-invalid': signupForm.get('email')?.touched && signupForm.get('email')?.invalid}" />
                 <small class="error" *ngIf="signupForm.get('email')?.touched && signupForm.get('email')?.invalid">
                     Please enter a valid email.
                 </small>
@@ -36,7 +40,8 @@
             <!-- Password -->
             <div class="form-group">
                 <label for="password">Password</label>
-                <input id="password" type="password" formControlName="password_hash" placeholder="Create a password" />
+                <input id="password" type="password" formControlName="password_hash" placeholder="Create a password"
+                    [ngClass]="{'is-invalid': signupForm.get('password_hash')?.touched && signupForm.get('password_hash')?.invalid}" />
                 <small class="error"
                     *ngIf="signupForm.get('password_hash')?.touched && signupForm.get('password_hash')?.invalid">
                     Password must be at least 6 characters.
@@ -47,42 +52,73 @@
             <div class="form-group">
                 <label for="confirmPassword">Confirm Password</label>
                 <input id="confirmPassword" type="password" formControlName="confirmPassword"
-                    placeholder="Confirm your password" />
+                    placeholder="Confirm your password"
+                    [ngClass]="{'is-invalid': signupForm.hasError('mismatch') && signupForm.get('confirmPassword')?.touched}" />
                 <small class="error"
                     *ngIf="signupForm.hasError('mismatch') && signupForm.get('confirmPassword')?.touched">
                     Passwords do not match.
                 </small>
             </div>
 
-            <!-- Country / State / City / Address / Phone / Image -->
+            <!-- Country -->
             <div class="form-group">
                 <label for="country">Country</label>
-                <input id="country" type="text" formControlName="country" placeholder="Enter your country" />
+                <input id="country" type="text" formControlName="country" placeholder="Enter your country"
+                    [ngClass]="{'is-invalid': signupForm.get('country')?.touched && signupForm.get('country')?.invalid}" />
+                <small class="error" *ngIf="signupForm.get('country')?.touched && signupForm.get('country')?.invalid">
+                    Country is required.
+                </small>
             </div>
 
+            <!-- State -->
             <div class="form-group">
                 <label for="state">State</label>
-                <input id="state" type="text" formControlName="state" placeholder="Enter your state" />
+                <input id="state" type="text" formControlName="state" placeholder="Enter your state"
+                    [ngClass]="{'is-invalid': signupForm.get('state')?.touched && signupForm.get('state')?.invalid}" />
+                <small class="error" *ngIf="signupForm.get('state')?.touched && signupForm.get('state')?.invalid">
+                    State is required (min 3 characters).
+                </small>
             </div>
 
+            <!-- City -->
             <div class="form-group">
                 <label for="city">City</label>
-                <input id="city" type="text" formControlName="city" placeholder="Enter your city" />
+                <input id="city" type="text" formControlName="city" placeholder="Enter your city"
+                    [ngClass]="{'is-invalid': signupForm.get('city')?.touched && signupForm.get('city')?.invalid}" />
+                <small class="error" *ngIf="signupForm.get('city')?.touched && signupForm.get('city')?.invalid">
+                    City is required (min 3 characters).
+                </small>
             </div>
 
+            <!-- Address -->
             <div class="form-group">
                 <label for="address">Address</label>
-                <textarea id="address" formControlName="address" placeholder="Enter your address"></textarea>
+                <textarea id="address" formControlName="address" placeholder="Enter your address"
+                    [ngClass]="{'is-invalid': signupForm.get('address')?.touched && signupForm.get('address')?.invalid}"></textarea>
+                <small class="error" *ngIf="signupForm.get('address')?.touched && signupForm.get('address')?.invalid">
+                    Address is required (min 10 characters).
+                </small>
             </div>
 
+            <!-- Phone -->
             <div class="form-group">
                 <label for="phone">Phone Number</label>
-                <input id="phone" type="tel" formControlName="phone_number" placeholder="Enter your phone number" />
+                <input id="phone" type="tel" formControlName="phone_number" placeholder="Enter your phone number"
+                    [ngClass]="{'is-invalid': signupForm.get('phone_number')?.touched && signupForm.get('phone_number')?.invalid}" />
+                <small class="error"
+                    *ngIf="signupForm.get('phone_number')?.touched && signupForm.get('phone_number')?.invalid">
+                    Phone number is required (10 digits).
+                </small>
             </div>
 
+            <!-- Image -->
             <div class="form-group">
                 <label for="image">Upload Image</label>
-                <input id="image" type="file" (change)="onFileSelected($event)" />
+                <input id="image" type="file" (change)="onFileSelected($event)"
+                    [ngClass]="{'is-invalid': signupForm.get('image')?.touched && signupForm.get('image')?.invalid}" />
+                <small class="error" *ngIf="signupForm.get('image')?.touched && signupForm.get('image')?.invalid">
+                    Please upload an image.
+                </small>
             </div>
 
             <button type="submit" class="btn-login">Sign Up</button>

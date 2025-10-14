@@ -16,15 +16,6 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
   text-align: center;
 
-  body.light {
-    background: var(--bg-color-light);
-    color: var(--text-dark);
-  }
-  body.dark {
-    background: var(--bg-color-dark);
-    color: var(--text-light);
-  }
-
   .logo {
     font-size: 1.8rem;
     font-weight: 600;
@@ -61,9 +52,15 @@
       }
     }
 
+    input.is-invalid,
+    textarea.is-invalid {
+      border-color: red;
+      background-color: #ffe6e6;
+    }
+
     .error {
-      color: var(--primary-color);
-      font-size: 0.8rem;
+      color: red;
+      font-size: 12px;
       margin-top: 4px;
     }
   }
@@ -89,14 +86,6 @@
     font-size: 13px;
     opacity: 0.7;
 
-    body.light {
-      background: var(--bg-color-light);
-      color: var(--text-dark);
-    }
-    body.dark {
-      background: var(--bg-color-dark);
-      color: var(--text-light);
-    }
     a {
       color: var(--primary-color);
       text-decoration: none;

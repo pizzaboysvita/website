@@ -8,6 +8,7 @@ import {
   ReactiveFormsModule,
 } from "@angular/forms";
 import { AuthService } from "../../core/services/auth.service";
+import { CouponService } from "../../core/services/coupon.service";
 
 @Component({
   selector: "app-login",
@@ -23,7 +24,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private couponService: CouponService
   ) {}
 
   ngOnInit(): void {
@@ -48,11 +50,13 @@ export class LoginComponent implements OnInit {
         if (res && res.code == 1) {
           this.authService.setToken(res.access_token);
           localStorage.setItem("user", JSON.stringify(res.user));
-          // this.router.navigate(["/home"]);
-          alert("Login successful!");
+          // alert("Login successful!");
           this.router.navigate(["/home"]).then(() => {
-            window.location.reload(); // reload ensures header picks updated user
+            this.couponService.openCouponModal();
           });
+          // this.router.navigate(["/home"]).then(() => {
+          //   window.location.reload(); // reload ensures header picks updated user
+          // });
         } else {
           alert("Login failed. Please check your credentials.");
         }

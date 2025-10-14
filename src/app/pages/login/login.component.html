@@ -5,23 +5,28 @@
         <h2>Login</h2>
 
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+            <!-- Email -->
             <div class="form-group">
-                <input type="email" formControlName="email" placeholder="Email" />
-                <div class="error" *ngIf="submitted && f['email'].errors">
-                    <small *ngIf="f['email'].errors['required']">Email is required</small>
-                    <small *ngIf="f['email'].errors['email']">Enter a valid email</small>
-                </div>
+                <input type="email" formControlName="email" placeholder="Email"
+                    [ngClass]="{'is-invalid': submitted && f['email'].invalid}" />
+                <small class="error" *ngIf="submitted && f['email'].errors">
+                    <span *ngIf="f['email'].errors['required']">Email is required</span>
+                    <span *ngIf="f['email'].errors['email']">Enter a valid email</span>
+                </small>
             </div>
 
+            <!-- Password -->
             <div class="form-group">
-                <input type="password" formControlName="password_hash" placeholder="Password" />
-                <div class="error" *ngIf="submitted && f['password_hash'].errors">
-                    <small *ngIf="f['password_hash'].errors['required']">Password is required</small>
-                    <small *ngIf="f['password_hash'].errors['minlength']">Min 6 characters</small>
-                </div>
+                <input type="password" formControlName="password_hash" placeholder="Password"
+                    [ngClass]="{'is-invalid': submitted && f['password_hash'].invalid}" />
+                <small class="error" *ngIf="submitted && f['password_hash'].errors">
+                    <span *ngIf="f['password_hash'].errors['required']">Password is required</span>
+                    <span *ngIf="f['password_hash'].errors['minlength']">Min 6 characters</span>
+                </small>
             </div>
 
-            <button type="submit" [disabled]="loginForm.invalid" class="btn-login">Login</button>
+            <button type="submit" class="btn-login">Login</button>
 
             <div class="divider"><span>OR</span></div>
 
