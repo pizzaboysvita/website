@@ -1,0 +1,22 @@
+<div class="coupon-backdrop" *ngIf="show">
+  <div class="coupon-container">
+    <h2 class="title">🎁 Exclusive Offers for You!</h2>
+
+    <div class="carousel" *ngIf="coupons.length > 0; else noCoupon">
+      <div class="carousel-item" *ngFor="let coupon of coupons; let i = index" [class.active]="i === currentIndex">
+        <h3>{{ coupon.promo_name }}</h3>
+        <!-- <p>Description</p> -->
+        <div class="coupon-code">Code: <strong>{{ coupon.promo_code }}</strong></div>
+      </div>
+
+      <button class="prev" (click)="prevSlide()">‹</button>
+      <button class="next" (click)="nextSlide()">›</button>
+    </div>
+
+    <ng-template #noCoupon>
+      <p class="text-danger">No coupons available.</p>
+    </ng-template>
+
+    <button type="button" class="btn btn-danger" aria-label="Close" (click)="close()">Close</button>
+  </div>
+</div>

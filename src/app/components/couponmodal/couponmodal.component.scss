@@ -1,0 +1,116 @@
+.coupon-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.coupon-container {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 450px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  position: relative;
+}
+
+.title {
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  color: #d32f2f;
+  font-weight: 700;
+}
+
+.carousel {
+  position: relative;
+  overflow: hidden;
+  height: 180px;
+  margin-bottom: 1rem;
+}
+
+.carousel-item {
+  opacity: 0;
+  transform: translateX(100%);
+  position: absolute;
+  width: 100%;
+  transition: all 0.6s ease;
+}
+
+.carousel-item.active {
+  opacity: 1;
+  transform: translateX(0);
+  position: relative;
+}
+
+.carousel h3 {
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.coupon-code {
+  background: #ffe0b2;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  display: inline-block;
+  margin-top: 0.6rem;
+  font-weight: 600;
+  color: #e65100;
+}
+
+.prev,
+.next {
+  position: absolute;
+  top: 40%;
+  background: rgba(0, 0, 0, 0.4);
+  color: white;
+  border: none;
+  font-size: 1.6rem;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.prev {
+  left: 10px;
+}
+.next {
+  right: 10px;
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 1rem;
+}
+
+.carousel-dots span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #3aa724;
+  cursor: pointer;
+}
+
+.carousel-dots span.active {
+  background: #d32f2f;
+}
+
+.btn-close {
+  background-color: var(--primary-color-dark) !important;
+  color: var(--text-light) !important;
+  border: none;
+  padding: 0.6rem 1.4rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-close:hover {
+  background: var(--secondary-color) !important;
+}
