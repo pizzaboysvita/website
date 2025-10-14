@@ -14,7 +14,8 @@
             <!-- Categories Grid -->
             <div class="categories-grid" [class.center-content]="categories.length <= 5" #categoryContainer>
                 <div *ngFor="let item of categories">
-                    <div *ngIf="item.is_online_hide === 0" class="category-card" (click)="selectCategory(item)"
+                    <!-- *ngIf="item.is_online_hide === 0" -->
+                    <div class="category-card" (click)="selectCategory(item)"
                         [ngClass]="{ highlighted: selectedCategoryId === item.id }">
                         <img [src]="item.category_image" alt="{{ item.name }}" />
                         <h6>{{ item.name }}</h6>

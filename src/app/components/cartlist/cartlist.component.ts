@@ -19,6 +19,7 @@ interface CartItem {
   cart_id: number;
   user_id: number;
   dish_id: number;
+  store_id: number;
   quantity: number;
   price: number;
   options?: any;
@@ -118,9 +119,9 @@ export class CartlistComponent implements OnInit {
       .addItem(
         this.user.user_id,
         item.dish_id,
-        this.user.store_id,
+        item.store_id,
         item.dish_price,
-        item.quantity + 1,
+        1,
         item.options
       )
       .subscribe();
@@ -135,9 +136,9 @@ export class CartlistComponent implements OnInit {
         .addItem(
           this.user.user_id,
           item.dish_id,
-          this.user.store_id,
+          item.store_id,
           item.dish_price,
-          item.quantity - 1,
+          1,
           item.options
         )
         .subscribe();

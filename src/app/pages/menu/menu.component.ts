@@ -144,9 +144,9 @@ export class MenuComponent implements OnInit, OnDestroy {
           isOnlineHide: dish.is_online_hide,
         }));
 
-        // ✅ Filter dishes based on isOnlineHide === 0
+        // ✅ Filter dishes based on isOnlineHide === 1
         this.filteredProducts = this.allProducts.filter(
-          (dish) => dish.isOnlineHide === 0
+          (dish) => dish.isOnlineHide === 1
         );
 
         this.cdr.detectChanges();
@@ -161,7 +161,7 @@ export class MenuComponent implements OnInit, OnDestroy {
       ? this.allProducts.filter((d) => d.dish_category_id === category.id)
       : [...this.allProducts];
 
-    this.filteredProducts = products.filter((d) => d.isOnlineHide === 0);
+    this.filteredProducts = products.filter((d) => d.isOnlineHide === 1);
     this.selectedCategoryName = category?.name || "All Dishes";
     this.cdr.detectChanges();
   }
