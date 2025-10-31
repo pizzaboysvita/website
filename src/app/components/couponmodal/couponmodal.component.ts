@@ -68,7 +68,7 @@ export class CouponmodalComponent implements OnInit, OnDestroy {
   close() {
     this.stopAutoSlide();
     this.couponService.closeCouponModal();
-    window.location.reload();
+    // window.location.reload();
   }
 
   ngOnDestroy() {

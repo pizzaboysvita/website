@@ -88,7 +88,7 @@ body {
   top: 0;
   width: 100%;
   z-index: 1000;
-  background: inherit;
+  background: #000000;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 
   .navbar {
@@ -98,7 +98,7 @@ body {
     padding: 0.5rem 0;
 
     .logo {
-      height: 40px;
+      height: 50px;
       object-fit: contain;
     }
 
@@ -109,7 +109,7 @@ body {
       .nav-link {
         font-weight: 500;
         text-decoration: none;
-        color: inherit;
+        color: #ffffff;
         transition: color 0.3s ease;
 
         &:hover,
@@ -126,14 +126,6 @@ body {
       object-fit: cover;
       cursor: pointer;
     }
-
-    .badge.bg-theme {
-      background: var(--badge-color);
-      color: var(--text-light);
-      font-size: 0.75rem;
-      padding: 0.25rem 0.5rem;
-      border-radius: 12px;
-    }
   }
 }
 
@@ -141,8 +133,8 @@ body {
    OFFCANVAS (Mobile Nav)
    ===================== */
 .offcanvas {
-  background: inherit;
-  color: inherit;
+  background: #000000;
+  color: #ffffff;
 
   .offcanvas-body {
     .navbar-nav {

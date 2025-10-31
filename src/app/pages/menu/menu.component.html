@@ -1,78 +1,86 @@
 <app-breadcrumb></app-breadcrumb>
 
 <main class="menu-container">
-    <div class="container">
+  <div class="container">
+    <ng-container *ngIf="categories && categories.length > 0; else noCategories">
+      <app-category (categorySelected)="onCategorySelected($event)"></app-category>
+    </ng-container>
+    <ng-template #noCategories>
+      <p class="text-center text-muted py-3">No categories available</p>
+    </ng-template>
 
-        <!-- Category Section -->
-        <ng-container *ngIf="categories && categories.length > 0; else noCategories">
-            <app-category (categorySelected)="onCategorySelected($event)"></app-category>
-        </ng-container>
-        <ng-template #noCategories>
-            <p class="text-center text-muted py-3">No categories available</p>
-        </ng-template>
+    <div class="menu-section">
+      <h2 class="category-title mb-4">
+        {{ selectedCategoryName || 'All Dishes' }}
+      </h2>
 
-        <!-- Menu Section -->
-        <div class="menu-section">
-            <h2 class="category-title mb-4">{{ selectedCategoryName || 'All Dishes' }}</h2>
+      <ng-container *ngIf="filteredProducts && filteredProducts.length > 0; else noDishes">
+        <div class="row g-3" [@listAnimation]>
+          <ng-container *ngFor="let item of filteredProducts; trackBy: trackByProductId">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+              <div class="card h-100 position-relative overflow-hidden">
+                <a [routerLink]="['/item', item.dish_id]" class="d-block position-relative">
+                  <img
+                    [src]="item.dish_image || 'assets/no-image.png'"
+                    [alt]="item.dish_name"
+                    class="card-img-top"
+                    (load)="item.imageLoaded = true"
+                    (error)="item.imageLoaded = true; item.dish_image='assets/no-image.png'"
+                    [class.opacity-0]="!item.imageLoaded"
+                    [class.opacity-100]="item.imageLoaded"
+                  />
+                </a>
 
-            <!-- Dishes Section -->
-            <ng-container *ngIf="filteredProducts && filteredProducts.length > 0; else noDishes">
-                <div class="row g-3" [@listAnimation]>
-                    <ng-container *ngFor="let item of filteredProducts; trackBy: trackByProductId">
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                            <div class="card h-100 position-relative overflow-hidden">
+                <button
+                  type="button"
+                  class="btn btn-sm position-absolute top-0 end-0 m-2 favorite-btn"
+                  (click)="toggleFavorite(item); $event.stopPropagation()"
+                  [class.active]="item.isFavorite"
+                  title="Toggle favorite"
+                >
+                  <i
+                    class="fa"
+                    [ngClass]="{
+                      'fa-heart text-danger': item.isFavorite,
+                      'fa-heart-o text-dark': !item.isFavorite
+                    }"
+                  ></i>
+                </button>
 
-                                <!-- Dish Image -->
-                                <a [routerLink]="['/item', item.dish_id]" class="d-block position-relative">
-                                    <img [src]="item.dish_image || 'assets/no-image.png'" [alt]="item.dish_name"
-                                        class="card-img-top" (load)="item.imageLoaded = true"
-                                        (error)="item.imageLoaded = true; item.dish_image='assets/no-image.png'"
-                                        [class.opacity-0]="!item.imageLoaded" [class.opacity-100]="item.imageLoaded" />
+                <div class="card-body d-flex flex-column justify-content-between">
+                  <a [routerLink]="['/item', item.dish_id]" class="text-decoration-none">
+                    <h5 class="card-title">{{ item.dish_name }}</h5>
+                  </a>
+                  <p class="card-text">{{ item.description }}</p>
 
-                                    <!-- Image Loading Spinner -->
-                                    <div *ngIf="!item.imageLoaded"
-                                        class="position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center bg-dark">
-                                        <div class="spinner-border text-primary" role="status">
-                                            <span class="visually-hidden">Loading...</span>
-                                        </div>
-                                    </div>
-                                </a>
+                  <div class="d-flex justify-content-between align-items-center mt-2">
+                    <span class="fw-bold text-danger">$ {{ item.dish_price }}</span>
 
-                                <!-- Favorite Button -->
-                                <button type="button" class="btn btn-sm position-absolute top-0 end-0 m-2 favorite-btn"
-                                    (click)="toggleFavorite(item); $event.stopPropagation()"
-                                    [class.active]="item.isFavorite" title="Toggle favorite">
-                                    <i class="fa" [ngClass]="{
-                       'fa-heart text-danger': item.isFavorite,
-                       'fa-heart-o text-dark': !item.isFavorite
-                     }"></i>
-                                </button>
-
-                                <!-- Dish Info -->
-                                <div class="card-body d-flex flex-column justify-content-between">
-                                    <a [routerLink]="['/item', item.dish_id]" class="text-decoration-none">
-                                        <h5 class="card-title">{{ item.dish_name }}</h5>
-                                    </a>
-                                    <p class="card-text">{{ item.description }}</p>
-                                    <div class="d-flex justify-content-between align-items-center mt-2">
-                                        <span class="fw-bold text-danger">$ {{ item.dish_price }}</span>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </ng-container>
+                    <button
+                      type="button"
+                      class="btn btn-outline-primary btn-sm"
+                      (click)="addToCart(item); $event.stopPropagation()"
+                      [disabled]="item.isInCart"
+                    >
+                      <i class="fa" [ngClass]="item.isInCart ? 'fa-check' : 'fa-cart-plus'"></i>
+                      {{ item.isInCart ? 'Added' : 'Add to Cart' }}
+                    </button>
+                  </div>
                 </div>
-            </ng-container>
-
-            <!-- No Dishes Template -->
-            <ng-template #noDishes>
-                <div class="text-center py-5">
-                    <p class="text-muted mb-2 fs-5">No dishes available for this category</p>
-                    <p class="text-secondary small">Try selecting another category or refresh your filters.</p>
-                </div>
-            </ng-template>
+              </div>
+            </div>
+          </ng-container>
         </div>
+      </ng-container>
 
+      <ng-template #noDishes>
+        <div class="text-center py-5">
+          <p class="text-muted mb-2 fs-5">No dishes available for this category</p>
+          <p class="text-secondary small">Try selecting another category or refresh your filters.</p>
+        </div>
+      </ng-template>
     </div>
+  </div>
+
+  <app-login-guest-modal></app-login-guest-modal>
 </main>

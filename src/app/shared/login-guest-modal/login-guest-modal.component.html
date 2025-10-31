@@ -1,0 +1,15 @@
+<div class="modal-backdrop" *ngIf="show">
+  <div class="modal-container">
+    <div class="modal-content">
+      <h3>Welcome to PizzaBoyz 🍕</h3>
+      <p>Would you like to Login or Continue as a Guest?</p>
+      <div class="modal-actions">
+        <button class="btn btn-primary" (click)="goToLogin()">Login</button>
+        <button class="btn btn-outline-secondary" (click)="continueAsGuest()">
+          Continue as Guest
+        </button>
+      </div>
+      <button class="modal-close" (click)="close()">✖</button>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,10 @@
-import { ChangeDetectorRef, Component, OnInit, OnDestroy } from "@angular/core";
+import {
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+} from "@angular/core";
 import {
   trigger,
   transition,
@@ -15,6 +21,8 @@ import { CategoryComponent } from "../../components/category/category.component"
 import { BreadcrumbComponent } from "../../shared/breadcrumb/breadcrumb.component";
 import { HomeService } from "../../core/services/home.service";
 import { StoreService } from "../../core/services/store.service";
+import { GuestUserService } from "../../core/services/guest-user.service";
+import { LoginGuestModalComponent } from "../../shared/login-guest-modal/login-guest-modal.component";
 
 interface Dish {
   dish_id: number;
@@ -28,13 +36,20 @@ interface Dish {
   isFavorite?: boolean;
   wishlist_id?: number | null;
   isOnlineHide?: number | null;
+  isInCart?: boolean;
   [key: string]: any;
 }
 
 @Component({
   selector: "app-menu",
   standalone: true,
-  imports: [CategoryComponent, BreadcrumbComponent, CommonModule, RouterLink],
+  imports: [
+    CategoryComponent,
+    BreadcrumbComponent,
+    CommonModule,
+    RouterLink,
+    LoginGuestModalComponent,
+  ],
   templateUrl: "./menu.component.html",
   styleUrls: ["./menu.component.scss"],
   animations: [
@@ -77,20 +92,21 @@ export class MenuComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
   private user: any;
 
+  @ViewChild(LoginGuestModalComponent)
+  loginGuestModal!: LoginGuestModalComponent;
+
   constructor(
     private apiService: HomeService,
     private cdr: ChangeDetectorRef,
-    private storeService: StoreService
+    private storeService: StoreService,
+    private guestService: GuestUserService
   ) {}
 
   ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem("user") || "{}"); // need user_id
-
-    // ✅ Load once on init
+    this.user = JSON.parse(localStorage.getItem("user") || "{}");
     this.loadCategories();
     this.loadDishesAndFavorites();
 
-    // ✅ Reload when store changes
     this.storeService.storeChanged$
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
@@ -99,7 +115,6 @@ export class MenuComponent implements OnInit, OnDestroy {
       });
   }
 
-  /** Load categories from API */
   private loadCategories() {
     this.apiService
       .getCategories()
@@ -113,10 +128,12 @@ export class MenuComponent implements OnInit, OnDestroy {
       });
   }
 
-  /** Load dishes + user favorites together */
+  /** Load dishes + favorites + cart */
   private loadDishesAndFavorites() {
     const userId = this.user?.user_id;
     const storeId = this.getStoreId();
+    const guestFavorites = this.guestService.getFavorites();
+    const guestCart = this.guestService.getCart();
 
     forkJoin({
       dishes: this.apiService
@@ -135,16 +152,24 @@ export class MenuComponent implements OnInit, OnDestroy {
           favMap.set(Number(f.dish_id), Number(f.wishlist_id));
         });
 
-        this.allProducts = (dishes?.data || []).map((dish: any) => ({
-          ...dish,
-          quantity: 1,
-          imageLoaded: false,
-          isFavorite: favMap.has(dish.dish_id),
-          wishlist_id: favMap.get(dish.dish_id) || null,
-          isOnlineHide: dish.is_online_hide,
-        }));
+        this.allProducts = (dishes?.data || []).map((dish: any) => {
+          const isGuestFav = guestFavorites.some(
+            (g) => g.dish_id === dish.dish_id
+          );
+          const isGuestCart = guestCart.some(
+            (c) => c.dish_id === dish.dish_id
+          );
+          return {
+            ...dish,
+            quantity: 1,
+            imageLoaded: false,
+            isFavorite: userId ? favMap.has(dish.dish_id) : isGuestFav,
+            wishlist_id: userId ? favMap.get(dish.dish_id) || null : null,
+            isOnlineHide: dish.is_online_hide,
+            isInCart: isGuestCart,
+          };
+        });
 
-        // ✅ Filter dishes based on isOnlineHide === 1
         this.filteredProducts = this.allProducts.filter(
           (dish) => dish.isOnlineHide === 1
         );
@@ -166,58 +191,114 @@ export class MenuComponent implements OnInit, OnDestroy {
     this.cdr.detectChanges();
   }
 
+  // ❤️ Toggle Favorite
   toggleFavorite(product: Dish) {
     const userId = this.user?.user_id;
     const storeId = this.getStoreId();
 
-    if (!userId) {
-      console.warn("User not logged in — cannot manage favorites.");
+    // Logged user
+    if (userId) {
+      if (product.isFavorite) {
+        if (!product.wishlist_id) {
+          this.loadDishesAndFavorites();
+          return;
+        }
+        const body = {
+          type: "delete",
+          wishlist_id: product.wishlist_id,
+          user_id: userId,
+          dish_id: product.dish_id,
+          store_id: storeId,
+        };
+        this.apiService.addWishlist(body).subscribe({
+          next: () => {
+            product.isFavorite = false;
+            product.wishlist_id = null;
+          },
+        });
+      } else {
+        const body = {
+          type: "insert",
+          user_id: userId,
+          dish_id: product.dish_id,
+          store_id: storeId,
+        };
+        this.apiService.addWishlist(body).subscribe({
+          next: (res) => {
+            const newId =
+              res?.data?.wishlist_id || res?.wishlist_id || null;
+            product.isFavorite = true;
+            product.wishlist_id = newId ? Number(newId) : null;
+          },
+        });
+      }
       return;
     }
 
-    if (product.isFavorite) {
-      // Remove favorite
-      if (!product.wishlist_id) {
-        this.loadDishesAndFavorites();
-        return;
+    // Guest
+    if (this.guestService.isGuest()) {
+      if (product.isFavorite) {
+        this.guestService.removeFavorite(product.dish_id);
+        product.isFavorite = false;
+      } else {
+        this.guestService.addFavorite({
+          dish_id: product.dish_id,
+          dish_name: product.dish_name,
+          dish_image: product.dish_image,
+          dish_price: product.dish_price,
+          store_id: storeId,
+        });
+        product.isFavorite = true;
       }
-
-      const body = {
-        type: "delete",
-        wishlist_id: product.wishlist_id,
-        user_id: userId,
-        dish_id: product.dish_id,
-        store_id: storeId,
-      };
-
-      this.apiService.addWishlist(body).subscribe({
-        next: () => {
-          product.isFavorite = false;
-          product.wishlist_id = null;
-        },
-        error: (err) => console.error("Error removing favorite:", err),
-      });
-    } else {
-      // Add favorite
-      const body = {
-        type: "insert",
-        user_id: userId,
-        dish_id: product.dish_id,
-        store_id: storeId,
-      };
-
-      this.apiService.addWishlist(body).subscribe({
-        next: (res) => {
-          const newId =
-            (res && res.data && res.data.wishlist_id) ||
-            res?.wishlist_id ||
-            null;
-          product.isFavorite = true;
-          product.wishlist_id = newId ? Number(newId) : null;
-        },
-        error: (err) => console.error("Error adding favorite:", err),
-      });
+      this.cdr.detectChanges();
+      return;
     }
+
+    // Ask user modal
+    this.loginGuestModal?.open().then((choice) => {
+      if (choice === "guest") {
+        this.guestService.activateGuest();
+        this.toggleFavorite(product);
+      } else if (choice === "login") {
+        console.log("Redirecting to login...");
+      }
+    });
+  }
+
+  // 🛒 Add to Cart (Guest + Logged-in)
+  addToCart(product: Dish) {
+    const userId = this.user?.user_id;
+    const storeId = this.getStoreId();
+
+    // Logged user (placeholder)
+    if (userId) {
+      console.log("Add to cart API call for user:", userId, product);
+      return;
+    }
+
+    // Guest user
+    if (this.guestService.isGuest()) {
+      this.guestService.addToCart({
+        dish_id: product.dish_id,
+        dish_name: product.dish_name,
+        dish_image: product.dish_image,
+        dish_price: product.dish_price,
+        store_id: storeId,
+      });
+      product.isInCart = true;
+      this.cdr.detectChanges();
+      return;
+    }
+
+    // Modal ask
+    this.loginGuestModal?.open().then((choice) => {
+      if (choice === "guest") {
+        this.guestService.activateGuest();
+        this.addToCart(product);
+      } else if (choice === "login") {
+        console.log("Redirecting to login...");
+      }
+    });
   }
 
   ngOnDestroy() {

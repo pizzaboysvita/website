@@ -1,30 +1,57 @@
 <app-breadcrumb></app-breadcrumb>
 
 <div class="sectionbg">
-    <div class="container mt-4">
-        <div class="wishlist-grid" *ngIf="wishlist.length > 0; else noData">
-            <div class="wishlist-card" *ngFor="let item of wishlist">
-                <div class="wishlist-img">
-                    <img [src]="item.dish_image" alt="{{ item.dish_name }}" class="dishimg" />
-                    <button class="close-icon" (click)="deleteItem(item)">
-                        <i class="ri-close-line"></i>
-                    </button>
-                </div>
+  <div class="container mt-4">
+    <h2 class="wishlist-title mb-4">
+      <i class="ri-heart-3-fill text-danger"></i> My Wishlist
+    </h2>
 
-                <div class="wishlist-content">
-                    <h4 class="dish-name">{{ item.dish_name }}</h4>
-                    <p class="dish-price">Price: ${{ item.dish_price }}</p>
-                    <p class="store-name">Store: {{ item.store_name }}</p>
-
-                    <div class="wishlist-actions">
-                        <button class="cart-btn" (click)="addToCart(item)">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
+    <div class="wishlist-grid" *ngIf="wishlist.length > 0; else noData">
+      <div class="wishlist-card" *ngFor="let item of wishlist">
+        <div class="wishlist-img">
+          <img
+            [src]="item.dish_image || 'assets/img/default.jpg'"
+            alt="{{ item.dish_name }}"
+            class="dishimg"
+            (error)="onImageError($event)"
+          />
+          <button class="close-icon" (click)="deleteItem(item)">
+            <i class="ri-close-line"></i>
+          </button>
         </div>
 
-        <ng-template #noData>
-            <p class="no-data">No wishlist items found.</p>
-        </ng-template>
+        <div class="wishlist-content">
+          <h4 class="dish-name text-truncate">{{ item.dish_name }}</h4>
+          <div class="wishlist-meta">
+            <span class="price">₹{{ item.dish_price }}</span>
+            <span class="store"><i class="ri-store-2-line"></i> {{ item.store_name }}</span>
+          </div>
+
+          <div class="wishlist-actions">
+            <button
+                class="cart-btn"
+                [ngClass]="{ added: item.addedToCart }"
+                (click)="addToCart(item)"
+                >
+                <ng-container *ngIf="!item.addedToCart; else added">
+                    <i class="ri-shopping-cart-2-line"></i> Add to Cart
+                </ng-container>
+                <ng-template #added>
+                    <i class="ri-check-double-line"></i> Added
+                </ng-template>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <ng-template #noData>
+      <div class="empty-state text-center">
+        <p>Your wishlist is empty.</p>
+        <button class="btn btn-primary mt-2" (click)="browseMenu()">
+          Browse Menu
+        </button>
+      </div>
+    </ng-template>
+  </div>
 </div>

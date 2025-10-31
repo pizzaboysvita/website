@@ -1,69 +1,109 @@
 <app-breadcrumb></app-breadcrumb>
 
 <div class="details-page">
-    <div class="container">
-        <div class="row main">
-            <!-- Cart Items -->
-            <div class="col-lg-8 cart-section">
-                <h2 class="title">Cart</h2>
+  <div class="container">
+    <div class="row main">
+      <!-- 🛒 CART SECTION -->
+      <div class="col-lg-8 cart-section">
+        <h2 class="title mb-3">Cart</h2>
 
-                <div *ngIf="cartWithDishDetails.length > 0; else emptyCart">
-                    <div class="cart-item card p-3" *ngFor="let item of cartWithDishDetails; let i = index">
-                        <div class="item-header d-flex justify-content-between">
-                            <h4>{{ item.dish_name }}</h4>
-                            <span>{{ item.dish_price | currency }}</span>
-                        </div>
-
-                        <div class="item-options" *ngIf="item.options">
-                            <p *ngIf="item.options.notes">
-                                <strong>Note:</strong> {{ item.options.notes }}
-                            </p>
-                        </div>
-
-                        <div class="item-actions d-flex justify-content-between align-items-center">
-                            <button (click)="removeItem(i)" class="delete-btn">Remove</button>
-
-                            <div class="quantity-control">
-                                <button (click)="decreaseQuantity(i)">-</button>
-                                <span>{{ item.quantity }}</span>
-                                <button (click)="increaseQuantity(i)">+</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <ng-template #emptyCart>
-                    <div class="empty-cart-message">Your cart is empty</div>
-                </ng-template>
-
-                <div class="notes-section mt-3">
-                    <label for="notes">Notes</label>
-                    <textarea id="notes" [(ngModel)]="notes" rows="4" placeholder="Add notes for your order"></textarea>
-                </div>
-
-                <div class="price-summary mt-3">
-                    <div class="summary-row d-flex justify-content-between">
-                        <span>Sub Total</span>
-                        <span>{{ totalPrice | currency }}</span>
-                    </div>
-                    <div class="summary-row total d-flex justify-content-between">
-                        <span>Total</span>
-                        <span>{{ totalPrice | currency }}</span>
-                    </div>
-                </div>
-
-                <button class="checkout-btn mt-3" [disabled]="cartWithDishDetails.length === 0" (click)="checkout()">
-                    Checkout
-                </button>
+        <!-- ✅ Cart Items -->
+        <div *ngIf="cartWithDishDetails.length > 0; else emptyCart">
+          <div
+            class="cart-item card p-3"
+            *ngFor="let item of cartWithDishDetails; let i = index"
+          >
+            <div class="item-header d-flex justify-content-between align-items-center">
+              <h4>{{ item.dish_name }}</h4>
+              <span class="price">{{ item.dish_price | currency }}</span>
             </div>
 
-            <!-- Store Info -->
-            <div class="col-lg-4 store-section">
-                <div class="card p-3">
-                    <h4>{{ user?.store_id ? "Store Details" : "Store" }}</h4>
-                    <p *ngIf="user?.store_id">Store info dynamically from backend</p>
-                </div>
+            <div class="item-actions d-flex justify-content-between align-items-center">
+              <button (click)="removeItem(i)" class="delete-btn">
+                Remove
+              </button>
+
+              <div class="quantity-control">
+                <button (click)="decreaseQuantity(i)">−</button>
+                <span>{{ item.quantity }}</span>
+                <button (click)="increaseQuantity(i)">+</button>
+              </div>
             </div>
+          </div>
+
+          <!-- ✅ Price Summary -->
+          <div class="price-summary mt-3">
+            <div class="summary-row d-flex justify-content-between">
+              <span>Total</span>
+              <span>{{ totalPrice | currency }}</span>
+            </div>
+            <button class="checkout-btn mt-3" (click)="checkout()">
+              Proceed to Checkout
+            </button>
+          </div>
+
+          <!-- 🧾 Guest Checkout Form -->
+          <div
+            class="guest-checkout mt-4"
+            *ngIf="showGuestCheckoutForm && isGuest"
+          >
+            <h5>Guest Checkout</h5>
+            <p>Please provide your details to complete the order.</p>
+
+            <div class="form-group mb-2">
+              <input
+                type="text"
+                [(ngModel)]="guestName"
+                placeholder="Your Name"
+                class="form-control"
+              />
+            </div>
+            <div class="form-group mb-2">
+              <input
+                type="tel"
+                [(ngModel)]="guestPhone"
+                placeholder="Phone Number"
+                class="form-control"
+              />
+            </div>
+            <div class="form-group mb-3">
+              <input
+                type="email"
+                [(ngModel)]="guestEmail"
+                placeholder="Email Address"
+                class="form-control"
+              />
+            </div>
+
+            <button class="checkout-btn mt-2" (click)="completeGuestCheckout()">
+              Complete Order
+            </button>
+          </div>
         </div>
+
+        <!-- 🧩 Empty Cart -->
+        <ng-template #emptyCart>
+          <div class="empty-cart-message text-center mt-4">
+            <p>Your cart is empty.</p>
+            <button class="btn btn-primary mt-2" (click)="browseMenu()">
+              Browse Menu
+            </button>
+          </div>
+        </ng-template>
+      </div>
+
+      <!-- 🏪 STORE SECTION -->
+      <div class="col-lg-4 store-section">
+        <div class="card p-3">
+          <h4>{{ user?.store_id ? "Store Details" : "Store" }}</h4>
+          <p *ngIf="user?.store_id; else defaultStore">
+            Store info dynamically from backend.
+          </p>
+          <ng-template #defaultStore>
+            <p>Select a store to view details.</p>
+          </ng-template>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
