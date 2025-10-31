@@ -1,24 +1,29 @@
-import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { Router, RouterModule } from "@angular/router";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { CartService } from "../../core/services/cart.service";
 import { AuthService } from "../../core/services/auth.service";
 import { StoreService } from "../../core/services/store.service";
+import { GuestUserService } from "../../core/services/guest-user.service";
 import { StoreModalComponent } from "../../components/storemodal/storemodal.component";
+import { LoginGuestModalComponent } from "../login-guest-modal/login-guest-modal.component";
 
 @Component({
   selector: "app-header",
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, LoginGuestModalComponent],
   templateUrl: "./header.component.html",
   styleUrls: ["./header.component.scss"],
 })
 export class HeaderComponent implements OnInit {
+  @ViewChild(LoginGuestModalComponent) loginGuestModal!: LoginGuestModalComponent;
+
   token: string | null = null;
   user: any;
   cartCount = 0;
   selectedStoreName: string = "Default Store";
+  isGuestUser = false;
 
   navLinks = [
     { label: "Home", path: "/home" },
@@ -30,6 +35,7 @@ export class HeaderComponent implements OnInit {
   constructor(
     private cartService: CartService,
     private authService: AuthService,
+    private guestService: GuestUserService,
     private storeService: StoreService,
     private router: Router,
     private modalService: NgbModal,
@@ -37,26 +43,20 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // Reactive login/logout
+    this.syncUserStatus();
+
+    // Auth change listener
     this.authService.authChanged$.subscribe(() => {
-      this.token = this.authService.getToken();
-      const userData = localStorage.getItem("user");
-      this.user = userData ? JSON.parse(userData) : null;
-      this.cd.detectChanges();
+      this.syncUserStatus();
     });
 
-    // Initial token/user
-    this.token = this.authService.getToken();
-    const userData = localStorage.getItem("user");
-    if (userData) this.user = JSON.parse(userData);
-
-    // Cart updates
+    // Cart reactive updates
     this.cartService.cartItems$.subscribe((items) => {
       this.cartCount = items.length;
       this.cd.detectChanges();
     });
 
-    // Store updates
+    // Store reactive updates
     this.storeService.storeChanged$.subscribe((name: string) => {
       this.selectedStoreName = name;
       this.cd.detectChanges();
@@ -65,12 +65,22 @@ export class HeaderComponent implements OnInit {
     // Initial store
     this.selectedStoreName = this.storeService.getSelectedStoreName();
 
-    // Open store modal if none selected
+    // Ask store selection if not selected
     if (this.storeService.getSelectedStoreId() === -1) {
       setTimeout(() => this.changeStore(), 500);
     }
   }
 
+  /** ✅ Sync User / Guest status */
+  private syncUserStatus() {
+    this.token = this.authService.getToken();
+    this.isGuestUser = this.guestService.isGuest();
+    const userData = localStorage.getItem("user");
+    this.user = userData ? JSON.parse(userData) : null;
+    this.cd.detectChanges();
+  }
+
+  /** ✅ Open Store Selector */
   changeStore() {
     this.modalService.open(StoreModalComponent, {
       size: "lg",
@@ -80,19 +90,42 @@ export class HeaderComponent implements OnInit {
     });
   }
 
+  /** ✅ Go to Cart / Wishlist with Guest-Login modal */
   goToCart() {
-    this.router.navigate(["/cartlist"]);
+    if (this.token || this.isGuestUser) {
+      this.router.navigate(["/cartlist"]);
+    } else {
+      this.loginGuestModal.open();
+    }
   }
 
   goToWishList() {
-    this.router.navigate(["/wishlist"]);
+    if (this.token || this.isGuestUser) {
+      this.router.navigate(["/wishlist"]);
+    } else {
+      this.loginGuestModal.open();
+    }
   }
 
+  /** ✅ Logout or Disable Guest */
   logout() {
-    this.authService.logout();
-    localStorage.removeItem("user");
-    this.token = null;
-    this.user = null;
-    this.router.navigate(["/login"]);
+    if (this.isGuestUser) {
+      this.guestService.disableGuestMode();
+      this.isGuestUser = false;
+      this.router.navigate(["/home"]);
+    } else {
+      this.authService.logout();
+      localStorage.removeItem("user");
+      this.token = null;
+      this.user = null;
+      this.router.navigate(["/login"]);
+    }
+  }
+
+  /** ✅ When user chooses Guest from Modal */
+  onGuestSelected() {
+    this.guestService.activateGuest();
+    this.isGuestUser = true;
+    this.cd.detectChanges();
   }
 }
