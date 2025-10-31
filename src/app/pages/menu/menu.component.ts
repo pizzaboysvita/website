@@ -36,6 +36,7 @@ interface Dish {
   isFavorite?: boolean;
   wishlist_id?: number | null;
   isOnlineHide?: number | null;
+  isInCart?: boolean;
   [key: string]: any;
 }
 
@@ -114,7 +115,6 @@ export class MenuComponent implements OnInit, OnDestroy {
       });
   }
 
-  /** Load categories from API */
   private loadCategories() {
     this.apiService
       .getCategories()
@@ -128,11 +128,12 @@ export class MenuComponent implements OnInit, OnDestroy {
       });
   }
 
-  /** Load dishes + favorites */
+  /** Load dishes + favorites + cart */
   private loadDishesAndFavorites() {
     const userId = this.user?.user_id;
     const storeId = this.getStoreId();
     const guestFavorites = this.guestService.getFavorites();
+    const guestCart = this.guestService.getCart();
 
     forkJoin({
       dishes: this.apiService
@@ -155,6 +156,9 @@ export class MenuComponent implements OnInit, OnDestroy {
           const isGuestFav = guestFavorites.some(
             (g) => g.dish_id === dish.dish_id
           );
+          const isGuestCart = guestCart.some(
+            (c) => c.dish_id === dish.dish_id
+          );
           return {
             ...dish,
             quantity: 1,
@@ -162,6 +166,7 @@ export class MenuComponent implements OnInit, OnDestroy {
             isFavorite: userId ? favMap.has(dish.dish_id) : isGuestFav,
             wishlist_id: userId ? favMap.get(dish.dish_id) || null : null,
             isOnlineHide: dish.is_online_hide,
+            isInCart: isGuestCart,
           };
         });
 
@@ -186,7 +191,7 @@ export class MenuComponent implements OnInit, OnDestroy {
     this.cdr.detectChanges();
   }
 
-  /** ✅ Toggle Favorite — handles Guest & Logged user both */
+  // ❤️ Toggle Favorite
   toggleFavorite(product: Dish) {
     const userId = this.user?.user_id;
     const storeId = this.getStoreId();
@@ -210,7 +215,6 @@ export class MenuComponent implements OnInit, OnDestroy {
             product.isFavorite = false;
             product.wishlist_id = null;
           },
-          error: (err) => console.error("Error removing favorite:", err),
         });
       } else {
         const body = {
@@ -226,13 +230,12 @@ export class MenuComponent implements OnInit, OnDestroy {
             product.isFavorite = true;
             product.wishlist_id = newId ? Number(newId) : null;
           },
-          error: (err) => console.error("Error adding favorite:", err),
         });
       }
       return;
     }
 
-    // Guest user
+    // Guest
     if (this.guestService.isGuest()) {
       if (product.isFavorite) {
         this.guestService.removeFavorite(product.dish_id);
@@ -251,17 +254,51 @@ export class MenuComponent implements OnInit, OnDestroy {
       return;
     }
 
-    // Neither — open modal
-    if (this.loginGuestModal) {
-      this.loginGuestModal.open().then((choice) => {
-        if (choice === "guest") {
-          this.guestService.activateGuest();
-          this.toggleFavorite(product);
-        } else if (choice === "login") {
-          console.log("Redirecting to login...");
-        }
-      });
+    // Ask user modal
+    this.loginGuestModal?.open().then((choice) => {
+      if (choice === "guest") {
+        this.guestService.activateGuest();
+        this.toggleFavorite(product);
+      } else if (choice === "login") {
+        console.log("Redirecting to login...");
+      }
+    });
+  }
+
+  // 🛒 Add to Cart (Guest + Logged-in)
+  addToCart(product: Dish) {
+    const userId = this.user?.user_id;
+    const storeId = this.getStoreId();
+
+    // Logged user (placeholder)
+    if (userId) {
+      console.log("Add to cart API call for user:", userId, product);
+      return;
     }
+
+    // Guest user
+    if (this.guestService.isGuest()) {
+      this.guestService.addToCart({
+        dish_id: product.dish_id,
+        dish_name: product.dish_name,
+        dish_image: product.dish_image,
+        dish_price: product.dish_price,
+        store_id: storeId,
+      });
+      product.isInCart = true;
+      this.cdr.detectChanges();
+      return;
+    }
+
+    // Modal ask
+    this.loginGuestModal?.open().then((choice) => {
+      if (choice === "guest") {
+        this.guestService.activateGuest();
+        this.addToCart(product);
+      } else if (choice === "login") {
+        console.log("Redirecting to login...");
+      }
+    });
   }
 
   ngOnDestroy() {

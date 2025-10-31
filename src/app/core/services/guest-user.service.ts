@@ -30,7 +30,7 @@ export class GuestUserService {
     this.ensureGuestId();
   }
 
-  /** ✅ Fully activate guest mode (for direct call from components) */
+  /** ✅ Fully activate guest mode */
   activateGuest(): string {
     this.enableGuestMode();
     return this.ensureGuestId();
@@ -50,22 +50,24 @@ export class GuestUserService {
     return localStorage.getItem(this.guestIdKey);
   }
 
-  /** ✅ CART Operations */
+  // 🛒 ----------------- CART -----------------
   getCart(): any[] {
     return JSON.parse(localStorage.getItem(this.guestCartKey) || "[]");
   }
 
   addToCart(item: any): void {
     const cart = this.getCart();
-    const exists = cart.find((x) => x.id === item.id);
-    if (!exists) {
-      cart.push(item);
-      localStorage.setItem(this.guestCartKey, JSON.stringify(cart));
+    const existing = cart.find((x) => x.dish_id === item.dish_id);
+    if (existing) {
+      existing.quantity = (existing.quantity || 1) + 1;
+    } else {
+      cart.push({ ...item, quantity: 1 });
     }
+    localStorage.setItem(this.guestCartKey, JSON.stringify(cart));
   }
 
-  removeFromCart(itemId: any): void {
-    const cart = this.getCart().filter((x) => x.id !== itemId);
+  removeFromCart(dishId: number): void {
+    const cart = this.getCart().filter((x) => x.dish_id !== dishId);
     localStorage.setItem(this.guestCartKey, JSON.stringify(cart));
   }
 
@@ -73,7 +75,7 @@ export class GuestUserService {
     localStorage.removeItem(this.guestCartKey);
   }
 
-  /** ✅ FAVORITES Operations */
+  // ❤️ ---------------- FAVORITES ----------------
   getFavorites(): any[] {
     return JSON.parse(localStorage.getItem(this.guestFavKey) || "[]");
   }
@@ -96,7 +98,7 @@ export class GuestUserService {
     localStorage.removeItem(this.guestFavKey);
   }
 
-  /** ✅ FAVORITE Wrappers for MenuComponent compatibility */
+  /** ✅ FAVORITE Wrappers */
   addFavorite(dish: any): void {
     this.activateGuest();
     this.addToFavorites(dish);
@@ -106,7 +108,7 @@ export class GuestUserService {
     this.removeFromFavorites(dishId);
   }
 
-  /** ✅ ORDER INFO */
+  // 🧾 ---------------- ORDER INFO ----------------
   saveOrderInfo(orderData: any): void {
     localStorage.setItem(this.guestOrderKey, JSON.stringify(orderData));
   }
@@ -119,7 +121,7 @@ export class GuestUserService {
     localStorage.removeItem(this.guestOrderKey);
   }
 
-  /** ✅ CLEAR ALL GUEST DATA */
+  /** ✅ CLEAR ALL */
   clearAll(): void {
     localStorage.removeItem(this.guestCartKey);
     localStorage.removeItem(this.guestFavKey);
