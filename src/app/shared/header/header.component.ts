@@ -8,6 +8,7 @@ import { StoreService } from "../../core/services/store.service";
 import { GuestUserService } from "../../core/services/guest-user.service";
 import { StoreModalComponent } from "../../components/storemodal/storemodal.component";
 import { LoginGuestModalComponent } from "../login-guest-modal/login-guest-modal.component";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-header",
@@ -20,10 +21,12 @@ export class HeaderComponent implements OnInit {
   @ViewChild(LoginGuestModalComponent) loginGuestModal!: LoginGuestModalComponent;
 
   token: string | null = null;
-  user: any;
+  user: any = null;
   cartCount = 0;
   selectedStoreName = "Default Store";
   isGuestUser = false;
+
+  private subs: Subscription[] = [];
 
   navLinks = [
     { label: "Home", path: "/home" },
@@ -43,43 +46,64 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    // initial sync
     this.syncUserStatus();
 
-    // 🔄 React to Auth or Guest changes
-    this.authService.authChanged$.subscribe(() => this.syncUserStatus());
-    this.guestService.guestStatus$.subscribe(() => this.syncUserStatus());
+    // Subscribe to auth changes (login/logout)
+    this.subs.push(
+      this.authService.currentUser$.subscribe((user) => {
+        this.user = user;
+        this.token = this.authService.getToken();
+        // if a real user logged in, ensure guest flag cleared
+        if (user && this.guestService.isGuest()) {
+          this.guestService.disableGuestMode();
+        }
+        this.isGuestUser = this.guestService.isGuest();
+        this.cd.detectChanges();
+      })
+    );
 
-    // 🛒 Cart reactive updates
-    this.cartService.cartItems$.subscribe((items) => {
-      this.cartCount = items.length;
-      this.cd.detectChanges();
-    });
+    // Subscribe to guest mode changes
+    this.subs.push(
+      this.guestService.guestStatus$.subscribe((isGuest) => {
+        this.isGuestUser = !!isGuest;
+        // keep token/user in sync
+        this.token = this.authService.getToken();
+        this.user = this.authService.getUser();
+        this.cd.detectChanges();
+      })
+    );
 
-    // 🏪 Store reactive updates
-    this.storeService.storeChanged$.subscribe((name: string) => {
-      this.selectedStoreName = name;
-      this.cd.detectChanges();
-    });
+    // cart updates
+    this.subs.push(
+      this.cartService.cartItems$.subscribe((items) => {
+        this.cartCount = items.length;
+        this.cd.detectChanges();
+      })
+    );
 
-    // Initialize store name
+    // store updates
+    this.subs.push(
+      this.storeService.storeChanged$.subscribe((name: string) => {
+        this.selectedStoreName = name;
+        this.cd.detectChanges();
+      })
+    );
+
+    // initialize store
     this.selectedStoreName = this.storeService.getSelectedStoreName();
-
-    // Ask for store selection if not selected
     if (this.storeService.getSelectedStoreId() === -1) {
       setTimeout(() => this.changeStore(), 500);
     }
   }
 
-  /** ✅ Sync user or guest session */
   private syncUserStatus() {
     this.token = this.authService.getToken();
+    this.user = this.authService.getUser();
     this.isGuestUser = this.guestService.isGuest();
-    const userData = localStorage.getItem("user");
-    this.user = userData ? JSON.parse(userData) : null;
     this.cd.detectChanges();
   }
 
-  /** ✅ Store selection modal */
   changeStore() {
     this.modalService.open(StoreModalComponent, {
       size: "lg",
@@ -89,7 +113,6 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  /** ✅ Navigate with guest modal */
   goToCart() {
     if (this.token || this.isGuestUser) {
       this.router.navigate(["/cartlist"]);
@@ -106,29 +129,27 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  /** ✅ Logout / Guest Exit */
   logout() {
     if (this.isGuestUser) {
       this.guestService.disableGuestMode();
       this.isGuestUser = false;
-      this.router.navigate(["/home"]).then(() => {
-        window.location.reload(); // force reload to refresh header
-      });
+      this.router.navigate(["/home"]);
     } else {
       this.authService.logout();
-      localStorage.removeItem("user");
       this.token = null;
       this.user = null;
-      this.router.navigate(["/login"]).then(() => {
-        window.location.reload(); // refresh header UI
-      });
+      this.router.navigate(["/login"]);
+      this.cd.detectChanges();
     }
   }
 
-  /** ✅ From Guest Modal */
   onGuestSelected() {
     this.guestService.activateGuest();
     this.isGuestUser = true;
     this.cd.detectChanges();
+  }
+
+  ngOnDestroy(): void {
+    this.subs.forEach((s) => s.unsubscribe());
   }
 }

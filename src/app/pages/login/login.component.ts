@@ -9,6 +9,7 @@ import {
 } from "@angular/forms";
 import { AuthService } from "../../core/services/auth.service";
 import { CouponService } from "../../core/services/coupon.service";
+import { GuestUserService } from "../../core/services/guest-user.service";
 
 @Component({
   selector: "app-login",
@@ -24,6 +25,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
+    private guestService: GuestUserService,
     private router: Router,
     private couponService: CouponService
   ) {}
@@ -47,16 +49,18 @@ export class LoginComponent implements OnInit {
 
     this.authService.login({ email, password_hash }).subscribe({
       next: (res) => {
-        if (res && res.code == 1) {
-          this.authService.setToken(res.access_token);
-          localStorage.setItem("user", JSON.stringify(res.user));
-          // alert("Login successful!");
+        // backend returns code==1 sometimes — still AuthService handles tokens & user
+        if (res && (res.code === 1 || res.token || res.access_token || res.accessToken)) {
+          // If guest mode was active, disable it — prevents header confusion
+          if (this.guestService.isGuest()) {
+            this.guestService.disableGuestMode();
+          }
+
+          // AuthService already stored token/user and emitted currentUser$
+          // Just navigate; header listens to currentUser$
           this.router.navigate(["/home"]).then(() => {
-            this.couponService.openCouponModal();
+            this.couponService.openCouponModal?.();
           });
-          // this.router.navigate(["/home"]).then(() => {
-          //   window.location.reload(); // reload ensures header picks updated user
-          // });
         } else {
           alert("Login failed. Please check your credentials.");
         }

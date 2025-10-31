@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable, tap, BehaviorSubject } from "rxjs";
+import { Observable, BehaviorSubject, tap } from "rxjs";
 import { environment } from "../../../environments/environment";
 
 @Injectable({
@@ -8,26 +8,43 @@ import { environment } from "../../../environments/environment";
 })
 export class AuthService {
   private apiUrl = environment.apiUrl;
-  private authChangedSubject = new BehaviorSubject<void>(undefined);
-  authChanged$ = this.authChangedSubject.asObservable();
+
+  // reactive current user (null when not logged)
+  private currentUserSubject = new BehaviorSubject<any>(this.getUser());
+  currentUser$ = this.currentUserSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 
-  login(credentials: {
-    email: string;
-    password_hash: string;
-  }): Observable<any> {
+  /**
+   * Login — tolerant to different token property names from backend.
+   * Expects backend to return an object containing user and some token.
+   */
+  login(credentials: { email: string; password_hash: string }): Observable<any> {
     return this.http
       .post(`${this.apiUrl}/loginUser?store_id=-1&type=web`, credentials)
       .pipe(
         tap((res: any) => {
-          if (res.token) {
-            localStorage.setItem("token", res.token);
-            if (res.refresh_token) {
+          // Accept multiple token names used by different backends
+          const token =
+            res?.token || res?.access_token || res?.accessToken || res?.data?.token || null;
+
+          if (token) {
+            localStorage.setItem("token", token);
+            if (res?.refresh_token) {
               localStorage.setItem("refreshToken", res.refresh_token);
+            } else if (res?.data?.refresh_token) {
+              localStorage.setItem("refreshToken", res.data.refresh_token);
             }
-            localStorage.setItem("user", JSON.stringify(res.user));
-            this.authChangedSubject.next();
+          }
+
+          // Accept different user payload shapes
+          const user = res?.user || res?.data?.user || res?.data || null;
+          if (user) {
+            localStorage.setItem("user", JSON.stringify(user));
+            this.currentUserSubject.next(user);
+          } else if (token) {
+            // token present but user not returned — still trigger update so components re-check localStorage
+            this.currentUserSubject.next(this.getUser());
           }
         })
       );
@@ -42,19 +59,22 @@ export class AuthService {
 
   setToken(token: string) {
     localStorage.setItem("token", token);
-    this.authChangedSubject.next();
   }
 
   getToken(): string | null {
     return localStorage.getItem("token");
   }
 
+  getUser(): any {
+    const u = localStorage.getItem("user");
+    return u ? JSON.parse(u) : null;
+  }
+
   logout() {
     localStorage.removeItem("token");
     localStorage.removeItem("refreshToken");
     localStorage.removeItem("user");
-    this.authChangedSubject.next();
-    // Optionally redirect to login page
+    this.currentUserSubject.next(null);
   }
 
   refreshToken(): Observable<any> {
@@ -68,11 +88,13 @@ export class AuthService {
       .post(`${this.apiUrl}/refreshToken`, { refresh_token: refreshToken })
       .pipe(
         tap((res: any) => {
-          if (res.accessToken) {
-            localStorage.setItem("token", res.accessToken);
-            this.authChangedSubject.next();
+          const access = res?.accessToken || res?.access_token || res?.token;
+          if (access) {
+            localStorage.setItem("token", access);
+            // notify others if needed (user likely unchanged)
+            this.currentUserSubject.next(this.getUser());
           }
-          if (res.refresh_token) {
+          if (res?.refresh_token) {
             localStorage.setItem("refreshToken", res.refresh_token);
           }
         })
