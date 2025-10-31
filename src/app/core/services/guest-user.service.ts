@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { BehaviorSubject } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -10,38 +11,40 @@ export class GuestUserService {
   private guestFavKey = "guest_favorites";
   private guestOrderKey = "guest_order";
 
+  /** Emits whenever guest mode changes */
+  guestStatus$ = new BehaviorSubject<boolean>(this.isGuest());
+
   constructor() {
     this.ensureGuestId();
   }
 
   /** ✅ Create or get Guest ID */
-  ensureGuestId(): string {
+  private ensureGuestId(): string {
     let guestId = localStorage.getItem(this.guestIdKey);
     if (!guestId) {
-      guestId = "guest_" + new Date().getTime();
+      guestId = "guest_" + Date.now();
       localStorage.setItem(this.guestIdKey, guestId);
     }
     return guestId;
   }
 
-  /** ✅ Enable Guest Mode (and create guest ID if missing) */
-  enableGuestMode(): void {
-    localStorage.setItem(this.isGuestKey, "true");
-    this.ensureGuestId();
-  }
-
-  /** ✅ Fully activate guest mode */
+  /** ✅ Activate Guest Mode */
   activateGuest(): string {
-    this.enableGuestMode();
-    return this.ensureGuestId();
+    localStorage.setItem(this.isGuestKey, "true");
+    const guestId = this.ensureGuestId();
+    this.guestStatus$.next(true);
+    return guestId;
   }
 
+  /** ✅ Disable Guest Mode (and clear localStorage data) */
   disableGuestMode(): void {
+    this.clearAll();
     localStorage.removeItem(this.isGuestKey);
     localStorage.removeItem(this.guestIdKey);
-    this.clearAll();
+    this.guestStatus$.next(false);
   }
 
+  /** ✅ Check if guest mode is active */
   isGuest(): boolean {
     return localStorage.getItem(this.isGuestKey) === "true";
   }
@@ -50,7 +53,7 @@ export class GuestUserService {
     return localStorage.getItem(this.guestIdKey);
   }
 
-  // 🛒 ----------------- CART -----------------
+  // 🛒 ---------------- CART ----------------
   getCart(): any[] {
     return JSON.parse(localStorage.getItem(this.guestCartKey) || "[]");
   }
@@ -121,7 +124,7 @@ export class GuestUserService {
     localStorage.removeItem(this.guestOrderKey);
   }
 
-  /** ✅ CLEAR ALL */
+  /** ✅ CLEAR ALL LOCALSTORAGE KEYS */
   clearAll(): void {
     localStorage.removeItem(this.guestCartKey);
     localStorage.removeItem(this.guestFavKey);

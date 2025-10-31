@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, EventEmitter, Output } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { Router } from "@angular/router";
 import { GuestUserService } from "../../core/services/guest-user.service";
@@ -13,12 +13,12 @@ import { GuestUserService } from "../../core/services/guest-user.service";
 export class LoginGuestModalComponent {
   show = false;
 
+  /** ✅ Event emitter to notify parent (like Header) of selection */
+  @Output() guestSelected = new EventEmitter<void>();
+
   private resolver: ((value: "login" | "guest" | null) => void) | null = null;
 
-  constructor(
-    private router: Router,
-    private guestService: GuestUserService
-  ) {}
+  constructor(private router: Router, private guestService: GuestUserService) {}
 
   /** ✅ Open modal and return a Promise resolved with user choice */
   open(): Promise<"login" | "guest" | null> {
@@ -37,10 +37,14 @@ export class LoginGuestModalComponent {
     }
   }
 
-  /** ✅ User chose Guest */
+  /** ✅ Continue as Guest */
   continueAsGuest(): void {
     const guestId = this.guestService.activateGuest();
     console.log("Guest mode activated:", guestId);
+
+    // Emit event to parent
+    this.guestSelected.emit();
+
     this.show = false;
     if (this.resolver) {
       this.resolver("guest");
@@ -48,7 +52,7 @@ export class LoginGuestModalComponent {
     }
   }
 
-  /** ✅ User chose Login */
+  /** ✅ Go to Login page */
   goToLogin(): void {
     this.show = false;
     if (this.resolver) {

@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
   token: string | null = null;
   user: any;
   cartCount = 0;
-  selectedStoreName: string = "Default Store";
+  selectedStoreName = "Default Store";
   isGuestUser = false;
 
   navLinks = [
@@ -45,33 +45,32 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.syncUserStatus();
 
-    // Auth change listener
-    this.authService.authChanged$.subscribe(() => {
-      this.syncUserStatus();
-    });
+    // 🔄 React to Auth or Guest changes
+    this.authService.authChanged$.subscribe(() => this.syncUserStatus());
+    this.guestService.guestStatus$.subscribe(() => this.syncUserStatus());
 
-    // Cart reactive updates
+    // 🛒 Cart reactive updates
     this.cartService.cartItems$.subscribe((items) => {
       this.cartCount = items.length;
       this.cd.detectChanges();
     });
 
-    // Store reactive updates
+    // 🏪 Store reactive updates
     this.storeService.storeChanged$.subscribe((name: string) => {
       this.selectedStoreName = name;
       this.cd.detectChanges();
     });
 
-    // Initial store
+    // Initialize store name
     this.selectedStoreName = this.storeService.getSelectedStoreName();
 
-    // Ask store selection if not selected
+    // Ask for store selection if not selected
     if (this.storeService.getSelectedStoreId() === -1) {
       setTimeout(() => this.changeStore(), 500);
     }
   }
 
-  /** ✅ Sync User / Guest status */
+  /** ✅ Sync user or guest session */
   private syncUserStatus() {
     this.token = this.authService.getToken();
     this.isGuestUser = this.guestService.isGuest();
@@ -80,7 +79,7 @@ export class HeaderComponent implements OnInit {
     this.cd.detectChanges();
   }
 
-  /** ✅ Open Store Selector */
+  /** ✅ Store selection modal */
   changeStore() {
     this.modalService.open(StoreModalComponent, {
       size: "lg",
@@ -90,7 +89,7 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  /** ✅ Go to Cart / Wishlist with Guest-Login modal */
+  /** ✅ Navigate with guest modal */
   goToCart() {
     if (this.token || this.isGuestUser) {
       this.router.navigate(["/cartlist"]);
@@ -107,22 +106,26 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  /** ✅ Logout or Disable Guest */
+  /** ✅ Logout / Guest Exit */
   logout() {
     if (this.isGuestUser) {
       this.guestService.disableGuestMode();
       this.isGuestUser = false;
-      this.router.navigate(["/home"]);
+      this.router.navigate(["/home"]).then(() => {
+        window.location.reload(); // force reload to refresh header
+      });
     } else {
       this.authService.logout();
       localStorage.removeItem("user");
       this.token = null;
       this.user = null;
-      this.router.navigate(["/login"]);
+      this.router.navigate(["/login"]).then(() => {
+        window.location.reload(); // refresh header UI
+      });
     }
   }
 
-  /** ✅ When user chooses Guest from Modal */
+  /** ✅ From Guest Modal */
   onGuestSelected() {
     this.guestService.activateGuest();
     this.isGuestUser = true;
