@@ -181,4 +181,8 @@ export class WishlistComponent implements OnInit {
   onImageError(event: any): void {
     event.target.src = "assets/img/default.jpg";
   }
+
+  browseMenu(){
+    this.router.navigate(["/menu"]);
+  }
 }
