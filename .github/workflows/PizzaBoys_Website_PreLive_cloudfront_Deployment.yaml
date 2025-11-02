@@ -3,7 +3,7 @@ name: Deploy to S3 and CloudFront (pre_live)
 on:
   push:
     branches:
-      - pizzaboys_stg
+      - pizzaboyz_stg
 
 env:
   AWS_REGION: ap-southeast-2
