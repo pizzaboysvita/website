@@ -1,0 +1,84 @@
+name: Deploy to S3 and CloudFront (pre_live)
+
+on:
+  push:
+    branches:
+      - pizzaboys_stg
+
+env:
+  AWS_REGION: ap-southeast-2
+  S3_BUCKET: pizzaboyz-website
+  DISTRIBUTION_ID: E1QHBGZC7VPLMI
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+      # Step 1: Checkout the repo
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      # Step 4: Build your project
+      - name: Build project
+        run: npm run build:development
+
+      # Step 5: List build output (for debugging)
+      - name: List dist output
+        run: ls -R dist/
+
+      # Step 6: Configure AWS credentials
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      # Step 7: Remove old S3 files
+      - name: Clear existing files in S3
+        run: |
+          echo "🧹 Clearing existing files from S3..."
+          aws s3 rm s3://${{ env.S3_BUCKET }}/pre-live --recursive
+
+      # Step 8: Upload new build to S3
+      - name: Upload new build to S3
+        run: |
+          echo "🚀 Uploading new build to S3..."
+          aws s3 sync dist/zomo-admin/browser s3://${{ env.S3_BUCKET }}/pre-live --delete
+
+      # Step 9: Fix JS content type (important for caching)
+      - name: Set JS Content-Type
+        run: |
+          echo "🧾 Updating JS content types..."
+          aws s3 cp ./dist/zomo-admin/browser s3://${{ env.S3_BUCKET }}/pre-live \
+            --recursive \
+            --exclude "*" \
+            --include "*.js" \
+            --content-type "application/javascript" \
+            --metadata-directive REPLACE
+
+      # Step 10: Invalidate CloudFront cache (fixed)
+      - name: Invalidate CloudFront cache
+        run: |
+          echo "🔄 Invalidating CloudFront cache..."
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ env.DISTRIBUTION_ID }} \
+            --paths "/*"
+
+      # Step 11: Done
+      - name: Deployment complete
+        run: echo "✅ Deployment Completed Successfully!"
