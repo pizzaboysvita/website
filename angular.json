@@ -49,40 +49,74 @@
             ]
           },
           "configurations": {
-            "production": {
+          "dev": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev.ts"
+                }
+              ],
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "4mb",
-                  "maximumError": "8mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "4mb",
-                  "maximumError": "8mb"
+                  "maximumWarning": "15mb",
+                  "maximumError": "20mb"
                 }
               ],
-              "outputHashing": "all"
+              "optimization": true,
+              "sourceMap": true
             },
-            "development": {
-              "optimization": false,
-              "extractLicenses": false,
+            "stg": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.stg.ts"
+                }
+              ],
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "15mb",
+                  "maximumError": "20mb"
+                }
+              ],
+              "optimization": true,
+              "sourceMap": true
+            },
+              "prod": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "15mb",
+                  "maximumError": "20mb"
+                }
+              ],
+              "optimization": true,
               "sourceMap": true
             }
           },
-          "defaultConfiguration": "production"
+          "defaultConfiguration": "dev"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
-            "production": {
-              "buildTarget": "zomo-front:build:production"
+            "prod": {
+              "buildTarget": "zomo-front:build:prod"
             },
-            "development": {
-              "buildTarget": "zomo-front:build:development"
+            "dev": {
+              "buildTarget": "zomo-front:build:dev"
+            },
+            "stg": {
+              "buildTarget": "zomo-front:build:stg"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "dev"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n"
