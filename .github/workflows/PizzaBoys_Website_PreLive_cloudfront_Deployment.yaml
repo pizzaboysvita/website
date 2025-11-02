@@ -34,7 +34,7 @@ jobs:
 
       # Step 4: Build your project
       - name: Build project
-        run: npm run build:development
+        run: npm run build:stg
 
       # Step 5: List build output (for debugging)
       - name: List dist output
