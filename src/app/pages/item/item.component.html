@@ -44,27 +44,33 @@
 
           <!-- STANDARD Dish -->
           <ng-container *ngIf="dish.dish_type === 'standard'">
-            <ng-container *ngIf="dish.optionGroups?.length; else noOptionsStandard">
-              <div *ngFor="let optionGroup of dish.optionGroups; let i = index" class="option-group">
-                <div class="card p-3">
-                  <div class="option-header">
-                    <h2>{{ optionGroup.title }}</h2>
-                    <span class="required-text">
-                      {{
-                      optionGroup.optionType === 'radio'
-                      ? 'Required - Choose one'
-                      : optionGroup.optionType === 'checkbox'
-                      ? 'Optional - Choose multiple'
-                      : 'Optional - Adjust quantities'
-                      }}
-                    </span>
-                  </div>
+            <div class="accordion" id="standardAccordion">
+
+              <!-- Option Groups (Base + Extras) -->
+              <div *ngFor="let optionGroup of dish.optionGroups; let i = index" class="accordion-item">
+                <div class="accordion-header" (click)="toggleOptionGroup(i)">
+                  <button class="accordion-button" [class.collapsed]="!optionGroup.open">
+                    {{ optionGroup.title }}
+                  </button>
+                </div>
+
+                <div class="accordion-body" *ngIf="optionGroup.open">
+                  <p class="required-text mb-2">
+                    {{
+                    optionGroup.optionType === 'radio'
+                    ? 'Required - Choose one'
+                    : optionGroup.optionType === 'checkbox'
+                    ? 'Optional - Choose multiple'
+                    : 'Optional - Adjust quantities'
+                    }}
+                  </p>
 
                   <div *ngFor="let option of optionGroup.options; let oi = index" class="option-item" [class.selected]="
-                         (optionGroup.optionType === 'checkbox' && isOptionSelected(option, i)) ||
-                         (optionGroup.optionType === 'radio' && selectedOptions[i]?.id === option.id) ||
-                         (optionGroup.optionType === 'counter' && option.count > 0)
-                       ">
+                 (optionGroup.optionType === 'checkbox' && isOptionSelected(option, i)) ||
+                 (optionGroup.optionType === 'radio' && selectedOptions[i]?.id === option.id) ||
+                 (optionGroup.optionType === 'counter' && option.count > 0)
+               ">
+
                     <div class="option-info">
                       <span class="option-title">{{ option.name }}</span>
                       <span *ngIf="option.price" class="option-price">({{ option.price | currency:'$' }})</span>
@@ -72,18 +78,12 @@
                     </div>
 
                     <div class="option-check">
-                      <ng-container *ngIf="optionGroup.optionType === 'radio'">
-                        <input type="radio" [name]="optionGroup.title + '-' + i"
+                      <ng-container [ngSwitch]="optionGroup.optionType">
+                        <input *ngSwitchCase="'radio'" type="radio" [name]="optionGroup.title + '-' + i"
                           [checked]="selectedOptions[i]?.id === option.id" (change)="selectRadio(option, i)" />
-                      </ng-container>
-
-                      <ng-container *ngIf="optionGroup.optionType === 'checkbox'">
-                        <input type="checkbox" [checked]="isOptionSelected(option, i)"
+                        <input *ngSwitchCase="'checkbox'" type="checkbox" [checked]="isOptionSelected(option, i)"
                           (change)="toggleCheckbox(option, i)" />
-                      </ng-container>
-
-                      <ng-container *ngIf="optionGroup.optionType === 'counter'">
-                        <div class="counter-box">
+                        <div *ngSwitchCase="'counter'" class="counter-box">
                           <button (click)="decrementCounter(option, i)">-</button>
                           <span>{{ option.count }}</span>
                           <button (click)="incrementCounter(option, i)">+</button>
@@ -93,27 +93,30 @@
                   </div>
                 </div>
               </div>
-            </ng-container>
 
-            <!-- Ingredients -->
-            <div *ngIf="dish.ingredients?.length" class="option-group">
-              <div class="card p-3">
-                <div class="option-header">
-                  <h2>Ingredients</h2>
-                  <span class="required-text">Optional - Uncheck to remove</span>
+              <!-- Ingredients Accordion -->
+              <div *ngIf="dish.ingredients?.length" class="accordion-item mt-3">
+                <div class="accordion-header" (click)="toggleIngredients()">
+                  <button class="accordion-button" [class.collapsed]="!ingredientsOpen">
+                    Ingredients
+                  </button>
                 </div>
 
-                <div *ngFor="let ing of dish.ingredients; let ii = index" class="option-item"
-                  [class.selected]="ing.checked">
-                  <div class="option-info">
-                    <span class="option-title">{{ ing.name }}</span>
-                    <small *ngIf="ing.price" class="option-description">({{ ing.price | currency:'$' }})</small>
-                  </div>
-                  <div class="option-check">
-                    <input type="checkbox" [(ngModel)]="ing.checked" />
+                <div class="accordion-body" *ngIf="ingredientsOpen">
+                  <p class="required-text mb-2">Optional - Uncheck to remove</p>
+                  <div *ngFor="let ing of dish.ingredients; let ii = index" class="option-item"
+                    [class.selected]="ing.checked">
+                    <div class="option-info">
+                      <span class="option-title">{{ ing.name }}</span>
+                      <small *ngIf="ing.price" class="option-description">({{ ing.price | currency:'$' }})</small>
+                    </div>
+                    <div class="option-check">
+                      <input type="checkbox" [(ngModel)]="ing.checked" />
+                    </div>
                   </div>
                 </div>
               </div>
+
             </div>
 
             <ng-template #noOptionsStandard>
@@ -121,107 +124,106 @@
             </ng-template>
           </ng-container>
 
+
           <!-- COMBO Dish -->
           <ng-container *ngIf="dish.dish_type === 'combo'">
             <ng-container *ngIf="comboGroups?.length; else noOptionsCombo">
               <div class="accordion" id="comboAccordion">
+
                 <div *ngFor="let cg of comboGroups; let ci = index" class="accordion-item">
-                  <h2 class="accordion-header" id="heading{{ ci }}">
-                    <button class="accordion-button" type="button" [class.collapsed]="!cg.open"
-                      (click)="cg.open = !cg.open">
+                  <div class="accordion-header" (click)="cg.open = !cg.open">
+                    <button class="accordion-button" [class.collapsed]="!cg.open">
                       {{ cg.comboName }}
+                      <span class="accordion-icon">{{ cg.open ? '−' : '+' }}</span>
                     </button>
-                  </h2>
+                  </div>
 
-                  <div [id]="'collapse' + ci" class="accordion-collapse collapse" [class.show]="cg.open">
-                    <div class="accordion-body">
-                      <div *ngFor="let subDish of cg.subDishes; let sdi = index" class="sub-dish mb-3">
+                  <div class="accordion-body" *ngIf="cg.open">
+                    <div *ngFor="let subDish of cg.subDishes; let sdi = index" class="sub-dish mb-3">
+                      <div class="subdish-header d-flex justify-content-between align-items-center"
+                        (click)="subDish.open = !subDish.open">
+                        <h5 class="fw-bold mb-0">{{ subDish.name }}</h5>
+                        <span class="accordion-icon">{{ subDish.open ? '−' : '+' }}</span>
+                      </div>
 
-                        <!-- Sub Dish Header (Accordion Toggle) -->
-                        <div class="subdish-header d-flex justify-content-between align-items-center"
-                          (click)="subDish.open = !subDish.open">
-                          <h5 class="fw-bold mb-0">{{ subDish.name }}</h5>
-                          <span class="accordion-icon">{{ subDish.open ? '−' : '+' }}</span>
+                      <div class="subdish-body" *ngIf="subDish.open">
+                        <!-- SubDish Option Groups -->
+                        <div *ngFor="let optionGroup of subDish.optionGroups; let gi = index"
+                          class="accordion-item inner">
+                          <div class="accordion-header" (click)="toggleSubDishOptionGroup(subDish, gi)">
+                            <button class="accordion-button small" [class.collapsed]="!optionGroup.open">
+                              {{ optionGroup.title }}
+                                      </button>
+                          </div>
+
+                          <div class="accordion-body" *ngIf="optionGroup.open">
+                            <p class="required-text mb-2">
+                              {{
+                              optionGroup.optionType === 'radio'
+                              ? 'Required - Choose one'
+                              : optionGroup.optionType === 'checkbox'
+                              ? 'Optional - Choose multiple'
+                              : 'Optional - Adjust quantities'
+                              }}
+                            </p>
+
+                            <div *ngFor="let option of optionGroup.options; let oi = index" class="option-item"
+                              [class.selected]="
+                           (optionGroup.optionType === 'checkbox' && isSubDishOptionSelected(subDish, option, gi)) ||
+                           (optionGroup.optionType === 'radio' && subDish.selectedOptions[gi]?.id === option.id) ||
+                           (optionGroup.optionType === 'counter' && option.count > 0)
+                         ">
+                              <div class="option-info">
+                                <span class="option-title">{{ option.name }}</span>
+                                <span *ngIf="option.price" class="option-price">({{ option.price | currency:'$'
+                                  }})</span>
+                              </div>
+                              <div class="option-check">
+                                <ng-container [ngSwitch]="optionGroup.optionType">
+                                  <input *ngSwitchCase="'radio'" type="radio" [name]="subDish.name + '-' + gi"
+                                    [checked]="subDish.selectedOptions[gi]?.id === option.id"
+                                    (change)="selectSubDishRadio(subDish, option, gi)" />
+                                  <input *ngSwitchCase="'checkbox'" type="checkbox"
+                                    [checked]="isSubDishOptionSelected(subDish, option, gi)"
+                                    (change)="toggleSubDishCheckbox(subDish, option, gi)" />
+                                  <div *ngSwitchCase="'counter'" class="counter-box">
+                                    <button (click)="decrementSubDishCounter(subDish, option, gi)">-</button>
+                                    <span>{{ option.count || 0 }}</span>
+                                    <button (click)="incrementSubDishCounter(subDish, option, gi)">+</button>
+                                  </div>
+                                </ng-container>
+                              </div>
+                            </div>
+                          </div>
                         </div>
 
-                        <div class="subdish-body" *ngIf="subDish.open">
-
-                          <!-- Option Groups -->
-                          <div *ngFor="let optionGroup of subDish.optionGroups; let gi = index" class="option-group">
-                            <div class="card p-3 mb-2">
-                              <div class="option-header">
-                                <h6>{{ optionGroup.title }}</h6>
-                                <span class="required-text">
-                                  {{
-                                  optionGroup.optionType === 'radio'
-                                  ? 'Required - Choose one'
-                                  : optionGroup.optionType === 'checkbox'
-                                  ? 'Optional - Choose multiple'
-                                  : 'Optional - Adjust quantities'
-                                  }}
-                                </span>
+                        <!-- SubDish Ingredients -->
+                        <div *ngIf="subDish.ingredients?.length" class="accordion-item inner mt-2">
+                          <div class="accordion-header" (click)="subDish.ingredientsOpen = !subDish.ingredientsOpen">
+                            <button class="accordion-button small" [class.collapsed]="!subDish.ingredientsOpen">
+                              Ingredients
+                              <span class="accordion-icon">{{ subDish.ingredientsOpen ? '−' : '+' }}</span>
+                            </button>
+                          </div>
+                          <div class="accordion-body" *ngIf="subDish.ingredientsOpen">
+                            <p class="required-text mb-2">Optional - Uncheck to remove</p>
+                            <div *ngFor="let ing of subDish.ingredients" class="option-item"
+                              [class.selected]="ing.selected">
+                              <div class="option-info">
+                                <span class="option-title">{{ ing.name }}</span>
                               </div>
-
-                              <div *ngFor="let option of optionGroup.options; let oi = index" class="option-item"
-                                [class.selected]="
-                                     (optionGroup.optionType === 'checkbox' && isSubDishOptionSelected(subDish, option, gi)) ||
-                                     (optionGroup.optionType === 'radio' && subDish.selectedOptions[gi]?.id === option.id) ||
-                                     (optionGroup.optionType === 'counter' && option.count > 0)
-                                   ">
-                                <div class="option-info">
-                                  <span class="option-title">{{ option.name }}</span>
-                                  <span *ngIf="option.price" class="option-price">({{ option.price | currency:'$'
-                                    }})</span>
-                                </div>
-
-                                <div class="option-check">
-                                  <ng-container *ngIf="optionGroup.optionType === 'radio'">
-                                    <input type="radio" [name]="subDish.name + '-' + gi"
-                                      [checked]="subDish.selectedOptions[gi]?.id === option.id"
-                                      (change)="selectSubDishRadio(subDish, option, gi)" />
-                                  </ng-container>
-
-                                  <ng-container *ngIf="optionGroup.optionType === 'checkbox'">
-                                    <input type="checkbox" [checked]="isSubDishOptionSelected(subDish, option, gi)"
-                                      (change)="toggleSubDishCheckbox(subDish, option, gi)" />
-                                  </ng-container>
-
-                                  <ng-container *ngIf="optionGroup.optionType === 'counter'">
-                                    <div class="counter-box">
-                                      <button (click)="decrementSubDishCounter(subDish, option, gi)">-</button>
-                                      <span>{{ option.count || 0 }}</span>
-                                      <button (click)="incrementSubDishCounter(subDish, option, gi)">+</button>
-                                    </div>
-                                  </ng-container>
-                                </div>
+                              <div class="option-check">
+                                <input type="checkbox" [(ngModel)]="ing.selected" />
                               </div>
                             </div>
                           </div>
+                        </div>
 
-                          <!-- Ingredients -->
-                          <div *ngIf="subDish.ingredients?.length" class="option-group">
-                            <div class="card p-3">
-                              <div class="option-header">
-                                <h6>Ingredients</h6>
-                                <span class="required-text">Optional - Uncheck to remove</span>
-                              </div>
-                              <div *ngFor="let ing of subDish.ingredients" class="option-item"
-                                [class.selected]="ing.selected">
-                                <div class="option-info">
-                                  <span class="option-title">{{ ing.name }}</span>
-                                </div>
-                                <div class="option-check">
-                                  <input type="checkbox" [(ngModel)]="ing.selected" />
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-
-                        </div> <!-- /.subdish-body -->
                       </div>
                     </div>
                   </div>
                 </div>
+
               </div>
             </ng-container>
 
@@ -230,6 +232,7 @@
             </ng-template>
           </ng-container>
         </div>
+
       </div>
     </div>
   </div>
