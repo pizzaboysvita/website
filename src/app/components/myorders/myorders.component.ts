@@ -42,7 +42,7 @@ export class MyOrdersComponent {
             if (firstItemWithImage) {
               let url = firstItemWithImage.image_url.replace(/\\/g, "");
               if (!url.startsWith("http")) {
-                url = `http://pizzaboyz-live-402584349.ap-southeast-2.elb.amazonaws.com/${url}`;
+                url = `http://78.142.47.247:3003/${url}`;
               }
               image = url;
             }
