@@ -1,3 +1,4 @@
+/* === Item Page Layout === */
 .dish-detail-container {
   display: flex;
   gap: 20px;
@@ -5,7 +6,7 @@
   flex-wrap: wrap;
 }
 
-/* Left Column */
+/* === LEFT COLUMN === */
 .left-column {
   flex: 0 0 40%;
   max-width: 40%;
@@ -49,7 +50,7 @@
   }
 }
 
-/* Quantity Control */
+/* === QUANTITY CONTROL === */
 .quantity-control {
   display: flex;
   align-items: center;
@@ -72,7 +73,7 @@
   }
 }
 
-/* Notes */
+/* === NOTES === */
 .notes-label {
   margin: 12px 0 6px;
   font-weight: 500;
@@ -89,7 +90,7 @@
   resize: vertical;
 }
 
-/* Bottom Info */
+/* === TOTAL PRICE + ADD TO CART === */
 .bottom-info {
   display: flex;
   justify-content: space-between;
@@ -101,6 +102,7 @@
       font-size: 0.9rem;
       color: var(--text-muted, #ccc);
     }
+
     .price-value {
       font-size: 1.5rem;
       font-weight: 700;
@@ -122,7 +124,7 @@
   }
 }
 
-/* Right Column */
+/* === RIGHT COLUMN === */
 .right-column {
   flex: 1;
   display: flex;
@@ -130,12 +132,13 @@
   gap: 15px;
 }
 
+/* === BASE CARD STYLE === */
 .card {
   background: var(--bg-color-dark) !important;
   color: var(--text-light);
 }
 
-/* Option Groups & Items */
+/* === OPTION GROUPS (Base, Extras, Ingredients) === */
 .option-group {
   background: #121212 !important;
   border-radius: 12px;
@@ -243,161 +246,249 @@
   }
 }
 
-/* Combo & Sub-dish Accordion */
-/* Combo Accordion - Polished Dark UI */
+/* === ACCORDION (UNIFIED FOR BASE, EXTRAS, INGREDIENTS, COMBOS) === */
 .accordion {
   background: transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.accordion-item {
+  background: #0d0d0d;
   border-radius: 12px;
+  border: 1px solid #2b2b2b;
+  margin-bottom: 10px;
   overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 
-  .accordion-item {
-    border: 1px solid #2b2b2b;
-    border-radius: 12px;
-    background: var(--bg-color-dark);
-    margin-bottom: 10px;
-    overflow: hidden;
+  &.inner {
+    background: #121212;
+    border: 1px solid #333;
+  }
+}
 
-    .accordion-button {
-      background: linear-gradient(90deg, #1e1e1e, #2a2a2a);
-      color: var(--text-light);
-      font-weight: 600;
-      padding: 14px 18px;
-      border: none;
-      outline: none;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-      transition: all 0.3s ease;
+.accordion-header {
+  padding: 0;
+  background: #1a1a1a;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+.accordion-button::after {
+  content: "";
+  flex-shrink: 0;
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-left: auto;
+  background-color: #f31026; /* red background */
+  mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='white' d='M1.5 5.5l6 6 6-6z'/></svg>") no-repeat center;
+  -webkit-mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='white' d='M1.5 5.5l6 6 6-6z'/></svg>") no-repeat center;
+  mask-size: contain;
+  -webkit-mask-size: contain;
+  border-radius: 8px;
+  transition: transform 0.25s ease;
+}
 
-      &::after {
-        content: "›";
-        transform: rotate(90deg);
-        transition: transform 0.3s ease;
-        font-size: 1.2rem;
-        color: var(--primary-color);
-      }
+/* Rotate caret when open */
+.accordion-button:not(.collapsed)::after {
+  transform: rotate(180deg);
+}
 
-      &.collapsed::after {
-        transform: rotate(0);
-      }
+.accordion-button {
+  all: unset;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff !important;
+  background: transparent;
+  padding: 15px 20px;
+  cursor: pointer;
+  transition: background 0.25s ease;
 
-      &:hover {
-        background: #262626;
-      }
+  &:hover {
+    background: #222;
+  }
+
+  &.collapsed {
+    opacity: 0.9;
+  }
+
+  .accordion-title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    &::after {
+      content: "-";
+      color: var(--primary-color);
+      font-weight: 900;
+      font-size: 1.2rem;
+      margin-left: 2px;
+    }
+  }
+
+  .accordion-icon {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    transform: rotate(90deg);
+    transition: transform 0.25s ease;
+  }
+
+  &.collapsed .accordion-icon {
+    transform: rotate(0deg);
+  }
+
+  &.small {
+    padding: 10px 14px;
+    font-size: 0.95rem;
+    background: #181818;
+  }
+}
+
+/* === ACCORDION BODY === */
+.accordion-body {
+  background: var(--bg-color-dark);
+  padding: 18px 22px;
+  border-top: 1px dashed #333;
+  animation: fadeIn 0.25s ease-out;
+  color: var(--text-light);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === FLEX ALIGNMENT FOR OPTION ITEMS === */
+.option-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  padding: 8px 0;
+  border-bottom: 1px dashed #333;
+  transition: background 0.3s ease;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &.selected {
+    background-color: rgba(255, 255, 255, 0.06);
+    border-radius: 6px;
+  }
+
+  .option-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    .option-title {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #fff;
     }
 
-    .accordion-collapse {
-      border-top: 1px solid #333;
-      background: #111;
+    .option-price {
+      font-size: 0.9rem;
+      color: #e53935;
+      font-weight: 500;
     }
 
-    .accordion-body {
-      padding: 18px 20px;
+    .option-description {
+      font-size: 0.8rem;
+      color: #aaa;
+    }
+  }
 
-      .sub-dish {
-        background: #181818;
-        border: 1px solid #2f2f2f;
-        border-radius: 10px;
-        margin-bottom: 12px;
-        padding: 14px;
+  .option-check {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    min-width: 40px;
 
-        h5 {
-          font-size: 1rem;
-          font-weight: 600;
-          color: var(--text-light);
-          margin-bottom: 8px;
-        }
-
-        .option-group {
-          background: #0f0f0f !important;
-          border-radius: 10px;
-          margin-bottom: 10px;
-          padding: 12px;
-
-          .option-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-
-            h6 {
-              font-size: 0.95rem;
-              margin: 0;
-              font-weight: 600;
-              color: var(--text-light);
-            }
-
-            .required-text {
-              font-size: 0.8rem;
-              color: var(--text-muted);
-            }
-          }
-
-          .option-item {
-            background: transparent;
-            transition: background 0.3s ease, border-color 0.3s;
-            border-bottom: 1px dashed #333;
-
-            &:last-child {
-              border-bottom: none;
-            }
-
-            &.selected {
-              background: rgba(255, 255, 255, 0.06);
-              border-radius: 6px;
-            }
-
-            .option-info {
-              .option-title {
-                font-weight: 500;
-              }
-
-              .option-price {
-                font-size: 0.85rem;
-                color: var(--primary-color);
-              }
-            }
-
-            .option-check {
-              input[type="radio"],
-              input[type="checkbox"] {
-                accent-color: var(--primary-color);
-              }
-
-              .counter-box button {
-                background: var(--primary-color);
-                color: #fff;
-                width: 26px;
-                height: 26px;
-                border-radius: 50%;
-                border: none;
-                font-size: 1rem;
-                cursor: pointer;
-                transition: all 0.3s;
-
-                &:hover {
-                  opacity: 0.85;
-                }
-              }
-            }
-          }
-        }
-
-        /* Ingredients inside Subdish */
-        .option-group:last-child {
-          border-top: 1px solid #2a2a2a;
-          margin-top: 10px;
-          padding-top: 10px;
-        }
-      }
+    input[type="checkbox"],
+    input[type="radio"] {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--primary-color);
+      cursor: pointer;
     }
   }
 }
 
-/* Small polish */
+/* === SUB-DISH SECTION === */
+.sub-dish {
+  background: #181818;
+  border: 1px solid #2f2f2f;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  padding: 14px;
+
+  h5 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-light);
+    margin-bottom: 8px;
+  }
+}
+
+/* === NO OPTIONS TEXT === */
 .no-options-text {
   text-align: center;
   padding: 20px;
   color: var(--text-muted);
   font-size: 0.95rem;
+}
+  /* === Counter Box (Rounded + / - Buttons) === */
+.counter-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  button {
+    background: #f31026; /* your primary red */
+    color: #fff;
+    border: none;
+    border-radius: 50%; /* makes them circular */
+    width: 32px;
+    height: 32px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    transition: all 0.25s ease;
+
+    &:hover {
+      background: lighten(#f31026, 8%);
+      transform: scale(1.05);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
+  span {
+    min-width: 22px;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+  }
 }

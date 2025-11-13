@@ -23,6 +23,7 @@ export class ItemComponent implements OnInit {
   quantity = 1;
   notes = "";
   total = 0;
+  ingredientsOpen = false;
 
   // Selection state for standard dish optionGroups
   selectedOptions: any[] = [];
@@ -366,6 +367,19 @@ export class ItemComponent implements OnInit {
         sd.ingredients?.forEach((ing: any) => (ing.selected = false));
       }
     });
+  }
+
+  toggleOptionGroup(index: number) {
+    this.dish.optionGroups[index].open = !this.dish.optionGroups[index].open;
+  }
+
+  toggleIngredients() {
+    this.ingredientsOpen = !this.ingredientsOpen;
+  }
+
+  toggleSubDishOptionGroup(subDish: any, groupIndex: number) {
+    const group = subDish.optionGroups[groupIndex];
+    group.open = !group.open;
   }
 
   /** Price Calculation */
