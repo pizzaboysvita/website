@@ -127,7 +127,7 @@
 
           <!-- COMBO Dish -->
           <ng-container *ngIf="dish.dish_type === 'combo'">
-            <ng-container *ngIf="comboGroups?.length; else noOptionsCombo">
+            <ng-container *ngIf="comboGroups.length; else noOptionsCombo">
               <div class="accordion" id="comboAccordion">
 
                 <div *ngFor="let cg of comboGroups; let ci = index" class="accordion-item">
