@@ -2,8 +2,8 @@
   <div class="container">
     <div class="carousel-wrapper">
       <owl-carousel-o #owlCarousel [options]="customOptions" class="owl-theme">
-        <ng-template carouselSlide *ngFor="let item of testimonials">
-          <img class="img-fluid img" [src]="item.image" [alt]="item.name" />
+        <ng-template carouselSlide *ngFor="let item of bannersList">
+          <img class="img-fluid img" [src]="item?.banner_image_url" [alt]="item?.banner_text" />
         </ng-template>
       </owl-carousel-o>
 

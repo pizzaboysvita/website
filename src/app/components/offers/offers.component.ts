@@ -1,6 +1,9 @@
 import { Component, ViewChild } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { CarouselModule, CarouselComponent, OwlOptions } from "ngx-owl-carousel-o";
+import { HomeService } from "../../core/services/home.service";
+import { Subject, switchMap, takeUntil } from "rxjs";
+import { StoreService } from "../../core/services/store.service";
 
 @Component({
   selector: "app-offers",
@@ -11,7 +14,9 @@ import { CarouselModule, CarouselComponent, OwlOptions } from "ngx-owl-carousel-
 })
 export class OffersComponent {
   @ViewChild("owlCarousel", { static: false }) owlCarousel!: CarouselComponent;
-
+  bannersList: any[];
+  private destroy$ = new Subject<void>();
+  
   testimonials = [
     { name: "Deal 1", image: "assets/img/deals1.jpeg" },
     { name: "Deal 2", image: "assets/img/deals2.jpeg" },
@@ -19,7 +24,11 @@ export class OffersComponent {
     { name: "Deal 4", image: "assets/img/deals4.jpeg" },
     { name: "Deal 5", image: "assets/img/deals5.jpeg" },
   ];
-
+ constructor(
+    private homeService: HomeService,private storeService: StoreService
+  ) {
+    this.getBanners();
+  }
   customOptions: OwlOptions = {
     loop: true,
     autoplay: true,
@@ -38,7 +47,41 @@ export class OffersComponent {
       992: { items: 1 },
     },
   };
+  getBanners(){
+      this.storeService.storeChanged$
+          .pipe(
+            takeUntil(this.destroy$),
+            switchMap(() => this.homeService.getBanners())
+          )
+          .subscribe({
+            next: (res:any) => {
+                   if (res?.code === "1") {
+                     this.bannersList = res.banners;
+                   }
 
+                else {
+                      this.bannersList=[]
+                      console.warn("No Banner found");
+                    }
+                  },
+            error: (err) => {
+              console.error("Error fetching categories:", err);
+                this.bannersList=[]
+            },
+          });
+//  this.homeService.getBanners().subscribe({
+//       next: (res: any) => {
+//         if (res?.code === "1") {
+//           this.bannersList = res.banners
+ 
+//         }
+//       },
+//         error: (err:any) => {
+//           console.error("Error fetching banners:", err);
+//         },
+//     });
+  }
+   
   prev(): void {
     if (!this.owlCarousel) return;
     const c = this.owlCarousel as any;

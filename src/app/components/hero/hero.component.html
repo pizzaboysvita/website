@@ -1,4 +1,24 @@
 <div class="hero sectionbg">
+    <!--  Banner Text Scroller -->
+ <div class="container hero-wrapper-banner-text shadow-lg rounded-3 mb-1">
+ <div class="banner-scroll" *ngIf="bannersList?.length">
+  <div class="scroll-track">
+    <ng-container *ngFor="let banner of bannersList">
+      <span class="star">★</span>
+      <span class="text">{{ banner.banner_text }}</span>
+      <span class="star">★</span>
+    </ng-container>
+
+    <!-- Duplicate for smooth infinite scroll -->
+    <ng-container *ngFor="let banner of bannersList">
+      <span class="star">★</span>
+      <span class="text">{{ banner.banner_text }}</span>
+      <span class="star">★</span>
+    </ng-container>
+  </div>
+</div>
+</div>
+
     <div class="container hero-wrapper shadow-lg rounded-3">
         <!-- Curtains -->
         <div class="hero__curtains" [ngClass]="{ open: isCurtainsOpen }">
@@ -10,10 +30,27 @@
             </div>
         </div>
         <!-- Background Video -->
-        <video #introVideo class="hero-video" [ngClass]="{ show: isCurtainsOpen }" autoplay muted playsinline loop>
+         <video
+  #introVideo
+  class="hero-video"
+  [ngClass]="{ show: isCurtainsOpen }"
+  autoplay
+  muted
+  playsinline
+  loop
+  *ngIf="latestBanner"
+>
+    <source
+    [attr.src]="latestBanner?.banner_video_url"
+    type="video/mp4"
+  />
+  Your browser does not support the video tag.
+</video>
+
+        <!-- <video #introVideo class="hero-video" [ngClass]="{ show: isCurtainsOpen }" autoplay muted playsinline loop>
             <source src="assets/videos/pizza_boyz.mp4" type="video/mp4" />
             Your browser does not support the video tag.
-        </video>
+        </video> -->
         <!-- Fallback Play Button -->
         <div *ngIf="showPlayButton" class="play-overlay" (click)="playVideo()">
             <i class="fa fa-play-circle"></i>

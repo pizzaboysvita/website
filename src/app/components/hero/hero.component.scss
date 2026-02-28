@@ -148,3 +148,47 @@
     font-size: 1.2rem !important;
   }
 }
+// banner taxt 
+.hero-wrapper-banner-text {
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+  background: #000; // fallback
+  transform-origin: top center; // scale from top
+}
+.banner-scroll {
+  width: 100%;
+  overflow: hidden;
+  background: #000;
+  color: #fff;
+  white-space: nowrap;
+  padding: 8px 0;
+  position: relative;
+}
+
+.scroll-track {
+  display: inline-block;
+  animation: scrollLeft 20s linear infinite;
+}
+
+.scroll-track span {
+  display: inline-block;
+  margin: 0 10px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.star {
+  color: gold;
+  font-size: 16px;
+}
+
+@keyframes scrollLeft {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+

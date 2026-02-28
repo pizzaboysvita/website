@@ -63,4 +63,15 @@ export class HomeService {
     const params = new HttpParams().set("type", "web");
     return this.http.get(`${this.baseUrl}/store`, { params });
   }
+    getBanners() {
+      const params = new HttpParams()
+      .set("store_id", this.getStoreId())
+      // .set("user_id", '-1')
+      .set("type", "web");
+       return this.http.get(`${this.baseUrl}/banner`, { params });
+      //     return this.http.get(
+      // `${this.baseUrl}/banner?user_id=${userId}&type=${type}`
+    // );
+    
+  }
 }
